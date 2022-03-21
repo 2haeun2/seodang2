@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="userRegister" extends="main">
+    	<put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userRegister.jsp"/>
+    </definition>
+    <definition name="userLogin" extends="main">
+    	<put-attribute name="title" value="로그인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userLogin.jsp"/>
+    </definition>
+    <definition name="userView" extends="main">
+    	<put-attribute name="title" value="회원로그인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userView.jsp"/>
+    </definition>
+    <definition name="userModify" extends="main">
+    	<put-attribute name="title" value="회원정보수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userModify.jsp"/>
+    </definition>
+    <definition name="userChangePassword" extends="main">
+    	<put-attribute name="title" value="회원정보수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userChangePassword.jsp"/>
+    </definition>
+</tiles-definitions>
+
+
