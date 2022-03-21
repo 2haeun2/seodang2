@@ -21,19 +21,17 @@ public interface OqnaService {
 	public void insertOqna(OqnaVO Oqna);
 	
 	/*=============글상세==============*/
-	public OqnaVO selectOqna(Integer Oqna_num);
+	public OqnaVO selectOqna(Integer qna_num);
 	
-	/*=============조회수==============*/
-	public void updateOqnaHit(Integer Oqna_num);
 	
 	/*=============글수정(OnqnaMapper.xml에 명시)==============*/
 	public void updateOqna(OqnaVO Oqna);
 	
 	/*=============글삭제==============*/
-	public void deleteOqna(int num);
+	public void deleteOqna(int qna_num);
 	
 	/*=============파일삭제==============*/
-	public void deleteOqnaFile(Integer Oqna_num);
+	public void deleteOqnaFile(Integer qna_num);
 	
 	
 	

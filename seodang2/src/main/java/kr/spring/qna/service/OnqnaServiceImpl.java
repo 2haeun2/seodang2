@@ -17,14 +17,14 @@ public class OnqnaServiceImpl implements OnqnaService{
 	@Autowired
 	private OnqnaMapper onqnaMapper;
 	
-	//글 목록
+	//2. 글 목록
 	@Override
 	public List<OnqnaVO> getOnqnaList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	//글 목록 - rowCount
+	//2. 글 목록 - rowCount
 	@Override
 	public int selectOnqnaRowCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
@@ -37,7 +37,7 @@ public class OnqnaServiceImpl implements OnqnaService{
 		onqnaMapper.insertOnqna(Onqna);
 	}
 	
-	/*=============글상세==============*/
+	/*=============3. 글상세==============*/
 	@Override
 	public OnqnaVO selectOnqna(Integer Onqna_num) {
 		// TODO Auto-generated method stub

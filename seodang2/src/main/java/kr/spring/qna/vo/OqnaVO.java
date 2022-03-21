@@ -21,6 +21,7 @@ public class OqnaVO {	//전체 게시판
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
 	private String filename;		//파일명
 	private String id;
+	private String name;
 
 	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
 	public void setUpload(MultipartFile upload)throws IOException {	//getBytes()사용시 IOException
@@ -99,8 +100,19 @@ public class OqnaVO {	//전체 게시판
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
 }

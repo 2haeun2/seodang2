@@ -35,34 +35,28 @@ public class OqnaServiceImpl implements OqnaService{
 		oqnaMapper.insertOqna(Oqna);
 	}
 
+	//(4) 글 상세
 	@Override
-	public OqnaVO selectOqna(Integer Oqna_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public OqnaVO selectOqna(Integer qna_num) {
+		return oqnaMapper.selectOqna(qna_num);
 	}
 
-	@Override
-	public void updateOqnaHit(Integer Oqna_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	//(6) 글 수정
 	@Override
 	public void updateOqna(OqnaVO Oqna) {
-		// TODO Auto-generated method stub
-		
+		oqnaMapper.updateOqna(Oqna);
 	}
 
+	//(7) 글 삭제
 	@Override
-	public void deleteOqna(int num) {
-		// TODO Auto-generated method stub
-		
+	public void deleteOqna(int qna_num) {
+		oqnaMapper.deleteOqna(qna_num);
 	}
-
+	
+	//(5) 글 수정form - 파일 삭제
 	@Override
-	public void deleteOqnaFile(Integer Oqna_num) {
-		// TODO Auto-generated method stub
-		
+	public void deleteOqnaFile(Integer qna_num) {
+		oqnaMapper.deleteOqnaFile(qna_num);
 	}
 
 }

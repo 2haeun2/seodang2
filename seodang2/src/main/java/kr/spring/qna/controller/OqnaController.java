@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,7 @@ import kr.spring.qna.dao.OqnaMapper;
 import kr.spring.qna.service.OqnaService;
 import kr.spring.qna.vo.OqnaVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 
 @Controller
 public class OqnaController {
@@ -114,10 +116,91 @@ public class OqnaController {
 	
 	
 	//(6) 게시판 글상세
+	@RequestMapping("/oqna/oqnaDetail.do")
+	public ModelAndView process(@RequestParam int qna_num, HttpSession session) {
+		
+		//로그처리
+		logger.info("<<게시판 글상세 - 글번호 >> : " + qna_num);
+		
+		//타이틀 HTML 불허
+		OqnaVO oqna = oqnaService.selectOqna(qna_num);
+		oqna.setTitle(StringUtil.useBrNoHtml(oqna.getTitle()));
+		
+		return new ModelAndView("oqnaDetailView","oqna",oqna);
+									//타일스 설정	  속성명	속성값
+	}
+	
+	//(6-2) 이미지 출력
+	@RequestMapping("/oqna/imageView.do")
+	public ModelAndView viewImage(@RequestParam int qna_num) {
+		
+		OqnaVO oqna = oqnaService.selectOqna(qna_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", oqna.getUploadfile());
+		mav.addObject("filename",oqna.getFilename());
+	
+		return mav;
+	}
+	
+	//(6-3) 파일 다운로드
+	@RequestMapping("/oqna/file.do")
+	public ModelAndView download(@RequestParam int qna_num) {
+		OqnaVO oqna = oqnaService.selectOqna(qna_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("downloadView");
+		mav.addObject("downloadFile", oqna.getUploadfile());
+		mav.addObject("filename", oqna.getFilename());
+		
+		return mav;
+	}
+
+	
 	
 	//(7) 수정form
+	@GetMapping("/oqna/oqnaUpdate.do")
+	public String formUpdate(@RequestParam int qna_num, Model model) {
+		OqnaVO qnaVO = oqnaService.selectOqna(qna_num);
+		model.addAttribute("qnaVO",qnaVO);
+		
+		return "oqnaModify";
+	}
 	
 	//(8) 수정form에서 전송된 데이터 처리
+	@PostMapping("/oqna/oqnaUpdate.do")
+	public String submitUpdate(@Valid OqnaVO qnaVO, BindingResult result,
+								HttpServletRequest request, Model model) {
+		
+		//로그 출력
+		logger.info("<<글 정보 수정>> : " + qnaVO);
+		
+		//<1> 유효성 체크결과 오류가 있으면 폼을 호출
+		if(result.hasErrors()) {
+			OqnaVO vo = oqnaService.selectOqna(qnaVO.getQna_num());
+			qnaVO.setFilename(vo.getFilename());
+			
+			return "oqnaModify";
+		}
+		
+		//<2> 글 수정
+		oqnaService.updateOqna(qnaVO);
+
+		//<3> view에 표시할 메시지를 지정
+		model.addAttribute("message", "글 수정 완료");
+		model.addAttribute("url", request.getContextPath()+"/oqna/oqnaList.do");
+		
+		//<4> 스크립트 호출
+		return "common/resultView";
+	}
+	
 	
 	//(9) 게시판 글 삭제
+	@RequestMapping("/oqna/oqnaDelete.do")
+	public String submitDelete(@RequestParam int qna_num) {
+		oqnaService.deleteOqna(qna_num);
+		return "redirect:/oqna/oqnaList.do";
+	}
+	
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css"/>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -26,9 +26,10 @@
 			<li>
 				<select name="keyfield" id="keyfield">
 					<option value="1"<c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
-					<option value="2"<c:if test="${param.keyfield==2}">selected</c:if>>ID</option>
-					<option value="3"<c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
-					<option value="4"<c:if test="${param.keyfield==4}">selected</c:if>>제목+내용</option>
+					<option value="2"<c:if test="${param.keyfield==2}">selected</c:if>>작성자 ID</option>
+					<option value="3"<c:if test="${param.keyfield==3}">selected</c:if>>작성자 이름</option>
+					<option value="4"<c:if test="${param.keyfield==4}">selected</c:if>>내용</option>
+					<option value="5"<c:if test="${param.keyfield==5}">selected</c:if>>제목+내용</option>
 				</select>
 			</li>
 			<li>
@@ -57,14 +58,16 @@
 			<tr>
 				<th>글번호</th>
 				<th width="400">제목</th>
+				<th>작성자ID</th>
 				<th>작성자</th>
 				<th>작성일</th>
 			</tr>
 			<c:forEach var="oqna" items="${list }">
 				<tr>
 					<td>${oqna.qna_num }</td>
-					<td><a href="detail.do?oqna_num=${oqna.qna_num }">${oqna.title }</a></td>
+					<td><a href="oqnaDetail.do?qna_num=${oqna.qna_num }">${oqna.title }</a></td>
 					<td>${oqna.id }</td>
+					<td>${oqna.name }</td>
 					<td>${oqna.reg_date }</td>
 				</tr>
 			</c:forEach>
