@@ -69,6 +69,7 @@
 	     class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="kr.spring.user.vo,
+		                                           kr.spring.kit.vo,
 		                                           kr.spring.board.vo,
 		                                           kr.spring.onclass.vo,
 		                                           kr.spring.qna.vo,"/>

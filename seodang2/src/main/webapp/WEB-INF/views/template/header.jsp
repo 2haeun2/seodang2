@@ -10,7 +10,7 @@
 		<div class="menu clearfix">
 			<a href="${pageContext.request.contextPath}/onclass/onclassList.do" class="menu-item"><b>온라인</b></a>
 			<a href="${pageContext.request.contextPath}/offclass/offclassList.do" class="menu-item"><b>오프라인</b></a>
-			<a href="#" class="menu-item"><b>키트</b></a>
+			<a href="${pageContext.request.contextPath}/kit/kitList.do" class="menu-item"><b>키트</b></a>
 		</div>
 		<div class="login align-right">
 	    	<c:if test="${!empty session_user_num && !empty session_user_photo}">
