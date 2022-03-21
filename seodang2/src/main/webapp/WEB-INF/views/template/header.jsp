@@ -38,7 +38,7 @@
 	</div>
 	<div class="align-right">
 		<a href="#" class="logo">게시판</a>
-		<a href="#" class="logo">Q&amp;A</a>
+		<a href="${pageContext.request.contextPath}/oqna/oqnaList.do" class="logo">Q&amp;A</a>
 	</div>
 <div>
 <!-- 상단 끝 -->

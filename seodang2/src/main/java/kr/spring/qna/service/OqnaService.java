@@ -1,14 +1,13 @@
-package kr.spring.qna.dao;
+package kr.spring.qna.service;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 
-import kr.spring.qna.vo.OnqnaVO;
 import kr.spring.qna.vo.OqnaVO;
 
-public interface OqnaMapper {
+public interface OqnaService {
 
 	//[ 부모글 ] 
 	
@@ -19,8 +18,6 @@ public interface OqnaMapper {
 	public int selectOqnaRowCount(Map<String,Object> map);
 	
 	/*=============1.글등록==============*/
-	@Insert("INSERT INTO oqna(qna_num, user_num, title, content, uploadfile, filename) "
-			+ "VALUES (oqna_seq.nextval,#{user_num},#{title},#{content},#{uploadfile},#{filename})")
 	public void insertOqna(OqnaVO Oqna);
 	
 	/*=============글상세==============*/

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class OqnaVO {	//전체 게시판    
+public class OqnaVO {	//전체 게시판
 	private int qna_num;
 	private int user_num;
 	@NotEmpty
@@ -16,22 +16,22 @@ public class OqnaVO {	//전체 게시판
 	private String content;
 	private Date reg_date;
 	private Date modify_date;
-	
+
 	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
 	private String filename;		//파일명
-	
-	
+	private String id;
+
 	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
 	public void setUpload(MultipartFile upload)throws IOException {	//getBytes()사용시 IOException
 		this.upload = upload;
-		
+
 		setUploadfile(upload.getBytes());
 
 		setFilename(upload.getOriginalFilename());
 	}	
-	
-	
+
+
 	//* toString()재정의
 	@Override
 	public String toString() {
@@ -39,8 +39,8 @@ public class OqnaVO {	//전체 게시판
 				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", upload=" + upload + ", filename="
 				+ filename + "]";
 	}	
-	
-	
+
+
 	public int getQna_num() {
 		return qna_num;
 	}
@@ -93,6 +93,14 @@ public class OqnaVO {	//전체 게시판
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	
-	
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

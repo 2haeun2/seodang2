@@ -4,7 +4,64 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.qna.dao.OqnaMapper"> 
 
-	
+	<!-- 글 목록처리1 -->
+	<select id="getOqnaList" parameterType="map" resultType="oqnaVO">
+		SELECT
+		*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT 
+					*
+				 FROM oqna q JOIN ouser	u 
+				 ON q.user_num = u.user_num
+				 
+				 	<where>
+			 			<if test="keyword!='' and keyfield==1">	
+			 				q.title LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 			<if test="keyword!='' and keyfield==2">
+			 				u.id LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 			<if test="keyword!='' and keyfield==3">
+			 				q.content LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 			<if test="keyword!='' and keyfield==4">
+			 				q.title LIKE '%' || #{keyword} || '%' or
+			 				q.content LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 		</where>
+			 		
+				 ORDER BY q.qna_num DESC)a)
+		 	 
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
+	<!-- 글 목록처리2 -->
+	<select id="selectOqnaRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM oqna q JOIN ouser u 
+		ON q.user_num = u.user_num	
+		 <where>
+ 			<if test="keyword!='' and keyfield==1">	
+ 				q.title LIKE '%' || #{keyword} || '%'
+ 			</if>
+ 			<if test="keyword!='' and keyfield==2">
+ 				u.id LIKE '%' || #{keyword} || '%'
+ 			</if>
+ 			<if test="keyword!='' and keyfield==3">
+ 				q.content LIKE '%' || #{keyword} || '%'
+ 			</if>
+ 			<if test="keyword!='' and keyfield==4">
+ 				q.title LIKE '%' || #{keyword} || '%' or
+ 				q.content LIKE '%' || #{keyword} || '%'
+ 			</if>
+ 		</where>	
+		
+	</select>
 	
 </mapper>
 

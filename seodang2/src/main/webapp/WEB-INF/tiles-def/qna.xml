@@ -9,6 +9,18 @@
     	<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberRegister.jsp"/>
     </definition>
+    
+    <definition name="oqnaList" extends="main">
+    	<put-attribute name="title" value="QnA 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/oqna/oqnaList.jsp"/>
+    </definition>
+    
+    
+    <definition name="oqnaWrite" extends="main">
+    	<put-attribute name="title" value="QnA 작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/oqna/oqnaWrite.jsp"/>
+    </definition>
+    
     <definition name="onqnaWrite" extends="main">
     	<put-attribute name="title" value="온라인 클래스 1:1문의글 작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/onqna/onqnaWrite.jsp"/>

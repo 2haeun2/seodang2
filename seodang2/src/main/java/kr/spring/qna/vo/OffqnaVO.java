@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class OffqnaVO {		//오프라인 클래스 1:1게시판 
+public class OffqnaVO {		//오프라인 클래스 1:1게시판
 
 	private int offqua_num;
 	private int off_num;

@@ -78,7 +78,7 @@ create table oqna(
 	uploadfile blob,
 	reg_date date default sysdate not null,
 	modify_date date,
-	constraint oqna_pk primary key (qna_num)
+	constraint oqna_pk primary key (qna_num),
 	constraint oqna_fk1 foreign key (user_num) references ouser (user_num)
 );
 create sequence oqna_seq;
@@ -87,7 +87,7 @@ create sequence oqna_seq;
 
 /*전체게시판 댓글*/
 create table oqna_reply(
-	qnare_num number not null,
+	oqnare_num number not null,
 	qna_num number not null,
 	user_num number not null,
 	content clob not null,
