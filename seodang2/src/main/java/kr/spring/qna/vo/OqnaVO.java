@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class OqnaVO {	//전체 게시판  
+public class OqnaVO {	//전체 게시판   
 	private int qna_num;
 	private int user_num;
 	@NotEmpty
