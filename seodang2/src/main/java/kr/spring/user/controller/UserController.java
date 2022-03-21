@@ -199,6 +199,7 @@ public class UserController {
 		//비밀번호 수정
 		userService.updatePassword(userVO);
 	
-	return "redirect:/user/myPage.do";
+		return "redirect:/user/myPage.do";
 	}
+	//회원삭제
 }
