@@ -25,6 +25,10 @@
     	<put-attribute name="title" value="회원정보수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/userChangePassword.jsp"/>
     </definition>
+    <definition name="userDelete" extends="main">
+    	<put-attribute name="title" value="회원탈퇴"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userDelete.jsp"/>
+    </definition>
 </tiles-definitions>
 
-
+ 

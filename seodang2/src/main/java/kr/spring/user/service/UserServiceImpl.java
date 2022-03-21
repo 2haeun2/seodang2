@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void deleteUser(Integer user_num) {
-		// TODO Auto-generated method stub
-		
+		userMapper.deleteUser(user_num);
+		userMapper.deleteUser_detail(user_num);
 	}
 
 	@Override

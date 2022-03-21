@@ -201,5 +201,54 @@ public class UserController {
 	
 		return "redirect:/user/myPage.do";
 	}
-	//회원삭제
+	
+	//회원 삭제 폼
+	@GetMapping("/user/delete.do")
+	public String formDelete() {
+		return "userDelete";
+	}
+	
+	//회원 데이터 삭제
+	@PostMapping("/user/delete.do")
+	public String submitDelete(@Valid UserVO userVO,
+								BindingResult result,
+								HttpSession session) {
+		logger.info("<<회원탈퇴>> : " + userVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasFieldErrors("id") || result.hasFieldErrors("passwd")) {
+			return formDelete();
+		}
+		
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		userVO.setUser_num(user_num);
+		
+		//아이디와 비밀번호 일치 여부 체크
+		try {
+			//세션에 저장된 회원번호를 이용해서 DB에 저장된 회원 정보를 UserVO에 담아서
+			//반환
+			UserVO db_user =
+					userService.selectUser(userVO.getUser_num());
+			boolean check = false;
+			
+			if(db_user!=null && userVO.getId().contentEquals(db_user.getId())) {
+				//비밀번호 일치 여부 체크
+				check = db_user.isCheckedPassword(userVO.getPasswd());
+			}
+			if(check) {
+				//인증 성공, 회원정보 삭제
+				userService.deleteUser(userVO.getUser_num());
+				//로그아웃
+				session.invalidate();
+				
+				return "redirect:/main/main.do";
+			}
+			//인증 실패
+			throw new AuthCheckException();
+		}catch(AuthCheckException e){
+			result.reject("invalidIdOrPassword");
+		}
+		
+		return "redirect:/main/main.do";
+	}
 }

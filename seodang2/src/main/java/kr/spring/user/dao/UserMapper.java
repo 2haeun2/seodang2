@@ -1,5 +1,6 @@
 package kr.spring.user.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -25,7 +26,9 @@ public interface UserMapper {
 	public void updateUser(UserVO user);
 	@Update("UPDATE ouser_detail SET passwd=#{passwd} WHERE user_num=#{user_num}")
 	public void updatePassword(UserVO user);
+	@Update("UPDATE ouser SET auth=0 WHERE user_num=#{user_num}")
 	public void deleteUser(Integer user_num);
+	@Delete("DELETE FROM ouser_detail WHERE user_num=#{user_num}")
 	public void deleteUser_detail(Integer user_num);
 	public void updateProfile(UserVO user);
 }

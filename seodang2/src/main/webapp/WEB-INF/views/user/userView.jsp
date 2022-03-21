@@ -132,7 +132,7 @@
 		<input type="button" value="비밀번호변경" 
 		                   onclick="location.href='changePassword.do'"> 
 		<input type="button" value="회원탈퇴" 
-		                   onclick="location.href='delete.do'">                                     
+		                   onclick="location.href='delete.do'">                                         
 	</p>
 </div>
 <!-- 중앙 컨텐츠 끝 -->
