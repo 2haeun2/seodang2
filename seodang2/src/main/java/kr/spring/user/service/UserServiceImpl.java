@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateProfile(UserVO user) {
-		// TODO Auto-generated method stub
+		userMapper.updateProfile(user);
 		
 	}
 

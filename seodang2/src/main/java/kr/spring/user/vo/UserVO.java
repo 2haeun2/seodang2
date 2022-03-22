@@ -50,7 +50,7 @@ public class UserVO {
 		return false;
 	}
 	
-	//이미지 blod 처리
+	//이미지 blob 처리
 	public void setUpload(MultipartFile upload) throws IOException{
 		this.upload = upload;
 		//MultiFile -> byte[]

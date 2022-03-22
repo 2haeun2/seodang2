@@ -91,8 +91,8 @@
 	<ul>
 		<li>
 			<c:if test="${empty user.photo_name}">
-			<img src="${pageContext.request.contextPath}/resources/"
-			                     width="200" height="200" class="my-photo" onclick="location.href='update.do'">
+			<img src="${pageContext.request.contextPath}/resources/images/face.png"
+			                     width="200" height="200" class="my-photo">
 			
 			</c:if>
 			<c:if test="${!empty user.photo_name}">

@@ -30,5 +30,6 @@ public interface UserMapper {
 	public void deleteUser(Integer user_num);
 	@Delete("DELETE FROM ouser_detail WHERE user_num=#{user_num}")
 	public void deleteUser_detail(Integer user_num);
+	@Update("UPDATE ouser_detail SET photo=#{photo},photo_name=#{photo_name} WHERE user_num=#{user_num}")
 	public void updateProfile(UserVO user);
 }

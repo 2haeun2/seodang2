@@ -29,6 +29,7 @@ private static final Logger logger = LoggerFactory.getLogger(UserAjaxController.
 		logger.info("<<id>> : "+id);
 		
 		Map<String, String> map = new HashMap<String, String>();
+		
 		UserVO user= userService.selectCheckUser(id);
 		//경우의 수 세가지 
 		if(user!=null) {
@@ -36,12 +37,20 @@ private static final Logger logger = LoggerFactory.getLogger(UserAjaxController.
 			map.put("result", "idDuplicated");
 		}else {
 			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", id)) {
+				//패턴 불일치
 				map.put("result", "notMatchPattern");
 			}else {
 				//아이디 미중복
 				map.put("result", "idNotFound");
 			}
 		}
+		return map;
+	}
+	
+	@RequestMapping("/user/updateMyPhoto.do")
+	@ResponseBody
+	public Map<String,String> processProfile(){
+		
 		return map;
 	}
 }
