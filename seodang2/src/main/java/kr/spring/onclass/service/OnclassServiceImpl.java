@@ -3,12 +3,15 @@ package kr.spring.onclass.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.onclass.dao.OnclassMapper;
 import kr.spring.onclass.vo.OnclassVO;
+import kr.spring.onclass.vo.OnlikeVO;
 
 @Service
 @Transactional
@@ -63,6 +66,24 @@ public class OnclassServiceImpl implements OnclassService{
 	public OnclassVO selectOnclass(Integer on_num) {
 		// TODO Auto-generated method stub
 		return onclassMapper.selectOnclass(on_num);
+	}
+
+	@Override
+	public OnlikeVO selectLike(int user_num,int on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectLike(user_num,on_num);
+	}
+
+	@Override
+	public OnlikeVO deleteLike(int onlike_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.deleteLike(onlike_num);
+	}
+
+	@Override
+	public OnlikeVO insertLike(int user_num,int on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.insertLike(user_num,on_num);
 	}
 
 }

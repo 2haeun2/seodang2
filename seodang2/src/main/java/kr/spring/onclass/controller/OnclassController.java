@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
+import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
 import kr.spring.util.PagingUtil;
@@ -141,6 +142,22 @@ public class OnclassController {
 		mav.addObject("filename", onclass.getFilename());
 		return mav;
 	}
-	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

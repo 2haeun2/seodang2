@@ -76,6 +76,10 @@
 			<mapping path="/user/update.do"/>
 			<mapping path="/user/changePassword.do"/>
 			<mapping path="/user/delete.do"/>
+			<mapping path="/onclass/onclassInsert.do"/>
+			<mapping path="/onclass/onclassModify.do"/>
+			<mapping path="/onclass/onclassDelete.do"/>
+			
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 	</interceptors>

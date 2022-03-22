@@ -6,11 +6,51 @@
 <link href="css/styles.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-        
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	var status; //noFav or yesFav
+	$('#output_fav').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
+		console.log("asd");
+		$.ajax({
+			url:'like.do',
+			type:'post',
+			data:{on_num:${onclass.on_num}},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+					if(data.result=='success'){ //추천하트 표시
+		            	displayFav(data);
+		            }else{
+		               alert('등록시 오류 발생!');
+		            }
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});
+	//좋아요 표시
+	   function displayFav(data){
+	      status = data.status;
+	      var count = data.count;
+	      var output;
+	      if(status=='noFav'){
+	         output = '../resources/image/heart1.png';
+	      }else{
+	         output = '../resources/image/heart2.png';
+	      }         
+	      //문서 객체에 추가
+	      $('#output_fav').attr('src',output); //id가 output_fav인 태그 src에 output 저장
+	   }
+});
+</script>
+   
  <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-8">
@@ -81,10 +121,11 @@
                                 <li><i class="bi bi-archive"></i>&nbsp&nbsp키트구매</li>
                                 <li><i class="bi bi-question-circle"></i>&nbsp&nbsp1:1 QnA</li>
                                 <li><i class="bi bi-chat-left-dots"></i>&nbsp&nbsp강의후기 게시판</li>
+                                <li><img id="output_fav" src="../resources/image/heart1.png"></li>	
                             </ul>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-dark" onclick="" style="width:230px">구매</button>
+                    <button type="button" class="btn btn-dark" style="width:230px">구매</button>
                 </div>
             </div>
         </div>

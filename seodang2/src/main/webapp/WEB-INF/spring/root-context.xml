@@ -72,7 +72,7 @@
 		                                           kr.spring.kit.vo,
 		                                           kr.spring.board.vo,
 		                                           kr.spring.onclass.vo,
-		                                           kr.spring.qna.vo,"/>
+		                                           kr.spring.qna.vo"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.**.dao"/>

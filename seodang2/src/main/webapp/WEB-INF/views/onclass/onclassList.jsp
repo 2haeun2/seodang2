@@ -6,9 +6,11 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/List.css">
+       
 <style>
 p { margin:20px 0px;}
 
@@ -22,62 +24,73 @@ p { margin:20px 0px;}
 <c:forEach var="onclass" items="${list}">
 <!--//////////////////////////////////////////////////////////////////////////////////////////  -->
 
-	<div class="card-group" style="width:250px;height:300px">
-		  <div class="card">
-		    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-		    <img class="card-img-top" src="${pageContext.request.contextPath}/upload/${onclass.filename}" alt="">
-		    <c:if test="${fn:endsWith(onclass.filename,'.jpg') ||
+	<div class="home">
+<ul>
+	<li>
+		<div class="List">
+			<div>
+				<c:if test="${fn:endsWith(onclass.filename,'.jpg') ||
 		             		fn:endsWith(onclass.filename,'.JPG') ||
 		              		fn:endsWith(onclass.filename,'.gif') ||
 		            		fn:endsWith(onclass.filename,'.GIF') ||
 		            		fn:endsWith(onclass.filename,'.png') ||
 		            		fn:endsWith(onclass.filename,'.PNG')}">
 				<div class="align-center">
-					<img src="imageView.do?on_num=${onclass.on_num}" 
-                                     					 style="max-width:200px;max-height:100px">
+					<div class="list_img">
+					<a data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+						<img src="imageView.do?on_num=${onclass.on_num}" 
+	                                     					 style="max-width:200px;max-height:200px">
+					</a>	                                     					 
+					</div>                                     					 
+			<div class="btn_one">                                     					 
+				<c:if test="${sessionScope.session_user_num == onclass.user_num}">
+			    		<!-- 본인게시물만 삭제 수정 가능 %관리자도 삭제 가능하게 -->
+				      <button type="button" class="btn btn-dark" onclick="location.href='onclassModify.do?on_num=${onclass.on_num}'">수정</button>
+				      <button type="button" class="btn btn-dark" onclick="location.href='onclassDelete.do?on_num=${onclass.on_num}'">삭제</button>		      
+			    </c:if>
+			    <button type="button" class="btn btn-dark" onclick="location.href='onclassDetail.do?on_num=${onclass.on_num}'">상세보기</button>	
+			</div>					
+			<div class="icon_one">
+				<!-- 찜하기 아이콘  -->
+				<i class="bi bi-heart"></i>
+				<i class="bi bi-person"></i>
+		 	
+			</div>										         
+										                                     					 	
 				</div>
 			</c:if>
-		    </a>    
-		    <div class="card-body">
-		      <h5 class="card-title">${onclass.on_name}</h5>
-		      <p class="card-text">${onclass.on_content}</p>
-		    </div>
-		    <div class="card-footer">
-		    <c:if test="${sessionScope.session_user_num == onclass.user_num}">
-		    	<!-- 본인게시물만 삭제 수정 가능 %관리자도 삭제 가능하게 -->
-		      <button type="button" class="btn btn-dark" onclick="location.href='onclassModify.do?on_num=${onclass.on_num}'">수정</button>
-		      <button type="button" class="btn btn-dark" onclick="location.href='onclassDelete.do?on_num=${onclass.on_num}'">삭제</button>
-		      <button type="button" class="btn btn-dark" onclick="location.href='onclassDetail.do?on_num=${onclass.on_num}'">상세보기</button>
-		    </c:if>
-		      <!-- 모달 시작 -->
-		      	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				        ...
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Understood</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-		      <!-- 모달 끝 -->
-		            
+			</div>
+		</div>
+	</li>	
+</ul>	
+</div>
+<!-- 모달 시작 -->
+      	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Understood</button>
+		      </div>
 		    </div>
 		  </div>
 		</div>
-<!--//////////////////////////////////////////////////////////////////////////////////////////  -->
-	</c:forEach>
-test
+<!-- 모달 끝 -->
+</c:forEach>
+
+		
+
+<div class="align-center">${pagingHtml}</div>
+
+</c:if>
 	
-	<div class="align-center" style="text-align: bottom;">${pagingHtml}</div>
-	</c:if>
 	
 
 
