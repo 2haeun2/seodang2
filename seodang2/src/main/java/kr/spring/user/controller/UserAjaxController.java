@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,22 @@ private static final Logger logger = LoggerFactory.getLogger(UserAjaxController.
 	
 	@RequestMapping("/user/updateMyPhoto.do")
 	@ResponseBody
-	public Map<String,String> processProfile(){
+	public Map<String,String> processProfile(UserVO userVO,
+										HttpSession session){
+		Map<String,String> map = new HashMap<String,String>();
+		
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		if(user_num==null) {//로그인 되지 않은 경우
+			map.put("result", "logout");
+		}else {//로그인 된 경우
+			userVO.setUser_num(user_num);
+			userService.updateProfile(userVO);
+			
+			//이미지를 업로드한 후 세션에 저장된 user_photo 값 변경
+			session.setAttribute("user_photo", userVO.getPhoto());
+			
+			map.put("result","success");
+		}
 		
 		return map;
 	}

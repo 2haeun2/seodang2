@@ -13,8 +13,12 @@
     	<put-attribute name="title" value="로그인"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/userLogin.jsp"/>
     </definition>
+    <definition name="userMenu" extends="main">
+    	<put-attribute name="title" value="회원메뉴"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/userMenu.jsp"/>
+    </definition>
     <definition name="userView" extends="main">
-    	<put-attribute name="title" value="회원로그인"/>
+    	<put-attribute name="title" value="회원상세정보"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/userView.jsp"/>
     </definition>
     <definition name="userModify" extends="main">

@@ -122,6 +122,20 @@ public class UserController {
 
 		return "redirect:/main/main.do";
 	}
+	
+	// 내 메뉴 보기
+	@RequestMapping("/user/myMenu.do")
+	public String processMenu(HttpSession session, Model model) {
+		
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		UserVO user = userService.selectUser(user_num);
+		
+		logger.info("<<회원 상세 정보>> : " + user);
+		
+		model.addAttribute("user",user);
+				
+		return "userMenu";
+	}
 
 	// 마이페이지
 	@RequestMapping("/user/myPage.do")
