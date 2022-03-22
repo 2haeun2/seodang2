@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
@@ -20,6 +21,8 @@ p { margin:20px 0px;}
 <c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
+<a href="${pageContext.request.contextPath}/onclass/onclassList.do" class="menu-item">등록일순</a>
+<a href="${pageContext.request.contextPath}/onclass/hitList.do" class="menu-item">조회수순</a>
 <c:if test="${count > 0}">
 <c:forEach var="onclass" items="${list}">
 <!--//////////////////////////////////////////////////////////////////////////////////////////  -->
@@ -53,8 +56,8 @@ p { margin:20px 0px;}
 			<div class="icon_one">
 				<!-- 찜하기 아이콘  -->
 				<i class="bi bi-heart"></i>
-				<i class="bi bi-person"></i>
-		 	
+				<i class="bi bi-person">${onclass.hit}</i>
+		 		
 			</div>										         
 										                                     					 	
 				</div>
@@ -69,14 +72,22 @@ p { margin:20px 0px;}
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+		        <h5 class="modal-title" id="staticBackdropLabel">${onclass.on_name}</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        ...
+		       	<c:if test="${fn:endsWith(onclass.filename,'.jpg') ||
+		             		fn:endsWith(onclass.filename,'.JPG') ||
+		              		fn:endsWith(onclass.filename,'.gif') ||
+		            		fn:endsWith(onclass.filename,'.GIF') ||
+		            		fn:endsWith(onclass.filename,'.png') ||
+		            		fn:endsWith(onclass.filename,'.PNG')}">
+		           <img src="imageView.do?on_num=${onclass.on_num}" 
+		           									style="max-width:400px;max-height:300px">	
+           		</c:if>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 		        <button type="button" class="btn btn-primary">Understood</button>
 		      </div>
 		    </div>

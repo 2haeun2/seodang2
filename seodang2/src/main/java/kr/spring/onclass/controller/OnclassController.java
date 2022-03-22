@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
-import kr.spring.onclass.vo.OnlikeVO;
+import kr.spring.onclass.vo.OstarVO;
+import kr.spring.user.controller.UserController;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
 public class OnclassController {
+	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private OnclassService onclassService;
 	@Autowired
@@ -35,6 +39,7 @@ public class OnclassController {
 	public OnclassVO initCommand() {
 		return new OnclassVO();
 	}
+	
 	//온라인 클래스 목록
 	@RequestMapping("/onclass/onclassList.do")
 	public ModelAndView process(
@@ -128,7 +133,9 @@ public class OnclassController {
 	
 	@GetMapping("/onclass/onclassDetail.do")
 	public String detailForm(Integer on_num,Model model) {
+		onclassService.updateHit(on_num);
 		OnclassVO oVO = onclassService.selectOnclass(on_num);
+		oVO.setAvgqna(onclassService.avgQna(on_num));
 		model.addAttribute("onclass",oVO);
 		return "onclassDetail";
 	}
@@ -142,7 +149,36 @@ public class OnclassController {
 		mav.addObject("filename", onclass.getFilename());
 		return mav;
 	}
+	
+	@RequestMapping("/onclass/hitList.do")
+	public ModelAndView hitForm(
+			@RequestParam(value="pageNum",defaultValue="1")
+			int currentPage,
+			@RequestParam(value="keyfield",defaultValue="")
+			String keyfield,
+			@RequestParam(value="keyword",defaultValue="")
+			String keyword , HttpServletRequest request) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		int count = onclassService.selectRowCount(map);	
+		PagingUtil page = new PagingUtil(keyfield,keyword,
+                currentPage,count,6,10,"onclassList.do");
+		map.put("start",page.getStartCount());
+		map.put("end", page.getEndCount());	
+		List<OnclassVO> list = null;
+			if(count > 0) {
+				list = onclassService.hitList(map);
+			}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("onclassList");
+		mav.addObject("count", count);
+		mav.addObject("list",list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
 
+		return mav;
+	}
+	
 }
 
 

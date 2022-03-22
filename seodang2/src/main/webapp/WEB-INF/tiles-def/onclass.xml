@@ -25,9 +25,13 @@
     	<put-attribute name="title" value="삭제비밀번호확인"/>
     	<put-attribute name="body" value="/WEB-INF/views/onclass/onclassDelete.jsp"/>
     </definition>
-        <definition name="onclassDetail" extends="main">
+    <definition name="onclassDetail" extends="main">
     	<put-attribute name="title" value="상세정보"/>
     	<put-attribute name="body" value="/WEB-INF/views/onclass/onclassDetail.jsp"/>
+    </definition>
+    <definition name="qnaList" extends="main">
+    	<put-attribute name="title" value="상세정보"/>
+    	<put-attribute name="body" value="/WEB-INF/views/onclass/qnaList.jsp"/>
     </definition>
 </tiles-definitions>
 

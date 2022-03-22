@@ -13,12 +13,25 @@ public class OnclassVO {
 	private int user_num;
 	private String on_name;
 	private int on_price;
+	private int hit;
 	private String on_content;
 	private MultipartFile upload;
 	private byte[] uploadfile;
 	private String filename;
 	private Date reg_date;
 	private Date modify_date;
+	
+	//평균 평점(후기게시판)
+	private int avgqna;
+	public int getAvgqna() {
+		return avgqna;
+	}
+
+	public void setAvgqna(int avgqna) {
+		this.avgqna = avgqna;
+	}
+	//평균 평점(후기게시판)
+	
 	
 	private String deletePasswd;
 	
@@ -30,7 +43,13 @@ public class OnclassVO {
 		this.deletePasswd = deletePasswd;
 	}
 	
-	
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 
 	public void setUpload(MultipartFile upload)throws IOException{
 		this.upload = upload;

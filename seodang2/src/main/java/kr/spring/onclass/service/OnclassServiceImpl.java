@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.spring.onclass.dao.OnclassMapper;
 import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
+import kr.spring.onclass.vo.OstarVO;
+
 
 @Service
 @Transactional
@@ -69,21 +71,51 @@ public class OnclassServiceImpl implements OnclassService{
 	}
 
 	@Override
-	public OnlikeVO selectLike(int user_num,int on_num) {
+	public OnlikeVO selectLike(Integer user_num,int on_num) {
 		// TODO Auto-generated method stub
 		return onclassMapper.selectLike(user_num,on_num);
 	}
 
 	@Override
-	public OnlikeVO deleteLike(int onlike_num) {
+	public void deleteLike(int onlike_num) {
 		// TODO Auto-generated method stub
-		return onclassMapper.deleteLike(onlike_num);
+		onclassMapper.deleteLike(onlike_num);
 	}
 
 	@Override
-	public OnlikeVO insertLike(int user_num,int on_num) {
+	public void insertLike(Integer user_num,int on_num) {
 		// TODO Auto-generated method stub
-		return onclassMapper.insertLike(user_num,on_num);
+		onclassMapper.insertLike(user_num,on_num);
+	}
+
+	@Override
+	public void updateHit(Integer on_num) {
+		// TODO Auto-generated method stub
+		onclassMapper.updateHit(on_num);
+	}
+
+	@Override
+	public List<OnclassVO> hitList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return onclassMapper.hitList(map);
+	}
+
+	@Override
+	public OstarVO selectQna(Integer user_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectQna(user_num);
+	}
+
+	@Override
+	public void insertqna(OstarVO ostarvo) {
+		// TODO Auto-generated method stub
+		onclassMapper.insertqna(ostarvo);
+	}
+
+	@Override
+	public int avgQna(Integer on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.avgQna(on_num);
 	}
 
 }

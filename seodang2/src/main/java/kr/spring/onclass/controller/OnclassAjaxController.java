@@ -23,14 +23,13 @@ public class OnclassAjaxController {
 	private OnclassService onclassService;
 	
 	@RequestMapping("/onclass/like.do")
-	@ResponseBody
-	
-	public Map<String, Object> likeForm(int on_num,OnlikeVO vo,HttpSession session) {
+	@ResponseBody	
+	public Map<String, Object> likeForm(int on_num,HttpSession session) {
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		System.out.println(user_num);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		vo = onclassService.selectLike(user_num,on_num);
+		OnlikeVO vo = onclassService.selectLike(user_num,on_num);
 		
 		if(vo!=null) { //이미 추천을 한 경우
 			onclassService.deleteLike(vo.getOnlike_num());

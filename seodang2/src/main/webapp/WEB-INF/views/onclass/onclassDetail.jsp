@@ -15,7 +15,6 @@
 $(function(){
 	var status; //noFav or yesFav
 	$('#output_fav').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
-		console.log("asd");
 		$.ajax({
 			url:'like.do',
 			type:'post',
@@ -104,9 +103,10 @@ $(function(){
                                 </div>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">${onclass.on_price}</a></li>
-                                        <li><a href="#!">${onclass.reg_date}</a></li>
-                                        <li><a href="#!">평점</a></li>
+                                        <li>${onclass.on_price}</li>
+                                        <li>${onclass.reg_date}</li>
+                                        <li><c:if test="${empty onclass.avgqna}">0</c:if>
+                                        							${onclass.avgqna}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ $(function(){
                                 <li><i class="bi bi-cart"></i>&nbsp&nbsp장바구니 담기</li>
                                 <li><i class="bi bi-archive"></i>&nbsp&nbsp키트구매</li>
                                 <li><i class="bi bi-question-circle"></i>&nbsp&nbsp1:1 QnA</li>
-                                <li><i class="bi bi-chat-left-dots"></i>&nbsp&nbsp강의후기 게시판</li>
+                                <li><i class="bi bi-chat-left-dots"></i><a href="${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${onclass.on_num}" class="menu-item">&nbsp&nbsp강의후기 게시판</a></li>
                                 <li><img id="output_fav" src="../resources/image/heart1.png"></li>	
                             </ul>
                         </div>
@@ -129,3 +129,4 @@ $(function(){
                 </div>
             </div>
         </div>
+            
