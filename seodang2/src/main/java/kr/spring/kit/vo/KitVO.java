@@ -1,62 +1,93 @@
 package kr.spring.kit.vo;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.Arrays;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class KitVO {
 	
 	private int kit_num; //상품번호
-	private String name; //상품명
-	private int price; //가격
-	private int quantity; //판매 수량
-	private String photo1; //상품명1
-	private String photo2; //상품명2
-	private String detail; //상품 정보
+	private String kit_name; //상품명
+	private int kit_price; //가격
+	private int kit_quantity; //판매 수량
+	private String kit_content; //상품 정보
 	private Date reg_date; //등록일
 	private Date modify_date; //수정일
-	private int status; //상품 표시 여부
 	private String user_num;//회원번호
+	private int hit;//조회수
+	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
+	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
+	private String filename;		//파일명
 	
+	
+	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) throws IOException{
+		this.upload = upload;
+		//MultipartFile -> byte[] 변환
+		setUploadfile(upload.getBytes());
+		//파일명 구하기
+		setFilename(upload.getOriginalFilename());
+	}
+	
+	@Override
+	public String toString() {
+		return "KitVO [kit_num=" + kit_num + ", kit_name=" + kit_name + ", kit_price=" + kit_price + ", kit_quantity="
+				+ kit_quantity + ", kit_content=" + kit_content + ", reg_date=" + reg_date + ", modify_date="
+				+ modify_date + ", user_num=" + user_num + ", hit=" + hit + ", upload=" + upload + ", uploadfile="
+				+ Arrays.toString(uploadfile) + ", filename=" + filename + "]";
+	}
+	public byte[] getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(byte[] uploadfile) {
+		this.uploadfile = uploadfile;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public int getKit_num() {
 		return kit_num;
 	}
 	public void setKit_num(int kit_num) {
 		this.kit_num = kit_num;
 	}
-	public String getName() {
-		return name;
+	public String getKit_name() {
+		return kit_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setKit_name(String kit_name) {
+		this.kit_name = kit_name;
 	}
-	public int getPrice() {
-		return price;
+	public int getKit_price() {
+		return kit_price;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setKit_price(int kit_price) {
+		this.kit_price = kit_price;
 	}
-	public int getQuantity() {
-		return quantity;
+	public int getKit_quantity() {
+		return kit_quantity;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setKit_quantity(int kit_quantity) {
+		this.kit_quantity = kit_quantity;
 	}
-	public String getPhoto1() {
-		return photo1;
+	public String getKit_content() {
+		return kit_content;
 	}
-	public void setPhoto1(String photo1) {
-		this.photo1 = photo1;
-	}
-	public String getPhoto2() {
-		return photo2;
-	}
-	public void setPhoto2(String photo2) {
-		this.photo2 = photo2;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setKit_content(String kit_content) {
+		this.kit_content = kit_content;
 	}
 	public Date getReg_date() {
 		return reg_date;
@@ -70,27 +101,11 @@ public class KitVO {
 	public void setModify_date(Date modify_date) {
 		this.modify_date = modify_date;
 	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
 	public String getUser_num() {
 		return user_num;
 	}
 	public void setUser_num(String user_num) {
 		this.user_num = user_num;
 	}
-	
-	@Override
-	public String toString() {
-		return "KitVO [kit_num=" + kit_num + ", name=" + name + ", price=" + price + ", quantity=" + quantity
-				+ ", photo1=" + photo1 + ", photo2=" + photo2 + ", detail=" + detail + ", reg_date=" + reg_date
-				+ ", modify_date=" + modify_date + ", status=" + status + ", user_num=" + user_num + "]";
-	}
-	
-	
-	
 	
 }

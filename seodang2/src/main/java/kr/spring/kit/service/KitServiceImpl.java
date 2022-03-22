@@ -18,27 +18,32 @@ public class KitServiceImpl implements KitService{
 	
 	@Override
 	public List<KitVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return  kitMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
+		//kitMapper.selectRowCount(map);
 		return 0;
 	}
 
 	@Override
 	public void insertKit(KitVO kit) {
-		// TODO Auto-generated method stub
+		kitMapper.insertKit(kit);
 		
 	}
 
 	@Override
 	public KitVO selectKit(Integer kit_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return kitMapper.selectKit(kit_num);
 	}
+	
+	@Override
+	public void updateHit(Integer kit_num) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	@Override
 	public void updateKit(KitVO kit) {
@@ -51,6 +56,7 @@ public class KitServiceImpl implements KitService{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 
 	
