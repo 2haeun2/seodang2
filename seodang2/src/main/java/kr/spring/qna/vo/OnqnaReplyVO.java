@@ -2,7 +2,7 @@ package kr.spring.qna.vo;
 
 import kr.spring.util.DurationFromNow;
 
-public class Onqua_replyVO {	//온라인 클래스 1:1게시판 답변
+public class OnqnaReplyVO {	//온라인 클래스 1:1게시판 답변
 
 	private int onqnare_num;
 	private int onqua_num;
@@ -24,9 +24,9 @@ public class Onqua_replyVO {	//온라인 클래스 1:1게시판 답변
 	//toString재정의
 	@Override
 	public String toString() {
-		return "Onqua_reply [onqnare_num=" + onqnare_num + ", onqua_num=" + onqua_num + ", user_num=" + user_num
+		return "OnqnaReplyVO [onqnare_num=" + onqnare_num + ", onqua_num=" + onqua_num + ", user_num=" + user_num
 				+ ", re_content=" + re_content + ", re_date=" + re_date + ", re_mdate=" + re_mdate + "]";
-	}	
+	}
 	
 	
 	public int getOnqnare_num() {

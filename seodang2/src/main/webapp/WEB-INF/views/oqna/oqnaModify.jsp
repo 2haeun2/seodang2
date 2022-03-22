@@ -25,7 +25,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
 	<h2>글수정</h2>
-	<form:form modelAttribute="qnaVO" action="oqnaUpdate.do" id="update_form" enctype="multipart/form-data">
+	<form:form modelAttribute="oqnaVO" action="oqnaUpdate.do" id="update_form" enctype="multipart/form-data">
 	<form:hidden path="qna_num"/>
 	<form:errors element="div" cssClass="error-color"/>
 	<ul class="editor-form">
@@ -74,7 +74,7 @@
 								if(choice){
 									$.ajax({
 										url:'deleteFile.do',
-										data:{qna_num:${qnaVO.qna_num}},
+										data:{qna_num:${oqnaVO.qna_num}},
 										type:'post',
 										dataType:'json',
 										cache:false,
@@ -101,7 +101,7 @@
 	</ul>
 	<div class="align-center">
 		<input type="button" value="목록" onclick="location.href='oqnaList.do'">
-		<input type="button" value="취소" onclick="location.href='oqnaDetail.do?qna_num=${qnaVO.qna_num}'">
+		<input type="button" value="취소" onclick="location.href='oqnaDetail.do?qna_num=${oqnaVO.qna_num}'">
 		<form:button>수정</form:button>
 	</div>	
 	</form:form>

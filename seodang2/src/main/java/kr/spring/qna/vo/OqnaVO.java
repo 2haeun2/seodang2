@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class OqnaVO {	//전체 게시판
 	private int qna_num;
 	private int user_num;
-	@NotEmpty
+	@Size(min=1, max=30)
 	private String title;
 	@NotEmpty
 	private String content;
@@ -22,6 +23,8 @@ public class OqnaVO {	//전체 게시판
 	private String filename;		//파일명
 	private String id;
 	private String name;
+	private int auth;	/*0탈퇴,1.정지,2일반,3관리자 // default=2*/
+	
 
 	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
 	public void setUpload(MultipartFile upload)throws IOException {	//getBytes()사용시 IOException
@@ -38,7 +41,7 @@ public class OqnaVO {	//전체 게시판
 	public String toString() {
 		return "OqnaVO [qna_num=" + qna_num + ", user_num=" + user_num + ", title=" + title + ", content=" + content
 				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", upload=" + upload + ", filename="
-				+ filename + "]";
+				+ filename + ", id=" + id + ", name=" + name + ", auth=" + auth + "]";
 	}	
 
 
@@ -112,7 +115,14 @@ public class OqnaVO {	//전체 게시판
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public int getAuth() {
+		return auth;
+	}
+
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
 	
 	
 }

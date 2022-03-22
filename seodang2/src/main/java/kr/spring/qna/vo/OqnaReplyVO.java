@@ -2,7 +2,7 @@ package kr.spring.qna.vo;
 
 import kr.spring.util.DurationFromNow;
 
-public class Oqna_replyVO {		//전체게시판 댓글
+public class OqnaReplyVO {		//전체게시판 댓글
 
 	private int qnare_num;
 	private int qna_num;
@@ -10,6 +10,8 @@ public class Oqna_replyVO {		//전체게시판 댓글
 	private String content;
 	private String re_date;
 	private String re_mdate;
+	private String name;
+	private int auth;
 	
 	
 	//날짜처리 변경
@@ -24,11 +26,10 @@ public class Oqna_replyVO {		//전체게시판 댓글
 	//toString재정의
 	@Override
 	public String toString() {
-		return "Qna_replyVO [qnare_num=" + qnare_num + ", qna_num=" + qna_num + ", user_num=" + user_num + ", content="
-				+ content + ", re_date=" + re_date + ", re_mdate=" + re_mdate + "]";
-	}	
-	
-	
+		return "OqnaReplyVO [qnare_num=" + qnare_num + ", qna_num=" + qna_num + ", user_num=" + user_num + ", content="
+				+ content + ", re_date=" + re_date + ", re_mdate=" + re_mdate + ", name=" + name + ", auth=" + auth
+				+ "]";
+	}
 	
 	public int getQnare_num() {
 		return qnare_num;
@@ -61,5 +62,19 @@ public class Oqna_replyVO {		//전체게시판 댓글
 	public String getRe_mdate() {
 		return re_mdate;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAuth() {
+		return auth;
+	}
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
 
+	
+	
 }

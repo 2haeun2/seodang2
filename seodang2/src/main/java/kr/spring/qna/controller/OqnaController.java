@@ -162,30 +162,30 @@ public class OqnaController {
 	//(7) 수정form
 	@GetMapping("/oqna/oqnaUpdate.do")
 	public String formUpdate(@RequestParam int qna_num, Model model) {
-		OqnaVO qnaVO = oqnaService.selectOqna(qna_num);
-		model.addAttribute("qnaVO",qnaVO);
+		OqnaVO oqnaVO = oqnaService.selectOqna(qna_num);
+		model.addAttribute("oqnaVO",oqnaVO);
 		
 		return "oqnaModify";
 	}
 	
 	//(8) 수정form에서 전송된 데이터 처리
 	@PostMapping("/oqna/oqnaUpdate.do")
-	public String submitUpdate(@Valid OqnaVO qnaVO, BindingResult result,
+	public String submitUpdate(@Valid OqnaVO oqnaVO, BindingResult result,
 								HttpServletRequest request, Model model) {
 		
 		//로그 출력
-		logger.info("<<글 정보 수정>> : " + qnaVO);
+		logger.info("<<글 정보 수정>> : " + oqnaVO);
 		
 		//<1> 유효성 체크결과 오류가 있으면 폼을 호출
 		if(result.hasErrors()) {
-			OqnaVO vo = oqnaService.selectOqna(qnaVO.getQna_num());
-			qnaVO.setFilename(vo.getFilename());
+			OqnaVO vo = oqnaService.selectOqna(oqnaVO.getQna_num());
+			oqnaVO.setFilename(vo.getFilename());
 			
 			return "oqnaModify";
 		}
 		
 		//<2> 글 수정
-		oqnaService.updateOqna(qnaVO);
+		oqnaService.updateOqna(oqnaVO);
 
 		//<3> view에 표시할 메시지를 지정
 		model.addAttribute("message", "글 수정 완료");

@@ -201,7 +201,8 @@ form{
 }
 /*CKEditor 사용시 등록, 수정폼*/
 form#register_form, form#update_form{
-	width:900px;
+	width:100%;
+	border:white;
 }
 ul{
 	list-style:none;
@@ -215,7 +216,7 @@ input[type="text"],input[type="password"],input[type="email"]{
 }
 
 input.title{
-	width:890px;
+	width:945px;
 }
 
 #register_form input[id="id"]{

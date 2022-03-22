@@ -3,8 +3,7 @@ package kr.spring.qna.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
-
+import kr.spring.qna.vo.OqnaReplyVO;
 import kr.spring.qna.vo.OqnaVO;
 
 public interface OqnaService {
@@ -36,5 +35,22 @@ public interface OqnaService {
 	
 	
 	//[ 댓글 ] 
+	
+	//1. 댓글 등록
+	public void insertReply(OqnaReplyVO oqnaReplyVO);
+	
+	//2-1. 댓글목록 count
+	public int selectRowCountReply(Map<String,Object> map);
+	//2-2. 댓글 목록 : xml에 명시
+	public List<OqnaReplyVO> selectListReply(Map<String,Object> map);
+	
+	//3-1. 댓글 수정 및 삭제 전 기존댓글 전체 데이터 읽어오기 (Intercepter에서 사용)
+	public OqnaReplyVO selectReply(Integer re_num);
+	//3-2. 댓글 수정
+	public void updateReply(OqnaReplyVO oqnaReplyVO);
+	
+	//4. 댓글 삭제
+	public void deleteReply(Integer re_num);
+
 	
 }
