@@ -12,7 +12,7 @@ create table offclass(
 	user_num number not null,
 	constraint offclass_pk primary key (off_num),
 	constraint offclass_fk foreign key(user_num) references ouser(user_num),
-	constraint offclass_fk2 foreign key(category_num) references category(category_num)
+	/*constraint offclass_fk2 foreign key(category_num) references category(category_num)*/
 );
 
 create sequence offclass_seq;

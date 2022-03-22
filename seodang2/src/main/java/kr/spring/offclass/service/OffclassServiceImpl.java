@@ -31,8 +31,8 @@ public class OffclassServiceImpl implements OffclassService{
 
 	@Override
 	public void insertOffClass(OffclassVO offclass) {
-		// TODO Auto-generated method stub
-		
+		offclass.setOff_num(offclassMapper.selectOff_num());
+		offclassMapper.insertOffClass(offclass);
 	}
 
 	@Override

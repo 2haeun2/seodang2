@@ -1,15 +1,26 @@
 package kr.spring.offclass.vo;
 
+import java.io.IOException;
 import java.sql.Date;
+import java.util.Arrays;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 public class OffclassVO {
 	private int off_num;//클래스 번호
+	@Range(min=1,max=5)
 	private int category_num;
+	@NotEmpty
 	private String off_name;//클래스 이름
+	@Range(min=1,max=99)
 	private String off_limit;//클래스 정원
+	@Min(0)
 	private String off_price;//클래스 가격
+	@NotEmpty
 	private String off_content;//클래스 내용
 	private MultipartFile off_upload;
 	private String off_filename;//파일명
@@ -18,6 +29,13 @@ public class OffclassVO {
 	private Date reg_date;
 	private Date modify_date;
 	private String user_name;
+	
+	//업로드 파일 처리
+	public void setOff_upload(MultipartFile off_upload) throws IOException{
+		this.off_upload = off_upload;
+		setOff_uploadfile(off_upload.getBytes());
+		setOff_filename(off_upload.getOriginalFilename());
+	}
 	
 	public int getOff_num() {
 		return off_num;
@@ -58,9 +76,7 @@ public class OffclassVO {
 	public MultipartFile getOff_upload() {
 		return off_upload;
 	}
-	public void setOff_upload(MultipartFile off_upload) {
-		this.off_upload = off_upload;
-	}
+
 	public String getOff_filename() {
 		return off_filename;
 	}
@@ -99,7 +115,7 @@ public class OffclassVO {
 	}
 	@Override
 	public String toString() {
-		return "OffClassVO [off_num=" + off_num + ", category_num=" + category_num + ", off_name=" + off_name
+		return "OffclassVO [off_num=" + off_num + ", category_num=" + category_num + ", off_name=" + off_name
 				+ ", off_limit=" + off_limit + ", off_price=" + off_price + ", off_content=" + off_content
 				+ ", off_upload=" + off_upload + ", off_filename=" + off_filename + ", user_num=" + user_num
 				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", user_name=" + user_name + "]";

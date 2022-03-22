@@ -9,9 +9,9 @@
     	<put-attribute name="title" value="오프라인 클래스"/>
     	<put-attribute name="body" value="/WEB-INF/views/offclass/offclassList.jsp"/>
     </definition>
-    <definition name="offclassWrite" extends="main">
+    <definition name="offclassOpen" extends="main">
     	<put-attribute name="title" value="오프라인 클래스 등록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/offclass/offclassWrite.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/offclass/offclassOpen.jsp"/>
     </definition>
 </tiles-definitions>
 
