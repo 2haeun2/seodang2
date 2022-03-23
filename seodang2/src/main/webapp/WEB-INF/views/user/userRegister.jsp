@@ -63,6 +63,7 @@
 				<label>회원구분</label>
 				<form:radiobutton path="auth" value="2"/>학생
 				<form:radiobutton path="auth" value="3"/>선생님
+				<form:radiobutton path="auth" value="4"/>관리자
 			</li>
 			<li>
 				<form:label path="id">아이디</form:label>

@@ -1,5 +1,8 @@
 package kr.spring.user.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -32,4 +35,14 @@ public interface UserMapper {
 	public void deleteUser_detail(Integer user_num);
 	@Update("UPDATE ouser_detail SET photo=#{photo},photo_name=#{photo_name} WHERE user_num=#{user_num}")
 	public void updateProfile(UserVO user);
+	
+	//관리자
+	public List<UserVO> selectList(Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
+	@Update("UPDATE ouser SET auth=#{auth} WHERE user_num=#{user_num}")
+	public void updateByAdmin(UserVO user);
+	@Update("UPDATE ouser_detail SET name=#{name},phone=#{phone},zipcode=#{zipcode},"
+			+ "address1=#{address1},address2=#{address2},email=#{email},age=#{age},modify_date=SYSDATE "
+			+ "WHERE user_num=#{user_num}")
+	public void updateDetailByAdmin(UserVO user);
 }

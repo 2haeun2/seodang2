@@ -33,6 +33,14 @@
     	<put-attribute name="title" value="회원탈퇴"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/userDelete.jsp"/>
     </definition>
+    <definition name="admin_userList" extends="main">
+    	<put-attribute name="title" value="회원목록(관리자용)"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/admin_userList.jsp"/>
+    </definition>
+    <definition name="admin_userModify" extends="main">
+    	<put-attribute name="title" value="회원목록(관리자용)"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/admin_userModify.jsp"/>
+    </definition>
 </tiles-definitions>
 
  
