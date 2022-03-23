@@ -56,7 +56,6 @@
 			<th>키트번호</th>
 			<th width="400">제품명</th>
 			<th>키트가격</th>
-			<th>판매자</th>
 			<th>남은수량</th>
 			<th>작성일</th>
 			<th>조회수</th>
@@ -64,12 +63,11 @@
 		<c:forEach var="kit" items="${list}">
 		<tr>
 		    <td>${kit.kit_num}</td>
-			<td>${kit.name}</td>
-			<td><a href="detail.do?kit_num=${kit.kit_num}">${kit.name}</a></td>
-			<td>${kit.price}</td>
-			<td></td>
-			<td>${kit.user_num}</td>
+					<td><a href="kitDetail.do?kit_num=${kit.kit_num}">${kit.kit_name}</a></td>
+			<td>${kit.kit_price}</td>
+			<td>${kit.kit_quantity}</td>
 			<td>${kit.reg_date}</td>
+			<td>${kit.hit}</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -77,70 +75,3 @@
 	</c:if>
 </div>
 <!-- 중앙 컨텐츠 끝 -->
-<!--  <div class="container">
-	<h2>키트 목록</h2>
-	<c:if test="${!empty session_user_num && session_user_auth>=2}">
-	<div class="align-right">
-		<input type="button" value="키트등록" onclick="location.href='kitWrite.do'">
-	</div>
-	</c:if>
-	<c:if test="${count == 1}">
-	<div class="result-display">표시할 게시물이 없습니다.</div>
-	</c:if>
-
-	<c:if test="${count>0}">
-	<ul class="list-main flex-row">
-		<c:forEach var="product" items="${list}">
-		<li>
-			<a class="flex-column" href="${pageContext.request.contextPath}/kit/kitdetail.do?kit_num=${kit.kit_num}">
-			<img src="${pageContext.request.contextPath}/upload/${kit.photo1}">
-			<div>${kit.name}</div>
-			<div>
-				<c:if test="${kit.price==0}">
-				품절
-				</c:if>
-				<c:if test="${kit.price>0}">
-				<fmt:formatNumber value="${kit.price}"/>원
-				</c:if>
-			</div>
-			<div>
-				관심 ${kit.likes}
-			</div>
-			</a>
-		</li>
-		</c:forEach>
-	</ul>
-	<div class="paging flex-row justify-center">
-		${pagingHtml}
-	</div>
-	</c:if>
-	</div>
-     목록 출력 끝
-	<c:if test="${count > 0}">
-	<table>
-		<tr>
-		    <th>키트번호</th>
-			<th width="400">제품명</th>
-			<th>키트가격</th>
-			<th>판매자</th>
-			<th>남은수량</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach var="kit" items="${list}">
-		<tr>
-		    <td>${kit.kit_num}</td>
-			<td>${kit.name}</td>
-			<td><a href="detail.do?kit_num=${kit.kit_num}">${kit.name}</a></td>
-			<td>${kit.price}</td>
-			<td></td>
-			<td>${kit.user_num}</td>
-			<td>${kit.reg_date}</td>
-		</tr>
-		</c:forEach>
-	</table>
-	<div class="align-center">${pagingHtml}</div>
-	</c:if>
-</div> 
--->
-

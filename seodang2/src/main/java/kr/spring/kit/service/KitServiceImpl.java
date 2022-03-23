@@ -23,8 +23,7 @@ public class KitServiceImpl implements KitService{
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		//kitMapper.selectRowCount(map);
-		return 0;
+		return kitMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class KitServiceImpl implements KitService{
 	
 	@Override
 	public void updateHit(Integer kit_num) {
-		// TODO Auto-generated method stub
+		kitMapper.updateHit(kit_num);
 		
 	}
 	

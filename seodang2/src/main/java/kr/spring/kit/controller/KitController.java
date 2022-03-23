@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.kit.service.KitService;
 import kr.spring.kit.vo.KitVO;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 
 @Controller
 public class KitController {
@@ -42,21 +43,22 @@ public class KitController {
 		return "kitWrite";
 	}
 	//글 등록 폼에서 전송된 데이터 처리
-		@PostMapping("/kit/kitWrite.do")
+	@PostMapping("/kit/kitWrite.do")
 		public String submit(@Valid KitVO kitVO,
 				             BindingResult result,
 				             HttpSession session,
 				             HttpServletRequest request) {
-			logger.info("<<게시판 글 저장>> : " + kitVO);
+			logger.info("<<글 저장>> : " + kitVO);
 			
 			//유효성 체크 결과 오류가 있으면 폼 호출
 			if(result.hasErrors()) {
 				return form();
 			}
 			
-			Integer user_num = (Integer)session.getAttribute("user_num");
+			Integer user_num = (Integer)session.getAttribute("session_user_num");
+			logger.info("<<회원번호>> : " + user_num);
 			//회원 번호 셋팅
-			kitVO.setKit_num(user_num);
+			kitVO.setUser_num(user_num);
 			
 			//글쓰기
 			kitService.insertKit(kitVO);
@@ -64,37 +66,56 @@ public class KitController {
 			return "redirect:/kit/kitList.do";
 		}
 	
-	//Kit 목록
-	@RequestMapping("/kit/kitList.do")
-	public ModelAndView process(
-			@RequestParam(value="pageNum",defaultValue="1")
-			int currentPage,
-			@RequestParam(value="keyfield",defaultValue="")
-			String keyfield,
-			@RequestParam(value="keyword",defaultValue="")
-			String keyword) {
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfielld",keyfield);
-		map.put("keyword",keyword);
-		
-		int count = kitService.selectRowCount(map);
-		
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"kitList.do");
-		
-		map.put("start",page.getStartCount());
-		map.put("end",page.getEndCount());
-		
-		List<KitVO> list = null;
-		if(count > 0) {
-			list = kitService.selectList(map);
+	    //Kit 목록
+		@RequestMapping("/kit/kitList.do")
+		public ModelAndView process(
+				@RequestParam(value="pageNum",defaultValue="1")
+				int currentPage,
+				@RequestParam(value="keyfield",defaultValue="")
+				String keyfield,
+				@RequestParam(value="keyword",defaultValue="")
+				String keyword) {
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyfielld",keyfield);
+			map.put("keyword",keyword);
+			
+			int count = kitService.selectRowCount(map);
+			
+			PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"kitList.do");
+			
+			map.put("start",page.getStartCount());
+			map.put("end",page.getEndCount());
+			
+			List<KitVO> list = null;
+			if(count > 0) {
+				list = kitService.selectList(map);
+			}
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("kitList");
+			mav.addObject("count", count);
+			mav.addObject("list",list);
+			mav.addObject("pagingHtml",page.getPagingHtml());
+			
+			return mav;
 		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("kitList");
-		mav.addObject("count", count);
-		mav.addObject("list",list);
-		mav.addObject("pagingHtml",page.getPagingHtml());
-		
-		return mav;
+			
+			//게시판 글 상세
+			@RequestMapping("/kit/kitDetail.do")
+			public ModelAndView process(@RequestParam int kit_num) {
+				logger.info("<<게시판 글 상세 - 글 번호>> : " + kit_num);
+				
+				//해당 글의 조회수 증가
+				kitService.updateHit(kit_num);
+				
+				KitVO kit = kitService.selectKit(kit_num);
+				//타이틀 HTML 불허
+				kit.setKit_name(StringUtil.useNoHtml(kit.getKit_name()));
+				                        //타일스 설정      속성명      속성값
+				return new ModelAndView("kitDetail","kit",kit);
+			}
+			
+			
+	
 	}
-}
+

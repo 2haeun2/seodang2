@@ -4,18 +4,28 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.Arrays;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 public class KitVO {
 	
 	private int kit_num; //상품번호
+	@NotEmpty
 	private String kit_name; //상품명
+	//@Range(min=1,max=5)
+	//private int category_num;//카테고리
+	@NotNull
 	private int kit_price; //가격
+	@NotNull
 	private int kit_quantity; //판매 수량
+	@NotEmpty
 	private String kit_content; //상품 정보
 	private Date reg_date; //등록일
 	private Date modify_date; //수정일
-	private String user_num;//회원번호
+	private int user_num;//회원번호
 	private int hit;//조회수
 	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
@@ -34,13 +44,12 @@ public class KitVO {
 		setFilename(upload.getOriginalFilename());
 	}
 	
-	@Override
-	public String toString() {
-		return "KitVO [kit_num=" + kit_num + ", kit_name=" + kit_name + ", kit_price=" + kit_price + ", kit_quantity="
-				+ kit_quantity + ", kit_content=" + kit_content + ", reg_date=" + reg_date + ", modify_date="
-				+ modify_date + ", user_num=" + user_num + ", hit=" + hit + ", upload=" + upload + ", uploadfile="
-				+ Arrays.toString(uploadfile) + ", filename=" + filename + "]";
+	/*public int getCategory_num() {
+		return category_num;
 	}
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}*/
 	public byte[] getUploadfile() {
 		return uploadfile;
 	}
@@ -101,11 +110,19 @@ public class KitVO {
 	public void setModify_date(Date modify_date) {
 		this.modify_date = modify_date;
 	}
-	public String getUser_num() {
+	public int getUser_num() {
 		return user_num;
 	}
-	public void setUser_num(String user_num) {
+	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
+	@Override
+	public String toString() {
+		return "KitVO [kit_num=" + kit_num + ", kit_name=" + kit_name + ", kit_price=" + kit_price + ", kit_quantity="
+				+ kit_quantity + ", kit_content=" + kit_content + ", reg_date=" + reg_date + ", modify_date="
+				+ modify_date + ", user_num=" + user_num + ", hit=" + hit + ", upload=" + upload + ", filename="
+				+ filename + "]";
+	}
+	
 	
 }
