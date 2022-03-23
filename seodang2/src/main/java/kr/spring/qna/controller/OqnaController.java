@@ -81,6 +81,11 @@ public class OqnaController {
 								@RequestParam(value="keyword", defaultValue="") String keyword,
 								HttpSession session){
 		
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		//로그처리
+		logger.info("<<게시판 글상세 - 회원번호 >> : " + user_num);
+		
+		
 		//<1> keyfield, keyword데이터를 Map객체에 넘기기
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
@@ -102,11 +107,9 @@ public class OqnaController {
 		}
 		
 		//<5> request에 데이터 저장
-		Integer session_num = (Integer)session.getAttribute("session_user_num");
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("oqnaList");
-		mav.addObject("session_num",session_num);
+		mav.addObject("user_num",user_num);
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("pagingHtml",page.getPagingHtml());
@@ -119,14 +122,28 @@ public class OqnaController {
 	@RequestMapping("/oqna/oqnaDetail.do")
 	public ModelAndView process(@RequestParam int qna_num, HttpSession session) {
 		
-		//로그처리
-		logger.info("<<게시판 글상세 - 글번호 >> : " + qna_num);
+		Integer session_user_num = (Integer)session.getAttribute("session_user_num");
+		Integer session_user_auth = (Integer)session.getAttribute("session_user_auth");
 		
 		//타이틀 HTML 불허
 		OqnaVO oqna = oqnaService.selectOqna(qna_num);
 		oqna.setTitle(StringUtil.useBrNoHtml(oqna.getTitle()));
 		
-		return new ModelAndView("oqnaDetailView","oqna",oqna);
+		//로그처리
+		logger.info("<<게시판 글상세 - 로그인한 회원번호 >> : " + session_user_num);
+		logger.info("<<게시판 글상세 - 로그인한 회원등급 >> : " + session_user_auth);
+		logger.info("<<게시판 글상세 - 글 작성자 oqnaVO >> : " + oqna);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("oqnaDetailView");
+		mav.addObject("session_user_num",session_user_num);
+		mav.addObject("session_user_auth",session_user_auth);
+		mav.addObject("oqna",oqna);
+
+		
+		return mav;
+		
+		//return new ModelAndView("oqnaDetailView","oqna",oqna);
 									//타일스 설정	  속성명	속성값
 	}
 	

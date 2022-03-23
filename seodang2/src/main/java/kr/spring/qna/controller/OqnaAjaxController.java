@@ -95,8 +95,8 @@ public class OqnaAjaxController {
 											@RequestParam int qna_num,
 											HttpSession session){
 		//로그처리
-		logger.info("<<목록 호출>> currentPage : "+ currentPage);
-		logger.info("<<목록 호출 >> qna_num : " + qna_num);
+		logger.info("<<댓글 목록 호출>> currentPage : "+ currentPage);
+		logger.info("<<댓글 목록 호출 >> 글번호 : " + qna_num);
 		
 		//<1>Map객체 생성
 		Map<String, Object> map = new HashMap<String,Object>();

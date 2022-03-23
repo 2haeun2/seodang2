@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css"/>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/videoAdapter.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/board.reply.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/oqna.reply.js"></script>
 
 <div class="page-main">
 
@@ -67,16 +67,16 @@
 
 	<!--  =================댓글=============== -->
 	<div id="reply_div">
-		<span class="re-title">댓글달기</span>
+		<span class="re-title">댓글작성</span>
 		
 		<form id="re_form">
 			<input type="hidden" name="qna_num" value="${oqna.qna_num }" id="qna_num">
 			
 			<textarea rows="5" cols="80" name="content" id="content" class="rep-content"
-			 <c:if test="${oqna.auth<3 }">disabled="disabled"</c:if>
-			><c:if test="${oqna.auth<3 }">관리자만 작성할 수 있습니다.</c:if></textarea>
+			 <c:if test="${session_user_auth==null || session_user_auth<3 }">disabled="disabled"</c:if>
+			><c:if test="${session_user_auth==null || session_user_auth<3 }">관리자만 작성할 수 있습니다.</c:if></textarea>
 		
-			<c:if test="${oqna.auth>=3 }">
+			<c:if test="${session_user_auth!=null && session_user_auth>=3 }">
 				<div id="re_first">
 					<span class="letter-count">300/300</span>
 				</div>
