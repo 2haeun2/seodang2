@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 중앙 컨텐츠 시작 -->
 <!-- 부트스트랩 라이브러리 -->
@@ -21,12 +22,23 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
+				<form:label path="category_num">카테고리</form:label>
+				<form:select path="category_num">
+					<form:option value="1">드로잉</form:option>
+					<form:option value="2">플라워</form:option>
+					<form:option value="3">공예</form:option>
+					<form:option value="4">요리</form:option>
+					<form:option value="5">베이킹</form:option>
+				</form:select>
+				<form:errors path="category_num" cssClas="error-color"/>
+			</li>
+			<li>
 				<form:label path="on_name">제목</form:label>
 				<form:input path="on_name"/>
 				<form:errors path="on_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="on_price">제목</form:label>
+				<form:label path="on_price">가격</form:label>
 				<form:input path="on_price"/>
 				<form:errors path="on_price" cssClass="error-color"/>
 			</li>
@@ -61,8 +73,6 @@
 		</ul>	 
 		<div class="align-center">
 			<form:button>전송</form:button>
-			<input type="button" value="목록" 
-			              onclick="location.href='list.do'">
 		</div>                                          
 	</form:form>
 </div>

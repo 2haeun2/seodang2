@@ -7,6 +7,15 @@ public class OstarVO {
 	private String rating;
 	private String text;
 	
+	//아이디 조인
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	public String getRating() {
 		return rating;

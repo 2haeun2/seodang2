@@ -3,6 +3,7 @@ package kr.spring.onclass.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,9 @@ public class OstarController {
 		return new OstarVO();
 	}
 	@GetMapping("/onclass/qnaList.do")
-	public String qnaForm(Model model,OstarVO ostarVO,int on_num) {
+	public String qnaForm(Model model,OstarVO ostarVO,int on_num,HttpServletRequest request) {
 		ostarVO.setOn_num(on_num);
-		Map<Integer, String> map = new HashMap<Integer, String>();
-		map.put(0, "☆☆☆☆☆");
-		map.put(1, "★☆☆☆☆");
-		map.put(2, "★★☆☆☆");
-		map.put(3, "★★★☆☆");
-		map.put(4, "★★★★☆");
-		map.put(5, "★★★★★");
-		model.addAttribute("map", map);
+		model.addAttribute("list",onclassService.listAll());
 		return "qnaList";
 	}
 	//별점 처리

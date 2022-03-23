@@ -118,4 +118,10 @@ public class OnclassServiceImpl implements OnclassService{
 		return onclassMapper.avgQna(on_num);
 	}
 
+	@Override
+	public List<OstarVO> listAll() {
+		// TODO Auto-generated method stub
+		return onclassMapper.listAll();
+	}
+
 }

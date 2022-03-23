@@ -3,17 +3,24 @@ package kr.spring.onclass.vo;
 import java.io.IOException;
 import java.sql.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
-import kr.spring.user.vo.UserVO;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
 
 public class OnclassVO {
 	private int on_num;
 	private int user_num;
+	@NotEmpty
 	private String on_name;
+	@Range(min=0,max=999999)
 	private int on_price;
 	private int hit;
+	@Range(min=1,max=5)
+	private int category_num;
+	@NotEmpty
 	private String on_content;
 	private MultipartFile upload;
 	private byte[] uploadfile;
@@ -43,6 +50,15 @@ public class OnclassVO {
 		this.deletePasswd = deletePasswd;
 	}
 	
+	
+	public int getCategory_num() {
+		return category_num;
+	}
+
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+
 	public int getHit() {
 		return hit;
 	}
@@ -132,6 +148,14 @@ public class OnclassVO {
 
 	public MultipartFile getUpload() {
 		return upload;
+	}
+
+	@Override
+	public String toString() {
+		return "OnclassVO [on_num=" + on_num + ", user_num=" + user_num + ", on_name=" + on_name + ", on_price="
+				+ on_price + ", hit=" + hit + ", category_num=" + category_num + ", on_content=" + on_content
+				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", avgqna=" + avgqna + ", deletePasswd="
+				+ deletePasswd + "]";
 	}
 	
 	

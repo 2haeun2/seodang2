@@ -32,4 +32,6 @@ public interface OnclassService {
 	public OstarVO selectQna(Integer user_num);
 	public void insertqna(OstarVO ostarvo);
 	public int avgQna(Integer on_num);
+	//리스트
+	public List<OstarVO> listAll();
 }

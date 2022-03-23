@@ -17,8 +17,8 @@ public interface OnclassMapper {
 	public List<OnclassVO> selectList(Map<String,Object> map);
 	public List<OnclassVO> hitList(Map<String, Object> map);
 	public int selectRowCount(Map<String,Object> map);
-	@Insert("insert into onclass (on_num, user_num,on_name,on_price,on_content,uploadfile,filename) "
-			+ "values(onclass_seq.nextval,#{user_num},#{on_name},#{on_price},#{on_content},#{uploadfile},#{filename})")
+	@Insert("insert into onclass (on_num, user_num,on_name,category_num,on_price,on_content,uploadfile,filename) "
+			+ "values(onclass_seq.nextval,#{user_num},#{on_name},#{category_num},#{on_price},#{on_content},#{uploadfile},#{filename})")
 	public void insertOnclass(OnclassVO onclassVO);
 	@Select("select * from onclass where on_num = #{on_num}")
 	public OnclassVO selectOnclass(Integer on_num);
@@ -51,4 +51,6 @@ public interface OnclassMapper {
 	//평점 평균
 	@Select("select NVL(avg(rating),0) from ostar where on_num = #{on_num}")
 	public int avgQna(Integer on_num);
+	//평점 리스트
+	public List<OstarVO> listAll();
 }

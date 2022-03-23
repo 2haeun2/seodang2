@@ -6,12 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
-import kr.spring.onclass.vo.OstarVO;
 import kr.spring.user.controller.UserController;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
@@ -75,14 +76,19 @@ public class OnclassController {
 		return mav;
 	}
 	
-	
+	//수업 등록
 	@GetMapping("/onclass/onclassInsert.do")
 	public String insertForm() {
 		return "onclassInsert";
 	}
 	
 	@PostMapping("/onclass/onclassInsert.do")
-	public String insert(OnclassVO onclassVO,HttpSession session) {
+	public String insert(@Valid OnclassVO onclassVO,BindingResult result,HttpSession session) {
+		
+		if(result.hasErrors()) {
+			return insertForm();
+		}
+		
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		onclassVO.setUser_num(user_num);
 		onclassService.insertOnclass(onclassVO);
@@ -99,7 +105,11 @@ public class OnclassController {
 		return "onclassModify";		
 	}
 	@PostMapping("/onclass/onclassModify.do")
-	public String update(OnclassVO onclassVO,HttpServletRequest request,Model model) {
+	public String update(@Valid OnclassVO onclassVO,BindingResult result,HttpServletRequest request,Model model) {
+		
+		if(result.hasErrors()) {
+			return "onclassModify";
+		}
 		
 		onclassService.updateOnclass(onclassVO);
 
