@@ -21,9 +21,11 @@
 	    		<img src="${pageContext.request.contextPath}/resources/images/face.png" 
 	    	                        width="25" height="25" class="my-photo">
 	    	</c:if>
-			<c:if test="${!empty session_user_num && session_user_auth == 4}">
-				<a href="${pageContext.request.contextPath}/admin/adminMemberList.do">회원관리</a>
-			</c:if>
+
+			<c:if test="${session_user_auth==2 }">일반회원</c:if>
+			<c:if test="${session_user_auth==3 }">강사</c:if>
+			<c:if test="${session_user_auth==4 }">관리자</c:if>
+
 			<c:if test="${!empty session_user_num}">
 				[<span>${session_user_name}</span>]
 				<a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a>
@@ -32,17 +34,20 @@
 				<a href="${pageContext.request.contextPath}/user/registerUser.do">회원가입</a>
 				<a href="${pageContext.request.contextPath}/user/login.do">로그인</a>
 			</c:if>
-			<c:if test="${!empty session_user_num && session_user_auth == 2}">
+			<c:if test="${!empty session_user_num}">
 				<a href="${pageContext.request.contextPath}/user/myMenu.do">MY메뉴</a>
 			</c:if>
 			
 			<a href="${pageContext.request.contextPath}/main/main.do">홈으로</a>
 		</div>
 	</div>
-	</div>
+
 	<div class="align-right">
 		<a href="#" class="logo">게시판</a>
 		<a href="${pageContext.request.contextPath}/oqna/oqnaList.do" class="logo">Q&amp;A</a>
+		<c:if test="${!empty session_user_num && session_user_auth == 4}">
+			<a href="${pageContext.request.contextPath}/admin/adminMemberList.do">회원관리</a>
+		</c:if>			
 	</div>
-<div>
+</div>
 <!-- 상단 끝 -->
