@@ -1,5 +1,9 @@
 package kr.spring.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,10 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.qna.service.OqnaService;
+import kr.spring.qna.vo.OqnaVO;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
 import kr.spring.util.AuthBlockException;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class UserController {
@@ -26,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private OqnaService oqnaService;
 
 	@ModelAttribute
 	public UserVO initCommand() {
@@ -122,18 +132,40 @@ public class UserController {
 
 		return "redirect:/main/main.do";
 	}
-	
+
 	// 내 메뉴 보기
 	@RequestMapping("/user/myMenu.do")
 	public String processMenu(HttpSession session, Model model) {
-		
-		Integer user_num = (Integer)session.getAttribute("session_user_num");
+
+		Integer user_num = (Integer) session.getAttribute("session_user_num");
 		UserVO user = userService.selectUser(user_num);
-		
+
 		logger.info("<<회원 상세 정보>> : " + user);
-		
-		model.addAttribute("user",user);
-				
+
+		model.addAttribute("user", user);
+
+		// QNA, 데이터를 맵에 넘기기
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield", "");
+		map.put("keyword", "");
+		map.put("user_num", user_num);
+		int count = oqnaService.selectOqnaRowCount(map);
+
+		// <3> 페이지처리
+		PagingUtil page = new PagingUtil("", "", 1, count, 5, 10, null);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+
+		// <4> map을 넘겨줘서 글목록 뽑아오기
+		List<OqnaVO> list = null;
+		if (count > 0) {
+			list = oqnaService.getOqnaList(map);
+		}
+
+		// <5> request에 데이터 저장
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+
 		return "userMenu";
 	}
 

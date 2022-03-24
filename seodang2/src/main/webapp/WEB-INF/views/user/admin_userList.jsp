@@ -44,6 +44,8 @@
 			<th>이름</th>
 			<th>전화번호</th>
 			<th>이메일</th>
+			<th>주소</th>
+			<th>나이</th>
 			<th>가입일</th>
 			<th>권한</th>
 		</tr>
@@ -56,6 +58,8 @@
 			<td>${user.name}</td>
 			<td>${user.phone}</td>
 			<td>${user.email}</td>
+			<td>${user.address1}</td>
+			<td>${user.age}</td>
 			<td>${user.reg_date}</td>
 			<td>
 				<c:if test="${user.auth==0}">탈퇴</c:if>

@@ -17,7 +17,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='update.do'">1:1문의 내역
+			                     width="160" height="160" class="my-photo" onclick="location.href='oqnaList.do'">1:1문의 내역
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"

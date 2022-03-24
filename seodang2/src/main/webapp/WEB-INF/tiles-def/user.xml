@@ -41,6 +41,10 @@
     	<put-attribute name="title" value="회원목록(관리자용)"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/admin_userModify.jsp"/>
     </definition>
+	<definition name="oqnaList" extends="main">
+    	<put-attribute name="title" value="QnA 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/oqnaList.jsp"/>
+    </definition>
 </tiles-definitions>
 
  
