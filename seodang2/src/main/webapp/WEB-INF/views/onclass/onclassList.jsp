@@ -22,7 +22,7 @@ p { margin:20px 0px;}
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
 <a href="${pageContext.request.contextPath}/onclass/onclassList.do" class="menu-item">등록일순</a>
-<a href="${pageContext.request.contextPath}/onclass/hitList.do" class="menu-item">조회수순</a>
+<a href="${pageContext.request.contextPath}/onclass/onclassList.do?category=1" class="menu-item">조회수순</a>
 <c:if test="${count > 0}">
 <c:forEach var="onclass" items="${list}">
 <!--//////////////////////////////////////////////////////////////////////////////////////////  -->

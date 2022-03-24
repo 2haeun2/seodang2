@@ -38,51 +38,17 @@
 		            		b.on_content LIKE '%' || #{keyword} || '%'
 		            	</if>
 		            </where>
+		            <if test="category == 0">
 		            ORDER BY b.on_num DESC)a)
-	   <![CDATA[
-	   WHERE rnum >= #{start} AND rnum <= #{end}
-	   ]]>	            
-	</select>
-	<select id="hitList" parameterType="map" resultType="onclassVO">
-		SELECT
-		  *
-		FROM (SELECT 
-		       a.*,
-		       rownum rnum
-		      FROM (SELECT 
-		               b.on_num,
-		               <![CDATA[
-		               REPLACE(REPLACE(b.on_name,'<','&lt;'),'>','&gt;') on_name,
-		               ]]>
-		               b.reg_date,
-		               m.id ,
-		               b.on_content,
-		               m.user_num,
-		               b.hit,
-		               b.filename
-		            FROM onclass b
-		            JOIN ouser m 
-		            ON b.user_num = m.user_num
-		            <where>
-		            	<if test="keyword != '' and keyfield == 1">
-		            		b.on_name LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 2">
-		            	    m.id LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 3">
-		            		b.on_content LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 4">
-		            		b.on_name LIKE '%' || #{keyword} || '%' or
-		            		b.on_content LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            </where>
+		            </if>
+		            <if test="category == 1">
 		            ORDER BY b.hit DESC)a)
+		            </if>
 	   <![CDATA[
 	   WHERE rnum >= #{start} AND rnum <= #{end}
 	   ]]>	            
 	</select>
+	
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 		  COUNT(*)

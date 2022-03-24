@@ -49,10 +49,12 @@ public class OnclassController {
 			@RequestParam(value="keyfield",defaultValue="")
 			String keyfield,
 			@RequestParam(value="keyword",defaultValue="")
-			String keyword) {
+			String keyword, @RequestParam(value="category",defaultValue="0") int category
+			) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("category", category);
 		
 		int count = onclassService.selectRowCount(map);
 		
@@ -61,7 +63,10 @@ public class OnclassController {
 
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
-
+		
+		//카테고리 로그
+		System.out.println(category);
+		
 		List<OnclassVO> list = null;
 			if(count > 0) {
 				list = onclassService.selectList(map);
@@ -157,35 +162,6 @@ public class OnclassController {
 		mav.setViewName("imageView");
 		mav.addObject("imageFile",onclass.getUploadfile());
 		mav.addObject("filename", onclass.getFilename());
-		return mav;
-	}
-	
-	@RequestMapping("/onclass/hitList.do")
-	public ModelAndView hitForm(
-			@RequestParam(value="pageNum",defaultValue="1")
-			int currentPage,
-			@RequestParam(value="keyfield",defaultValue="")
-			String keyfield,
-			@RequestParam(value="keyword",defaultValue="")
-			String keyword , HttpServletRequest request) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-		int count = onclassService.selectRowCount(map);	
-		PagingUtil page = new PagingUtil(keyfield,keyword,
-                currentPage,count,6,10,"onclassList.do");
-		map.put("start",page.getStartCount());
-		map.put("end", page.getEndCount());	
-		List<OnclassVO> list = null;
-			if(count > 0) {
-				list = onclassService.hitList(map);
-			}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("onclassList");
-		mav.addObject("count", count);
-		mav.addObject("list",list);
-		mav.addObject("pagingHtml", page.getPagingHtml());
-
 		return mav;
 	}
 	
