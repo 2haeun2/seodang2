@@ -16,7 +16,8 @@
 					<![CDATA[REPLACE(REPLACE(q.title, '<', '&lt;'),'>','&gt;') title,]]>
 					q.reg_date,
 					u.id,
-					d.name
+					d.name,
+					u.auth
 				 FROM oqna q JOIN ouser	u 
 				 ON q.user_num = u.user_num
 				 JOIN ouser_detail d ON u.user_num = d.user_num
@@ -25,14 +26,17 @@
 			 			<if test="keyword!='' and keyfield==1">	
 			 				q.title LIKE '%' || #{keyword} || '%'
 			 			</if>
-			 			<if test="keyword!='' and keyfield==2">
-			 				u.id LIKE '%' || #{keyword} || '%'
+			 			<if test="keyword!='' and keyfield==2">	
+			 				d.name LIKE '%' || #{keyword} || '%' and
+			 				u.auth = 3
 			 			</if>
-			 			<if test="keyword!='' and keyfield==3">
+			 			<if test="keyword!='' and keyfield==3">	
+			 				d.name LIKE '%' || #{keyword} || '%' and
+			 				u.auth = 4
+			 			</if>			 			
+			 			<if test="keyword!='' and keyfield==4">	
+			 				u.id LIKE '%' || #{keyword} || '%' or
 			 				d.name LIKE '%' || #{keyword} || '%'
-			 			</if>
-			 			<if test="keyword!='' and keyfield==4">
-			 				q.content LIKE '%' || #{keyword} || '%'
 			 			</if>
 			 			<if test="keyword!='' and keyfield==5">
 			 				q.title LIKE '%' || #{keyword} || '%' or
@@ -54,24 +58,27 @@
 		FROM oqna q JOIN ouser u 
 		ON q.user_num = u.user_num	
 		JOIN ouser_detail d ON u.user_num = d.user_num
-		 <where>
- 			<if test="keyword!='' and keyfield==1">	
- 				q.title LIKE '%' || #{keyword} || '%'
- 			</if>
- 			<if test="keyword!='' and keyfield==2">
- 				u.id LIKE '%' || #{keyword} || '%'
- 			</if>
- 			<if test="keyword!='' and keyfield==3">
-				d.name LIKE '%' || #{keyword} || '%'
-			</if>
-			<if test="keyword!='' and keyfield==4">
-				q.content LIKE '%' || #{keyword} || '%'
-			</if>
-			<if test="keyword!='' and keyfield==5">
-				q.title LIKE '%' || #{keyword} || '%' or
-				q.content LIKE '%' || #{keyword} || '%'
-			</if>
-		</where>	
+				 	<where>
+			 			<if test="keyword!='' and keyfield==1">	
+			 				q.title LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 			<if test="keyword!='' and keyfield==2">	
+			 				d.name LIKE '%' || #{keyword} || '%' and
+			 				u.auth = 3
+			 			</if>
+			 			<if test="keyword!='' and keyfield==3">	
+			 				d.name LIKE '%' || #{keyword} || '%' and
+			 				u.auth = 4
+			 			</if>			 			
+			 			<if test="keyword!='' and keyfield==4">	
+			 				u.id LIKE '%' || #{keyword} || '%' or
+			 				d.name LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 			<if test="keyword!='' and keyfield==5">
+			 				q.title LIKE '%' || #{keyword} || '%' or
+			 				q.content LIKE '%' || #{keyword} || '%'
+			 			</if>
+			 		</where>
 		
 	</select>
 	

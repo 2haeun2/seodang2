@@ -81,9 +81,9 @@ public class OqnaController {
 								@RequestParam(value="keyword", defaultValue="") String keyword,
 								HttpSession session){
 		
-		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		Integer session_user_num = (Integer)session.getAttribute("session_user_num");
 		//로그처리
-		logger.info("<<게시판 글상세 - 회원번호 >> : " + user_num);
+		logger.info("<<게시판 글상세 - 회원번호 >> : " + session_user_num);
 		
 		
 		//<1> keyfield, keyword데이터를 Map객체에 넘기기
@@ -96,7 +96,7 @@ public class OqnaController {
 		int count = oqnaService.selectOqnaRowCount(map);
 				
 		//<3> 페이지처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,20,10,"oqnaList.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,15,10,"oqnaList.do");
 		map.put("start", page.getStartCount());	
 		map.put("end", page.getEndCount());
 		
@@ -109,7 +109,7 @@ public class OqnaController {
 		//<5> request에 데이터 저장
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("oqnaList");
-		mav.addObject("user_num",user_num);
+		mav.addObject("session_user_num",session_user_num);
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("pagingHtml",page.getPagingHtml());
