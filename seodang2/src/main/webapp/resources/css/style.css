@@ -201,9 +201,8 @@ form#mre_form{
 }
 /*등록,수정폼*/
 form{
-	width:500px;
+	width:1000px;
 	margin:0 auto;
-	border:1px solid #000;
 	padding:10px 10px 10px 30px;
 }
 /*CKEditor 사용시 등록, 수정폼*/
