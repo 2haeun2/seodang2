@@ -6,6 +6,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.reply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/videoAdapter.js"></script>
+<!-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css"> -->
 <div class="page-main">
 	<div class="kitdetail_p">
 	<c:if test="${!empty kit.filename}">
@@ -53,6 +54,8 @@
 			};
 		</script>
 		</c:if>
+		<input type="button" value="장바구니" onclick="location.href='kitOder.do'">
+		<input type="button" value="관련클래스 구경하기" onclick="location.href='class.do'">
 		<input type="button" value="목록" onclick="location.href='kitList.do'">
 	</div>
 	</div>

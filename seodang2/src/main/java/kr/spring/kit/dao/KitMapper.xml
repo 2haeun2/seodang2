@@ -13,14 +13,15 @@
 			FROM (SELECT 
 					k.kit_num,
 					<![CDATA[REPLACE(REPLACE(k.kit_name, '<', '&lt;'),'>','&gt;') kit_name,]]>
+					k.kit_price,
+					k.kit_quantity,
 					k.reg_date,
 					k.hit,
-					d.name
+					d.name					
 				 FROM okit k 
 				 JOIN ouser	u 
 				 ON k.user_num = u.user_num
 				 JOIN ouser_detail d ON u.user_num = d.user_num
-				 
 				 	<where>
 			 			<if test="keyword!='' and keyfield==1">	
 			 				k.kit_name LIKE '%' || #{keyword} || '%'
@@ -75,13 +76,15 @@
 	<update id="updateKit" parameterType="kitVO" >
 		UPDATE okit SET
 			<if test="filename != ''">
-				uploadfile = #{uploadfile},
-				filename = #{filename},
+				uploadfile=#{uploadfile},
+				filename=#{filename},
 			</if>
 			kit_name=#{kit_name},
 			kit_content=#{kit_content},
-			modify_date= SYSDATE
-		WHERE kit_num = #{kit_num}	
+			kit_price=#{kit_price},
+			kit_quantity=#{kit_quantity},
+			modify_date=SYSDATE
+		WHERE kit_num=#{kit_num}	
 	</update>
 	
 </mapper>

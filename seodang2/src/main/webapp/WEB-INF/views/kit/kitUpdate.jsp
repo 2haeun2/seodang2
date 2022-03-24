@@ -4,10 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 중앙 컨텐츠 시작 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css.bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
+
 <div class="page-main">
 	<h2>글수정</h2>
 	<form:form modelAttribute="kitVO" action="kitUpdate.do" id="upate_form"
@@ -16,9 +18,9 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				<form:label path="kit_num">키트이름</form:label>
-				<form:input path="kit_num"/>
-				<form:errors path="kit_num" cssClass="error-color"/>
+				<form:label path="kit_name">키트이름</form:label>
+				<form:input path="kit_name"/>
+				<form:errors path="kit_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="kit_price">가격</form:label>

@@ -22,19 +22,18 @@
 	<div class="align-right">
 		<input type="button" value="키트등록" onclick="location.href='kitWrite.do'">
 	</div>
-	<form action="list.do" id="search_form" method="get">
+	<form action="kitList.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제품명</option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>키트이름</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>판매자</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
+					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>키트이름+내용</option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword"
-				                             value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
 				<input type="submit" value="검색">
@@ -65,7 +64,7 @@
 	    <div class="price">판매 금액 : ${kit.kit_price}원</div>
 		<div>남은 수량 : ${kit.kit_quantity}</div>
 		<div>조회수 : ${kit.hit}</div>
-		<div>등록일 : ${kit.reg_date}</div>
+		<div>등록일 : ${kit.reg_date}</div>	
 	</div>
 	</li>
 	</ul>
