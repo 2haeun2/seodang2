@@ -19,6 +19,12 @@ ul li {list-style-type: none;float: left;}
     float:left;
     text-align:center;
 }
+.textone{
+	width:200px; 
+	overflow:hidden; 
+	text-overflow:ellipsis;/* 글자 넘침 */
+}
+
 .btn_one{
 	margin-top:10px;
 }
