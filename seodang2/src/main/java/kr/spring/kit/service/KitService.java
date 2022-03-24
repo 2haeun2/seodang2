@@ -14,6 +14,7 @@ public interface KitService {
 	public void updateHit(Integer kit_num);	
 	public void updateKit(KitVO kit);
 	public void deleteKit(Integer kit_num);
+	public void deleteFile(Integer kit_num);
 
 
 }

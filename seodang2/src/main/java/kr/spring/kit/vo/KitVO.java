@@ -32,7 +32,7 @@ public class KitVO {
 	private String filename;		//파일명
 	
 	
-	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
+	//업로드 파일
 	public MultipartFile getUpload() {
 		return upload;
 	}
@@ -116,12 +116,15 @@ public class KitVO {
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "KitVO [kit_num=" + kit_num + ", kit_name=" + kit_name + ", kit_price=" + kit_price + ", kit_quantity="
 				+ kit_quantity + ", kit_content=" + kit_content + ", reg_date=" + reg_date + ", modify_date="
 				+ modify_date + ", user_num=" + user_num + ", hit=" + hit + ", upload=" + upload + ", filename="
-				+ filename + "]";
+				+ filename +"]";
 	}
 	
 	

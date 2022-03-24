@@ -4,7 +4,6 @@
 <!-- 중앙 컨텐츠 시작 -->
 <!-- 부트스트랩 라이브러리 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
@@ -18,7 +17,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
 <div>
 	<h2>Kit 등록하기</h2>
-	<form:form modelAttribute="kitVO" action="kitWrite.do" enctype="multipart/form-data" id="kit_register_form">
+	<form:form modelAttribute="kitVO" action="kitWrite.do" enctype="multipart/form-data" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 		
@@ -65,7 +64,7 @@
 				<input type="file" name="upload" id="upload">
 				<form:errors path="upload" cssClass="error-color"/>
 			</li>
-		</ul>
+	</ul>
 		<div class="align-center">
 			<form:button>등록하기</form:button>
 			<input type="button" value="목록" 

@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 회원상태 (0탈퇴회원,1정지회원,2일반회원,선생님회원,3관리자), 디폴트값 2 -->
 <!-- 중앙 컨텐츠 시작 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
 <script type="text/javascript">
 	$(function(){
 		$('#search_form').submit(function(){
@@ -43,35 +45,34 @@
 	</form>
 	<c:if test="${!empty user_num}">
 	<div class="align-right">
-		<input type="button" value="글쓰기" 
-		                         onclick="location.href='kitWrite.do'">
+		<input type="button" value="키트 등록" onclick="location.href='kitWrite.do'">
 	</div>
 	</c:if>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
+	
+	<div class="list-main">	
 	<c:if test="${count > 0}">
-	<table>
-		<tr>
-			<th>키트번호</th>
-			<th width="400">제품명</th>
-			<th>키트가격</th>
-			<th>남은수량</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach var="kit" items="${list}">
-		<tr>
-		    <td>${kit.kit_num}</td>
-					<td><a href="kitDetail.do?kit_num=${kit.kit_num}">${kit.kit_name}</a></td>
-			<td>${kit.kit_price}</td>
-			<td>${kit.kit_quantity}</td>
-			<td>${kit.reg_date}</td>
-			<td>${kit.hit}</td>
-		</tr>
-		</c:forEach>
-	</table>
-	<div class="align-center">${pagingHtml}</div>
+	<c:forEach var="kit" items="${list}">
+	<ul>
+	
+	<li>
+	<div class="box"><!-- 판매 금액,남은 수량 표시가 안된다.... -->
+	<div><a href="kitDetail.do?kit_num=${kit.kit_num}"><img src="imageView.do?kit_num=${kit.kit_num}"  style="width:200px; height:200px;"></a></div>
+	    <div> <a href="kitDetail.do?kit_num=${kit.kit_num}">${kit.kit_name}</a></div>
+	    <div>${kit.kit_num}</div>
+	    <div class="price">판매 금액 : ${kit.kit_price}원</div>
+		<div>남은 수량 : ${kit.kit_quantity}</div>
+		<div>조회수 : ${kit.hit}</div>
+		<div>등록일 : ${kit.reg_date}</div>
+	</div>
+	</li>
+	</ul>
+	</c:forEach>
 	</c:if>
+	</div>
+	<div class="page_num">${pagingHtml}</div>
+
 </div>
 <!-- 중앙 컨텐츠 끝 -->
