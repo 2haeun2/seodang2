@@ -1,12 +1,14 @@
 package kr.spring.qna.vo;
 
-import java.io.IOException;
-import java.util.Date;
+import java.io.IOException; 
+import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
+
+
 
 public class OqnaVO {	//전체 게시판
 	private int qna_num;
@@ -16,7 +18,8 @@ public class OqnaVO {	//전체 게시판
 	@NotEmpty
 	private String content;
 	private Date reg_date;
-	private Date modify_date;
+	//private Date modify_date;
+	private String modify_date;
 
 	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
@@ -34,7 +37,7 @@ public class OqnaVO {	//전체 게시판
 
 		setFilename(upload.getOriginalFilename());
 	}	
-
+ 
 
 	//* toString()재정의
 	@Override
@@ -43,6 +46,23 @@ public class OqnaVO {	//전체 게시판
 				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", upload=" + upload + ", filename="
 				+ filename + ", id=" + id + ", name=" + name + ", auth=" + auth + "]";
 	}	
+
+
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
+
+	public String getModify_date() {
+		return modify_date;
+	}
+
+
+	public void setModify_date(String modify_date) {
+		this.modify_date = modify_date;
+	}
 
 
 	public int getQna_num() {
@@ -69,18 +89,7 @@ public class OqnaVO {	//전체 게시판
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
-	public Date getModify_date() {
-		return modify_date;
-	}
-	public void setModify_date(Date modify_date) {
-		this.modify_date = modify_date;
-	}
+	
 	public MultipartFile getUpload() {
 		return upload;
 	}

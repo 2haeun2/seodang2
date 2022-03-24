@@ -51,7 +51,9 @@ $(function(){
 					let output = '<div class = "item">';
 					
 					output += '<h4>' + item.name;
-					if(item.auth >=3) {
+					if(item.auth ==3) {
+						output += '(선생님)'
+					}else if(item.auth ==4) {
 						output += '(관리자)'
 					}
 					output += '</h4>'
@@ -173,7 +175,7 @@ $(function(){
 				$('#re_first .letter-count').text(remain);
 			}else{
 				//수정폼 글자수
-				$('#mre_first .leetter-count').text(remain);
+				$('#mre_first .letter-count').text(remain);
 			}
 		}
 	});

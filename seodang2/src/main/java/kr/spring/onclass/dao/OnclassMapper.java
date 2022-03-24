@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.onclass.vo.OstarVO;
+import kr.spring.qna.vo.OqnaReplyVO;
 
 public interface OnclassMapper {
 	public List<OnclassVO> selectList(Map<String,Object> map);
@@ -29,18 +30,18 @@ public interface OnclassMapper {
 	public OnclassVO getOnclass(int num);
 	public void updateOnclass(OnclassVO onclassVO);
 	@Delete("delete from onclass where on_num = #{num}")
-	public void deleteOnclass(int on_num);
+	public void deleteOnclass(Integer on_num);
 	@Update("UPDATE onclass SET hit=hit+1 WHERE on_num=#{on_num}")
 	public void updateHit(Integer on_num);
 	//찜 눌렀는지 확인
 	@Select("select * from onlike where user_num = ${user_num} and on_num = ${on_num}")
-	public OnlikeVO selectLike(Integer user_num,int on_num);
+	public OnlikeVO selectLike(Integer user_num,Integer on_num);
 	//찜취소
 	@Delete("delete from onlike where onlike_num = ${onlike_num}")
 	public OnlikeVO deleteLike(int onlike_num);
 	//찜 하기
 	@Insert("insert into onlike (onlike_num,user_num,on_num,olike) values(onlike_seq.nextval,#{user_num},#{on_num},1)")
-	public OnlikeVO insertLike(Integer user_num,int on_num);
+	public OnlikeVO insertLike(Integer user_num,Integer on_num);
 	
 	
 	//평점
@@ -52,5 +53,8 @@ public interface OnclassMapper {
 	@Select("select NVL(avg(rating),0) from ostar where on_num = #{on_num}")
 	public int avgQna(Integer on_num);
 	//평점 리스트
-	public List<OstarVO> listAll();
+	public List<OstarVO> listAll(Map<String, Object> map);
+	
+	
+
 }

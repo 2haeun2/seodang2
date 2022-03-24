@@ -17,6 +17,14 @@
     	<put-attribute name="title" value="키트detail"/>
     	<put-attribute name="body" value="/WEB-INF/views/kit/kitDetail.jsp"/>
     </definition>
+    <definition name="kitUpdate" extends="main">
+    	<put-attribute name="title" value="키트수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/kit/kitUpdate.jsp"/>
+    </definition>
+    <definition name="kitDelete" extends="main">
+    	<put-attribute name="title" value="키트detail"/>
+    	<put-attribute name="body" value="/WEB-INF/views/kit/kitDelete.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

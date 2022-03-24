@@ -21,7 +21,29 @@
 						)
 						</foreach>
 	</insert>
-
+	<select id="selectListOffClass" parameterType="map" resultType="offclassVO">
+	SELECT
+		*
+	FROM (SELECT
+			a.*,
+		  rownum rnum
+		  FROM (SELECT
+		  		  *
+		  		FROM offclass o
+		  		JOIN ouser_detail d 
+		  		ON o.user_num=d.user_num
+		  		ORDER BY off_num DESC)a)
+	<![CDATA[
+	WHERE rnum >=#{start} AND rnum<=#{end}
+	]]>
+	</select>
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+	SELECT
+		COUNT(*)
+	FROM offclass o
+	JOIN ouser_detail d
+	ON o.user_num = d.user_num
+	</select>
 </mapper>
 
 

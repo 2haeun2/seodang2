@@ -2,10 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/List.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 	.fa-star{margin-right:20px;}
 	.btn{margin-top:30px;}
@@ -24,30 +31,61 @@
 		<form:radiobutton path="rating" onclick="starmark(this)" id="5one" value="5" style="font-size:40px;cursor:pointer;" class="fa fa-star"/></br>		
 			<button class="btn btn-block btn-primary" type="submit">리뷰 등록</button>     
 	</form:form>
+
+	<c:forEach items="${list}" var="ostar">
+<div class="home">
+<ul>
+	<li>asd${ostar.on_num}
+		<div class="List">
+			<div class="textone">
+				${ostar.text}
+				<c:choose>
+					<c:when test="${ostar.rating == 1}"><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></c:when>
+					<c:when test="${ostar.rating == 2}"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></c:when>
+					<c:when test="${ostar.rating == 3}"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></c:when>
+					<c:when test="${ostar.rating == 4}"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></c:when>
+					<c:when test="${ostar.rating == 5}"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></c:when>
+					<c:otherwise>평점 없음</c:otherwise>
+					</c:choose>
+					<!-- 모달 클릭 -->
+					<a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></a>
+				<button type="button" class="btn btn-dark" onclick="location.href='#'">상세보기</button>
+			</div>
+		</div>
+	</li>	
+</ul>	
+</div>
+	</c:forEach>
 	
-	<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">아이디</th>
-		      <th scope="col">별점</th>
-		      <th scope="col">평가내용</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	<c:forEach items="${list}" var="ostar">
-			    <tr>
-			      <th scope="row">${ostar.id}</th>
-			      <td>${ostar.rating}</td>
-			      <td>${ostar.text}</td>
-			    </tr>
-		    </c:forEach>
-		  </tbody>
-	</table>
+	<div class="align-center">${pagingHtml}</div>
 	
+	
+	
+<!-- 모달 시작 -->
+      	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">
+		        	
+		        </h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary">Understood</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+<!-- 모달 끝 -->
 	
 <script>
+//별점 스타일 시작
 var count;
-
 function starmark(item){
 	count=item.id[0];
 	sessionStorage.starRating = count;
@@ -61,10 +99,5 @@ function starmark(item){
 				}
 			}
 		}
-function result()
-{
-//Rating : Count
-//Review : Comment(id)
-alert("Rating : "+count+"\nReview : "+document.getElementById("comment").value);
-}		
+//별점 스타일 끝
 </script>

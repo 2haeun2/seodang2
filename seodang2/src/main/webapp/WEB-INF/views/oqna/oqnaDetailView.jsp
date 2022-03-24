@@ -13,13 +13,18 @@
 
 	<h2>${oqna.title }</h2>
 	<ul>
-		<li>글번호 : ${oqna.qna_num}</li>
-		<li>작성자ID : ${oqna.id }</li>
-		<li>작성자 : ${oqna.name}</li>
+		<li>작성자 : [
+			<c:if test="${oqna.auth==0 }">탈퇴회원</c:if>
+			<c:if test="${oqna.auth==1 }">정지회원</c:if>
+			<c:if test="${oqna.auth==2 }">일반회원</c:if>
+			<c:if test="${oqna.auth==3 }">선생님</c:if>
+			<c:if test="${oqna.auth==4 }">관리자</c:if>
+			] - ${oqna.name}(${oqna.id })
+		</li>
 		<li>작성일 : ${oqna.reg_date}</li>
 		
 		<c:if test = "${!empty oqna.modify_date}">
-			<li>최근 수정일 : ${oqna.modify_date}</li>
+			<li>수정일 : ${oqna.modify_date}</li>
 		</c:if>	
 		
 		<c:if test = "${!empty oqna.filename }">
@@ -74,7 +79,7 @@
 			
 			<textarea rows="5" cols="80" name="content" id="content" class="rep-content"
 			 <c:if test="${session_user_auth==null || session_user_auth<3 }">disabled="disabled"</c:if>
-			><c:if test="${session_user_auth==null || session_user_auth<3 }">관리자만 작성할 수 있습니다.</c:if></textarea>
+			><c:if test="${session_user_auth==null || session_user_auth<3 }">선생님과 관리자만 작성할 수 있습니다.</c:if></textarea>
 		
 			<c:if test="${session_user_auth!=null && session_user_auth>=3 }">
 				<div id="re_first">

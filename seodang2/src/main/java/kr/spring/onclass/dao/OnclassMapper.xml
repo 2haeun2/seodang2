@@ -120,15 +120,45 @@
 	</update>
 	
 	<!-- 평점 리스트 -->
-	<select id="listAll" resultType="ostarVO">
-		<![CDATA[
-			select a.text,a.rating,b.id 
-			from ostar a, ouser b
-			where a.user_num=b.user_num and ostar_num > 0
-			and rownum <=3
-			order by a.ostar_num desc
-		]]>
+	<select id="listAll" parameterType="map" resultType="ostarVO">
+		SELECT
+		  *
+		FROM (SELECT 
+		       a.*,
+		       rownum rnum
+		      FROM (SELECT 	
+		               b.ostar_num,
+		               b.on_num,
+		               <![CDATA[
+		               REPLACE(REPLACE(b.rating,'<','&lt;'),'>','&gt;') rating,
+		               ]]>
+		               b.text,
+		               m.id ,
+		               m.user_num
+		            FROM ostar b
+		            JOIN ouser m 
+		            ON b.user_num = m.user_num
+		            <where>
+		            	<if test="keyword != '' and keyfield == 1">
+		            		b.rating LIKE '%' || #{keyword} || '%'
+		            	</if>
+		            	<if test="keyword != '' and keyfield == 2">
+		            	    m.id LIKE '%' || #{keyword} || '%'
+		            	</if>
+		            	<if test="keyword != '' and keyfield == 3">
+		            		b.on_content LIKE '%' || #{keyword} || '%'
+		            	</if>
+		            	<if test="keyword != '' and keyfield == 4">
+		            		b.rating LIKE '%' || #{keyword} || '%' or
+		            		b.on_content LIKE '%' || #{keyword} || '%'
+		            	</if>
+		            </where>
+		            ORDER BY b.ostar_num DESC)a)
+	   <![CDATA[
+	   WHERE rnum >= #{start} AND rnum <= #{end}
+	   ]]>	            
 	</select>
+	
 </mapper>
 
 

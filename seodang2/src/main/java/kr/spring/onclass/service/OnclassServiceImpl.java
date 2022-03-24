@@ -47,7 +47,7 @@ public class OnclassServiceImpl implements OnclassService{
 	}
 
 	@Override
-	public void deleteOnclass(int on_num) {
+	public void deleteOnclass(Integer on_num) {
 		// TODO Auto-generated method stub
 		onclassMapper.deleteOnclass(on_num);
 	}
@@ -71,7 +71,7 @@ public class OnclassServiceImpl implements OnclassService{
 	}
 
 	@Override
-	public OnlikeVO selectLike(Integer user_num,int on_num) {
+	public OnlikeVO selectLike(Integer user_num,Integer on_num) {
 		// TODO Auto-generated method stub
 		return onclassMapper.selectLike(user_num,on_num);
 	}
@@ -83,7 +83,7 @@ public class OnclassServiceImpl implements OnclassService{
 	}
 
 	@Override
-	public void insertLike(Integer user_num,int on_num) {
+	public void insertLike(Integer user_num,Integer on_num) {
 		// TODO Auto-generated method stub
 		onclassMapper.insertLike(user_num,on_num);
 	}
@@ -119,9 +119,10 @@ public class OnclassServiceImpl implements OnclassService{
 	}
 
 	@Override
-	public List<OstarVO> listAll() {
+	public List<OstarVO> listALL(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return onclassMapper.listAll();
+		return onclassMapper.listAll(map);
 	}
+
 
 }
