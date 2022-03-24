@@ -43,16 +43,20 @@ public class KitServiceImpl implements KitService{
 		
 	}
 	
-
 	@Override
 	public void updateKit(KitVO kit) {
-		// TODO Auto-generated method stub
+		kitMapper.updateKit(kit);
 		
 	}
 
 	@Override
 	public void deleteKit(Integer kit_num) {
-		// TODO Auto-generated method stub
+	    kitMapper.deleteKit(kit_num);
+		
+	}
+	@Override
+	public void deleteFile(Integer kit_num) {
+		kitMapper.deleteFile(kit_num);
 		
 	}
 

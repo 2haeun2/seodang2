@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.kit.dao.KitMapper"> 
-	<!-- 글 목록처리1 -->
+	<!-- 글 목록 -->
 	<select id="selectList" parameterType="map" resultType="kitVO">
 		SELECT
 		*
@@ -44,7 +44,7 @@
 		]]>
 	</select>
 
-	<!-- 글 목록처리2 -->
+	<!-- 글 목록 -->
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
@@ -71,17 +71,17 @@
 	</select>
 	
 	
-	<!-- 글 수정 처리 
-	<update id="updateOqna" parameterType="kitVO" >
+	<!-- 글 수정 -->
+	<update id="updateKit" parameterType="kitVO" >
 		UPDATE okit SET
 			<if test="filename != ''">
 				uploadfile = #{uploadfile},
 				filename = #{filename},
 			</if>
-			title=#{title},
-			content=#{content},
+			kit_name=#{kit_name},
+			kit_content=#{kit_content},
 			modify_date= SYSDATE
-		WHERE qna_num = #{qna_num}	
+		WHERE kit_num = #{kit_num}	
 	</update>
-	-->
+	
 </mapper>

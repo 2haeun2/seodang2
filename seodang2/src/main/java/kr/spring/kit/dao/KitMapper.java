@@ -3,6 +3,7 @@ package kr.spring.kit.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -23,7 +24,12 @@ public interface KitMapper {
 	//키트 조회수
 	@Update("UPDATE okit SET hit=hit+1 WHERE kit_num=#{kit_num}")
 	public void updateHit(Integer kit_num);	
-	
+	//키트 수정
 	public void updateKit(KitVO kit);
+	//키트 삭제
+	@Delete("DELETE FROM okit WHERE kit_num=#{kit_num}")
 	public void deleteKit(Integer kit_num);
+	//파일삭제
+	@Update("UPDATE okit SET uploadfile='',filename='' WHERE kit_num=#{kit_num}")
+	public void deleteFile(Integer kit_num);
 }

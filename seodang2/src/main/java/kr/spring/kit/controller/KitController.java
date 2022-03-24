@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -100,7 +101,7 @@ public class KitController {
 			return mav;
 		}
 			
-			//게시판 글 상세
+			//kit 상세
 			@RequestMapping("/kit/kitDetail.do")
 			public ModelAndView process(@RequestParam int kit_num) {
 				logger.info("<<게시판 글 상세 - 글 번호>> : " + kit_num);
@@ -114,8 +115,65 @@ public class KitController {
 				                        //타일스 설정      속성명      속성값
 				return new ModelAndView("kitDetail","kit",kit);
 			}
+			//이미지 출력
+			@RequestMapping("/kit/imageView.do")
+			public ModelAndView viewImage(@RequestParam int kit_num) {
+				KitVO kit = kitService.selectKit(kit_num);
+				
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("imageView");
+				mav.addObject("imageFile",kit.getUploadfile());
+				mav.addObject("filename", kit.getFilename());
+				return mav;
+			}
+			//파일 다운로드
+			@RequestMapping("/kit/file.do")
+			public ModelAndView download(@RequestParam int kit_num) {
+				KitVO kit = kitService.selectKit(kit_num);
+				
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("downloadView");
+				mav.addObject("downloadFile", kit.getUploadfile());
+				mav.addObject("filename", kit.getFilename());
+				
+				return mav;
+			}
+				
+			//kit 수정
+			@GetMapping("/kit/kitUpdate.do")
+			public String formUpdate(@RequestParam int kit_num, Model model) {
+				KitVO vo = kitService.selectKit(kit_num);
+				model.addAttribute("kitVO",vo);
+				return "kitUpdate";
+			}
+			//수정form 데이터 처리
+			@PostMapping("/kit/kitUpdate.do")
+			public String submitUpdate(@Valid KitVO kit,BindingResult result,
+					                     HttpServletRequest request, Model model) {
+				
+				logger.info("<<kit 정보 수정>>" + kit);
+				
+				if(result.hasErrors()) {
+					KitVO vo = kitService.selectKit(kit.getKit_num());
+					kit.setFilename(vo.getFilename());
+					
+					return "kitUpdate";
+				}
+				
+				kitService.updateKit(kit);
+				
+				model.addAttribute("message","글수정완료");
+				model.addAttribute("url",request.getContextPath()+"/kit/kitList.do");
 			
+				return "common/resultView";
+			}
 			
-	
+			//글 삭제
+			@RequestMapping("/kit/kitDelete.do")
+			public String submitDelete(@RequestParam int kit_num) {
+				kitService.deleteKit(kit_num);
+				return "redirect:/kit/kitList.do";
+			}
 	}
+
 
