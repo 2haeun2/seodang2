@@ -21,6 +21,36 @@
 						)
 						</foreach>
 	</insert>
+	<insert id="insertOffClass" parameterType="offclassVO">
+	INSERT INTO offclass (off_num,
+						category_num,
+						off_name,
+						off_limit,
+						off_price,
+						off_content,
+						off_filename,
+						off_uploadfile,
+						user_num
+						<if test="img_file !=null ">
+						,img_file
+						</if>
+						) 
+						VALUES 
+						(
+						#{off_num},
+						#{category_num},
+						#{off_name},
+						#{off_limit},
+						#{off_price},
+						#{off_content},
+						#{off_filename},
+						#{off_uploadfile},
+						#{user_num}
+						<if test="img_file !=null">
+						,#{img_file}
+						</if>
+						)
+	</insert>
 	<select id="selectListOffClass" parameterType="map" resultType="offclassVO">
 	SELECT
 		*

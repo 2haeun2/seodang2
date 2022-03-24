@@ -60,17 +60,19 @@ public class OffclassController {
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		//회원번호 세팅
 		offclassVO.setUser_num(user_num);
+		/*이미지........./////////////////*/
 		//글 content 가져오기
 		String content = offclassVO.getOff_content();
 		System.out.println(content);
+		/*이미지 src의 맨 앞부분, 맨 뒷부분 찾아보기*/
 		int start = content.indexOf("src");
 		int end = content.indexOf('"',content.indexOf("src")+5);
-		String img_file =null;
+		String img_file =null; 
 		if(start!=-1) {
 			img_file = content.substring(start+4,end+1);
 			System.out.println(img_file);
-		}
-		offclassVO.setImg_file(img_file);
+		}			
+		offclassVO.setImg_file(img_file); 
 		logger.info("offclassVO : "+offclassVO);
 		
 		//글 작성
