@@ -10,6 +10,7 @@ create table offclass(
 	reg_date date default sysdate not null,
 	modify_date date,
 	user_num number not null,
+	img_file varchar(900)
 	constraint offclass_pk primary key (off_num),
 	constraint offclass_fk foreign key(user_num) references ouser(user_num),
 	/*constraint offclass_fk2 foreign key(category_num) references category(category_num)*/

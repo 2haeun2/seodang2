@@ -18,15 +18,13 @@ public class OffclassServiceImpl implements OffclassService{
 	private OffclassMapper offclassMapper;
 
 	@Override
-	public List<OffclassVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OffclassVO> selectListOffClass(Map<String, Object> map) {
+		return offclassMapper.selectListOffClass(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return offclassMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -37,14 +35,7 @@ public class OffclassServiceImpl implements OffclassService{
 
 	@Override
 	public OffclassVO selectOffClass(Integer off_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateHit(Integer off_num) {
-		// TODO Auto-generated method stub
-		
+		return offclassMapper.selectOffClass(off_num);
 	}
 
 	@Override

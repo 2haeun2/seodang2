@@ -78,3 +78,18 @@ div#time_date, div#time_start{
 div#time_end{
 	padding: 1px 18px 14px 18px;
 }
+/*목록 css*/
+.item-space .horizontal-area{
+	margin:2px;
+	padding:3px;
+	width:200px;
+	height:255px;
+	float:left;
+	overflow:hidden;
+	text-align:center;
+}
+.item-space .horizontal-area img{
+	width:195px;
+	height:175px;
+	object-fit: cover;
+}
