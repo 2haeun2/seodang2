@@ -24,20 +24,3 @@ create table ouser_detail(
 );
 
 create sequence ouser_seq;
-
-create table onclass(
-	on_num number not null,
-	user_num number not null,
-	on_name varchar2(12) not null,
-	on_price varchar2(30) not null,
-	on_image varchar2(150) not null,
-	on_uploadfile blob,
-	on_filename varchar2(100) not null,
-	on_content clob not null,
-	reg_date date default sysdate not null,
-	modify_date date,
-	constraint onclass_pk primary key (on_num),
-	constraint onclass_fk foreign key (user_num) 
-                         references ouser (user_num)
-);
-create sequence onclass_seq;
