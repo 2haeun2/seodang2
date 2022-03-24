@@ -26,7 +26,7 @@
 	<h2>TEst - QnA 목록 - Test</h2>
 
 	<div>
-		<img src="${pageContext.request.contextPath }/resources/images/oqnaImage.png" style="width:953px; hieght:338px">
+		<img src="${pageContext.request.contextPath }/resources/image/oqnaImage.png" style="width:953px; hieght:338px">
 	</div>
 
 	<form action="oqnaList.do" id="search_form" method="get" style="padding:40px 0px 0px 0px;">
