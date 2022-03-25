@@ -4,7 +4,7 @@ create table onclass(
 	on_name varchar2(12) not null,
 	on_price varchar2(30) not null,
 	hit number default 0 not null,
-	category not null,
+	category_num number not null,
 	uploadfile blob,
 	filename varchar2(100) not null,
 	on_content clob not null,
