@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.main.dao.MainMapper">
+<select id="selectList" parameterType="map" resultType="onclassVO">
+			SELECT * FROM (SELECT a.*,rownum rnum FROM (
+			SELECT on_num,category_num,on_content,on_name,on_price FROM onclass
+			UNION all
+			SELECT off_num,category_num,off_content,off_name,off_price FROM offclass
+			)a)
+			
+		<if test="category_num == 0">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>
+	  	</if>
+	  	<if test="category_num == 1">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end} and category_num = '1']]>
+	  	</if>
+	  	<if test="category_num == 2">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end} and category_num = '2']]>
+	  	</if>
+	  	<if test="category_num == 3">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end} and category_num = '3']]>
+	  	</if>
+	  	<if test="category_num == 4">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end} and category_num = '4']]>
+	  	</if>
+	  	<if test="category_num == 5">
+		   <![CDATA[WHERE rnum >= #{start} AND rnum <= #{end} and category_num = '5']]>
+	  	</if>
+	  	
+	  		            
+	</select>
+<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT SUM(cnt) FROM 
+		( SELECT count(*) as CNT FROM onclass
+		UNION all
+		SELECT count(*) as CNT FROM offclass )
+</select>
+</mapper>
