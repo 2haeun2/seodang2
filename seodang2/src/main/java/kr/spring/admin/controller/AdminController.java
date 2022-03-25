@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -109,7 +110,19 @@ public class AdminController {
 		
 		return "common/resultView";
 	}
-	
+	// 이미지 출력
+		@RequestMapping("/admin/photoView.do")
+		public ModelAndView viewImage(@RequestParam int user_num) {
+
+			UserVO vo =  userService.selectUser(user_num);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("imageView");
+			mav.addObject("imageFile", vo.getPhoto());
+			mav.addObject("filename", vo.getPhoto_name());
+
+			return mav;
+		}
 	
 }
 

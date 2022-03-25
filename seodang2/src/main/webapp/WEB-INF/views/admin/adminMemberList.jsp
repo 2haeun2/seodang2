@@ -70,7 +70,7 @@
 					<td style="width:50px; padding:10px 0px">
 					<div style="width:25; height: 25px; border-radius: 50%;">
 					<c:if test="${!empty member.photo_name}">
-			    		<img src="${pageContext.request.contextPath}/user/photoView.do" 
+			    		<img src="${pageContext.request.contextPath}/admin/photoView.do?user_num=${member.user_num}" 
 			    	                        width="25" height="25" class="my-photo">
 			    	</c:if>
 			    	<c:if test="${empty member.photo_name}">

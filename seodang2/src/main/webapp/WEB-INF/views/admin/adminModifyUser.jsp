@@ -5,6 +5,19 @@
 
 <div class="page-main">
 	<h2>회원정보 수정</h2>
+	
+		<span>
+			<c:if test="${!empty userVO.photo_name}">
+		   		<img src="${pageContext.request.contextPath}/admin/photoView.do?user_num=${userVO.user_num}"
+		   	                        width="200" height="200" class="my-photo">
+		   	</c:if>
+		   	<c:if test="${empty userVO.photo_name}">
+		   		<img src="${pageContext.request.contextPath}/resources/images/face.png" 
+		   	                        width="200" height="200" class="my-photo">
+		   	</c:if>
+		</span>
+	
+	
 	<form:form modelAttribute="userVO" action="adminUpdateUser.do" id="modify_form">
 	
 		<form:hidden path="user_num"/>
