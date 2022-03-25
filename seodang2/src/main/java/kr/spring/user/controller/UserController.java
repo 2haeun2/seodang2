@@ -137,6 +137,13 @@ public class UserController {
 	@RequestMapping("/user/myMenu.do")
 	public String processMenu(HttpSession session, Model model) {
 
+		
+		return "userMenu";
+	}
+	
+	@RequestMapping("/user/test.do")
+	public String test2(HttpSession session, Model model) {
+		
 		Integer user_num = (Integer) session.getAttribute("session_user_num");
 		UserVO user = userService.selectUser(user_num);
 
@@ -151,6 +158,8 @@ public class UserController {
 		map.put("user_num", user_num);
 		int count = oqnaService.selectOqnaRowCount(map);
 
+		logger.info("<<count>> : " + count);
+		
 		// <3> 페이지처리
 		PagingUtil page = new PagingUtil("", "", 1, count, 5, 10, null);
 		map.put("start", page.getStartCount());
@@ -163,10 +172,9 @@ public class UserController {
 		}
 
 		// <5> request에 데이터 저장
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		model.addAttribute("list", list);
 
-		return "userMenu";
+		return "test";
 	}
 
 	// 마이페이지
