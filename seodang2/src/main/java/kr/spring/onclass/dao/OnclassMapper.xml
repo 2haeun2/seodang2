@@ -121,7 +121,7 @@
 		            </where>
 		            ORDER BY b.ostar_num DESC)a)
 	   <![CDATA[
-	   WHERE rnum >= #{start} AND rnum <= #{end}
+	   WHERE rnum >= #{start} AND rnum <= #{end} and on_num = #{on_num}
 	   ]]>	            
 	</select>
 	

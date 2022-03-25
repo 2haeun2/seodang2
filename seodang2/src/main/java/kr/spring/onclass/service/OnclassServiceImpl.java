@@ -117,12 +117,14 @@ public class OnclassServiceImpl implements OnclassService{
 		// TODO Auto-generated method stub
 		return onclassMapper.avgQna(on_num);
 	}
-
+	
+	//평점 리스트
 	@Override
 	public List<OstarVO> listALL(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return onclassMapper.listAll(map);
 	}
-
+	//글 삭제 할 때 평점남긴것도 같이 삭제
+	
 
 }

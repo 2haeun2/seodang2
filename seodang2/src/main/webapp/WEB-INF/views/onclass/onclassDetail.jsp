@@ -11,6 +11,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
+<style>
+	.list-unstyled img{
+		display: block;
+		float:left;
+	}
+</style>
+
 <script type="text/javascript">
 $(function(){
 	var status; //noFav or yesFav
@@ -105,8 +112,53 @@ $(function(){
                                     <ul class="list-unstyled mb-0">
                                         <li>${onclass.on_price}</li>
                                         <li>${onclass.reg_date}</li>
-                                        <li><c:if test="${empty onclass.avgqna}">0</c:if>
-                                        							${onclass.avgqna}</li>
+                                        <li>
+                                        	<!-- 별 아이콘 반복 -->
+	                                        <c:if test="${onclass.avgqna == 0}">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        <c:if test="${onclass.avgqna == 1}">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        <c:if test="${onclass.avgqna == 2}">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        <c:if test="${onclass.avgqna == 3}">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        <c:if test="${onclass.avgqna == 4}">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        <c:if test="${onclass.avgqna == 5}">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
+	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">        			                                        	
+	                                        </c:if>
+	                                        
+	                                        
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

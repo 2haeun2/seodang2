@@ -56,7 +56,7 @@ public class OstarController {
 
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
-
+		map.put("on_num", on_num);
 		List<OstarVO> list = null;
 			if(count > 0) {
 				list = onclassService.listALL(map);
