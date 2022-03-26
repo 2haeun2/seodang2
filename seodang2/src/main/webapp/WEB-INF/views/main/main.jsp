@@ -9,7 +9,39 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+	<!-- 페이징 시작 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+    <!-- 페이징 끝 -->
+    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+
+<script>
+/* 	//주소 다 가져오는 것
+	const url = window.location.href;
+	//주소 파라미터명과 값만 가져오는 것
+	const url2 = window.location.search
+	
+	//카테고리 파라미터 값만 출력
+	const param = new URL(url).searchParams;
+	const category_num = param.get('category_num');
+
+	function ajaxGO(){
+		  $.ajax({
+              url : "/main/main.do",
+              data: {category_num : category_num},
+              type: "POST",
+              dataType: "text",
+              contentType: false, 
+              processData: false,
+      		});
+  		}
+	
+	} */
+
+</script>
+
 
 <!-- 메인 시작 -->
 
@@ -45,12 +77,12 @@
 <div class="mainOne">
 
 <div class="page-main">
-	<a href="${pageContext.request.contextPath}/main/main.do">전체보기</a>
-	<a href="${pageContext.request.contextPath}/main/main.do?category_num=1">드로잉</a>
-	<a href="${pageContext.request.contextPath}/main/main.do?category_num=2">플라워</a>
-	<a href="${pageContext.request.contextPath}/main/main.do?category_num=3">공예</a>
-	<a href="${pageContext.request.contextPath}/main/main.do?category_num=4">요리</a>
-	<a href="${pageContext.request.contextPath}/main/main.do?category_num=5">베이킹</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do">전체보기</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=1">드로잉</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=2">플라워</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=3">공예</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=4">요리</a>
+	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=5">베이킹</a>
 </div>
 
 <!-- 시작 -->
@@ -89,6 +121,7 @@
 
 </div>
 	</c:forEach>
+
 </div>
 
 <!-- 끝 -->
@@ -102,6 +135,30 @@
 			pause: "hover",
 			wrap: true,
 			keyboard : true
+			});
+		});
+	
+	//동적ㅈ 페이지
+	$(function(){
+		var status; //noFav or yesFav
+		$('#category').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
+			$.ajax({
+				url:'like.do',
+				type:'post',
+				data:{category_num:${onclass.category_num}},
+				dataType:'json',
+				cache:false,
+				timeout:30000,
+				success:function(data){
+						if(data.result=='success'){ //추천하트 표시
+			            	displayFav(data);
+			            }else{
+			               alert('등록시 오류 발생!');
+			            }
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
 			});
 		});
 </script>
