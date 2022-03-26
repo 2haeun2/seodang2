@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.main.service.MainService;
@@ -30,6 +31,7 @@ public class MainController {
 	
 		//온라인 클래스 목록
 		@RequestMapping("/main/main.do")
+		@ResponseBody
 		public ModelAndView process(
 				@RequestParam(value="pageNum",defaultValue="1")
 				int currentPage,

@@ -14,8 +14,8 @@
 	}
 </style>
 <!-- 중앙컨텐츠 시작 -->
-<div id="container" style="display: inline-block">
-	<h2>회원 로그인</h2>
+<div class="login-main">
+	<h2 class="login-title">회원 로그인</h2>
 	<form:form action="login.do" modelAttribute="userVO">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>

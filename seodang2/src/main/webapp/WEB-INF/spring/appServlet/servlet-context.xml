@@ -35,6 +35,7 @@
 				<beans:value>/WEB-INF/tiles-def/onclass.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/qna.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/kit.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/myclass.xml</beans:value>
 			</beans:list>
 		</beans:property>	
 	</beans:bean>
