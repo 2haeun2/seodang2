@@ -23,7 +23,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/myclassMain.do'">my클래스     
+			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/myclassMain.do'"> my클래스     
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
