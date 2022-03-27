@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.myclass.vo.MyclassVO;
@@ -24,4 +25,8 @@ public interface MyclassMapper {
 	@Insert("insert into onreg_detail(onreg_num,on_num,on_payment,on_status) "
 			+ "values(#{onreg_num},#{on_num},#{on_payment},#{on_status})")
 	public void insertDetailRegister(PaymentVO paymentVO);
+	//중복된 강의 확인
+	@Select("select count(*) from onreg a join onreg_detail z on a.onreg_num = z.onreg_num "
+			+ "where z.on_num = #{on_num} and a.user_num = #{user_num}")
+	public int overlap(@Param("on_num") int on_num,@Param("user_num") int user_num);
 }

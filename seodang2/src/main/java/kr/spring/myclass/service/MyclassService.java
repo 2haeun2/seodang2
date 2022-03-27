@@ -14,4 +14,7 @@ public interface MyclassService {
 	
 	//사용자가 구매한 강의
 	public void insertRegister(PaymentVO paymentVO);
+	
+	//중복 구매 제한 
+	public int overlap(int on_num,int user_num); 
 }

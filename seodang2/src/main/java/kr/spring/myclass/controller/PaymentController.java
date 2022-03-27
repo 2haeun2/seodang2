@@ -27,12 +27,18 @@ public class PaymentController {
 	public String payment(PaymentVO paymentVO,HttpSession session,Model model,HttpServletRequest request) {
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		paymentVO.setUser_num(user_num);
-		myclassService.insertRegister(paymentVO);
-		
 		logger.info("!!paymentVO : " + paymentVO);
+		/* System.out.println("강의 넘버 : " + paymentVO.on_num); */
+		int on_num = paymentVO.on_num;
 		
+		if(myclassService.overlap(on_num,user_num) == 0) {
+		myclassService.insertRegister(paymentVO);
 		model.addAttribute("message", "구매 완료 !!");
 		model.addAttribute("url", request.getContextPath() + "/main/main.do");
+		}else if(myclassService.overlap(on_num,user_num) >= 1) {
+			model.addAttribute("message", "이미 신청한 강의 입니다");
+			model.addAttribute("url", request.getContextPath() + "/onclass//onclassDetail.do?on_num="+on_num);
+		}
 		
 		return "common/resultView";
 	}

@@ -39,5 +39,11 @@ public class MyclassServiceImpl implements MyclassService{
 		myclassMapper.insertDetailRegister(paymentVO);
 	}
 
+	@Override
+	public int overlap(int on_num,int user_num) {
+		// TODO Auto-generated method stub
+		return myclassMapper.overlap(on_num,user_num);
+	}
+
 
 }
