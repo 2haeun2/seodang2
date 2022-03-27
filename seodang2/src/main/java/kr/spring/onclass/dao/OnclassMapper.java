@@ -13,6 +13,7 @@ import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.onclass.vo.OstarVO;
 import kr.spring.qna.vo.OqnaReplyVO;
+import kr.spring.user.vo.UserVO;
 
 public interface OnclassMapper {
 	public List<OnclassVO> selectList(Map<String,Object> map);
@@ -33,6 +34,9 @@ public interface OnclassMapper {
 	public void deleteOnclass(Integer on_num);
 	@Update("UPDATE onclass SET hit=hit+1 WHERE on_num=#{on_num}")
 	public void updateHit(Integer on_num);
+	//프로필정보 출력
+	@Select("select * from ouser o join ouser_detail z on o.user_num = z.user_num where o.user_num = #{user_num}")
+	public UserVO getProfile(int user_num);
 	//찜 눌렀는지 확인
 	@Select("select * from onlike where user_num = ${user_num} and on_num = ${on_num}")
 	public OnlikeVO selectLike(Integer user_num,Integer on_num);

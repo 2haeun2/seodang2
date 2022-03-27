@@ -9,6 +9,7 @@ import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.onclass.vo.OstarVO;
 import kr.spring.qna.vo.OqnaReplyVO;
+import kr.spring.user.vo.UserVO;
 
 
 
@@ -23,7 +24,8 @@ public interface OnclassService {
 	public void deleteOnclass(Integer on_num);
 	public OnclassVO selectOnclass(Integer on_num);
 	public void updateHit(Integer on_num);
-	
+	//프로필 정보 출력
+	public UserVO getProfile(int user_num);
 	//찜 누럴ㅆ는지 확인
 	public OnlikeVO selectLike(Integer user_num,Integer on_num);
 	public void deleteLike(int onlike_num);

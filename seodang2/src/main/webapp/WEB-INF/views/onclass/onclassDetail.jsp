@@ -58,21 +58,31 @@ $(function(){
 });
 
 //결제 코드
-
+function test(){
+	document.getElementById('paymentData_btn').submit();
+}
 function iamport(){
+	
+	const email = "${ouser.email}";
+	const on_price = "${onclass.on_price}";
+	const id = "${ouser.id}";
+	const phone = "${ouser.phone}";
+	const address1 = "${ouser.address1}";
+	const address2 = "${ouser.address2}";
+	const on_name = "${onclass.on_name}"
 	//가맹점 식별코드
 	IMP.init('imp62760166');
 	IMP.request_pay({
 	    pg : 'kcp',
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '상품1' , //결제창에서 보여질 이름
-	    amount : 100, //실제 결제되는 가격
-	    buyer_email : 'qwe123@qwe123',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '대전광역시',
-	    buyer_postcode : '123-456'
+	    name : on_name , //결제창에서 보여질 이름
+	    amount : on_price, //실제 결제되는 가격, 최소금액 500원 이상 , 500이하시 결제 오류
+	    buyer_email : email,
+	    buyer_name : id,
+	    buyer_tel : phone,
+	    buyer_addr : address1+address2
+	    /* buyer_postcode : '123-456' */
 	}, function(rsp) {
 		console.log(rsp);
 	    if ( rsp.success ) {
@@ -81,6 +91,7 @@ function iamport(){
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        document.getElementById('paymentData_btn').submit();
 	    } else {
 	    	 var msg = '결제에 실패하였습니다.';
 	         msg += '에러내용 : ' + rsp.error_msg;
@@ -211,7 +222,17 @@ function iamport(){
                         </div>
                     </div>
                     <button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
+                    <button type="button" onclick="test()" class="btn btn-dark" style="width:230px">test</button>
                 </div>
             </div>
         </div>
-            
+<div>
+	<!-- 안보이게 하기 -->
+	<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
+		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+		<input type="hidden" name="on_payment" value="2"/>
+		<input type="hidden" name="on_status" value="1"/>  
+	   	<input type="submit" value="qwe">
+	</form>
+	<!-- 안보이게 하기 -->
+</div>

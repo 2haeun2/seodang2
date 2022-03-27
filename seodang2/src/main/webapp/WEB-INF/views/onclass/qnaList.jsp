@@ -35,7 +35,7 @@
 	<c:forEach items="${list}" var="ostar">
 <div class="home">
 <ul>
-	<li>asd${ostar.on_num}
+	<li>${ostar.on_num}
 		<div class="List">
 			<div class="textone">
 				${ostar.text}

@@ -1,5 +1,6 @@
 package kr.spring.onclass.controller;
 
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.myclass.vo.PaymentVO;
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.user.controller.UserController;
@@ -147,11 +149,16 @@ public class OnclassController {
 	}
 	
 	@GetMapping("/onclass/onclassDetail.do")
-	public String detailForm(Integer on_num,Model model) {
+	public String detailForm(Integer on_num,Model model,HttpSession session) {
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		onclassService.updateHit(on_num);
 		OnclassVO oVO = onclassService.selectOnclass(on_num);
 		oVO.setAvgqna(onclassService.avgQna(on_num));
+		//개인프로필 저장
+		UserVO oUser = onclassService.getProfile(user_num);
 		model.addAttribute("onclass",oVO);
+		//프로필 뿌림
+		model.addAttribute("ouser",oUser);
 		return "onclassDetail";
 	}
 	
@@ -164,7 +171,7 @@ public class OnclassController {
 		mav.addObject("filename", onclass.getFilename());
 		return mav;
 	}
-	
+
 }
 
 

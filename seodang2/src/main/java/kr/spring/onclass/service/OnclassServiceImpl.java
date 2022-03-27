@@ -13,6 +13,7 @@ import kr.spring.onclass.dao.OnclassMapper;
 import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.onclass.vo.OstarVO;
+import kr.spring.user.vo.UserVO;
 
 
 @Service
@@ -125,6 +126,13 @@ public class OnclassServiceImpl implements OnclassService{
 		return onclassMapper.listAll(map);
 	}
 	//글 삭제 할 때 평점남긴것도 같이 삭제
+	
+	//프로필 정보 출력
+	@Override
+	public UserVO getProfile(int user_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.getProfile(user_num);
+	}
 	
 
 }
