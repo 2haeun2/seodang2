@@ -6,7 +6,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit_2.css">
 <style>
 .ck-editor__editable_inline{
 	min-height:250px;
@@ -19,25 +19,27 @@
 	<h2>Kit 등록하기</h2>
 	<form:form modelAttribute="kitVO" action="kitWrite.do" enctype="multipart/form-data" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
-		
-		    <li>
+		<ul id="box4">
+		    <li id="name">
 				<form:label path="kit_name" class="kit_name">키트이름</form:label>
 				<form:input path="kit_name"/>
 				<form:errors path="kit_name" cssClass="error-color"/>
 			</li>
-			<li>
+			
+			<li id="price">
 				<form:label path="kit_price">가격</form:label>
 				<form:input type="number" path="kit_price" min="0"/>
 				<form:errors path="kit_price" cssClass="error-color"/>
 			</li>
-			<li>
+			<li id="quantity">
 				<form:label path="kit_quantity">판매수량</form:label>
 				<form:input type="number" path="kit_quantity" min="1"/>
 				<form:errors path="kit_quantity" cssClass="error-color"/>
 			</li>
-			<li><b>내용</b></li>
-			<li>
+			</ul>
+			<ul id="box5">
+			<li id="content">내용</li>
+			<li id="content2">
 				<form:textarea path="kit_content"/>
 				<form:errors path="kit_content" cssClass="error-color"/>
 				<script>
@@ -59,13 +61,13 @@
 		            } );
 			    </script>       
 			</li>
-			<li>
+			<li id="file">
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 				<form:errors path="upload" cssClass="error-color"/>
 			</li>
 	</ul>
-		<div class="align-center">
+		<div class="kitwrite">
 			<form:button>등록하기</form:button>
 			<input type="button" value="목록" 
 			              onclick="location.href='kitList.do'">
