@@ -174,6 +174,9 @@ public class KitController {
 				kitService.deleteKit(kit_num);
 				return "redirect:/kit/kitList.do";
 			}
+			
+			//찜하기
+			
 	}
 
 

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.kit.vo.KitVO;
+import kr.spring.kit.vo.KiteLikeVO;
 
 public interface KitMapper {
 	//키트목록
@@ -32,4 +33,9 @@ public interface KitMapper {
 	//파일삭제
 	@Update("UPDATE okit SET uploadfile='',filename='' WHERE kit_num=#{kit_num}")
 	public void deleteFile(Integer kit_num);
+	
+	//키트 찜하기
+	@Insert("INSERT INTO okitlike (kitlike_num, kit_num, user_num) "
+				+ "VALUES (okitlike_seq.NEXTVAL,#{kit_num},#{user_num}")
+	public void insertKitLike(KiteLikeVO like);
 }

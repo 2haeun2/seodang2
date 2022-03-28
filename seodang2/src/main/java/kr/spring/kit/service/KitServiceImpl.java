@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.kit.dao.KitMapper;
 import kr.spring.kit.vo.KitVO;
+import kr.spring.kit.vo.KiteLikeVO;
 
 @Service
 public class KitServiceImpl implements KitService{
@@ -57,6 +58,11 @@ public class KitServiceImpl implements KitService{
 	@Override
 	public void deleteFile(Integer kit_num) {
 		kitMapper.deleteFile(kit_num);
+		
+	}
+	@Override
+	public void insertKitLike(KiteLikeVO like) {
+		kitMapper.insertKitLike(like);
 		
 	}
 

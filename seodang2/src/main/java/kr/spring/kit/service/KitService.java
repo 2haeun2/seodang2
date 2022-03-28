@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.kit.vo.KitVO;
+import kr.spring.kit.vo.KiteLikeVO;
 
 public interface KitService {
 	
@@ -15,6 +16,6 @@ public interface KitService {
 	public void updateKit(KitVO kit);
 	public void deleteKit(Integer kit_num);
 	public void deleteFile(Integer kit_num);
-
+	public void insertKitLike(KiteLikeVO like);
 
 }
