@@ -14,6 +14,7 @@
        
 <style>
 p { margin:20px 0px;}
+.container{width:1200px; max-width:none!important;}
 
 </style>
 

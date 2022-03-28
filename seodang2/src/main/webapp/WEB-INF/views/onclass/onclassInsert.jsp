@@ -9,8 +9,10 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .ck-editor__editable_inline{
+	
 	min-height:250px;
 }
+.container{width:1200px; max-width:none!important;}
 </style>
 <!-- ckedior 라이브러리 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
@@ -39,7 +41,7 @@
 			</li>
 			<li>
 				<form:label path="on_price">가격</form:label>
-				<form:input path="on_price"/>
+				<form:input type="number" path="on_price"/>
 				<form:errors path="on_price" cssClass="error-color"/>
 			</li>
 			<li><b>내용</b></li>
