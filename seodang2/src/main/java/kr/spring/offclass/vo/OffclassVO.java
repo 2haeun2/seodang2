@@ -17,9 +17,9 @@ public class OffclassVO {
 	@NotEmpty
 	private String off_name;//클래스 이름
 	@Range(min=1,max=99)
-	private String off_limit;//클래스 정원
+	private int off_limit;//클래스 정원
 	@Min(0)
-	private String off_price;//클래스 가격
+	private int off_price;//클래스 가격
 	@NotEmpty
 	private String off_content;//클래스 내용
 	private MultipartFile off_upload;
@@ -56,18 +56,21 @@ public class OffclassVO {
 	public void setOff_name(String off_name) {
 		this.off_name = off_name;
 	}
-	public String getOff_limit() {
+	public int getOff_limit() {
 		return off_limit;
 	}
-	public void setOff_limit(String off_limit) {
+
+	public void setOff_limit(int off_limit) {
 		this.off_limit = off_limit;
 	}
-	public String getOff_price() {
+
+	public int getOff_price() {
 		return off_price;
 	}
-	public void setOff_price(String off_price) {
+	public void setOff_price(int off_price) {
 		this.off_price = off_price;
 	}
+
 	public String getOff_content() {
 		return off_content;
 	}

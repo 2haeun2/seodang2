@@ -3,23 +3,25 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.offclass.dao.OffclassMapper"> 
-	<insert id="insertListOffTime" parameterType="list">
+	<insert id="insertListOffTime" parameterType="offTimetableVO">
 		INSERT INTO off_timetable(
 							time_num,
 							off_num,
 							time_date,
 							time_start,
 							time_end)
-							VALUES
-						<foreach collection="list" item="item" index="index">
+							SELECT off_timetable_seq.nextval, A.*
+							FROM
 						(
-							off_timetable_seq.nextval,
-							#{item.off_num},
-							#{item.time_date},
-							#{item.time_start},
-							#{item.tiem_end}
-						)
+						<foreach collection="list" item="item" index="index" separator="UNION ALL">
+							SELECT
+							#{item.off_num} AS off_num,
+							#{item.time_date} AS time_date,
+							#{item.time_start} AS time_start,
+							#{item.time_end} AS time_end
+							FROM DUAL
 						</foreach>
+						) A
 	</insert>
 	<insert id="insertOffClass" parameterType="offclassVO">
 	INSERT INTO offclass (off_num,

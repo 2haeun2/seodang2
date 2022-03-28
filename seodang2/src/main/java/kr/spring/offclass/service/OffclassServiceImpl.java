@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.offclass.dao.OffclassMapper;
+import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OffclassVO;
 
 @Service
@@ -28,9 +29,14 @@ public class OffclassServiceImpl implements OffclassService{
 	}
 
 	@Override
-	public void insertOffClass(OffclassVO offclass) {
+	public void insertOffClass(OffclassVO offclass,List<OffTimetableVO> list) {
 		offclass.setOff_num(offclassMapper.selectOff_num());
 		offclassMapper.insertOffClass(offclass);
+		for(int i=0;i<list.size();i++) {
+			OffTimetableVO offTimetableVO=list.get(i);
+			offTimetableVO.setOff_num(offclass.getOff_num());
+		}
+		offclassMapper.insertListOffTime(list);
 	}
 
 	@Override
@@ -55,6 +61,7 @@ public class OffclassServiceImpl implements OffclassService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }

@@ -43,18 +43,19 @@ public class OffclassController {
 	
 	//오프라인 클래스 폼
 	@GetMapping("/offclass/offclassOpen.do")
-	public String form() {
+	public String form(HttpSession session) {
+		session.removeAttribute("list");
 		return "offclassOpen";
 	}
 	
 	//오프라인 클래스 등록
 	@PostMapping("/offclass/offclassOpen.do")
-	public String sumbit(@Valid OffclassVO offclassVO,BindingResult result,HttpSession session) {
+	public String sumbit(@Valid OffclassVO offclassVO, BindingResult result,HttpSession session) {
 		
 		logger.info("<<오프라인 클래스 등록>>: "+offclassVO);
 		
 		if(result.hasErrors()) {
-			return form();
+			return "offclassOpen";
 		}
 		
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
@@ -76,8 +77,10 @@ public class OffclassController {
 		logger.info("offclassVO : "+offclassVO);
 		
 		//글 작성
-		offclassService.insertOffClass(offclassVO);
+		ArrayList<OffTimetableVO> list  =(ArrayList<OffTimetableVO>)session.getAttribute("list");
+		offclassService.insertOffClass(offclassVO,list);
 		
+		session.removeAttribute("list");
 		
 		return "redirect:/offclass/offclassList.do";
 	}

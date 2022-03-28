@@ -1,19 +1,20 @@
 package kr.spring.offclass.vo;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class OffTimetableVO {
-	private int titme_num;
+	private int time_num;
 	private int off_num;
 	private Date time_date;
 	private String time_start;
 	private String time_end;
 	
-	public int getTitme_num() {
-		return titme_num;
+	public int getTime_num() {
+		return time_num;
 	}
-	public void setTitme_num(int titme_num) {
-		this.titme_num = titme_num;
+	public void setTime_num(int time_num) {
+		this.time_num = time_num;
 	}
 	public int getOff_num() {
 		return off_num;
@@ -23,9 +24,6 @@ public class OffTimetableVO {
 	}
 	public Date getTime_date() {
 		return time_date;
-	}
-	public void setTime_date(Date time_date) {
-		this.time_date = time_date;
 	}
 	public String getTime_start() {
 		return time_start;
@@ -39,9 +37,12 @@ public class OffTimetableVO {
 	public void setTime_end(String time_end) {
 		this.time_end = time_end;
 	}
+	public void setTime_date(Date time_date) {
+		this.time_date = time_date;
+	}
 	@Override
 	public String toString() {
-		return "OffTimetableVO [titme_num=" + titme_num + ", off_num=" + off_num + ", time_date=" + time_date
+		return "OffTimetableVO [time_num=" + time_num + ", off_num=" + off_num + ", time_date=" + time_date
 				+ ", time_start=" + time_start + ", time_end=" + time_end + "]";
 	}
 	
