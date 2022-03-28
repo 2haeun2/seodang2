@@ -33,7 +33,7 @@ public class OnqnaController {
 	
 	//(3)글등록 form
 	@GetMapping("/onqna/onqnaWrite.do")	//view생성
-	public String form() {
+	public String form() { 
 		return "onqnaWrite";	//tiles등록
 	}
 	
