@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 중앙 컨텐츠 시작 -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/uploadAdapter.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/ckeditor_style.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/offclass.time.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/offclass.css">
 
-<div class="container">
+<div class="main">
 	<h4>오프라인 CLASS 등록하기</h4>
 	<form:form action="offclassOpen.do" modelAttribute="offclassVO" id="open_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
