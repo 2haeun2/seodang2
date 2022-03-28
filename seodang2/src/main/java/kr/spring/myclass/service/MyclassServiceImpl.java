@@ -57,5 +57,19 @@ public class MyclassServiceImpl implements MyclassService{
 		return myclassMapper.selectRowCount2(map);
 	}
 
+	@Override
+	public void deletePayment(int onreg_num, int user_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.deletePayment(onreg_num, user_num);
+		myclassMapper.updateStatusPayment(onreg_num);
+	}
+
+	@Override
+	public PaymentVO selectPayment(PaymentVO paymentVO) {
+		// TODO Auto-generated method stub
+		return myclassMapper.selectPayment(paymentVO);
+	}
+
+
 
 }

@@ -6,7 +6,7 @@ public class PaymentVO {
 	public int onreg_num;
 	public int user_num;
 	public int on_num;
-	public int on_payment; //결제 방법 계좌이체(1), 카드결제(2), !포인트!?
+	public int on_payment; //결제 방법 계좌이체(1), 카드결제(2)
 	public int on_status; //수강신청상태(1), 수강취소상태(2)
 	public Date on_regdate;
 	public Date on_moregdate;

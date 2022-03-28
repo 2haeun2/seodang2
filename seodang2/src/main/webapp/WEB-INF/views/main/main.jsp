@@ -17,32 +17,6 @@
     
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 
-<script>
-/* 	//주소 다 가져오는 것
-	const url = window.location.href;
-	//주소 파라미터명과 값만 가져오는 것
-	const url2 = window.location.search
-	
-	//카테고리 파라미터 값만 출력
-	const param = new URL(url).searchParams;
-	const category_num = param.get('category_num');
-
-	function ajaxGO(){
-		  $.ajax({
-              url : "/main/main.do",
-              data: {category_num : category_num},
-              type: "POST",
-              dataType: "text",
-              contentType: false, 
-              processData: false,
-      		});
-  		}
-	
-	} */
-
-</script>
-
-
 <!-- 메인 시작 -->
 
 <div style="width: 400px; margin:50px">
@@ -77,12 +51,12 @@
 <div class="mainOne">
 
 <div class="page-main">
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do">전체보기</a>
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=1">드로잉</a>
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=2">플라워</a>
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=3">공예</a>
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=4">요리</a>
-	<a id="category" onclick="ajaxGO()" href="${pageContext.request.contextPath}/main/main.do?category_num=5">베이킹</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do">전체보기</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=1">드로잉</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=2">플라워</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=3">공예</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=4">요리</a>
+	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=5">베이킹</a>
 </div>
 
 <!-- 시작 -->

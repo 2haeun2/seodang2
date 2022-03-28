@@ -32,7 +32,7 @@
 
 	<select id="selectRegisterList" parameterType="map" resultType="paymentVO">
 		SELECT * FROM (SELECT a.*,rownum rnum
-		FROM (SELECT b.onreg_num,c.on_num,b.on_regdate
+		FROM (SELECT b.onreg_num,c.on_num,b.on_regdate,b.on_moregdate,c.on_status
 		FROM onreg b JOIN onreg_detail c on b.onreg_num = c.onreg_num
 		where b.user_num = #{user_num}
 		ORDER BY b.onreg_num DESC)a) 

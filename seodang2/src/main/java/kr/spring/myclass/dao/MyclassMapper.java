@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
@@ -33,4 +34,13 @@ public interface MyclassMapper {
 	//구매 목록
 	public List<PaymentVO> selectRegisterList(Map<String,Object> map);
 	public int selectRowCount2(Map<String,Object> map);
+	//구매 취소
+	@Update("update onreg set on_moregdate = SYSDATE where onreg_num=#{onreg_num} and user_num = #{user_num}")
+	public void deletePayment(@Param("onreg_num") int onreg_num,@Param("user_num") int user_num);
+	@Update("update onreg_detail set on_status = '2' where onreg_num=#{onreg_num}")
+	public void updateStatusPayment(@Param("onreg_num") int onreg_num);
+	//내 구매목록 조회
+	@Select("select * from onreg a join onreg_detail b on a.onreg_num = b.onreg_num "
+			+ "where a.user_num = #{user_num} and a.onreg_num = #{onreg_num}")
+	public PaymentVO selectPayment(PaymentVO paymentVO);
 }

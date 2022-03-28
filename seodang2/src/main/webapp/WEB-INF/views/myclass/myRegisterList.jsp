@@ -69,12 +69,19 @@
 	<li>
 		<div class="List">
 			<div class="textone">
-				<p>회원번호 : ${user_num}</p>			
+				<p>회원번호 : ${user_num} status : ${myreg.on_status}</p>			
 				<p>강의 명 : ${myreg.onreg_num}</p>
-				<p>구매 일자 : ${myreg.on_regdate}</p>
+				<c:if test="${myreg.on_status == 1}">
+					<p>구매 일자 : ${myreg.on_regdate}</p>
+				</c:if>
+				<c:if test="${myreg.on_status == 2}">
+					<p style="color:red;">취소 일자 : ${myreg.on_moregdate}</p>
+				</c:if>
 				<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${myreg.on_num}'">후기</button>
 				<button type="button" class="btn btn-dark" onclick="location.href='#'">상세보기</button>
-				<button type="button" class="btn btn-dark" onclick="location.href='#'">수강취소</button>
+				<c:if test="${myreg.on_status == 1}">
+					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/myclass/deletePayment.do?onreg_num=${myreg.onreg_num}'">수강취소</button>
+				</c:if>
 			</div>
 		</div>
 	</li>	

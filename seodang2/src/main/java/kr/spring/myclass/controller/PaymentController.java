@@ -1,6 +1,5 @@
 package kr.spring.myclass.controller;
 
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.myclass.service.MyclassService;
-import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
-import kr.spring.qna.controller.OqnaController;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -81,9 +79,7 @@ public class PaymentController {
 			if(count > 0) {
 				list = myclassService.selectRegisterList(map);
 			}
-			
-			
-			
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myRegisterList");
 		mav.addObject("user_num",user_num);
@@ -93,4 +89,67 @@ public class PaymentController {
 
 		return mav;
 	}
+	
+	
+	//온라인강의 구매 취소
+	@GetMapping("/myclass/deletePayment.do")
+	public String delete(int onreg_num,Model model,HttpServletRequest request,HttpSession session,
+										PaymentVO pVO) {
+		
+		Integer user_num = (Integer)session.getAttribute("session_user_num");		
+		/* System.out.println(onreg_num); */
+		pVO.setOnreg_num(onreg_num);
+		pVO.setUser_num(user_num);		
+		pVO = myclassService.selectPayment(pVO);
+		
+		System.out.println("강의 상태 : " + pVO.getOn_status());
+		
+		int status = pVO.getOn_status(); // 강의상태
+		
+		if(status == 1) {
+			myclassService.deletePayment(onreg_num, user_num);
+			model.addAttribute("message", "수강 취소 되었습니다");
+			model.addAttribute("url", request.getContextPath() + "/myclass/myRegisterList.do");
+		}else if(status == 2) {
+			model.addAttribute("message", "이미 취소");
+			model.addAttribute("url", request.getContextPath() + "/myclass/myRegisterList.do");
+		}
+		
+		return "common/resultView";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

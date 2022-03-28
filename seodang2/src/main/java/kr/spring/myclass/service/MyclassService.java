@@ -20,4 +20,8 @@ public interface MyclassService {
 	//구매한 강의(학생)
 	public List<PaymentVO> selectRegisterList(Map<String,Object> map);
 	public int selectRowCount2(Map<String,Object> map);
+	//구매 취소
+	public void deletePayment(int onreg_num, int user_num);
+	//내 구매 목록 정보 출력
+	public PaymentVO selectPayment(PaymentVO paymentVO);
 }
