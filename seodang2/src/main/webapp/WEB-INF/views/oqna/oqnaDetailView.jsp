@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/oqna.reply.js"></script>
 
-<div class="page-main">
+<div class="page-main" id="qnaDetail">
 
 	<h2>${oqna.title }</h2>
 	<ul>
@@ -47,7 +47,7 @@
 	<p>
 		${oqna.content }
 	</p>
-	<hr size="1" width="100%" noshade="noshade">
+
 
 
 	<div class="align-right">
@@ -72,7 +72,6 @@
 
 	<!--  =================댓글=============== -->
 	<div id="reply_div">
-		<span class="re-title">댓글작성</span>
 		
 		<form id="re_form">
 			<input type="hidden" name="qna_num" value="${oqna.qna_num }" id="qna_num">

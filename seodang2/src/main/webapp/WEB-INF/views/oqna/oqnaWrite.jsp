@@ -11,7 +11,7 @@
 
 <style>
 .ck-editor__editable_inline{
-	min-height:250px;
+	min-height:450px;
 }
 </style>
 <!-- ckeditor 라이브러리 -->
@@ -19,21 +19,21 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
 
 
-<div class="page-main">
+<div class="page-main" id="qnaWrite">
 	<h2>글쓰기</h2>										  <!-- 파일업로드 처리하기 위해  enctype -->
 	<form:form modelAttribute="oqnaVO" action="oqnaWrite.do" enctype="multipart/form-data" id="register_form">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul class="editor-form">
 			<li>
 				<form:label path="title"><b>제목</b></form:label>
-				<form:input class="title" path="title"/>
-				<form:errors path="title" cssClass="error-color"/>
+				<form:input class="title" path="title" placeholder="제목은 1자이상 30자 이하로 입력하세요."/>
+				<form:errors path="title" cssClass="error-color" style="font-size:15px"/>
 			</li>
 
 			<li><b>내용</b></li>
 			<li>
 				<form:textarea path="content"/>
-				<form:errors path="content" cssClass="error-color"/>
+				<form:errors path="content" cssClass="error-color" style="font-size:15px"/>
 				<script>
 				 function MyCustomUploadAdapterPlugin(editor) {
 					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -55,7 +55,7 @@
 			</li>
 
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload"><b>파일업로드</b></form:label>
 				<input type="file" name="upload" id="upload">
 				<form:errors path="upload" cssClass="error-color"/>	
 				<!-- 파일업로드는 필수항목은 아니다.(그래도 에러처리는 해봤음) -->

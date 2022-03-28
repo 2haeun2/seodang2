@@ -25,7 +25,7 @@
 	<form action="adminMemberList.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield">
+				<select name="keyfield" id="keyfield">
 					<option value="1"<c:if test="${param.keyfield==1 }">selected</c:if>>관리자</option>
 					<option value="2"<c:if test="${param.keyfield==2 }">selected</c:if>>강사</option>
 					<option value="3"<c:if test="${param.keyfield==3 }">selected</c:if>>회원</option>
@@ -38,7 +38,7 @@
 			</li>
 			<li>
 				<input type="submit" value="검색">
-				<input type="button" value="목록" onclick="location.href='adminMemberList.do'">
+				<input type="button" value="목록" onclick="location.href='adminMemberList.do'" id="listbtn">
 			</li>
 		</ul>
 	</form>

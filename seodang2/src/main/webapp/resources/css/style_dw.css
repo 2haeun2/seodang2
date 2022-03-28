@@ -57,10 +57,82 @@ div#main_menu ul li{
 	margin-bottom:5px;
 }
 
+
+/*qna글쓰기,글수정 등록 폼 / 글상세 폼*/
 .page-main{
 	width:98%;
 	margin:0 auto;
 }
+.page-main#qnaWrite{
+	background-color:#6990f0;
+	width:100%;
+	box-shadow: 2px 2px 20px 1px rgb(51, 51, 51);
+	border-radius: 10px;
+}
+.page-main#qnaWrite h2{
+	padding:10px 0 0 0;
+	text-align:center;
+	vertical-align: middle;
+}
+
+.page-main#qnaDetail{
+	width:100%;
+	box-shadow: 2px 2px 20px 1px rgb(51, 51, 51);
+	border-radius: 10px;
+	
+}
+.page-main#qnaDetail h2{
+	padding:10px 0;
+	background-color:#6990f0;
+	text-align:center;
+	vertical-align: middle;
+}
+.page-main#qnaDetail ul{
+	font-weight: bold;
+}
+.page-main#qnaDetail p{
+	padding:0 10px;
+	height:80px;
+}
+.page-main#qnaDetail p#modify_p{
+	height:20px;
+}
+div.item{
+	padding:0 10px;
+}
+
+.align-right{
+	text-align:right;
+	padding:0 20px 0 0;
+}
+
+#re_form textarea{
+	width:80%;
+}
+
+form#re_form{
+	width:650px;
+	border:none;
+	display: inline;
+
+}
+
+
+form#modify_form{
+	
+	display: inline;
+}
+
+/*수정 끝 */
+
+
+
+
+
+
+
+
+
 .page-one{
 	width:600px;
 	margin:0 auto;	
@@ -168,7 +240,7 @@ table td{
 div#reply_div{
 	padding:5px 10px 40px 10px;
 	margin-top:10px;
-	background-color:#eeeeee;
+	background-color:#f2f8ff; /*댓글창 색깔 바꿈*/
 }
 form#re_form{
 	width:650px;
@@ -225,13 +297,16 @@ form{
 	width:500px;
 	margin:0 auto;
 	border:1px solid #000;
-	padding:10px 10px 10px 30px;
+	padding:10px ;
 }
 /*CKEditor 사용시 등록, 수정폼*/
 form#register_form, form#update_form{
-	width:100%;
+	width:98%;
 	border:white;
+	background-color:#f2f8ff;
 }
+
+
 ul{
 	list-style:none;
 }
@@ -242,10 +317,10 @@ label{
 input[type="text"],input[type="password"],input[type="email"]{
 	width:200px;
 }
-
+/*
 input.title{
-	width:945px;
-}
+	width:940px;
+}*/
 
 #register_form input[id="id"]{
 	width:113px;
@@ -261,10 +336,28 @@ input[id="zipcode"]{
 ul.editor-form{
 	padding-inline-start: 0px;
 	margin : 0 auto;
-	
+	font-size:13pt;
 }
 
+ul.editor-form li{
+	padding-inline-start: 0px;
+	padding:10px 10px;
+	margin : 0 auto;
+	font-size:13pt;
+}
 
+ul.editor-form li .title{
+	width:935px;
+	height:20px;
+}
+	
+ul.editor-form label{
+	width:100px;
+	float:left;
+	padding:0px 0px 10px 0px;
+}	
+	
+	
 input[id="keyword"]{
 	width:300px;
 	height:30px;

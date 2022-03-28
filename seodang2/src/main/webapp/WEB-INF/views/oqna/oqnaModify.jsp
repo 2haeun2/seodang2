@@ -13,7 +13,7 @@
 
 <style>
 .ck-editor__editable_inline{
-	min-height:250px;
+	min-height:450px;
 }
 </style>
 
@@ -23,7 +23,7 @@
 
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<div class="page-main">
+<div class="page-main" id="qnaWrite">
 	<h2>글수정</h2>
 	<form:form modelAttribute="oqnaVO" action="oqnaUpdate.do" id="update_form" enctype="multipart/form-data">
 	<form:hidden path="qna_num"/>
@@ -58,7 +58,7 @@
 			    </script>      
 		</li>
 		<li>
-			<form:label path="upload">파일업로드</form:label>
+			<form:label path="upload"><b>파일업로드</b></form:label>
 			<input type="file" name="upload" id="upload">
 			
 				<c:if test="${!empty qnaVO.filename }">

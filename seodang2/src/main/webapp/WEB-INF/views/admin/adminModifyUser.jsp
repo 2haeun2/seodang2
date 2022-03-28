@@ -6,85 +6,85 @@
 <div class="page-main">
 	<h2>회원정보 수정</h2>
 	
+	<div>
 		<span>
 			<c:if test="${!empty userVO.photo_name}">
-		   		<img src="${pageContext.request.contextPath}/admin/photoView.do?user_num=${userVO.user_num}"
-		   	                        width="200" height="200" class="my-photo">
+		   		<img src="${pageContext.request.contextPath}/admin/photoView.do?user_num=${userVO.user_num}" 
+		   	                        class="my-photo">
 		   	</c:if>
 		   	<c:if test="${empty userVO.photo_name}">
 		   		<img src="${pageContext.request.contextPath}/resources/images/face.png" 
-		   	                        width="200" height="200" class="my-photo">
+		   	                        class="my-photo">
 		   	</c:if>
 		</span>
-	
-	
-	<form:form modelAttribute="userVO" action="adminUpdateUser.do" id="modify_form">
-	
-		<form:hidden path="user_num"/>
-		<form:errors element="div" cssClass="error-color"/>
-		<ul>
-			<li>	<!-- 0탈퇴, 1정지, 2일반, 3강사, 4관리 -->
-				<label>회원 등급</label>
-				<c:if test = "${userVO.auth <4}">
-					<form:radiobutton path="auth" value="1"/>정지회원
-					<form:radiobutton path="auth" value="2"/>일반회원
-					<form:radiobutton path="auth" value="3"/>강사
-				</c:if>
-				<c:if test = "${userVO.auth ==4}">관리자
-					<form:hidden path="auth"/>
-				</c:if>
-			</li>
-			
-			<!-- 관리자가 고칠 수 있는 항목 : phone, zipcode, address1,2 ,email -->
-			
-			<li>
-				<form:label path="name">이름</form:label>
-				<form:input path="name" readonly="true"/>
-				<form:errors path="name" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="phone">전화번호</form:label>
-				<form:input path="phone"/>
-				<form:errors path="phone" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="zipcode">우편번호</form:label>
-				<form:input path="zipcode"/>
-				<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
-				<form:errors path="zipcode"/>                                  
-			</li>
-			<li>
-				<form:label path="address1">주소</form:label>
-				<form:input path="address1"/>
-				<form:errors path="address1" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="address2">상세주소</form:label>
-				<form:input path="address2"/>
-				<form:errors path="address2" cssClass="error-color"/>
-			</li>
-			
-			<li>
-				<form:label path="email">이메일</form:label>
-				<form:input path="email"/>
-				<form:errors path="email" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="age">나이</form:label>
-				<form:input path="age" readonly="true"/>
-				<form:errors path="age" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="reg_date">회원가입일</form:label>
-				<form:input path="reg_date" readonly="true"/>
-				<form:errors path="reg_date" cssClass="error-color"/>
-			</li>													
-		</ul>
-		<div class="align-center">
-			<form:button>수정</form:button>
-			<input type="button" value="회원목록" onclick="locaion.href='adminMemberList.do'">
-		</div>	
-	</form:form>
+
+		<form:form modelAttribute="userVO" action="adminUpdateUser.do" id="modify_form">
+			<form:hidden path="user_num"/>
+			<form:errors element="div" cssClass="error-color"/>
+			<ul>
+				<li>	<!-- 0탈퇴, 1정지, 2일반, 3강사, 4관리 -->
+					<label>회원 등급</label>
+					<c:if test = "${userVO.auth <4}">
+						<form:radiobutton path="auth" value="1"/>정지회원
+						<form:radiobutton path="auth" value="2"/>일반회원
+						<form:radiobutton path="auth" value="3"/>강사
+					</c:if>
+					<c:if test = "${userVO.auth ==4}">관리자
+						<form:hidden path="auth"/>
+					</c:if>
+				</li>
+				
+				<!-- 관리자가 고칠 수 있는 항목 : phone, zipcode, address1,2 ,email -->
+				
+				<li>
+					<form:label path="name">이름</form:label>
+					<form:input path="name" readonly="true"/>
+					<form:errors path="name" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="phone">전화번호</form:label>
+					<form:input path="phone"/>
+					<form:errors path="phone" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="zipcode">우편번호</form:label>
+					<form:input path="zipcode"/>
+					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
+					<form:errors path="zipcode"/>                                  
+				</li>
+				<li>
+					<form:label path="address1">주소</form:label>
+					<form:input path="address1"/>
+					<form:errors path="address1" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="address2">상세주소</form:label>
+					<form:input path="address2"/>
+					<form:errors path="address2" cssClass="error-color"/>
+				</li>
+				
+				<li>
+					<form:label path="email">이메일</form:label>
+					<form:input path="email"/>
+					<form:errors path="email" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="age">나이</form:label>
+					<form:input path="age" readonly="true"/>
+					<form:errors path="age" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="reg_date">회원가입일</form:label>
+					<form:input path="reg_date" readonly="true"/>
+					<form:errors path="reg_date" cssClass="error-color"/>
+				</li>													
+			</ul>
+			<div class="align-center">
+				<form:button>수정</form:button>
+				<input type="button" value="회원목록" onclick="locaion.href='adminMemberList.do'">
+			</div>	
+		</form:form>
+	</div>
 
 	<!-- 우편번호 스크립트 시작 -->
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
