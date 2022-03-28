@@ -40,10 +40,10 @@ public interface OnclassMapper {
 	
 	/////////////////////////찜하기 시작////////////////////////////
 	//찜 눌렀는지 확인
-	@Select("select * from onlike where user_num = ${user_num} and on_num = ${on_num}")
+	@Select("select * from onlike where user_num = #{user_num} and on_num = #{on_num}")
 	public OnlikeVO selectLike(@Param("user_num") Integer user_num,@Param("on_num") Integer on_num);
 	//찜취소
-	@Delete("delete from onlike where onlike_num = ${onlike_num}")
+	@Delete("delete from onlike where onlike_num = #{onlike_num}")
 	public void deleteLike(int onlike_num);
 	//찜 하기
 	@Insert("insert into onlike (onlike_num,user_num,on_num,olike) values(onlike_seq.nextval,#{user_num},#{on_num},1)")
