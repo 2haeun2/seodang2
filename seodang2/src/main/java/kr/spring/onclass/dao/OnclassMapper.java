@@ -37,16 +37,21 @@ public interface OnclassMapper {
 	//프로필정보 출력
 	@Select("select * from ouser o join ouser_detail z on o.user_num = z.user_num where o.user_num = #{user_num}")
 	public UserVO getProfile(int user_num);
+	
+	/////////////////////////찜하기 시작////////////////////////////
 	//찜 눌렀는지 확인
 	@Select("select * from onlike where user_num = ${user_num} and on_num = ${on_num}")
-	public OnlikeVO selectLike(Integer user_num,Integer on_num);
+	public OnlikeVO selectLike(@Param("user_num") Integer user_num,@Param("on_num") Integer on_num);
 	//찜취소
 	@Delete("delete from onlike where onlike_num = ${onlike_num}")
-	public OnlikeVO deleteLike(int onlike_num);
+	public void deleteLike(int onlike_num);
 	//찜 하기
 	@Insert("insert into onlike (onlike_num,user_num,on_num,olike) values(onlike_seq.nextval,#{user_num},#{on_num},1)")
-	public OnlikeVO insertLike(Integer user_num,Integer on_num);
-	
+	public void insertLike(@Param("user_num") Integer user_num,@Param("on_num") Integer on_num);
+	//찜한 갯수(모든 이용자)
+	@Select("select count(*) from onlike where on_num = #{on_num}")
+	public int selectLikeCount(Integer on_num);
+	/////////////////////////찜하기 끝////////////////////////////	
 	
 	//평점
 	@Select("select * from ostar where user_num = #{user_num}")

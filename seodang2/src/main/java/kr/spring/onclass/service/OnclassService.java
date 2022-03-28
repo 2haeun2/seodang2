@@ -30,6 +30,7 @@ public interface OnclassService {
 	public OnlikeVO selectLike(Integer user_num,Integer on_num);
 	public void deleteLike(int onlike_num);
 	public void insertLike(Integer user_num,Integer on_num);
+	public int selectLikeCount(Integer on_num);
 	
 	//평점
 	public OstarVO selectQna(Integer user_num);

@@ -133,6 +133,12 @@ public class OnclassServiceImpl implements OnclassService{
 		// TODO Auto-generated method stub
 		return onclassMapper.getProfile(user_num);
 	}
+
+	@Override
+	public int selectLikeCount(Integer on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectLikeCount(on_num);
+	}
 	
 
 }

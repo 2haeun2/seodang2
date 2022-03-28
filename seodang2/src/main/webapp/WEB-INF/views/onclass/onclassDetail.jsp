@@ -22,6 +22,26 @@
 <script type="text/javascript">
 $(function(){
 	var status; //noFav or yesFav
+	function selectData(on_num){ //77라인 초기값 세팅
+	   $.ajax({
+	      type:'post',
+	      data:{on_num:on_num}, //초기값 세팅에서 매개변수로 받아서 el 안씀
+	      url:'getFav.do', //LikecountAction
+	      dataType:'json',
+	      cache:false,
+	      timeout:30000,
+	      success:function(data){
+	         if(data.result=='success'){
+	            displayFav(data);
+	         }else{
+	            alert('좋아요 읽기 오류');
+	         }
+	      },
+	      error:function(){
+	         alert('네트워크 오류');
+	      }
+	   });
+	}
 	$('#output_fav').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
 		$.ajax({
 			url:'like.do',
@@ -54,7 +74,10 @@ $(function(){
 	      }         
 	      //문서 객체에 추가
 	      $('#output_fav').attr('src',output); //id가 output_fav인 태그 src에 output 저장
+	      $('#output_fcount').text(count); //id가 output_fcount인 태그 text에 count(좋아요 총 개수)저장
 	   }
+	
+	   selectData(${onclass.on_num}); //초기값 세팅
 });
 
 //결제 코드
@@ -214,7 +237,10 @@ function iamport(){
                                 <li><i class="bi bi-archive"></i>&nbsp&nbsp키트구매</li>
                                 <li><i class="bi bi-question-circle"></i>&nbsp&nbsp1:1 QnA</li>
                                 <li><i class="bi bi-chat-left-dots"></i><a href="${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${onclass.on_num}" class="menu-item">&nbsp&nbsp강의후기 게시판</a></li>
-                                <li><img id="output_fav" src="../resources/image/heart1.png"></li>	
+                                <li>
+	                                <img id="output_fav" src="../resources/image/heart1.png">
+	                                <span id="output_fcount" class="margin_right_10"></span>
+                                </li>	
                             </ul>
                         </div>
                     </div>
