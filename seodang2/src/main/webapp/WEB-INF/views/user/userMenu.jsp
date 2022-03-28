@@ -31,7 +31,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='myMenu.do'">찜목록
+			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/onqna/onqnaList.do'">찜목록
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"

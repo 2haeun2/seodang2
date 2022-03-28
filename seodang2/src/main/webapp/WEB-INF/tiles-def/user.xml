@@ -49,6 +49,14 @@
     	<put-attribute name="title" value="myqna목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/myqnaList.jsp"/>
     </definition>
+    <definition name="onqnaList" extends="main">
+    	<put-attribute name="title" value="onqna목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/onqna/onqnaList.jsp"/>
+    </definition>
+    <definition name="onqnaWrite" extends="main">
+    	<put-attribute name="title" value="onqna글쓰기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/onqna/onqnaWrite.jsp"/>
+    </definition>
 </tiles-definitions>
 
  
