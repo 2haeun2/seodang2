@@ -10,7 +10,7 @@ create table onqna(
 	filename varchar2(100),
 	uploadfile blob,
 
-	constraint onqna_pk primary key (onqna_num)
+	constraint onqna_pk primary key (onqna_num),
 	constraint onqna_fk1 foreign key (on_num) references onclass (on_num),
 	constraint onqna_fk2 foreign key (user_num) references ouser (user_num)
 );
@@ -26,7 +26,7 @@ create table onqna_reply(
 	re_content clob not null,
 	re_date date default sysdate not null,
 	re_mdate date,
-	constraint onqna_reply_pk primary key (onqnare_num)
+	constraint onqna_reply_pk primary key (onqnare_num),
 	constraint onqna_reply_fk1 foreign key (onqna_num) references onqna (onqna_num),
 	constraint onqna_reply_fk2 foreign key (user_num) references ouser (user_num)
 ); 
@@ -46,7 +46,7 @@ create table offqna(
 	uploadfile blob,
 	reg_date date default sysdate not null,
 	modify_date date,
-	constraint offqna_pk primary key (offqna_num)
+	constraint offqna_pk primary key (offqna_num),
 	constraint offqna_fk1 foreign key (off_num) references offclass (off_num),
 	constraint offqna_fk2 foreign key (user_num) references ouser (user_num)
 );
@@ -61,7 +61,7 @@ create table offqna_reply(
 	re_content clob not null,
 	re_date date default sysdate not null,
 	re_mdate date,
-	constraint offqna_reply_pk primary key (offqnare_num)
+	constraint offqna_reply_pk primary key (offqnare_num),
 	constraint offqna_reply_fk1 foreign key (offqna_num) references offqna (offqna_num),
 	constraint offqna_reply_fk2 foreign key (user_num) references ouser (user_num)
 );
@@ -93,7 +93,7 @@ create table oqna_reply(
 	content clob not null,
 	re_date date default sysdate not null,
 	re_mdate date,
-	constraint oqna_reply_pk primary key (oqnare_num)
+	constraint oqna_reply_pk primary key (oqnare_num),
 	constraint oqna_reply_fk1 foreign key (qna_num) references oqna (qna_num),
 	constraint oqna_reply_fk2 foreign key (user_num) references ouser (user_num)
 ); 
