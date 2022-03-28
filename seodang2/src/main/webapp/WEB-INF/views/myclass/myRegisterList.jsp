@@ -65,15 +65,16 @@
 		</ul>
 	</form>
 	</li>
-	<c:forEach var="myclass" items="${list}">
+	<c:forEach var="myreg" items="${list}">
 	<li>
 		<div class="List">
 			<div class="textone">
 				<p>회원번호 : ${user_num}</p>			
-				<p>강의 명 : ${myclass.on_name}</p>
-				<p>강의 가격 : ${myclass.on_price}</p>
-				<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${myclass.on_num}'">후기</button>
+				<p>강의 명 : ${myreg.onreg_num}</p>
+				<p>구매 일자 : ${myreg.on_regdate}</p>
+				<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${myreg.on_num}'">후기</button>
 				<button type="button" class="btn btn-dark" onclick="location.href='#'">상세보기</button>
+				<button type="button" class="btn btn-dark" onclick="location.href='#'">수강취소</button>
 			</div>
 		</div>
 	</li>	

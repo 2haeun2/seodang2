@@ -12,6 +12,10 @@
     <definition name="myclassList" extends="main">
     	<put-attribute name="title" value="게시판 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/myclass/myclassList.jsp"/>
+    </definition>  
+    <definition name="myRegisterList" extends="main">
+    	<put-attribute name="title" value="게시판 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/myclass/myRegisterList.jsp"/>
     </definition>   
 </tiles-definitions>
 

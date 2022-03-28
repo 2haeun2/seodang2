@@ -58,9 +58,6 @@ $(function(){
 });
 
 //결제 코드
-function test(){
-	document.getElementById('paymentData_btn').submit();
-}
 function iamport(){
 	
 	const email = "${ouser.email}";
@@ -222,7 +219,6 @@ function iamport(){
                         </div>
                     </div>
                     <button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
-                    <button type="button" onclick="test()" class="btn btn-dark" style="width:230px">test</button>
                 </div>
             </div>
         </div>
@@ -232,7 +228,7 @@ function iamport(){
 		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
 		<input type="hidden" name="on_payment" value="2"/>
 		<input type="hidden" name="on_status" value="1"/>  
-	   	<input type="submit" value="qwe">
+	   	<input type="submit" value="임시 구매 버튼">
 	</form>
 	<!-- 안보이게 하기 -->
 </div>

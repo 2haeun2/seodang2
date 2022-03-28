@@ -11,10 +11,11 @@ import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
 
 public interface MyclassMapper {
+	//내가 올린 강의 (선생님)
 	public List<MyclassVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
 	
-	//구매한 과목 저장
+	//구매한 과목 저장(학생)
 	//구매목록 시퀀스 생성
 	@Select("select onreg_seq.nextval from dual")
 	public int selectSeq();
@@ -29,4 +30,7 @@ public interface MyclassMapper {
 	@Select("select count(*) from onreg a join onreg_detail z on a.onreg_num = z.onreg_num "
 			+ "where z.on_num = #{on_num} and a.user_num = #{user_num}")
 	public int overlap(@Param("on_num") int on_num,@Param("user_num") int user_num);
+	//구매 목록
+	public List<PaymentVO> selectRegisterList(Map<String,Object> map);
+	public int selectRowCount2(Map<String,Object> map);
 }

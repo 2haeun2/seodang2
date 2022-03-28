@@ -35,7 +35,7 @@
 		</c:if>
 		<c:if test="${session_user_auth == 2}">
 		<li>
-			<a href="${pageContext.request.contextPath}/myclass/orderList.do">구매한 강의</a>
+			<a href="${pageContext.request.contextPath}/myclass/myRegisterList.do">구매한 강의</a>
 		</li>
 		</c:if>
 		<li>

@@ -45,5 +45,17 @@ public class MyclassServiceImpl implements MyclassService{
 		return myclassMapper.overlap(on_num,user_num);
 	}
 
+	@Override
+	public List<PaymentVO> selectRegisterList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.selectRegisterList(map);
+	}
+
+	@Override
+	public int selectRowCount2(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.selectRowCount2(map);
+	}
+
 
 }
