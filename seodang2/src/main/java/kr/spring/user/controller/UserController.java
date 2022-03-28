@@ -141,8 +141,8 @@ public class UserController {
 		return "userMenu";
 	}
 	
-	//테스트
-	@RequestMapping("/user/test.do")
+	//전체qna 내가 쓴 글
+	@RequestMapping("/user/myoqnaList.do")
 	public String test2(HttpSession session, Model model) {
 		
 		Integer user_num = (Integer) session.getAttribute("session_user_num");
@@ -175,7 +175,7 @@ public class UserController {
 		// <5> request에 데이터 저장
 		model.addAttribute("list", list);
 
-		return "test";
+		return "myoqnaList";
 	}
 	
 	//myqna리스트

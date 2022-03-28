@@ -19,7 +19,7 @@
 	<ul class="profile-photo">
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo">전체 qna 문의 게시판
+			                     width="160" height="160" class="my-photo" onclick="location.href='myoqnaList.do'">전체 qna
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
@@ -27,7 +27,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo"> off라인 강의 qna    
+			                     width="160" height="160" class="my-photo">오프라인 강의 qna    
 		</li>
 	</ul>
 </div>
