@@ -95,7 +95,7 @@
 
 </div>
 	</c:forEach>
-
+<div class="align-center">${pagingHtml}</div>
 </div>
 
 <!-- 끝 -->
