@@ -4,14 +4,19 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+	rel="stylesheet">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css" />
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/style_dw.css"
+	type="text/css" />
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#search_form').submit(function(){
-			if($('#keyword').val().trim()==''){
+	$(function() {
+		$('#search_form').submit(function() {
+			if ($('#keyword').val().trim() == '') {
 				alert('검색어를 입력하세요!');
 				$('#keyword').val('').focus();
 				return false;
@@ -24,29 +29,29 @@
 	<h2>TEst - QnA 목록 - Test</h2>
 
 	<div>
-		<img src="${pageContext.request.contextPath }/resources/image/oqnaImage.png" style="width:953px; hieght:338px">
+		<img
+			src="${pageContext.request.contextPath }/resources/image/oqnaImage.png"
+			style="width: 953px; hieght: 338px">
 	</div>
 
-	<form action="oqnaList.do" id="search_form" method="get" style="padding:40px 0px 0px 0px;">
+	<form action="oqnaList.do" id="search_form" method="get"
+		style="padding: 40px 0px 0px 0px;">
 		<ul class="search">
-			<li>
-				<select name="keyfield" id="keyfield">			
-					<option value="1"<c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
-					<option value="2"<c:if test="${param.keyfield==2}">selected</c:if>>선생님</option>
-					<option value="3"<c:if test="${param.keyfield==3}">selected</c:if>>관리자</option>
-					<option value="4"<c:if test="${param.keyfield==4}">selected</c:if>>작성자(이름+ID)</option>
-					<option value="5"<c:if test="${param.keyfield==5}">selected</c:if>>제목+내용</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword }" placeholder='검색어를 입력하세요!'>
-			</li>
-			<li>
-				<input type="submit" value="검색">
-				<input type="button" id="listbtn" value="목록" onclick="location.href='oqnaList.do'"> 
-			</li>
+			<li><select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
+					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>선생님</option>
+					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>관리자</option>
+					<option value="4" <c:if test="${param.keyfield==4}">selected</c:if>>작성자(이름+ID)</option>
+					<option value="5" <c:if test="${param.keyfield==5}">selected</c:if>>제목+내용</option>
+			</select></li>
+			<li><input type="search" name="keyword" id="keyword"
+				value="${param.keyword }" placeholder='검색어를 입력하세요!'></li>
+			<li><input type="submit" value="검색"> <input
+				type="button" id="listbtn" value="목록"
+				onclick="location.href='oqnaList.do'"></li>
 		</ul>
 	</form>
+
 	<table>
 		<tr style="font-family: 'Gowun Dodum', sans-serif;">
 			<th style="width: 8%;">글번호</th>
@@ -55,6 +60,8 @@
 			<th style="width: 10%;">작성자</th>
 			<th style="width: 12%;">작성자ID</th>
 			<th style="width: 10%;">작성일</th>
+			<th style="width: 50%;">게시판 user_num</th>
+			<th style="width: 50%;">세션 user_num</th>
 		</tr>
 		<c:forEach var="oqna" items="${list}">
 			<tr>
@@ -68,6 +75,8 @@
 				<td style="width: 10%;">${oqna.name }</td>
 				<td style="width: 12%;">${oqna.id }</td>
 				<td style="width: 10%;">${oqna.reg_date }</td>
+				<td style="width: 10%;">${oqna.user_num }</td>
+				<td style="width: 10%;">${session_user_num }</td>
 			</tr>
 		</c:forEach>
 	</table>

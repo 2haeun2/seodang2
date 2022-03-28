@@ -44,6 +44,10 @@
 	<definition name="test" extends="main">
     	<put-attribute name="title" value="QnA 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/user/test.jsp"/>
+    </definition>   
+	<definition name="myqnaList" extends="main">
+    	<put-attribute name="title" value="myqna목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/user/myqnaList.jsp"/>
     </definition>
 </tiles-definitions>
 

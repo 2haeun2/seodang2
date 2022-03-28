@@ -141,6 +141,7 @@ public class UserController {
 		return "userMenu";
 	}
 	
+	//테스트
 	@RequestMapping("/user/test.do")
 	public String test2(HttpSession session, Model model) {
 		
@@ -175,6 +176,14 @@ public class UserController {
 		model.addAttribute("list", list);
 
 		return "test";
+	}
+	
+	//myqna리스트
+	@RequestMapping("/user/myqnaList.do")
+	public String processmyoqna(HttpSession session, Model model) {
+		
+		
+		return "myqnaList";
 	}
 
 	// 마이페이지

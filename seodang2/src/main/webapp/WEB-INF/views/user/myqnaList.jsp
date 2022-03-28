@@ -15,34 +15,21 @@
 </style>
 <!-- 중앙 컨텐츠 시작 -->
 <div class="page-main">
-	<h2>my메뉴</h2>
+	<h2>QNA 리스트</h2>
 	<ul class="profile-photo">
 		<li>
-			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/face.png"
-			                     width="160" height="160" class="my-photo" onclick="location.href='myPage.do'">내정보
+			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
+			                     width="160" height="160" class="my-photo">전체 qna 문의 게시판
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/myclassMain.do'"> my클래스     
+			                     width="160" height="160" class="my-photo">온라인 강의 qna
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='myqnaList.do'">1:1문의 내역
-		</li>
-		<li>
-			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='myMenu.do'">찜목록
-		</li>
-		<li>
-			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='myMenu.do'">장바구니
-		</li>
-		<li>
-			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo" onclick="location.href='test.do'">구매내역
+			                     width="160" height="160" class="my-photo"> off라인 강의 qna    
 		</li>
 	</ul>
 </div>
 <!-- 중앙 컨텐츠 끝 -->
-
 
