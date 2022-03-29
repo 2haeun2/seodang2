@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.offclass.dao.OffclassMapper;
 import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OffclassVO;
+import kr.spring.offclass.vo.OfflikeVO;
 
 @Service
 @Transactional
@@ -60,6 +61,27 @@ public class OffclassServiceImpl implements OffclassService{
 	public void deleteFile(Integer off_num) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	//찜 기능
+	@Override
+	public OfflikeVO insertLike(Integer user_num, Integer off_num) {
+		return offclassMapper.insertLike(user_num, off_num);
+	}
+
+	@Override
+	public OfflikeVO deleteLike(Integer offlike_num) {
+		return offclassMapper.deleteLike(offlike_num);
+	}
+
+	@Override
+	public OfflikeVO selectLike(Integer user_num, Integer off_num) {
+		return offclassMapper.selectLike(user_num, off_num);
+	}
+
+	@Override
+	public int selectLikeCount(Integer off_num) {
+		return offclassMapper.selectLikeCount(off_num);
 	}
 
 

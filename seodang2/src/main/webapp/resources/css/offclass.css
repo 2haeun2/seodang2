@@ -1,11 +1,10 @@
 @CHARSET "UTF-8";
-/* @font-face {
-    font-family: 'neon';
-    src: url('../resources/fonts/NeonPlanetDisplay.ttf') format('truetype');
+.container-right {
+	width: 1024px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1.13em;
 }
-body {
-	font-family: 'neon';
-} */
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -39,11 +38,11 @@ body {
 }
 /*CKEditor 사용시 등록, 수정폼*/
 .ck-editor__editable_inline{
-	min-height:250px;
+	min-height:500px;
 }
 /*등록폼 css*/
 form#open_form{
-	width:950px;
+	width:800px;
 }
 .off-form-input{
     padding: 5px 5px 5px 1px;
@@ -78,6 +77,9 @@ div#time_date, div#time_start{
 div#time_end{
 	padding: 1px 18px 14px 18px;
 }
+li#content {
+    margin: 22px 0;
+}
 /*목록 css*/
 .item-space .horizontal-area{
 	margin:2px;
@@ -92,4 +94,58 @@ div#time_end{
 	width:195px;
 	height:175px;
 	object-fit: cover;
+}
+/*상세 css*/
+img.detail-img {
+    width: 1024px;
+}
+/*상세 ckeditor*/
+.container-head{
+	display:flex;
+	background-color: #fff;
+    position: sticky;
+    top: 50px;
+}
+.detail_content{
+	display:flex;
+	padding-top:20px
+}
+div.ck_content{
+	padding:0 10px;
+	width: 66.6667%;
+}
+.sidebar {
+	padding:0 10px;
+    width: 33.3333%;
+    display: block;
+}
+.sidbar_content{
+	top: 110px;
+	position: sticky;
+	padding:20px;
+	border: 1px solid;
+}
+.ck_content .image {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align:center;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+img {
+    max-width: 100%;
+}
+.image-style-side {
+    float: right;
+    margin-right: -200px;
+    margin-left: 50px;
+    margin-top: -50px;
+}
+.image.image_resized {
+    display: block;
+    box-sizing: border-box;
+}
+
+.image.image_resized img {
+    width: 100%;
 }

@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/offclass.css">
 
-<div class="main">
+<div class="container-right">
 	<h4>오프라인 CLASS 등록하기</h4>
 	<form:form action="offclassOpen.do" modelAttribute="offclassVO" id="open_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
@@ -61,7 +61,7 @@
 			<li><hr size="1" noshade></li>
 			<li><label for="off_content"><b>06</b></label></li>
 			<li><label for="off_content">수업 상세</label><br></li>
-			<li>
+			<li id="content">
 				<form:errors path="off_content" cssClass="error-color"/>
 				<form:textarea path="off_content" id="off_content"/>
 				<!-- <script>

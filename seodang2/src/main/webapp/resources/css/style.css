@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 /*====레이아웃====*/
 .container {
-	width: 800px;
+	width: 1024px;
+	background-color:#FFF;
 	margin-right: auto;
 	margin-left: auto;
 	font-size: 1.13em;
@@ -36,6 +37,8 @@ div#main {
 }
 
 div#main_header {
+	position: sticky;
+    top: 0px;
 	margin-bottom: 10px;
 	padding: 0 10px 0 0;
 }

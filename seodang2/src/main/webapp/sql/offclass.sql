@@ -17,3 +17,15 @@ create table offclass(
 );
 
 create sequence offclass_seq;
+
+/*찜하기*/
+create table offlike(
+	offlike_num number not null,
+	user_num number not null,
+	off_num number not null,
+	olike number(1) not null,
+	constraint offlike_pk primary key (offlike_num),
+	constraint offlike_fk1 foreign key (user_num) references ouser(user_num),
+	constraint offlike_fk2 foreign key (off_num) references offclass(off_num)
+);
+create sequence offlike_seq;

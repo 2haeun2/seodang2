@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import kr.spring.offclass.service.OffclassService;
 import kr.spring.offclass.vo.OffTimetableVO;
+import kr.spring.offclass.vo.OfflikeVO;
 
 @Controller
 public class OffclassAjaxController {
@@ -54,18 +55,6 @@ public class OffclassAjaxController {
 					if(list_offTimetable.getTime_date().equals(offTimtableVO.getTime_date())) {//동일한 날짜에
 						//String -> time으로 변경해서 비교
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-//						System.out.println("ListStart");
-//						System.out.println(LocalTime.parse(list_offTimetable.getTime_start(), formatter));
-//						System.out.println("ListEnd");
-//						System.out.println(LocalTime.parse(list_offTimetable.getTime_end(), formatter));
-//						System.out.println("들어오는 시작시간");
-//						System.out.println(LocalTime.parse(offTimtableVO.getTime_start(), formatter));
-//						System.out.println("들어오는 끝나는시간");
-//						System.out.println(LocalTime.parse(offTimtableVO.getTime_end(), formatter));
-//						System.out.println(LocalTime.parse(list_offTimetable.getTime_start(), formatter).isBefore(LocalTime.parse(offTimtableVO.getTime_start(), formatter)) 
-//								&& LocalTime.parse(list_offTimetable.getTime_end(), formatter).isAfter(LocalTime.parse(offTimtableVO.getTime_start(), formatter)));
-//						System.out.println((LocalTime.parse(list_offTimetable.getTime_start(), formatter).isBefore(LocalTime.parse(offTimtableVO.getTime_end(), formatter))  
-//									&& LocalTime.parse(list_offTimetable.getTime_end(), formatter).isAfter(LocalTime.parse(offTimtableVO.getTime_end(), formatter))));
 						
 						if((LocalTime.parse(list_offTimetable.getTime_start(), formatter).isBefore(LocalTime.parse(offTimtableVO.getTime_start(), formatter)) 
 								&& LocalTime.parse(list_offTimetable.getTime_end(), formatter).isAfter(LocalTime.parse(offTimtableVO.getTime_start(), formatter)))
@@ -92,9 +81,8 @@ public class OffclassAjaxController {
 			list2.add(offTimtableVO);
 			session.setAttribute("list", list2);
 
-			//map.put("result", "success");
+			map.put("result", "success");
 		}
-		map.put("result", "success");
 		return map;
 	}
 	
@@ -107,15 +95,7 @@ public class OffclassAjaxController {
 		logger.info("<<지우기 잘보내지는지 확인 index>>"+index);
 		ArrayList<OffTimetableVO> list =(ArrayList<OffTimetableVO>)session.getAttribute("list");
 		if(index!=-1) {
-//			for(int i=0;i<list.size();i++) {
-//				System.out.println("지우기전"+list.get(i));
-//				
-//			}
 			list.remove(index);
-//			for(int i=0;i<list.size();i++) {
-//				System.out.println("지운 후"+list.get(i));
-//				
-//			}
 			if(list.isEmpty()) {
 				map.put("result", "noClass");
 				return map;
@@ -125,6 +105,42 @@ public class OffclassAjaxController {
 		map.put("result", "success");
 		
 		return map;
+	}
+	
+	//찜하기 기능
+	@RequestMapping("/offclass/like.do")
+	@ResponseBody
+	public Map<String, String> likeForm(int off_num,HttpSession session){
+		Integer user_num= (Integer)session.getAttribute("session_user_num");
+		
+		logger.info("<<확인 - off_num>>"+off_num);
+		Map<String, String> map = new HashMap<String, String>();
+		if(user_num==null) {
+			map.put("result","logout");
+		}else {
+			OfflikeVO offLikeVO = offclassService.selectLike(user_num, off_num);
+			if(offLikeVO!=null) {//이미 추천한 경우
+				offclassService.deleteLike(offLikeVO.getOfflike_num());
+				map.put("result", "cancelLike");
+			}else {
+				offclassService.insertLike(user_num, off_num);
+				map.put("result", "success");
+			}
+		}
+		return map;
+	}
+	
+	//찜하기 Count
+	@RequestMapping("/offclass/countLike.do")
+	@ResponseBody
+	public Map<String, Object> likeCount(int off_num){
+		
+		logger.info("<<확인 - off_num>>"+off_num);
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		int count = offclassService.selectLikeCount(off_num);
+		mapJson.put("count", count);
+		
+		return mapJson;
 	}
 	
 }

@@ -120,7 +120,7 @@ public class OffclassController {
 		OffclassVO offclass=offclassService.selectOffClass(off_num);
 		offclass.setOff_name(StringUtil.useNoHtml(offclass.getOff_name()));
 		
-		return new ModelAndView("offclassView","offclass",offclass);
+		return new ModelAndView("offclassDetail","offclass",offclass);
 	}
 	//파일 다운로드
 	@RequestMapping("/offclass/offfile.do")
