@@ -85,21 +85,13 @@
 
 
 <c:forEach var="onclass" items="${list}">
-	<div class="card" style="display: inline-block">
+	<div class="card">
 		<ul>
 			<li>
-				<h5 class="card-header">수업</h5>
 				<ul class="card-ul">
-					<li>
-						<p>수업 이름 : ${onclass.on_name}</p>
-					</li>
-					<li>
-						<p>수업 가격 : ${onclass.on_price}</p>
-					</li>
-					<li>
-						<!-- ck에디터 <p> 태그 삭제하기  -->
-						<p>카테고리 번호 : ${onclass.category_num}</p>
-					</li>			
+					<li><b style="font-size:14px;"><br> ${onclass.on_name}</b></li> <!-- 수업이름 -->
+					<li><p>${onclass.on_content}</p></li> <!-- 수업내용 -->
+					<li><b>${onclass.on_price}</b></li> <!-- 수업가격 -->	
 				</ul>
 			</li>
 		</ul>

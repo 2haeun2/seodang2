@@ -26,8 +26,11 @@ p { margin:20px 0px;}
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
 
-<a href="${pageContext.request.contextPath}/onclass/onclassList.do" class="menu-item">등록일순</a>
-<a href="${pageContext.request.contextPath}/onclass/onclassList.do?category=1" class="menu-item">조회수순</a>
+<div class="main-category">
+	<div class="category-s"><i class="bi bi-calendar-check-fill"><a href="${pageContext.request.contextPath}/onclass/onclassList.do">최신순</a></i></div>
+	<div class="category-s"><i class="bi bi-lightning-charge-fill">인기순</i></div>
+	<div class="category-s"><i class="bi bi-list-ol"><a href="${pageContext.request.contextPath}/onclass/onclassList.do?category=1">조회순</a></i></div>
+</div>
 
 <form action="onclassList.do" id="search_form" method="get">
 		<ul class="search">
@@ -63,7 +66,7 @@ p { margin:20px 0px;}
 					<div class="list_img">
 					<a data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 						<img src="imageView.do?on_num=${onclass.on_num}" 
-	                                     					 style="max-width:200px;max-height:200px">
+	                                     					 style="max-width:200px;max-height:200px;margin-left:15px; margin-top:10px; border-radius: 10%;">
 					</a>	                                     					 
 					</div>                                     					 
 			<div class="btn_one">                                     					 
