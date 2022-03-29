@@ -21,14 +21,14 @@ public class OnqnaServiceImpl implements OnqnaService{
 	@Override
 	public List<OnqnaVO> getOnqnaList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return null;
+		return onqnaMapper.getOnqnaList(map);
 	}
 	
 	//2. 글 목록 - rowCount
 	@Override
 	public int selectOnqnaRowCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return onqnaMapper.selectOnqnaRowCount(map);
 	}
 
 	/*=============1.글등록==============*/
