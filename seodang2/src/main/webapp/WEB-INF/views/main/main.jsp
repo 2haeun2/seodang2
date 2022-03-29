@@ -19,20 +19,34 @@
 
 <!-- 메인 시작 -->
 
-<div style="width: 400px; margin:50px">
-	<div id="carousel-example-generic" class="carousel slide" style="width:900px;">
+<div class="main-content">
+	<h1 class="main-title">
+		<span>온라인수업과</span>
+		<span>오프라인수업을</span>
+		<span>찾는 가장 쉬운 방법</span>
+	</h1>
+	<div class="main-image">
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwS70r6aZEg6-wofSf66x7MU7FiZSEFSOIQA&usqp=CAU" weight="100" height="50" />
+	<span class="sub-content">에서 수업을 찾아보세요</span>
+	</div>
+	
+</div>
+
+
+<div class="content-image">
+	<div id="carousel-example-generic" class="carousel slide" style="width:700px;">
 		<ol class="carousel-indicators">
 			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 		</ol>
-<div class="carousel-inner" role="listbox" style="width:900px;height:300px;">
+<div class="carousel-inner" role="listbox" style="width:700px;height:300px;">
 		<div class="item active">
 		<!-- 첫번째 이미지 -->
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQErfku7CEDRa37M1j0Jju5BAHtI9cThSrDpw&usqp=CAU" width="900" height="300">
+			<img src="https://cdn.pixabay.com/photo/2021/02/11/23/50/dog-6006768_1280.png" width="900" height="350">
 		</div>
 		<div class="item">
 		<!-- 두번째 이미지 -->
-			<img src="https://image.idus.com/image/files/f26d272932814e0fbc20313b5ac7af81_1080.jpg"  width="900" height="300">
+			<!-- <img src="https://image.idus.com/image/files/f26d272932814e0fbc20313b5ac7af81_1080.jpg"  width="900" height="300"> -->
 		</div>
 </div>
 		<!-- 왼쪽 화살표 버튼 -->
@@ -47,55 +61,57 @@
 		</a>
 	</div>
 </div>
-
+<div style="padding-left:180px; padding-bottom:30px ">
+<div class="bubble">원하는 카테고리로 필터링 해보세요</div>
+</div>
 <div class="mainOne">
-
 <div class="page-main">
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do">전체보기</a>
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=1">드로잉</a>
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=2">플라워</a>
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=3">공예</a>
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=4">요리</a>
-	<a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=5">베이킹</a>
+	<ul>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do">#</a></li>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=1">#</a></li>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=2">#</a></li>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=3">#</a></li>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=4">#</a></li>
+		<li><a id="category" href="${pageContext.request.contextPath}/main/main.do?category_num=5">#</a></li>
+	</ul>
 </div>
 
+<div class="main-category">
+	<div class="category-s"><i class="bi bi-calendar-check-fill">최신순</i></div>
+	<div class="category-s"><i class="bi bi-lightning-charge-fill">인기순</i></div>
+	<div class="category-s"><i class="bi bi-list-ol">조회순</i></div>
+</div>
 <!-- 시작 -->
 
 
 <c:forEach var="onclass" items="${list}">
-<div class="card" style="display: inline-block">
-	<ul>
-		<li>
-			<h5 class="card-header">수업</h5>
-			<ul class="card-ul">
-				<li>
-					<p>수업 이름 : ${onclass.on_name}</p>
-				</li>
-				<li>
-					<p>수업 가격 : ${onclass.on_price}</p>
-				</li>
-				<li>
-					<!-- ck에디터 <p> 태그 삭제하기  -->
-					<p>수업 설명 : ${onclass.on_content}</p>
-				</li>
-				<li>
-					<div style="text-align:left"><i class="bi bi-emoji-heart-eyes"></i></div>
-				</li>
-				<li>
-					<i class="bi bi-eye"></i>
-				</li>
-				<li>
-					<i class="bi bi-star"></i>
-				</li>
-			
-			</ul>
-		</li>
-		
-	</ul>
-
-</div>
-	</c:forEach>
-<div class="align-center">${pagingHtml}</div>
+	<div class="card" style="display: inline-block">
+		<ul>
+			<li>
+				<h5 class="card-header">수업</h5>
+				<ul class="card-ul">
+					<li>
+						<p>수업 이름 : ${onclass.on_name}</p>
+					</li>
+					<li>
+						<p>수업 가격 : ${onclass.on_price}</p>
+					</li>
+					<li>
+						<!-- ck에디터 <p> 태그 삭제하기  -->
+						<p>카테고리 번호 : ${onclass.category_num}</p>
+					</li>			
+				</ul>
+			</li>
+		</ul>
+		<div style="bottom:0;">
+		<i class="bi bi-eye"></i>
+		<i class="bi bi-star"></i>
+		<i class="bi bi-emoji-heart-eyes"></i>
+		</div>
+	</div>
+</c:forEach>
+	
+<div class="align-center" style="padding-right:50px">${pagingHtml}</div>
 </div>
 
 <!-- 끝 -->
@@ -109,30 +125,6 @@
 			pause: "hover",
 			wrap: true,
 			keyboard : true
-			});
-		});
-	
-	//동적ㅈ 페이지
-	$(function(){
-		var status; //noFav or yesFav
-		$('#category').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
-			$.ajax({
-				url:'like.do',
-				type:'post',
-				data:{category_num:${onclass.category_num}},
-				dataType:'json',
-				cache:false,
-				timeout:30000,
-				success:function(data){
-						if(data.result=='success'){ //추천하트 표시
-			            	displayFav(data);
-			            }else{
-			               alert('등록시 오류 발생!');
-			            }
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
-				}
 			});
 		});
 </script>

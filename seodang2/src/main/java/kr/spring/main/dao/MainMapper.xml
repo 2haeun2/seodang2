@@ -26,8 +26,21 @@
 	</select>
 <select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT SUM(cnt) FROM 
-		( SELECT count(*) as CNT FROM onclass
+		( SELECT count(*) as CNT FROM onclass 
+		<if test="category_num == 0"><![CDATA[where category_num <= '5']]></if>
+		<if test="category_num == 1">where category_num = '1'</if>
+		<if test="category_num == 2">where category_num = '2'</if>
+		<if test="category_num == 3">where category_num = '3'</if>
+		<if test="category_num == 4">where category_num = '4'</if>
+		<if test="category_num == 5">where category_num = '5'</if>
 		UNION all
-		SELECT count(*) as CNT FROM offclass )
+		SELECT count(*) as CNT FROM offclass
+		<if test="category_num == 0"><![CDATA[where category_num <= '5']]></if>
+		<if test="category_num == 1">where category_num = '1'</if>
+		<if test="category_num == 2">where category_num = '2'</if>
+		<if test="category_num == 3">where category_num = '3'</if>
+		<if test="category_num == 4">where category_num = '4'</if>
+		<if test="category_num == 5">where category_num = '5'</if>
+		)
 </select>
 </mapper>

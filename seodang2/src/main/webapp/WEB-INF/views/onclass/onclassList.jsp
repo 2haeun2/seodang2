@@ -15,15 +15,35 @@
 <style>
 p { margin:20px 0px;}
 .container{width:1200px; max-width:none!important;}
-
 </style>
 
+<c:if test="${session_user_auth == 3}">
 <div><button type="button" class="btn btn-outline-secondary" onclick="location.href='onclassInsert.do'">수업등록</button></div>
+</c:if>
+
+
 <c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
+
 <a href="${pageContext.request.contextPath}/onclass/onclassList.do" class="menu-item">등록일순</a>
 <a href="${pageContext.request.contextPath}/onclass/onclassList.do?category=1" class="menu-item">조회수순</a>
+
+<form action="onclassList.do" id="search_form" method="get">
+		<ul class="search">
+			<li>
+				<select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>강의 이름</option>
+				</select>
+			</li>
+			<li>
+			<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+			</li>
+			<li>
+				<input type="submit" value="검색">
+			</li>
+		</ul>
+	</form>
 <c:if test="${count > 0}">
 <c:forEach var="onclass" items="${list}">
 <!--//////////////////////////////////////////////////////////////////////////////////////////  -->
@@ -56,11 +76,8 @@ p { margin:20px 0px;}
 			</div>					
 			<div class="icon_one">
 				<!-- 찜하기 아이콘  -->
-				<i class="bi bi-heart"></i>
-				<i class="bi bi-person">${onclass.hit}</i>
-		 		
-			</div>										         
-										                                     					 	
+				<i class="bi bi-person">${onclass.hit}</i>	
+			</div>										         							                                     					 	
 				</div>
 			</c:if>
 			</div>
@@ -101,8 +118,8 @@ p { margin:20px 0px;}
 
 <div class="align-center">${pagingHtml}</div>
 
+
 </c:if>
-	
 	
 
 

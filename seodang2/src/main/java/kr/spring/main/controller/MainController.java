@@ -35,6 +35,10 @@ public class MainController {
 		public ModelAndView process(
 				@RequestParam(value="pageNum",defaultValue="1")
 				int currentPage,
+				@RequestParam(value="keyfield",defaultValue="")
+				String keyfield,
+				@RequestParam(value="keyword",defaultValue="")
+				String keyword,
 				@RequestParam(value="category_num",defaultValue="0") int category_num) {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("category_num", category_num);
