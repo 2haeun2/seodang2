@@ -2,6 +2,12 @@ $(function(){
 	
 	let off_num=$('#off_num').val();
 	
+	function getContextPath() {
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	}
+	let contextPath = getContextPath();
+
 	//찜하기
 	selectLikeCount();
 	$('#like_btn').click(function(){
@@ -16,10 +22,10 @@ $(function(){
 					alert('로그인이 필요합니다.');
 					//location.href='${pageContext.request.contextPath}//user/login.do';
 				}else if(param.result=='success'){
-					$('#like_btn').find('img').attr('src','${pageContext.request.contextPath }/resources/images/heart_fill.png');
+					$('#like_btn').find('img').attr('src',contextPath +'/resources/images/heart_fill.png');
 					selectLikeCount();
 				}else if(param.result=='cancelLike'){
-					$('#like_btn').find('img').attr('src','${pageContext.request.contextPath }/resources/images/heart_nofill.png');
+					$('#like_btn').find('img').attr('src',contextPath +'/resources/images/heart_nofill.png');
 					selectLikeCount();
 				}else{
 					alert('찜 오류 발생');
