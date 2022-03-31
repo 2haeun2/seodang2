@@ -10,24 +10,25 @@
 	</div>
 	</c:if>
 	<c:if test="${count==0 }">
-		<div class="result-dispaly">등록된 클래스가 없습니다.</div>
+		<div >등록된 클래스가 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0 }">
 	<div class="item-space">
 		<c:forEach var="item" items="${list }">
 			<div class="horizontal-area">
-				<div>${item.category_num }</div>
 				<a href="offclassDetail.do?off_num=${item.off_num }">
-					<c:if test="${!empty item.img_file }">
-						<img class="list-img" src=${item.img_file }>
-					</c:if>
-					<span>${item.off_name }</span>
-					<br>
-					<span><b>${item.off_price }</b></span>
+					<div class="image-container">
+						<img src="imageView.do?off_num=${item.off_num}" >
+					</div>
+					<div class="item-category">${item.category_num }</div>
+					<div class="name">${item.name }</div>
+					<div>${item.off_name }</div>
+					<div><img src="${pageContext.request.contextPath}/resources/images/heart_gray.png"></div>
+					<div class="align-right"><b>${item.off_price }원</b></div>
 				</a>
 			</div>
 		</c:forEach>
 	</div>
-	<div>${pagingUtil }</div>
+	<div class="align-center">${pagingHtml }</div>
 	</c:if>
 </div>

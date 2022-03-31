@@ -33,9 +33,6 @@
 						off_filename,
 						off_uploadfile,
 						user_num
-						<if test="img_file !=null ">
-						,img_file
-						</if>
 						) 
 						VALUES 
 						(
@@ -48,27 +45,32 @@
 						#{off_filename},
 						#{off_uploadfile},
 						#{user_num}
-						<if test="img_file !=null">
-						,#{img_file}
-						</if>
 						)
 	</insert>
 	<select id="selectListOffClass" parameterType="map" resultType="offclassVO">
 	SELECT
-		*
-	FROM (SELECT
-			a.*,
-		  rownum rnum
-		  FROM (SELECT
-		  		  *
-		  		FROM offclass o
-		  		JOIN ouser_detail d 
-		  		ON o.user_num=d.user_num
-		  		ORDER BY off_num DESC)a)
-	<![CDATA[
-	WHERE rnum >=#{start} AND rnum<=#{end}
-	]]>
+		  *
+		FROM (SELECT 
+		       a.*,
+		       rownum rnum
+		      FROM (SELECT 
+		               <![CDATA[
+		               REPLACE(REPLACE(o.off_name,'<','&lt;'),'>','&gt;') off_name,
+		               ]]>
+		               o.off_price,
+		               o.category_num,
+		               d.name,
+		               o.off_filename,
+		               o.off_num
+		            FROM offclass o
+		            JOIN ouser_detail d
+		            ON o.user_num = d.user_num
+		            ORDER BY o.off_num DESC)a)
+	   <![CDATA[
+	   WHERE rnum >= #{start} AND rnum <= #{end}
+	   ]]>	            
 	</select>
+	
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 	SELECT
 		COUNT(*)
@@ -76,6 +78,18 @@
 	JOIN ouser_detail d
 	ON o.user_num = d.user_num
 	</select>
+	<update id="updateOffClass" parameterType="offclassVO">
+	UPDATE offclass 
+		SET 
+		category_num=#{category_num},
+		off_name=#{off_name},
+		off_price=#{off_price},
+		off_content=#{off_content}
+		<if test="off_filename!=''">
+		,off_filename=#{off_filename},off_uploadfile=#{off_uploadfile}
+		</if>
+		 WHERE off_num=#{off_num}
+	</update>
 </mapper>
 
 

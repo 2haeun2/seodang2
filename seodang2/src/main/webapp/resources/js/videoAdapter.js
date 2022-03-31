@@ -1,5 +1,6 @@
 window.onload=function(){
 	const youtube = 'https://youtu.be/';//유튜브
+	const youtube2= 'https://www.youtube.com/watch?v=';
 	let videoArray = [];
 	let oembeds = document.getElementsByTagName('oembed');
 	for(let i=0;i<oembeds.length;i++){
@@ -13,7 +14,17 @@ window.onload=function(){
 			output += '</iframe>';
 			output += '</div>';
 			videoArray.push(output);
-		} 
+		}
+		else if(url.includes(youtube2)){
+			var output = '';
+			output += '<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;">';
+			output += '<iframe src="https://www.youtube.com/embed/'+url.substring(youtube2.length)+'"';
+			output += 'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"';
+			output += 'frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>';
+			output += '</iframe>';
+			output += '</div>';
+			videoArray.push(output);
+		}
 	}  
 	if(videoArray.length>0){
 		let media = document.getElementsByClassName('media');

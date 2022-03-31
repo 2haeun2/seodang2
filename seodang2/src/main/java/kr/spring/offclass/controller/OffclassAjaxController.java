@@ -75,6 +75,7 @@ public class OffclassAjaxController {
 				list.add(offTimtableVO);
 				session.setAttribute("list", list);
 				
+				map.put("result", "success");
 			}
 		}else {
 			ArrayList<OffTimetableVO> list2 = new ArrayList<OffTimetableVO>();
@@ -89,13 +90,20 @@ public class OffclassAjaxController {
 	//클래스 등록 취소
 	@RequestMapping("/offclass/offTimetableDeleteAjax.do")
 	@ResponseBody
-	public Map<String, String> DeleteClass(HttpSession session,HttpServletRequest request,@RequestParam(value="index") int index){
+	public Map<String, String> DeleteClass(HttpSession session,HttpServletRequest request,OffTimetableVO offTimetableVO){
 	
 		Map<String, String> map = new HashMap<String, String>();
-		logger.info("<<지우기 잘보내지는지 확인 index>>"+index);
+		logger.info("<<지우기 잘보내지는지 확인 index>>"+offTimetableVO);
 		ArrayList<OffTimetableVO> list =(ArrayList<OffTimetableVO>)session.getAttribute("list");
-		if(index!=-1) {
-			list.remove(index);
+		System.out.println(list.contains(offTimetableVO));
+		if(offTimetableVO!=null) {
+			for(int i=0;i<list.size();i++) {
+				System.out.println("삭제 전: "+list.get(i));
+			}
+			list.remove(offTimetableVO);
+			for(int i=0;i<list.size();i++) {
+				System.out.println("삭제 후: "+list.get(i));
+			}
 			if(list.isEmpty()) {
 				map.put("result", "noClass");
 				return map;
@@ -110,15 +118,17 @@ public class OffclassAjaxController {
 	//찜하기 기능
 	@RequestMapping("/offclass/like.do")
 	@ResponseBody
-	public Map<String, String> likeForm(int off_num,HttpSession session){
+	public Map<String, String> likeForm(@RequestParam("off_num") int off_num,HttpSession session){
 		Integer user_num= (Integer)session.getAttribute("session_user_num");
 		
 		logger.info("<<확인 - off_num>>"+off_num);
+		logger.info("<<확인 - user_num>>"+user_num);
 		Map<String, String> map = new HashMap<String, String>();
 		if(user_num==null) {
 			map.put("result","logout");
 		}else {
 			OfflikeVO offLikeVO = offclassService.selectLike(user_num, off_num);
+			System.out.println("VO"+offLikeVO);
 			if(offLikeVO!=null) {//이미 추천한 경우
 				offclassService.deleteLike(offLikeVO.getOfflike_num());
 				map.put("result", "cancelLike");
@@ -136,11 +146,12 @@ public class OffclassAjaxController {
 	public Map<String, Object> likeCount(int off_num){
 		
 		logger.info("<<확인 - off_num>>"+off_num);
-		Map<String,Object> mapJson = new HashMap<String, Object>();
+		Map<String,Object> map = new HashMap<String, Object>();
 		int count = offclassService.selectLikeCount(off_num);
-		mapJson.put("count", count);
+		map.put("count", count);
+		map.put("result","success");
 		
-		return mapJson;
+		return map;
 	}
 	
 }

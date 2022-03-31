@@ -7,6 +7,9 @@ $(function(){
 			}
 		 ClassicEditor
             .create( document.querySelector( '#off_content' ),{
+			toolbar: {      
+			    viewportTopOffset : 55,
+				},
             	fontFamily: {
             		options: [
             			'default',

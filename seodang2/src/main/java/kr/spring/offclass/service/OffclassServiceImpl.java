@@ -1,5 +1,6 @@
 package kr.spring.offclass.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,14 @@ public class OffclassServiceImpl implements OffclassService{
 
 	@Override
 	public void insertOffClass(OffclassVO offclass,List<OffTimetableVO> list) {
-		offclass.setOff_num(offclassMapper.selectOff_num());
+		int num= offclassMapper.selectOff_num();
+		offclass.setOff_num(num);
 		offclassMapper.insertOffClass(offclass);
+		System.out.println("-----------------------"+num);
 		for(int i=0;i<list.size();i++) {
 			OffTimetableVO offTimetableVO=list.get(i);
-			offTimetableVO.setOff_num(offclass.getOff_num());
+			offTimetableVO.setOff_num(num);
+			System.out.println("offTimetableVO"+list.get(i));
 		}
 		offclassMapper.insertListOffTime(list);
 	}
@@ -46,9 +50,19 @@ public class OffclassServiceImpl implements OffclassService{
 	}
 
 	@Override
-	public void updateOffClass(OffclassVO offclass) {
-		// TODO Auto-generated method stub
-		
+	public List<OffTimetableVO> selectListOffTimetable(int off_num) {
+		return offclassMapper.selectListOffTimetable(off_num);
+	}
+
+	@Override
+	public void updateOffClass(OffclassVO offclass,List<OffTimetableVO> list) {
+		offclassMapper.updateOffClass(offclass);
+		offclassMapper.deleteOffTimetable(offclass.getOff_num());
+		for(int i=0;i<list.size();i++) {
+			OffTimetableVO offTimetableVO=list.get(i);
+			offTimetableVO.setOff_num(offclass.getOff_num());
+		}
+		offclassMapper.insertListOffTime(list);
 	}
 
 	@Override
@@ -57,21 +71,16 @@ public class OffclassServiceImpl implements OffclassService{
 		
 	}
 
-	@Override
-	public void deleteFile(Integer off_num) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	//찜 기능
 	@Override
-	public OfflikeVO insertLike(Integer user_num, Integer off_num) {
-		return offclassMapper.insertLike(user_num, off_num);
+	public void insertLike(Integer user_num, Integer off_num) {
+		offclassMapper.insertLike(user_num, off_num);
 	}
 
 	@Override
-	public OfflikeVO deleteLike(Integer offlike_num) {
-		return offclassMapper.deleteLike(offlike_num);
+	public void deleteLike(Integer offlike_num) {
+		offclassMapper.deleteLike(offlike_num);
 	}
 
 	@Override

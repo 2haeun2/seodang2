@@ -28,8 +28,7 @@ public class OffclassVO {
 	private int user_num;
 	private Date reg_date;
 	private Date modify_date;
-	private String user_name;
-	private String img_file;//content에 들어있는 이미지의 가장 위에 있는 src 경로 저장
+	private String name;
 	
 	//업로드 파일 처리
 	public void setOff_upload(MultipartFile off_upload) throws IOException{
@@ -111,18 +110,11 @@ public class OffclassVO {
 	public void setModify_date(Date modify_date) {
 		this.modify_date = modify_date;
 	}
-	public String getUser_name() {
-		return user_name;
+	public String getName() {
+		return name;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-	public String getImg_file() {
-		return img_file;
-	}
-
-	public void setImg_file(String img_file) {
-		this.img_file = img_file;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -130,8 +122,8 @@ public class OffclassVO {
 		return "OffclassVO [off_num=" + off_num + ", category_num=" + category_num + ", off_name=" + off_name
 				+ ", off_limit=" + off_limit + ", off_price=" + off_price + ", off_content=" + off_content
 				+ ", off_upload=" + off_upload + ", off_filename=" + off_filename + ", user_num=" + user_num
-				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", user_name=" + user_name + ", img_file="
-				+ img_file + "]";
+				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", user_name=" + name
+				+  "]";
 	}
 	
 }
