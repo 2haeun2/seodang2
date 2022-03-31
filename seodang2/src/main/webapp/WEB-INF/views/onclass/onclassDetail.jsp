@@ -3,14 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link href="css/styles.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+<!-- 모달 부트스트랩 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
 <!-- 아임포트 임포트 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ratestar.css">
+
 
 <style>
 	.list-unstyled img{
@@ -51,9 +59,12 @@ $(function(){
 			cache:false,
 			timeout:30000,
 			success:function(data){
-					if(data.result=='success'){ //추천하트 표시
+					if(data.result=='logout'){
+		               alert('로그인 후 누르세요');
+		            }else if(data.result=='success'){ //추천하트 표시
 		            	displayFav(data);
-		            }else{
+		            }
+		            else{
 		               alert('등록시 오류 발생!');
 		            }
 			},
@@ -78,6 +89,16 @@ $(function(){
 	   }
 	
 	   selectData(${onclass.on_num}); //초기값 세팅
+	   
+		$('#rateInsert').submit(function(){
+			if($('#rate_text').val().trim()==''){
+				alert('평가 내용을 입력하세요');
+				$('#rate_text').val('').focus();
+				return false;
+			}
+		});
+
+	    
 });
 
 //결제 코드
@@ -132,9 +153,6 @@ function iamport(){
                             <h1 class="fw-bolder mb-1">${onclass.on_name}</h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2">수업 등록일 : ${onclass.reg_date}</div>
-                            <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                         </header>
                         <!-- Preview image figure-->
                         <figure class="mb-4">
@@ -153,9 +171,9 @@ function iamport(){
                         
                         <!-- Post content-->
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">${onclass.on_content}</p>
-                            <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
+                            <p class="fs-5 mb-4">${onclass.on_content}ㅂㄷㅈ</p>
+                            <!-- <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
+                            <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p> -->
                         </section>
                     </article>
                 </div>
@@ -258,3 +276,120 @@ function iamport(){
 	</form>
 	<!-- 안보이게 하기 -->
 </div>
+
+
+<form action="ratingInsert.do" id="rateInsert" name="rateInsert" method="post"> 
+		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+		<textarea class="rate-textarea" name="text" id="rate_text" cols="30" rows="5"
+		<c:if test="${empty session_user_num}">readonly placeholder="로그인 하세요"</c:if>
+		></textarea><br>
+		<input class="btn btn-outline-warning ratingStar_btn" type="submit" value="별점 전송">	
+<div class="star-rating space-x-4">
+		<input type="radio" id="5-stars" name="rating" value="5"/>
+		<label for="5-stars" class="star pr-4">★</label>
+		<input type="radio" id="4-stars" name="rating" value="4"/>
+		<label for="4-stars" class="star">★</label>
+		<input type="radio" id="3-stars" name="rating" value="3"/>
+		<label for="3-stars" class="star">★</label>
+		<input type="radio" id="2-stars" name="rating" value="2"/>
+		<label for="2-stars" class="star">★</label>
+		<input type="radio" id="1-star" name="rating" value="1" />
+		<label for="1-star" class="star">★</label>			
+</div>   	
+</form>
+
+<hr size="1" noshade>
+<c:forEach var="ostar" items="${list}" varStatus="vs">
+<div class="outer"> <!-- 답글 쓰러 가기 -->
+	<div class="inner">
+		<ul>
+			<li>평가 점수 : ${ostar.rating}</li>
+			<li>아이디 : ${ostar.id}</li>
+			<li>평가 내용 : ${ostar.text}</li>
+			<li>작성 일 : ${ostar.reg_date}</li>
+			<li>오스타넘 : ${ostar.ostar_num}</li>
+			<li>
+			<div style="text-align:right; margin-right:15px;">
+			<!-- 수정 모달 시작 -->
+			<a data-bs-toggle="modal" data-bs-target="#staticBackdrop${vs.index}">수정</a>
+			<!-- 수정 모달 끝 -->
+			<a href="${pageContext.request.contextPath}/onclass/deleteOstar.do?ostar_num=${ostar.ostar_num}">삭제</a>
+			<a onclick="location.href='ratingWrite.do?ostar_num=${ostar.ostar_num}'">답글</a>
+			</div>
+			</li>
+			
+			
+			<li>
+				<div style="padding-left:90px; padding-top:30px ">
+				<div class="bubble">선생님 댓글 : ${reply.ostar_num}</div>
+				</div>
+			</li>
+									
+								
+						
+		</ul>	
+	</div>
+</div>
+<!-- 모달 시작 -->
+      	<div class="modal fade" id="staticBackdrop${vs.index}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <!-- 바디 -->
+		      <div class="modal-body">
+		       	<!-- 업데이트폼 시작  -->
+		       	<form action="updateOstar.do" id="updateOstar" name="updateOstar" method="post"> 
+						<input type="hidden" name="ostar_num" value="${ostar.ostar_num}"/>
+						<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+						<textarea class="rate-textarea-modal" name="text" id="rate_text" cols="30" rows="5"></textarea><br>
+						<input class="btn btn-outline-warning ratingStar_btn-modal" type="submit" value="별점 전송">	
+					<div class="star-rating2 space-x-4">
+						<input type="radio" id="5-stars${vs.index}" name="rating" value="5"/>
+						<label for="5-stars${vs.index}" class="star pr-4">★</label>
+						<input type="radio" id="4-stars${vs.index}" name="rating" value="4"/>
+						<label for="4-stars${vs.index}" class="star">★</label>
+						<input type="radio" id="3-stars${vs.index}" name="rating" value="3"/>
+						<label for="3-stars${vs.index}" class="star">★</label>
+						<input type="radio" id="2-stars${vs.index}" name="rating" value="2"/>
+						<label for="2-stars${vs.index}" class="star">★</label>
+						<input type="radio" id="1-star${vs.index}" name="rating" value="1" />
+						<label for="1-star${vs.index}" class="star">★</label>			
+					</div>   	
+				</form>
+		       	<!-- 업데이트폼 끝 -->
+		      </div>
+		      <!-- 바디 -->
+		      <!-- 푸터 -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 오스타넘:${ostar.ostar_num}</button>
+		        <button type="button" class="btn btn-primary">Understood</button>
+		      </div>
+		      <!-- 푸터 -->
+		      
+		    </div>
+		  </div>
+		</div>
+<!-- 모달 끝 -->
+</c:forEach>
+<div class="align-center">${pagingHtml}</div>
+
+
+
+
+<script>
+//별점 스타일 시작
+var count;
+function starmark(item){
+	count=item.id[0];
+	sessionStorage.starRating = count;
+	var subid= item.id.substring(1);
+		for(var i=0;i<5;i++){
+			if(i<count){
+				document.getElementById((i+1)+subid).style.color="orange";
+				}
+			else{
+				document.getElementById((i+1)+subid).style.color="black";
+				}
+			}
+		}
+//별점 스타일 끝
+</script>

@@ -100,31 +100,37 @@
 		               ]]>
 		               b.text,
 		               m.id ,
-		               m.user_num
+		               m.user_num,
+		               b.reg_date
 		            FROM ostar b
 		            JOIN ouser m 
 		            ON b.user_num = m.user_num
-		            <where>
-		            	<if test="keyword != '' and keyfield == 1">
-		            		b.rating LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 2">
-		            	    m.id LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 3">
-		            		b.on_content LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            	<if test="keyword != '' and keyfield == 4">
-		            		b.rating LIKE '%' || #{keyword} || '%' or
-		            		b.on_content LIKE '%' || #{keyword} || '%'
-		            	</if>
-		            </where>
 		            ORDER BY b.ostar_num DESC)a)
 	   <![CDATA[
 	   WHERE rnum >= #{start} AND rnum <= #{end} and on_num = #{on_num}
 	   ]]>	            
 	</select>
-	
+	<!-- 해당 게시물 평점 불러오기 카운트 -->
+	<select id="selectRowCountRating" parameterType="integer" resultType="integer">
+		SELECT COUNT(*)
+		FROM ostar where on_num = #{on_num}
+	</select>
+	<select id="selectListReply" parameterType="map" resultType="ostarReplyVO">
+       SELECT * FROM (SELECT a.*,rownum rnum FROM (SELECT
+				ore_num,
+               <![CDATA[
+               REPLACE(REPLACE(ore_content,'<','&lt;'),'>','&gt;') ore_content,
+               ]]>
+                ore_date,
+                ostar_num,
+                user_num,
+                id
+                FROM ostar_reply JOIN ouser USING(user_num) WHERE ostar_num = #{ostar_num}
+				ORDER BY ore_num DESC)a)
+       <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+       ]]>                                 
+    </select>
 </mapper>
 
 

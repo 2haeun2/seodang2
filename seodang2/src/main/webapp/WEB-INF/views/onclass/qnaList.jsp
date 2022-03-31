@@ -30,9 +30,9 @@
 		<form:radiobutton path="rating" onclick="starmark(this)" id="4one" value="4" style="font-size:40px;cursor:pointer;" class="fa fa-star"/>
 		<form:radiobutton path="rating" onclick="starmark(this)" id="5one" value="5" style="font-size:40px;cursor:pointer;" class="fa fa-star"/></br>		
 			<button class="btn btn-block btn-primary" type="submit">리뷰 등록</button>     
-	</form:form>
+</form:form>
 
-	<c:forEach items="${list}" var="ostar">
+	<c:forEach var="ostar" items="${list}">
 <div class="home">
 <ul>
 	<li>${ostar.on_num}
@@ -56,33 +56,7 @@
 </ul>	
 </div>
 	</c:forEach>
-	
 	<div class="align-center">${pagingHtml}</div>
-	
-	
-	
-<!-- 모달 시작 -->
-      	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">
-		        	
-		        </h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		      	
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-primary">Understood</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-<!-- 모달 끝 -->
-	
 <script>
 //별점 스타일 시작
 var count;

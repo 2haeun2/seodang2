@@ -93,3 +93,14 @@ div#time_end{
 	height:175px;
 	object-fit: cover;
 }
+
+.list-unstyled img{
+		display: block;
+		float:left;
+}
+
+
+
+
+
+

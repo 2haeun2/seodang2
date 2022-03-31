@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.spring.onclass.dao.OnclassMapper;
 import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
+import kr.spring.onclass.vo.OstarReplyVO;
 import kr.spring.onclass.vo.OstarVO;
 import kr.spring.user.vo.UserVO;
 
@@ -139,6 +140,77 @@ public class OnclassServiceImpl implements OnclassService{
 		// TODO Auto-generated method stub
 		return onclassMapper.selectLikeCount(on_num);
 	}
+
+	@Override
+	public int selectRowCountRating(int on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectRowCountRating(on_num);
+	}
+	
+	@Override
+	public void updateOstar(OstarVO ostarVO) {
+		// TODO Auto-generated method stub
+		onclassMapper.updateOstar(ostarVO);
+	}
+
+	@Override
+	public void deleteOstar(int ostar_num) {
+		// TODO Auto-generated method stub
+		//댓글 먼저 삭제
+		onclassMapper.deleteReplyByOstarNum(ostar_num);
+		onclassMapper.deleteOstar(ostar_num);
+	}
+	@Override
+	public List<OstarReplyVO> selectListReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public OstarReplyVO selectReply(Integer re_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectReply(re_num);
+	}
+
+	@Override
+	public void insertReply(OstarReplyVO ostarReply) {
+		// TODO Auto-generated method stub
+		onclassMapper.insertReply(ostarReply);
+	}
+
+	@Override
+	public void updateReply(OstarReplyVO ostarReply) {
+		// TODO Auto-generated method stub
+		onclassMapper.updateReply(ostarReply);
+	}
+
+	@Override
+	public void deleteReply(Integer re_num) {
+		// TODO Auto-generated method stub
+		onclassMapper.deleteReply(re_num);
+	}
+
+	@Override
+	public OstarVO selectOstar(Integer ostar_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectOstar(ostar_num);
+	}
+
+	@Override
+	public OstarReplyVO selectOstarReply(Integer ostar_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectOstarReply(ostar_num);
+	}
+
+
+
+
 	
 
 }

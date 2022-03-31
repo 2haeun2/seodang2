@@ -1,11 +1,14 @@
 package kr.spring.onclass.vo;
 
+import java.sql.Date;
+
 public class OstarVO {
 	private int ostar_num;
 	private int user_num;
 	private int on_num;
 	private String rating;
 	private String text;
+	private Date reg_date;
 	
 	//아이디 조인
 	private String id;
@@ -17,6 +20,13 @@ public class OstarVO {
 	}
 	
 	
+	
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
 	public String getRating() {
 		return rating;
 	}
@@ -46,6 +56,11 @@ public class OstarVO {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	@Override
+	public String toString() {
+		return "OstarVO [ostar_num=" + ostar_num + ", user_num=" + user_num + ", on_num=" + on_num + ", rating="
+				+ rating + ", text=" + text + ", reg_date=" + reg_date + ", id=" + id + "]";
 	}
 	
 	

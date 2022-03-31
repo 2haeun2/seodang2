@@ -48,3 +48,26 @@ create table onreg_detail(
     constraint onreg_detail_fk2 foreign key (on_num) references onclass (on_num)
 );
 create sequence onreg_detail_seq;
+--찜
+create table onlike (
+	onlike_num number not null,
+	user_num number not null,
+	on_num number not null,
+	olike number(1) not null,
+	constraint onlike_pk primary key (onlike_num),
+	constraint onlike_fk1 foreign key (user_num) references ouser(user_num),
+	constraint onlike_fk2 foreign key (on_num) references onclass(on_num)
+);
+create sequence onlike_seq;
+ -- 평점답변
+create table ostar_reply(
+    ore_num number not null,
+    ostar_num number not null,
+    user_num number not null,
+    ore_content varchar2(900) not null,
+    ore_date date default sysdate not null,
+    constraint ostar_reply_pk primary key(ore_num),
+    constraint ostar_reply_fk1 foreign key(user_num) references ouser(user_num),
+    constraint ostar_reply_fk2 foreign key(ostar_num) references ostar(ostar_num)
+);
+create sequence ostar_reply_seq;
