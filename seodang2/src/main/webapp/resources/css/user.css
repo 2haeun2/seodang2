@@ -1,22 +1,61 @@
 @charset "UTF-8";
 
 
-ul#login_form{
+
+ul#modify_passwd{
 	font-size: 130%;
-    border: 3px solid #000000;
-    height:150px;
+    border: 2px solid #000000;
+    height:200px;
     position: relative;
     left:100px;
     width: 500px;
-    margin: 0 auto;
-	padding: 10px 10px;
-}
-    
+    margin: 10 auto;
+	padding: 10px 10px 10px;
+}  
+       
 input#id{
 	width: 200px;
 	height:25px;
 }
 input#passwd{
+	width: 200px;
+	height:25px;
+}
+input#name{
+	width: 200px;
+	height:25px;
+}
+input#phone{
+	width: 200px;
+	height:25px;
+	
+}
+input#zipcode{
+	width: 200px;
+	height:25px;
+}
+input#address1{
+	width: 200px;
+	height:25px;
+}
+input#address2{
+	width: 200px;
+	height:25px;
+}
+input#email{
+	width: 200px;
+	height:25px;
+}
+input#age{
+	width: 200px;
+	height:25px;
+}
+input#now_passwd{
+	width: 200px;
+	height:25px;
+}
+
+input#confirm_passwd{
 	width: 200px;
 	height:25px;
 }
@@ -48,8 +87,46 @@ li#id{
   
 }
 
-.onqnaWrite{
+.login_input{
 	position: relative;
 	top:10px;
 	left:300px;
 }
+.modify_input{
+	position: relative;
+	top:10px;
+	left:300px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 200px;
+}
+
+#register_form input[id="id"] {
+	width: 113px;
+	text-align:center;
+}
+
+input[id="zipcode"] {
+	width: 95px;
+}
+
+#modify_password,#delete_form,#modify_form,#login_form{
+	width:700px;
+	margin:0 auto;
+}
+#modify_password input,#delete_form,#modify_form input,#login_form input{
+	margin-bottom:10px;
+}
+#modify_password ul li label{
+	width:150px;
+}
+
+#modify_form ul li label{
+	width:150px;
+}
+
+#login_form ul li label{
+	width:150px;
+}
+

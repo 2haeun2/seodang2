@@ -1,66 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<style>
-	.page-main a {
-		font-size:22px;
-	}
-</style>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user.css">
 
 <!-- 중앙 컨텐츠 시작 -->
-<div class="page-main">
-	<h2>회원정보수정</h2>
-	<form:form modelAttribute="userVO" action="update.do" 
-	                                              id="modify_form">
+<div>
+	<h2 style="text-align:center;">회원정보수정</h2>
+	<form:form modelAttribute="userVO" action="update.do" enctype="multipart/form-data" id="modify_form">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<li>
+			<li id="name">
 				<form:label path="name">이름</form:label>
 				<form:input path="name"/>
 				<form:errors path="name" cssClass="error-color"/>
 			</li>
-			<li>
+			<li id="phone">
 				<form:label path="phone">전화번호</form:label>
 				<form:input path="phone"/>
 				<form:errors path="phone" cssClass="error-color"/>
 			</li>
-			<li>
+			<li id="zipcode">
 				<form:label path="zipcode">우편번호</form:label>
 				<form:input path="zipcode"/>
 				<input type="button" onclick="sample2_execDaumPostcode()" 
 				                                  value="우편번호 찾기">
 				<form:errors path="zipcode"/>                                  
 			</li>
-			<li>
+			<li id="address1">
 				<form:label path="address1">주소</form:label>
 				<form:input path="address1"/>
 				<form:errors path="address1" cssClass="error-color"/>
 			</li>
-			<li>
+			<li id="address2">
 				<form:label path="address2">상세주소</form:label>
 				<form:input path="address2"/>
 				<form:errors path="address2" cssClass="error-color"/>
 			</li>
 			
-			<li>
+			<li id="email">
 				<form:label path="email">이메일</form:label>
 				<form:input path="email"/>
 				<form:errors path="email" cssClass="error-color"/>
 			</li>
-			<li>
+			<li id="age">
 				<form:label path="age">나이</form:label>
 				<form:input path="age"/>
 				<form:errors path="age" cssClass="error-color"/>
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="modify_input">
 			<form:button>전송</form:button>
 			<input type="button" value="홈으로"
 			       onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
