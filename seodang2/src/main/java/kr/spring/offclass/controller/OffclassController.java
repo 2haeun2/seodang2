@@ -2,6 +2,7 @@ package kr.spring.offclass.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,12 @@ public class OffclassController {
 		if(count>0) {
 			list = offclassService.selectListOffClass(map);
 		}
+		for(int i=0;i<list.size();i++) {
+			OffclassVO offclassVO = list.get(i);
+			int like_count = offclassService.selectLikeCount(offclassVO.getOff_num());
+			offclassVO.setLike_count(like_count);
+			System.out.println("like_count"+like_count);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("offclassList");
@@ -105,6 +112,8 @@ public class OffclassController {
 	@RequestMapping("/offclass/offclassDetail.do")
 	public ModelAndView processdetail(@RequestParam int off_num,HttpSession session) {
 		Integer user_num= (Integer)session.getAttribute("session_user_num");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		ModelAndView mav = new ModelAndView();
 		logger.info("<<게시판 글 상세 - 글 번호>>: "+off_num);
 
@@ -116,9 +125,25 @@ public class OffclassController {
 				mav.addObject("likecheck",offLikeVO.getOlike());
 			}
 		}
-		List<OffTimetableVO> list = offclassService.selectListOffTimetable(off_num);
+		map.put("off_num",off_num);
+		List<OffTimetableVO> list = offclassService.selectListOffTimeDate(off_num);
+		String[] week = {"일","월","화","수","목","금","토"};
 		
 		OffclassVO offclass=offclassService.selectOffClass(off_num);
+		
+		for(int i=0;i<list.size();i++) {
+			String date = list.get(i).getTime_date().toString().substring(5).replace("-", "/");
+			OffTimetableVO offTimetableVO = list.get(i);
+			offTimetableVO.setString_date(date);
+			Calendar cal = Calendar.getInstance() ;
+			cal.setTime(list.get(i).getTime_date());
+			int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
+			offTimetableVO.setDay(week[dayNum-1]);
+			
+		}
+
+		
+		
 		offclass.setOff_name(StringUtil.useNoHtml(offclass.getOff_name()));
 		mav.addObject("offclass", offclass);
 		mav.addObject("list", list);
@@ -143,7 +168,9 @@ public class OffclassController {
 		OffclassVO offclassVO = offclassService.selectOffClass(off_num);
 		logger.info("<<offclassVO >>"+offclassVO);
 		List<OffTimetableVO> list = new ArrayList<OffTimetableVO>();
-		list = offclassService.selectListOffTimetable(off_num);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("off_num", off_num);
+		list = offclassService.selectListOffTimetable(map);
 		System.out.println(list);
 		ModelAndView mav = new ModelAndView();
 		if(list!=null) {

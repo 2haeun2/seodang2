@@ -1,6 +1,7 @@
 package kr.spring.offclass.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -150,6 +151,27 @@ public class OffclassAjaxController {
 		int count = offclassService.selectLikeCount(off_num);
 		map.put("count", count);
 		map.put("result","success");
+		
+		return map;
+	}
+	
+	//detail 부분 timetable 
+	@RequestMapping("/offclass/selectTimeDate.do")
+	@ResponseBody
+	public Map<String, Object> selectTimeDate(int off_num,Date time_date){
+		
+		logger.info("<<off_num>>"+off_num);
+		logger.info("<<time_date>>"+time_date);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("off_num", off_num);
+		map.put("time_date", time_date);
+		List<OffTimetableVO> list = offclassService.selectListOffTimetable(map);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("result", "success");
 		
 		return map;
 	}

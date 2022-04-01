@@ -13,7 +13,8 @@ public interface OffclassService {
 	public int selectRowCount(Map<String, Object> map);
 	public void insertOffClass(OffclassVO offclass,List<OffTimetableVO> list);
 	public OffclassVO selectOffClass(Integer off_num);
-	public List<OffTimetableVO> selectListOffTimetable(int off_num);
+	public List<OffTimetableVO> selectListOffTimetable(Map<String, Object> map);
+	public List<OffTimetableVO> selectListOffTimeDate(int off_num);	
 	public void updateOffClass(OffclassVO offclass,List<OffTimetableVO> list);
 	public void deleteOffClass(Integer off_num);
 	

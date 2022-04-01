@@ -40,6 +40,8 @@ public class OffclassServiceImpl implements OffclassService{
 			OffTimetableVO offTimetableVO=list.get(i);
 			offTimetableVO.setOff_num(num);
 			System.out.println("offTimetableVO"+list.get(i));
+			offTimetableVO.setOff_limit(offclass.getOff_limit());
+			System.out.println(offTimetableVO);
 		}
 		offclassMapper.insertListOffTime(list);
 	}
@@ -50,10 +52,15 @@ public class OffclassServiceImpl implements OffclassService{
 	}
 
 	@Override
-	public List<OffTimetableVO> selectListOffTimetable(int off_num) {
-		return offclassMapper.selectListOffTimetable(off_num);
+	public List<OffTimetableVO> selectListOffTimetable(Map<String, Object> map) {
+		return offclassMapper.selectListOffTimetable(map);
 	}
-
+	
+	@Override
+	public List<OffTimetableVO> selectListOffTimeDate(int off_num) {
+		return offclassMapper.selectListOffTimeDate(off_num);
+	}
+	
 	@Override
 	public void updateOffClass(OffclassVO offclass,List<OffTimetableVO> list) {
 		offclassMapper.updateOffClass(offclass);
@@ -61,6 +68,7 @@ public class OffclassServiceImpl implements OffclassService{
 		for(int i=0;i<list.size();i++) {
 			OffTimetableVO offTimetableVO=list.get(i);
 			offTimetableVO.setOff_num(offclass.getOff_num());
+			offTimetableVO.setOff_personcount(offclass.getOff_limit());
 		}
 		offclassMapper.insertListOffTime(list);
 	}
@@ -70,7 +78,6 @@ public class OffclassServiceImpl implements OffclassService{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	//찜 기능
 	@Override
@@ -92,7 +99,5 @@ public class OffclassServiceImpl implements OffclassService{
 	public int selectLikeCount(Integer off_num) {
 		return offclassMapper.selectLikeCount(off_num);
 	}
-
-
 
 }

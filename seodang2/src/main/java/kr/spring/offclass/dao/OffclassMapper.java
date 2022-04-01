@@ -24,8 +24,9 @@ public interface OffclassMapper {
 	public int selectRowCount(Map<String, Object> map);
 	@Select("SELECT * FROM offclass o JOIN ouser_detail d ON o.user_num = d.user_num WHERE off_num=#{off_num}")
 	public OffclassVO selectOffClass(Integer off_num);
-	@Select("SELECT * FROM off_timetable WHERE off_num=#{off_num} AND CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start) >=TO_CHAR(SYSDATE,'YY/MM/DD HH24:MI') ORDER BY CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start)")
-	public List<OffTimetableVO> selectListOffTimetable(int off_num);
+	public List<OffTimetableVO> selectListOffTimetable(Map<String, Object> map);
+	@Select("SELECT DISTINCT time_date FROM off_timetable WHERE off_num=#{off_num} AND CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start) >=TO_CHAR(SYSDATE,'YY/MM/DD HH24:MI') ORDER BY time_date")
+	public List<OffTimetableVO> selectListOffTimeDate(int off_num);
 	public void updateOffClass(OffclassVO offclass);
 	@Delete("DELETE FROM off_timetable WHERE off_num=#{off_num} AND CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start) >=TO_CHAR(SYSDATE,'YY/MM/DD HH24:MI')")
 	public void deleteOffTimetable(int off_num);

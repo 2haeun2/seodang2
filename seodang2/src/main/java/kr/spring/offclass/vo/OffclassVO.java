@@ -29,6 +29,7 @@ public class OffclassVO {
 	private Date reg_date;
 	private Date modify_date;
 	private String name;
+	private int like_count;
 	
 	//업로드 파일 처리
 	public void setOff_upload(MultipartFile off_upload) throws IOException{
@@ -115,6 +116,13 @@ public class OffclassVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getLike_count() {
+		return like_count;
+	}
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
 	}
 
 	@Override

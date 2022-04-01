@@ -9,7 +9,8 @@
 							off_num,
 							time_date,
 							time_start,
-							time_end)
+							time_end,
+							off_limit)
 							SELECT off_timetable_seq.nextval, A.*
 							FROM
 						(
@@ -18,7 +19,8 @@
 							#{item.off_num} AS off_num,
 							#{item.time_date} AS time_date,
 							#{item.time_start} AS time_start,
-							#{item.time_end} AS time_end
+							#{item.time_end} AS time_end,
+							#{item.off_limit} AS off_limit
 							FROM DUAL
 						</foreach>
 						) A
@@ -78,6 +80,20 @@
 	JOIN ouser_detail d
 	ON o.user_num = d.user_num
 	</select>
+	
+	<select id="selectListOffTimetable" parameterType="map" resultType="offTimetableVO">
+	SELECT 
+		* 
+		FROM off_timetable 
+		WHERE off_num=#{off_num} 
+		AND 
+		CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start) >=TO_CHAR(SYSDATE,'YY/MM/DD HH24:MI')
+		<if test="time_date!=null">
+		AND time_date=#{time_date}
+		</if>
+		ORDER BY CONCAT(TO_CHAR(time_date,'YY/MM/DD '),time_start)
+	</select>
+	
 	<update id="updateOffClass" parameterType="offclassVO">
 	UPDATE offclass 
 		SET 

@@ -71,7 +71,7 @@ li hr{
     margin: 18px 10px 0 0;
     border-radius: 9px;
 }
-div.time_date, div.time_start{
+.timetable .time_date, .timetable .time_start{
     padding: 1px 18px;
 }
 div.time_end{
@@ -135,6 +135,28 @@ a:hover img {
 /*상세 css*/
 img.detail-img {
     width: 1024px;
+}
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+}
+a.schedules {
+    display: block;
+    width: 50px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.schedule_calendar {
+    position: relative;
+    overflow-x: scroll;
+    border-top: 1px solid #f0f3f8;
 }
 /*상세 ckeditor*/
 .container-head{

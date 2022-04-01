@@ -32,18 +32,24 @@
 				<h3>${offclass.off_name }</h3>
 				<h4>${offclass.off_price }원</h4>
 				<hr size="1">
-				<h4>클래스 일정</h4>
-				<div>
-				<c:forEach var="offTimetableVO" items="${list }">
-					<div aria-label="${offTimetableVO.time_date }">
-						<button class="btn" >${offTimetableVO.time_date }월</button>
+				<div class="schedule_calendar">
+					<h4>클래스 일정</h4>
+					<div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+					<c:forEach var="offTimetableVO" items="${list }">
+						<div id="time_date" data-timedate="${offTimetableVO.time_date }">
+							<a class="schedules">
+								<div class="time_date" >${offTimetableVO.string_date }</div>
+								<div class="time_date" >${offTimetableVO.day }</div>
+							</a>
+						</div>
+					</c:forEach>
 					</div>
-				</c:forEach>
+					<hr size="1" noshade>
+					<div id="timetable">
+					
+					</div>
 				</div>
 				<hr size="1" noshade>
-				<div id="timetable">
-				
-				</div>
 				<input class="btn btn-outline-secondary" type="button" value="장바구니 담기"><br>
 				<input class="btn btn-outline-secondary" type="button" value="바로 구매">
 				<c:choose>

@@ -23,7 +23,7 @@
 					<div class="item-category">${item.category_num }</div>
 					<div class="name">${item.name }</div>
 					<div>${item.off_name }</div>
-					<div><img src="${pageContext.request.contextPath}/resources/images/heart_gray.png"></div>
+					<div><img src="${pageContext.request.contextPath}/resources/images/heart_gray.png"><span>${item.like_count }</span></div>
 					<div class="align-right"><b>${item.off_price }원</b></div>
 				</a>
 			</div>

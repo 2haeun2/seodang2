@@ -4,12 +4,18 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Range;
+
 public class OffTimetableVO {
 	private int time_num;
 	private int off_num;
 	private Date time_date;
+	private String string_date;//string으로 받을 수 있는 공간
+	private String day;//day로 받을 수 있는 공간
 	private String time_start;
 	private String time_end;
+	private int off_personcount;//신청한 인원수
+	private int off_limit;//최대 인원수
 	
 	public OffTimetableVO() {}
 	public OffTimetableVO(int time_num,int off_num,Date time_date,String time_start,String time_end) {
@@ -57,6 +63,18 @@ public class OffTimetableVO {
 	public String getTime_start() {
 		return time_start;
 	}
+	public String getString_date() {
+		return string_date;
+	}
+	public void setString_date(String string_date) {
+		this.string_date = string_date;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
 	public void setTime_start(String time_start) {
 		this.time_start = time_start;
 	}
@@ -69,10 +87,23 @@ public class OffTimetableVO {
 	public void setTime_date(Date time_date) {
 		this.time_date = time_date;
 	}
+	public int getOff_personcount() {
+		return off_personcount;
+	}
+	public void setOff_personcount(int off_personcount) {
+		this.off_personcount = off_personcount;
+	}
+	public int getOff_limit() {
+		return off_limit;
+	}
+	public void setOff_limit(int off_limit) {
+		this.off_limit = off_limit;
+	}
 	@Override
 	public String toString() {
 		return "OffTimetableVO [time_num=" + time_num + ", off_num=" + off_num + ", time_date=" + time_date
-				+ ", time_start=" + time_start + ", time_end=" + time_end + "]";
+				+ ", string_date=" + string_date + ", day=" + day + ", time_start=" + time_start + ", time_end="
+				+ time_end + ", off_personcount=" + off_personcount + ", off_limit=" + off_limit + "]";
 	}
 	
 }
