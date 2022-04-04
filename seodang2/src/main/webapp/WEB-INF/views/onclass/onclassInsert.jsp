@@ -223,7 +223,7 @@ function handleButtonOnclick() {
         var p = ele.parentNode;
         attZone.removeChild(p)
       }
-      div.appendChild(img)
+      div.appendChild(img) 
       div.appendChild(btn)
       return div
     }
