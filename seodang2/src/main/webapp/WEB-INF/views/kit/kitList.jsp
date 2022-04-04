@@ -8,6 +8,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.reply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/videoAdapter.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ratestar.css">
 <script type="text/javascript">
 	$(function(){
 		$('#search_form').submit(function(){
@@ -19,10 +20,86 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+$(function(){
+	var status; //noFav or yesFav
+	function selectData(kit_num){ //77라인 초기값 세팅
+	   $.ajax({
+	      type:'post',
+	      data:{kit_num:kit_num}, //초기값 세팅에서 매개변수로 받아서 el 안씀
+	      url:'getFav.do', //LikecountAction
+	      dataType:'json',
+	      cache:false,
+	      timeout:30000,
+	      success:function(data){
+	         if(data.result=='success'){
+	            displayFav(data);
+	         }else{
+	            alert('좋아요 읽기 오류');
+	         }
+	      },
+	      error:function(){
+	         alert('네트워크 오류');
+	      }
+	   });
+	}
+	$('#output_fav').click(function(){ //좋아요를 클릭했을때 실행되는 ajax
+		$.ajax({
+			url:'kitLike.do',
+			type:'post',
+			data:{kit_num:${kit.kit_num}},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+					if(data.result=='logout'){
+		               alert('로그인 후 누르세요');
+		            }else if(data.result=='success'){ //추천하트 표시
+		            	displayFav(data);
+		            }
+		            else{
+		               alert('등록시 오류 발생!');
+		            }
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});
+	//좋아요 표시
+	   function displayFav(data){
+	      status = data.status;
+	      var count = data.count;
+	      var output;
+	      if(status=='noFav'){
+	         output = '../resources/image/heart1.png';
+	      }else{
+	         output = '../resources/image/heart2.png';
+	      }         
+	      //문서 객체에 추가
+	      $('#output_fav').attr('src',output); //id가 output_fav인 태그 src에 output 저장
+	      $('#output_fcount').text(count); //id가 output_fcount인 태그 text에 count(좋아요 총 개수)저장
+	   }
+	
+	   selectData(${kit.kit_num}); //초기값 세팅
+	   
+		$('#rateInsert').submit(function(){
+			if($('#rate_text').val().trim()==''){
+				alert('평가 내용을 입력하세요');
+				$('#rate_text').val('').focus();
+				return false;
+			}
+		});
+
+	    
+});
+</script>
 <div class="page-main">
 	<h2>키트 목록</h2>
 	<div class="align-right">
-		<input type="button" value="키트등록" id="button1" onclick="location.href='kitWrite.do'">
+	<c:if test="${!empty session_user_num && session_user_auth>=3}">
+		<input type="button" value="키트 등록" onclick="location.href='kitWrite.do'">
+	</c:if>
 		<input type="button" value="목록" id="button1" onclick="location.href='kitList.do'">
 	</div>
 	<form action="kitList.do" id="search_form" method="get">
@@ -41,38 +118,42 @@
 			<li>
 				<input type="submit" value="검색">
 			</li>
+			<li>
+	           
+                                </li>
 		</ul>
 	</form>
-	<c:if test="${!empty user_num}">
-	<div class="align-right">
-		<input type="button" value="키트 등록" onclick="location.href='kitWrite.do'">
-	</div>
-	</c:if>
+	
 	<c:if test="${count == 0}">
-	<div class="result-display">표시할 게시물이 없습니다.</div>
+	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
 	
 	<div class="list-main">	
 	<c:if test="${count > 0}">
 	<c:forEach var="kit" items="${list}">
 	<ul>
-	
 	<li>
 	<div class="box">
 	 <div id="kit_num">${kit.kit_num}</div>
 	<div><a href="kitDetail.do?kit_num=${kit.kit_num}"><img src="imageView.do?kit_num=${kit.kit_num}"  style="width:200px; height:200px; border-radius:5px;"></a></div>
-	  <div id="heart"><a href="#" >❤</a></div>
+	  <div id="heart">
+	  <img id="output_fav" src="../resources/image/heart1.png">
+	  <span id="output_fcount" class="margin_right_10"></span>
+	  </div>
 	    <div id="kit_name"><a href="kitDetail.do?kit_num=${kit.kit_num}">${kit.kit_name}</a></div>    
-		<div id="kit_quantity">남은 수량 : ${kit.kit_quantity}</div>
 		<div class="box3">
+		<div id="kit_content2">${kit.kit_content2}</div>
 		<div class="price">가격</div>
 		<div id="kit_price">${kit.kit_price}원</div></div>
+		
+		<!-- <input type="button" value="❤ " id="kitLike">
 		<input type="button" value="장바구니" id="button2">
-		<!-- <div id="">등록일 : ${kit.reg_date}</div> -->
+		<div id="">등록일 : ${kit.reg_date}</div> -->
 		
 	</div>
 	</li>
 	</ul>
+		
 	</c:forEach>
 	</c:if>
 	</div>

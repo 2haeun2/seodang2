@@ -30,7 +30,7 @@ public class KitVO {
 	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
 	private String filename;		//파일명
-	
+	private String kit_content2;
 	
 	//업로드 파일
 	public MultipartFile getUpload() {
@@ -116,16 +116,23 @@ public class KitVO {
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
-	
-	
-	
+	public String getKit_content2() {
+		return kit_content2;
+	}
+	public void setKit_content2(String kit_content2) {
+		this.kit_content2 = kit_content2;
+	}
 	@Override
 	public String toString() {
 		return "KitVO [kit_num=" + kit_num + ", kit_name=" + kit_name + ", kit_price=" + kit_price + ", kit_quantity="
 				+ kit_quantity + ", kit_content=" + kit_content + ", reg_date=" + reg_date + ", modify_date="
 				+ modify_date + ", user_num=" + user_num + ", hit=" + hit + ", upload=" + upload + ", filename="
-				+ filename +"]";
+				+ filename + ", kit_content2=" + kit_content2 + "]";
 	}
+	
+
+	
+	
 	
 	
 }
