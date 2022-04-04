@@ -31,19 +31,18 @@ create sequence ostar_seq;
 create table onreg(
     onreg_num number not null,
     user_num number not null,
-    on_regdate default sysdate not null,
+    on_regdate date default sysdate not null,
     on_moregdate date,
     constraint onreg_pk primary key (onreg_num),
 	constraint onreg_fk1 foreign key (user_num) references ouser (user_num)
 );
 create sequence onreg_seq;
+
 create table onreg_detail(
-    ondetail_num number not null,
     onreg_num number not null,
     on_num number not null,
     on_payment number not null,
     on_status number(1) default 1 not null, -- 수강신청상태(1), 수강취소상태(2)
-    constraint onreg_detail_pk primary key (ondetail_num),
 	constraint onreg_detail_fk1 foreign key (onreg_num) references onreg (onreg_num),
     constraint onreg_detail_fk2 foreign key (on_num) references onclass (on_num)
 );
@@ -58,7 +57,7 @@ create table onlike (
 	constraint onlike_fk1 foreign key (user_num) references ouser(user_num),
 	constraint onlike_fk2 foreign key (on_num) references onclass(on_num)
 );
-create sequence onlike_seq;
+create sequence onlike_seq; 
  -- 평점답변
 create table ostar_reply(
     ore_num number not null,
