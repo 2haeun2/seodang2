@@ -4,71 +4,71 @@
 .jejugothic * { 
  font-family: 'Jeju Gothic', sans-serif;
 }
-
-/*write*/
+/*write
+li{
+	float:left;
+}
+*/
+h2{
+	font-family: 'Jeju Gothic', sans-serif;
+}
 ul#box5{
     font-family: 'Jeju Gothic', sans-serif;
-	font-size: 130%;
-    position: relative;
-    left:100px;
+	font-size: 130%;	
+	position: relative;
+    top:80px;   
 }
 ul#box4{
 	font-family: 'Jeju Gothic', sans-serif;
 	font-size: 130%;
-    border: 2px solid #81BEF7;
-    height:150px;
-    position: relative;
-    left:100px;
+    border: 2px solid #D9F6FC;
+    border-radius:5px;
 }
-    
 input#kit_name{
-	width: 200px;
-	height:25px;
+	width: 300px;
+	height:30px;
 }
 input[type=number]{
-	width: 100px;
-	height:25px;
-	
+	width: 300px;
+	height:30px;
 }
 input[type=text]{
-	width: 100px;
-	height:25px;
-	
+	width: 300px;
+	height:30px;	
 }
 li#file{
 	position: relative;
-    top:30px;
-    
+    top:20px;   
 }
 li#price{
 	position: relative;
-    top:60px;
+    top:80px;
 }
-
 li#name{
 	position: relative;
-    top:30px;
+    top:60px;
 }
 li#quantity{
 	position: relative;
-    bottom:30px;
-    left:400px;
+    top:100px;
 }
 li#content{
 	position: relative;
-	top:10px;
+	top:150px;
 }
 li#content2{
 	position: relative;
-	top:20px;
+	top:130px;
 }
-input[type="button"],[type="submit"]{
+input[type="button"],[type="submit"],#file-upload-button]{
 	width: 70px;
 	height:30px;
 	text-align: center;
 	font-family: 'Jeju Gothic', sans-serif;
+	border-radius:5px;
+	border: 2px solid #D9F6FC;
+    background:#EBF9FC;
 }
-
 input#file-upload-button{
 	width: 70px;
 	height:30px;
@@ -83,34 +83,13 @@ id#upload{
 }
 .kitwrite{
 	position: relative;
-	top:30px;
+	top:50px;
 	left:400px;
 }
-/*detail*/
-input[id="button2"]{
-	width: 200px;
+input#kit_name,#kit_price,#kit_quantity{
+	border: 2px solid #BDEDF7;
+	border-radius:5px; 
 }
-input[id="cart"]{
-	position: relative;
-	bottom:40px;
-	left:250px;
-}
-div.kitdetail_p{
-	position: relative;
-    left:150px;
-    top:30px;
-}
-div.kitdetail{
-	position: relative;
-    left:500px;
-    bottom:200px;
-    font-family: 'Jeju Gothic', sans-serif;
-}
-div#kit_content{
-	font-family: 'Jeju Gothic', sans-serif;
-	font-size: 100%;
-    border: 2px solid #81BEF7;
-    height:150px;
-    position: relative;
-    left:100px;
-}
+
+
+

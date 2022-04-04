@@ -17,6 +17,8 @@
 					k.kit_quantity,
 					k.reg_date,
 					k.hit,
+					k.kit_content,
+					k.kit_content2,
 					d.name					
 				 FROM okit k 
 				 JOIN ouser	u 
@@ -69,7 +71,7 @@
 			</if>
 		</where>	
 		
-	</select>
+</select>
 	
 	
 	<!-- 글 수정 -->
@@ -81,10 +83,11 @@
 			</if>
 			kit_name=#{kit_name},
 			kit_content=#{kit_content},
+			kit_content2=#{kit_content2},
 			kit_price=#{kit_price},
 			kit_quantity=#{kit_quantity},
 			modify_date=SYSDATE
 		WHERE kit_num=#{kit_num}	
 	</update>
-	
+
 </mapper>
