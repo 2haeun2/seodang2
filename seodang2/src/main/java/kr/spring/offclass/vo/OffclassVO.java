@@ -30,6 +30,7 @@ public class OffclassVO {
 	private Date modify_date;
 	private String name;
 	private int like_count;
+	private String photo_name;//선생님 프로필 사진
 	
 	//업로드 파일 처리
 	public void setOff_upload(MultipartFile off_upload) throws IOException{
@@ -123,6 +124,13 @@ public class OffclassVO {
 
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
+	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
 	}
 
 	@Override

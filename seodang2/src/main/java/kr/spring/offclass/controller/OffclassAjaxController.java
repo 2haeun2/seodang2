@@ -28,6 +28,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import kr.spring.offclass.service.OffclassService;
 import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OfflikeVO;
+import kr.spring.offclass.vo.OffstarReplyVO;
+import kr.spring.offclass.vo.OffstarVO;
 
 @Controller
 public class OffclassAjaxController {
@@ -176,4 +178,54 @@ public class OffclassAjaxController {
 		return map;
 	}
 	
+	@RequestMapping("/offclass/writeOffReply.do")
+	@ResponseBody
+	public Map<String, String> writeReply(OffstarReplyVO offstarReplyVO,HttpSession session){
+		Map<String, String> map =new HashMap<String, String>();
+		logger.info("<<offstarReplyVO>>"+offstarReplyVO);
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		if(user_num==null) {
+			map.put("result", "logout");
+		}else {
+			offstarReplyVO.setUser_num(user_num);
+			offclassService.inserOffReviewReply(offstarReplyVO);
+			map.put("result", "success");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/offclass/selectOffReply.do")
+	@ResponseBody
+	public Map<String, Object> selectReply(int offstar_num,HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info("<<offstarReplyVO---->>"+offstar_num);
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		
+		OffstarReplyVO offstarReplyVO = offclassService.selectOffReviewReply(offstar_num);
+	
+			map.put("user_num", user_num);
+			map.put("offre_date", offstarReplyVO.getOffre_date());
+			map.put("offre_content", offstarReplyVO.getOffre_content());
+			map.put("photo_name",offstarReplyVO.getPhoto_name());
+			map.put("writer_name", offstarReplyVO.getName());
+			map.put("result", "success");
+		return map;
+	}
+	
+	@RequestMapping("/offclass/deleteReply.do")
+	@ResponseBody
+	public Map<String, Object> deleteReply(int num,HttpSession session){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		if(user_num==null) {
+			map.put("result", "logout");
+		}else {
+			map.put("result","success");
+			offclassService.deleteOffReview(num);
+		}
+		
+		return map;
+	}
 }
