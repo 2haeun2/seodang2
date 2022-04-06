@@ -3,6 +3,7 @@ package kr.spring.myclass.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -10,12 +11,12 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
+import kr.spring.onclass.vo.OnlikeVO;
 
 public interface MyclassMapper {
 	//내가 올린 강의 (선생님)
 	public List<MyclassVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
-	
 	//구매한 과목 저장(학생)
 	//구매목록 시퀀스 생성
 	@Select("select onreg_seq.nextval from dual")
@@ -43,4 +44,15 @@ public interface MyclassMapper {
 	@Select("select * from onreg a join onreg_detail b on a.onreg_num = b.onreg_num "
 			+ "where a.user_num = #{user_num} and a.onreg_num = #{onreg_num}")
 	public PaymentVO selectPayment(PaymentVO paymentVO);
+	
+	//찜목록 전체보기
+	public List<OnlikeVO> selectLikeList(Map<String,Object> map);
+	public int selectRowCount3(Map<String,Object> map);
+	
+	//찜 취소
+	//온라인 찜
+	@Delete("delete from onlike where on_num = #{on_num}")
+	public void onDeleteLike(int on_num);
+	@Delete("delete from offlike where off_num = #{on_num}")
+	public void offDeleteLike(int on_num);
 }

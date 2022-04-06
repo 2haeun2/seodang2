@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 
 import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
+import kr.spring.onclass.vo.OnlikeVO;
 
 public interface MyclassService {
 	//내가 올린 강의(선생님)
@@ -24,4 +25,13 @@ public interface MyclassService {
 	public void deletePayment(int onreg_num, int user_num);
 	//내 구매 목록 정보 출력
 	public PaymentVO selectPayment(PaymentVO paymentVO);
+	
+	//찜 한 목록
+	public List<OnlikeVO> selectLikeList(Map<String,Object> map);
+	//찜 카운트
+	public int selectRowCount3(Map<String,Object> map);
+	//찜 온라인 취소
+	public void onDeleteLike(int on_num);
+	//찜 오프라인 취소
+	public void offDeleteLike(int on_num);
 }

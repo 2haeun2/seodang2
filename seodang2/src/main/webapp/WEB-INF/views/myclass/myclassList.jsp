@@ -3,83 +3,57 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myclassList.css">    
-<style>
-	.main-left{
-		background-color:yellow;
-		width:300px;
-		height:500px;
-		float:left;
-	}
-	.main-center{
-		width:600px;
-		height:500px;
-		margin-left:300px;
-	}
-	.main-left ul li{
-		padding-top:50px;
-		margin-left:30px;
-		margin-top:30px;
-		font-size:20px;
-		font-color:gray;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myclassList.css">
 
-<div class="main-left">
-	<ul>
-		<li>
-			<a href="${pageContext.request.contextPath}/myclass/myclassMain.do">홈</a>
-		</li>
-		<c:if test="${session_user_auth == 3}">
-		<li>
-			<a href="${pageContext.request.contextPath}/myclass/myclassList.do">내가 올린 강의</a>
-		</li>
-		</c:if>
-		<c:if test="${session_user_auth == 2}">
-		<li>
-			<a href="${pageContext.request.contextPath}/myclass/myRegisterList.do">구매한 강의</a>
-		</li>
-		</c:if>
-		<li>
-			<a href="${pageContext.request.contextPath}/myclass/myclassMain.do">수익</a>
-		</li>
-	</ul>
-</div>
-<div class="main-center">
-	<div class="home">
-<ul>
-<li>
-	<form action="myclassList.do" id="search_form" method="get">
-		<ul class="search">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>강의 이름</option>
-				</select>
-			</li>
-			<li>
-			<input type="search" name="keyword" id="keyword" value="${param.keyword}">
-			</li>
-			<li>
-				<input type="submit" value="검색">
-			</li>
-		</ul>
-	</form>
-	</li>
-	<c:forEach var="myclass" items="${list}">
-	<li>
-		<div class="List">
-			<div class="textone">
-				<p>회원번호 : ${user_num}</p>			
-				<p>강의 명 : ${myclass.on_name}</p>
-				<p>강의 가격 : ${myclass.on_price}</p>
-				<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${myclass.on_num}'">후기</button>
-				<button type="button" class="btn btn-dark" onclick="location.href='#'">상세보기</button>
+<div class="container-right">
+	<h3>수강중인 과목</h3>
+</div>    
+	<div class="item-space">
+		<!-- foreach 문 시작 -->
+		<c:forEach var="myclass" items="${list}" varStatus="vs">
+			<div class="horizontal-area">
+				<a href="onclassDetail.do?on_num=">
+					<div class="image-container">
+						<!-- 폴더 저장 메인 이미지 -->
+						<%-- <img src="${pageContext.request.contextPath}/resources/image_upload/${onclass.mimage}"> --%>
+						<!-- 오프라인 mimage 컬럼 추가하면 주석 제거 -->
+					</div>
+					<div class="item-category">온오프 넘버 : ${myclass.onoff}</div>
+					<div class="name">${myclass.on_name}</div>
+					<div></div>
+					<div>
+					<%-- <img src="${pageContext.request.contextPath}/resources/images/heart_gray.png"> --%>
+					</div>
+					<div class="align-right"><b>${myclass.on_price}원</b></div>
+				</a>
 			</div>
-		</div>
-	</li>	
-	</c:forEach>
-</ul>	
-</div>
-
+			
+			<!-- 오프 -->
+			<div class="horizontal-area">
+				<a href="onclassDetail.do?on_num=">
+					<div class="image-container">
+						<!-- 폴더 저장 메인 이미지 -->
+						<%-- <img src="${pageContext.request.contextPath}/resources/image_upload/${onclass.mimage}"> --%>
+						<!-- 오프라인 mimage 컬럼 추가하면 주석 제거 -->
+					</div>
+					<div class="item-category">온오프 넘버 : ${myclass.onoff}</div>
+					<div class="name">${myclass.on_name}</div>
+					<div></div>
+					<div>
+					<%-- <img src="${pageContext.request.contextPath}/resources/images/heart_gray.png"> --%>
+					</div>
+					<div class="align-right"><b>${myclass.on_price}원</b></div>
+				</a>
+			</div>
+		</c:forEach>
+	</div>
+	
 	<div class="align-center">${pagingHtml}</div>
-</div>
+	
+	<!-- 헤더 겹침 임시 위치 -->
+	<a>전체보기</a>
+	<a>전체보기</a>
+	<a>전체보기</a>
+	
+	
+	

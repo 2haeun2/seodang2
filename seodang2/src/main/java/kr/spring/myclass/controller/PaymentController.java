@@ -43,7 +43,7 @@ public class PaymentController {
 			model.addAttribute("url", request.getContextPath() + "/main/main.do");
 		}else if(myclassService.overlap(on_num,user_num) >= 1) {
 			model.addAttribute("message", "이미 신청한 강의 입니다");
-			model.addAttribute("url", request.getContextPath() + "/onclass//onclassDetail.do?on_num="+on_num);
+			model.addAttribute("url", request.getContextPath() + "/onclass/onclassDetail.do?on_num="+on_num);
 		}
 		
 		return "common/resultView";

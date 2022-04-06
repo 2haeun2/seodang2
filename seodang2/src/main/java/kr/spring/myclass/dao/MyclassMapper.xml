@@ -5,9 +5,9 @@
 <mapper namespace="kr.spring.myclass.dao.MyclassMapper"> 
 	<select id="selectList" parameterType="map" resultType="MyclassVO">
 		SELECT * FROM (SELECT a.*,rownum rnum FROM (
-		SELECT on_num,category_num,on_content,on_name,on_price,user_num FROM onclass where user_num = #{user_num}
+		SELECT on_num,category_num,on_content,on_name,on_price,user_num,onoff FROM onclass where user_num = #{user_num}
 		UNION all
-		SELECT off_num,category_num,off_content,off_name,off_price,user_num FROM offclass where user_num = #{user_num} order by on_num
+		SELECT off_num,category_num,off_content,off_name,off_price,user_num,onoff FROM offclass where user_num = #{user_num} order by on_num
 		)a)
 	   <![CDATA[
 	   WHERE rnum >= #{start} AND rnum <= #{end}
@@ -45,6 +45,29 @@
 			FROM onreg b
 			JOIN onreg_detail c on b.onreg_num = c.onreg_num
 			where b.user_num = #{user_num}
+			)a)
+	</select>
+	
+	<!-- 좋아요한 목록 -->
+	<select id="selectLikeList" parameterType="map" resultType="OnlikeVO">
+		SELECT * FROM (SELECT a.*,rownum rnum FROM (
+		SELECT z.on_num,n.onlike_num,n.user_num,z.on_name,z.on_price,z.filename,z.uploadfile,z.onoff
+		FROM onlike n join onclass z on n.on_num = z.on_num where n.user_num = #{user_num}
+		UNION all
+		SELECT t.off_num,r.offlike_num,r.user_num,t.off_name,t.off_price,t.off_filename,t.off_uploadfile,t.onoff
+		FROM offlike r join offclass t on r.off_num = t.off_num where r.user_num = #{user_num}
+		order by on_num)a)
+	   <![CDATA[
+	   WHERE rnum >= #{start} AND rnum <= #{end}
+	   ]]>
+	</select>
+	<select id="selectRowCount3" parameterType="map" resultType="integer">
+		    SELECT count(*) FROM (SELECT a.*,rownum rnum FROM (
+			SELECT z.on_num,n.onlike_num,n.user_num,z.on_name,z.on_price,z.filename,z.uploadfile
+			FROM onlike n join onclass z on n.on_num = z.on_num where n.user_num = '61'
+			UNION all
+			SELECT t.off_num,r.offlike_num,r.user_num,t.off_name,t.off_price,t.off_filename,t.off_uploadfile
+			FROM offlike r join offclass t on r.off_num = t.off_num where r.user_num = '61' 
 			)a)
 	</select>
 </mapper>

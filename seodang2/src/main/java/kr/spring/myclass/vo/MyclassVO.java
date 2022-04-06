@@ -9,7 +9,15 @@ public class MyclassVO {
 	private String off_name;
 	private String off_limit;
 	private String off_price;
+	private int onoff;
 	
+	
+	public int getOnoff() {
+		return onoff;
+	}
+	public void setOnoff(int onoff) {
+		this.onoff = onoff;
+	}
 	public int getOn_num() {
 		return on_num;
 	}

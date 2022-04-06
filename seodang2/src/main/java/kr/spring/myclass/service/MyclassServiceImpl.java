@@ -11,6 +11,7 @@ import kr.spring.myclass.dao.MyclassMapper;
 import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
 import kr.spring.onclass.vo.OnclassVO;
+import kr.spring.onclass.vo.OnlikeVO;
 
 @Service
 @Transactional
@@ -68,6 +69,30 @@ public class MyclassServiceImpl implements MyclassService{
 	public PaymentVO selectPayment(PaymentVO paymentVO) {
 		// TODO Auto-generated method stub
 		return myclassMapper.selectPayment(paymentVO);
+	}
+
+	@Override
+	public List<OnlikeVO> selectLikeList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.selectLikeList(map);
+	}
+
+	@Override
+	public int selectRowCount3(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.selectRowCount3(map);
+	}
+
+	@Override
+	public void onDeleteLike(int on_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.onDeleteLike(on_num);
+	}
+
+	@Override
+	public void offDeleteLike(int on_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.offDeleteLike(on_num);
 	}
 
 
