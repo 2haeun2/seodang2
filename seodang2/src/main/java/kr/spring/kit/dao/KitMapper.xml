@@ -39,7 +39,6 @@
 			 				k.kit_content LIKE '%' || #{keyword} || '%'
 			 			</if>
 			 		</where>
-			 		
 				 ORDER BY k.kit_num DESC)a)
 		 	 
 		<![CDATA[

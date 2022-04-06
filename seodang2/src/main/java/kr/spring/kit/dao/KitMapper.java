@@ -10,8 +10,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.kit.vo.KitVO;
-import kr.spring.kit.vo.OlistVO;
-import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.kit.vo.KitLikeVO;
 
 public interface KitMapper {
@@ -40,21 +38,17 @@ public interface KitMapper {
 	
 	
 	//찜 눌렀는지 확인
-		@Select("SELECT * FROM okitlike WHERE user_num = ${user_num} and kit_num = ${kit_num}")
-		public KitLikeVO selectKitLike(@Param("user_num") Integer user_num,@Param("user_num")Integer kit_num);
+	@Select("SELECT * FROM okitlike WHERE user_num = ${user_num} and kit_num = ${kit_num}")
+	public KitLikeVO selectKitLike(@Param("user_num") Integer user_num,@Param("kit_num")Integer kit_num);
 	//키트 찜하기
 	@Insert("INSERT INTO okitlike (kitLike_num, kit_num, user_num,olike) "
-			+ "VALUES (okitlike_seq.NEXTVAL,#{kit_num},#{user_num},#{on_num},1)")
-	public void insertKitLike(@Param("user_num") Integer user_num,@Param("user_num") Integer kit_num);
+			+ "VALUES (okitlike_seq.NEXTVAL,#{kit_num},#{user_num},1)")
+	public void insertKitLike(@Param("user_num") Integer user_num,@Param("kit_num") Integer kit_num);
 	//찜취소
 	@Delete("DELETE FROM okitlike WHERE kitLike_num = ${kitLike_num}")
 	public KitLikeVO deleteKitLike(int kitLike_num);
 	//찜하기 Count
 	@Select("SELECT COUNT(*) FROM okitlike WHERE kit_num=#{kit_num}")
 	public int selectLikeCount(Integer kit_num);
-	
-	
-	//관련 클래스 연동
-	public List<OlistVO> selectOlist(Map<String,Object>map);
-	public int selectOlistCount(Map<String,Object>map);
+
 }
