@@ -2,7 +2,6 @@
 create table okit(
 	kit_num number not null,
 	user_num number not null,
-    category_num number not null,
 	kit_name varchar2(30) not null,
 	kit_price number not null,
 	kit_quantity number not null,
