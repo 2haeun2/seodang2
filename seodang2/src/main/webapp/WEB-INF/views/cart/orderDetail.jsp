@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css"/>
 
-<h1>주문 내역 상세</h1>
+<h1>주문 내역 상세</h1> 
 	<table>
 		<tr>
 			<th style="width:15%">상품 분류</th>

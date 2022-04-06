@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css"/>
 
 
-<h1>주문서 작성</h1>
+<h1>주문서 작성</h1> 
 
 <table>
 	<tr>

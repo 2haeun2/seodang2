@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_dw.css" type="text/css"/>
 
 <h1>주문내역</h1>
-
+ 
 <c:if test="${empty orderList}" >
 	<div class="result-display">
    		주문내역이 존재하지 않습니다.

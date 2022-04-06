@@ -9,11 +9,6 @@
 <script type="text/javascript">
 $(function(){
 	
-	//구매하기 버튼 클릭시 => 재고수량 부족(kit), 마감상태(off_class) 일 때 alert
-	//$('.cart-btn').on('click',function(){
-		
-	//}
-	
 	
 	//장바구니 상품 수량변경
 	$('.cart-modify').on('click',function(){
