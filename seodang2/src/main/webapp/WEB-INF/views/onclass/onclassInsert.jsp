@@ -14,7 +14,9 @@
   width: 660px;
   min-height: 150px;
   padding: 10px;
-  border: 1px dotted #fff;
+  border:1px solid #dde0e2; 
+  float:right; 
+  margin-top:25px;
 }
 
 #att_zone:empty:before {
@@ -24,25 +26,6 @@
 }
 </style>
 
-
-<script type="text/javascript">
-$(function(){
-		$('#open_form').submit(function(){
-			if($('#upload').val().trim()==''){
-				alert('대표 사진을 선택하세요!');
-				$('#upload').val('').focus();
-				return false;
-			}
-});
-</script>
-
-<style>
-.ck-editor__editable_inline{
-	
-	min-height:250px;
-}
-.container{width:1200px; max-width:none!important;}
-</style>
 <!-- ckedior 라이브러리 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
@@ -104,32 +87,37 @@ $(function(){
 			    </script>      
 			</li>
 			<li>
-				<form:label path="upload">대표사진 선택</form:label>
-				<input type="file" name="upload" id="upload">
-			</li>
-			<li>
 				<div id='image_preview'>
 				<img src="../resources/image/choice.png" onclick='handleButtonOnclick()'>
-			    <input type='file' id='btnAtt' name="uploadFile" multiple='multiple' />
-			    <div id='att_zone'
-			      data-placeholder='드래그앤드롭 하세요'></div>
+			    <input type='file' id='btnAtt' name="uploadFile" multiple='multiple' style="display:none;" />
+			    <div id='att_zone' data-placeholder='드래그앤드롭 하세요'></div>
 			  	</div>		
 			</li>
 		</ul>	 
 		<div class="align-center">
-			<form:button>전송</form:button>
+			<form:button id="imageGO">전송</form:button>
 		</div>                                          
 	</form:form>
 </div>
 
 <script>
+$(document).ready(function() {
+  $('#btnAtt').change(function() {
+    if (this.files.length > 4){
+      alert('최대 사진 4개 까지 가능합니다');
+      //새로고침
+      location.reload();
+    }
+  });
+});
+
 //파일선택 (css)
 function handleButtonOnclick() {
 		document.getElementById('btnAtt').click();
 	
 		console.log('클릭');
 }
-	
+
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
   imageView = function imageView(att_zone, btn){
 

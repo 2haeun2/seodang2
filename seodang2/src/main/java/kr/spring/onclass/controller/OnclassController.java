@@ -1,31 +1,36 @@
 package kr.spring.onclass.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
-import kr.spring.onclass.vo.OstarReplyVO;
 import kr.spring.onclass.vo.OstarVO;
+import kr.spring.onclass.vo.UploadFileVO;
 import kr.spring.user.controller.UserController;
 import kr.spring.user.service.UserService;
 import kr.spring.user.vo.UserVO;
@@ -76,8 +81,9 @@ public class OnclassController {
 		mav.setViewName("onclassList");
 		mav.addObject("count", count);
 		mav.addObject("list",list);
+		
 		mav.addObject("pagingHtml", page.getPagingHtml());
-
+		
 		return mav;
 	}
 	
@@ -88,42 +94,146 @@ public class OnclassController {
 	}
 	
 	@PostMapping("/onclass/onclassInsert.do")
-	public String insert(@Valid OnclassVO onclassVO,BindingResult result,HttpSession session) {
+	public String insert(@Valid OnclassVO onclassVO,BindingResult result,HttpSession session,
+			MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
+
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		onclassVO.setUser_num(user_num);
 		
-		logger.info("!!온넘확인!! : " + onclassVO);
+		int on_num = onclassService.currSelect();
+		System.out.println("온넘 찍기 : "+on_num);
 		
+		String uploadFolder = "/resources/image_upload";
+		String realFolder = session.getServletContext().getRealPath(uploadFolder);
+		
+		System.out.println(realFolder);
+		
+        File dir = new File(realFolder);
+        if (!dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        
+        String mimage = null; 
+        //넘어온 파일을 리스트로 저장
+        List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+        if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {       
+        } else {
+            for (int i = 0; i < mf.size(); i++) {
+                //파일 중복명 처리
+                String genId = UUID.randomUUID().toString();
+                //본래 파일명
+                String originalfileName = mf.get(i).getOriginalFilename();                
+                String extension = StringUtils.getFilenameExtension(originalfileName);
+                //저장되는 파일 이름 
+                String saveFileName = genId + "." + extension;
+                //저장 될 파일 경로
+                String savePath = realFolder +"/"+ saveFileName;
+                //파일 사이즈
+                long fileSize = mf.get(i).getSize(); 
+                //파일 저장
+                mf.get(i).transferTo(new File(savePath)); 
+					
+				if(i == 0) {mimage = saveFileName;}
+             
+                onclassService.fileUpload(originalfileName, saveFileName, fileSize, on_num);
+
+            }
+        }
+        
+        
 		if(result.hasErrors()) {
 			return insertForm();
 		}
 		
-		Integer user_num = (Integer)session.getAttribute("session_user_num");
-		onclassVO.setUser_num(user_num);
+		System.out.println(mimage);
+		
+		onclassVO.setOn_num(on_num);
+		onclassVO.setMimage(mimage);
 		onclassService.insertOnclass(onclassVO);
 		
+	////////////실험
+    //System.out.println("이미지 값 : " + mimage);
+    //System.out.println("온 넘 값 : " + on_num);
+	/* onclassService.fileMainUpdate(mimage, on_num); */
+    
 		return "redirect:/onclass/onclassList.do";
 	}
-	
-	
+
+
+
 	@GetMapping("/onclass/onclassModify.do")
 	public String updateForm(@RequestParam int on_num, Model model) {
 		OnclassVO onclassVO = onclassService.selectOnclass(on_num);
 		model.addAttribute("onclassVO",onclassVO);
+		//다중이미지 출력
+		List<UploadFileVO> list = onclassService.selectFile(on_num);
+		
+		model.addAttribute("list",list);
 		
 		return "onclassModify";		
 	}
 	@PostMapping("/onclass/onclassModify.do")
-	public String update(@Valid OnclassVO onclassVO,BindingResult result,HttpServletRequest request,Model model) {
+	public String update(@Valid OnclassVO onclassVO,BindingResult result,MultipartHttpServletRequest mhsq,
+							HttpSession session,HttpServletRequest request,Model model) throws IllegalStateException, IOException {
+		///////////////////////////////////////////////////////////
+		int on_num = onclassVO.getOn_num();
 		
-		logger.info("!!온넘확인!! : " + onclassVO);
+		//수정할때 전에 올린 이미지 삭제
+		onclassService.deleteFile(on_num);
+		
+		String uploadFolder = "/resources/image_upload";
+		String realFolder = session.getServletContext().getRealPath(uploadFolder);
+        File dir = new File(realFolder);
+        if (!dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        
+        //넘어온 파일을 리스트로 저장
+        
+        String mimage = null; //메인 이미지 저장 
+        
+        List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+        if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {       
+        } else {
+            for (int i = 0; i < mf.size(); i++) {
+                //파일 중복명 처리
+                String genId = UUID.randomUUID().toString();
+                //본래 파일명
+                String originalfileName = mf.get(i).getOriginalFilename();                
+                String extension = StringUtils.getFilenameExtension(originalfileName);
+                //저장되는 파일 이름 
+                String saveFileName = genId + "." + extension;
+                //저장 될 파일 경로
+                String savePath = realFolder +"/"+ saveFileName;
+                //파일 사이즈
+                long fileSize = mf.get(i).getSize(); 
+                //파일 저장
+                mf.get(i).transferTo(new File(savePath));
+                
+                if(i == 0) {mimage = saveFileName;} //for 첫번째 이미지 변수 저장
+                
+                onclassService.fileUpload(originalfileName, saveFileName, fileSize, on_num);
+				
+				 
+            }
+        }
+		///////////////////////////////////////////////////////////
+		
+        List<UploadFileVO> list = onclassService.selectFile(on_num);
 		
 		if(result.hasErrors()) {
 			return "onclassModify";
 		}
-		
+		System.out.println("엠이미지 : " + mimage);
+		onclassVO.setMimage(mimage);
 		onclassService.updateOnclass(onclassVO);
 
+		//다중파일 띄우기
+		model.addAttribute("list",list);
 		model.addAttribute("message", "글 수정 완료!!");
 		model.addAttribute("url", request.getContextPath() + "/onclass/onclassList.do");
+		
+		
 		
 		return "common/resultView";
 	}
@@ -161,15 +271,11 @@ public class OnclassController {
 									int currentPage,HttpSession session, 
 									@ModelAttribute("ostarVO") OstarVO ostarVO) {
 		
-		int on_num = ostarVO.getOn_num();
-		
+		int on_num = ostarVO.getOn_num();	
 		Map<String,Object> map = new HashMap<String,Object>();
-		
 		int count = onclassService.selectRowCountRating(on_num);
-
 		PagingUtil page = new PagingUtil(currentPage,count,6,10,"onclassDetail.do","&on_num="+on_num);
 
-		
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
 		map.put("on_num", on_num);
@@ -178,12 +284,15 @@ public class OnclassController {
 		if(count > 0) {
 			list = onclassService.listALL(map);
 		}
-
-		
+	
 		onclassService.updateHit(on_num); //조회수
 		
+		//다중업로드 파일 가져오기 시작
+		List<UploadFileVO> uplist = onclassService.selectFile(on_num);
+		//다중업로드 파일 가져오기 끝
+		
 		OnclassVO oVO = onclassService.selectOnclass(on_num);
-		oVO.setAvgqna(onclassService.avgQna(on_num));
+		/* oVO.setAvgqna(onclassService.avgQna(on_num)); */
 	
 		ModelAndView mav = new ModelAndView();
 
@@ -193,6 +302,21 @@ public class OnclassController {
 		mav.addObject("onclass",oVO);		
 		mav.addObject("count", count);
 		mav.addObject("list",list);
+		//다중 업로드
+		mav.addObject("uplist",uplist);
+		//실험 첫번째 이미지 추출
+		//mav.addObject("upone",uplist.get(0));
+		//실험 두번째 이미지 추출
+		//mav.addObject("uptwo",uplist.get(1));
+		//실험 세번째 이미지 추출
+		//mav.addObject("upthree",uplist.get(2));
+		//실험 네번째 이미지 추출
+		//mav.addObject("upfour",uplist.get(3));
+		
+		for(int i=0; i<4;i++) {
+			mav.addObject("upfile"+i,uplist.get(i));
+		}
+		
 		mav.addObject("pagingHtml", page.getPagingHtml());
 
 		return mav;
@@ -224,14 +348,12 @@ public class OnclassController {
 		return "redirect:/onclass/onclassDetail.do?on_num="+on_num;
 	}
 	@GetMapping("/onclass/deleteOstar.do")
-	public String deleteOstar(OstarVO ostarVO,HttpServletRequest request,Model model) {
+	public String deleteOstar(Integer ostar_num) {
 
-		onclassService.deleteOstar(ostarVO.getOstar_num());
+		onclassService.deleteOstar(ostar_num);
+
 		
-		model.addAttribute("message", "글 삭제");
-		model.addAttribute("url", request.getContextPath() + "/onclass/onclassList.do");
-		
-		return "common/resultView"; 
+		return "redirect:/onclass/onclassList.do"; 
 	}
 	
 	@GetMapping("/onclass/ratingWrite.do")

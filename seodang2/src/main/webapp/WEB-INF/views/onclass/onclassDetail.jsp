@@ -3,29 +3,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!-- 외부이미지 불러오기 -->
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
+
+
 <!-- 모달 부트스트랩 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+<!-- 리플 -->
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/onclass.reply.js"></script> --%>
 
 <!-- 아임포트 임포트 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ratestar.css">
 
-
-<style>
-	.list-unstyled img{
-		display: block;
-		float:left;
-	}
-</style>
 
 <script type="text/javascript">
 $(function(){
@@ -96,9 +97,7 @@ $(function(){
 				$('#rate_text').val('').focus();
 				return false;
 			}
-		});
-
-	    
+		});  
 });
 
 //결제 코드
@@ -140,143 +139,104 @@ function iamport(){
 	    alert(msg);
 	});
 }
+
+/////////////////////////////////////////////////////////////////////
+
 </script>
-   
- <div class="container mt-5">
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Post content-->
-                    <article>
-                        <!-- Post header-->
-                        <header class="mb-4">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">${onclass.on_name}</h1>
-                            <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">수업 등록일 : ${onclass.reg_date}</div>
-                        </header>
-                        <!-- Preview image figure-->
-                        <figure class="mb-4">
-                        	<c:if test="${fn:endsWith(onclass.filename,'.jpg') ||
-	             						fn:endsWith(onclass.filename,'.JPG') ||
-	              						fn:endsWith(onclass.filename,'.gif') ||
-	            					 	fn:endsWith(onclass.filename,'.GIF') ||
-	            					  	fn:endsWith(onclass.filename,'.png') ||
-	            					  	fn:endsWith(onclass.filename,'.PNG')}">
-							<div class="align-center">
-								<img src="imageView.do?on_num=${onclass.on_num}" 
-		                                      					 style="max-width:500px">
-							</div>
-							</c:if>
-                        </figure>
-                        
-                        <!-- Post content-->
-                        <section class="mb-5">
-                            <p class="fs-5 mb-4">${onclass.on_content}ㅂㄷㅈ</p>
-                            <!-- <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p> -->
-                        </section>
-                    </article>
-                </div>
-                <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-header">강의 정보</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li>가격</li>
-                                        <li>강의등록일</li>
-                                        <li>강의 평점</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li>${onclass.on_price}</li>
-                                        <li>${onclass.reg_date}</li>
-                                        <li>
-                                        	<!-- 별 아이콘 반복 -->
-	                                        <c:if test="${onclass.avgqna == 0}">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        <c:if test="${onclass.avgqna == 1}">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        <c:if test="${onclass.avgqna == 2}">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        <c:if test="${onclass.avgqna == 3}">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        <c:if test="${onclass.avgqna == 4}">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        <c:if test="${onclass.avgqna == 5}">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">
-	                                        		<img src="../resources/image/star1.png" width="15px" height="15px">        			                                        	
-	                                        </c:if>
-	                                        
-	                                        
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">
-                        	<ul class="list-unstyled mb-0">
-                                <li><i class="bi bi-cart"></i>&nbsp&nbsp장바구니 담기</li>
-                                <li><i class="bi bi-archive"></i>&nbsp&nbsp키트구매</li>
-                                <li><i class="bi bi-question-circle"></i>&nbsp&nbsp1:1 QnA</li>
-                                <li><i class="bi bi-chat-left-dots"></i><a href="${pageContext.request.contextPath}/onclass/qnaList.do?on_num=${onclass.on_num}" class="menu-item">&nbsp&nbsp강의후기 게시판</a></li>
-                                <li>
-	                                <img id="output_fav" src="../resources/image/heart1.png">
-	                                <span id="output_fcount" class="margin_right_10"></span>
-                                </li>	
-                            </ul>
-                        </div>
-                    </div>
-                    <button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
-                </div>
-            </div>
-        </div>
-<div>
-	<!-- 안보이게 하기 -->
-	<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
-		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
-		<input type="hidden" name="on_payment" value="2"/>
-		<input type="hidden" name="on_status" value="1"/>  
-	   	<input type="submit" value="임시 구매 버튼">
-	</form>
-	<!-- 안보이게 하기 -->
+<div class="img-one"">
+<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile0.file_name}">
+</div>
+<div class="img-two">
+<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile1.file_name}">
+</div>
+<div class="img-three">
+<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile2.file_name}">
+</div>
+<div class="img-four">
+<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile3.file_name}">
 </div>
 
+
+
+<!-- 다중이미지 불러오기 -->
+<%-- <c:forEach var="uplist" items="${uplist}" varStatus="vs">
+	<div style="float:left; width:25%;">
+		<img src="${pageContext.request.contextPath}/resources/image_upload/${uplist.file_name}" height="200px">
+	</div>
+</c:forEach>    --%>
+
+<div>
+${onclass.on_name}
+수업 등록일 : ${onclass.reg_date} ,,하나만 ${upone.file_name},,하나만 ${uptwo.file_name}
+글내용 : ${onclass.on_content}
+${onclass.on_price}
+${onclass.reg_date}
+<a href="${pageContext.request.contextPath}/onclass/onclassModify.do?on_num=${onclass.on_num}">수정</a>
+<a href="${pageContext.request.contextPath}/onclass/onclassDelete.do?on_num=${onclass.on_num}">삭제</a>
+</div>
+
+      <!-- 별 아이콘 반복 -->
+       <c:if test="${onclass.avgqna == 0}">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+       </c:if>
+       <c:if test="${onclass.avgqna == 1}">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+       </c:if>
+       <c:if test="${onclass.avgqna == 2}">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+       </c:if>
+       <c:if test="${onclass.avgqna == 3}">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+       </c:if>
+       <c:if test="${onclass.avgqna == 4}">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
+       </c:if>
+       <c:if test="${onclass.avgqna == 5}">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">
+       		<img src="../resources/image/star1.png" width="15px" height="15px">        			                                        	
+       </c:if>	                                        
+
+            
+		<!-- 찜 누르기 -->
+		<img id="output_fav" src="../resources/image/heart1.png">
+		<span id="output_fcount" class="margin_right_10"></span>
+		<!-- 찜 누르기 -->
+		<!-- 구매버튼 -->
+		<button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
+		<!-- 구매버튼 -->
+		<div>
+			<!-- 안보이게 하기 -->
+			<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
+				<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+				<input type="hidden" name="on_payment" value="2"/>
+				<input type="hidden" name="on_status" value="1"/>  
+			   	<input type="submit" value="임시 구매 버튼">
+			</form>
+			<!-- 안보이게 하기 -->
+		</div>
 
 <form action="ratingInsert.do" id="rateInsert" name="rateInsert" method="post"> 
 		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
@@ -284,6 +244,7 @@ function iamport(){
 		<c:if test="${empty session_user_num}">readonly placeholder="로그인 하세요"</c:if>
 		></textarea><br>
 		<input class="btn btn-outline-warning ratingStar_btn" type="submit" value="별점 전송">	
+<!-- 별점 -->		
 <div class="star-rating space-x-4">
 		<input type="radio" id="5-stars" name="rating" value="5"/>
 		<label for="5-stars" class="star pr-4">★</label>
@@ -295,7 +256,8 @@ function iamport(){
 		<label for="2-stars" class="star">★</label>
 		<input type="radio" id="1-star" name="rating" value="1" />
 		<label for="1-star" class="star">★</label>			
-</div>   	
+</div>
+<!-- 별점 -->   	
 </form>
 
 <hr size="1" noshade>
@@ -313,20 +275,20 @@ function iamport(){
 			<!-- 수정 모달 시작 -->
 			<a data-bs-toggle="modal" data-bs-target="#staticBackdrop${vs.index}">수정</a>
 			<!-- 수정 모달 끝 -->
-			<a href="${pageContext.request.contextPath}/onclass/deleteOstar.do?ostar_num=${ostar.ostar_num}">삭제</a>
-			<a onclick="location.href='ratingWrite.do?ostar_num=${ostar.ostar_num}'">답글</a>
+			<a href="${pageContext.request.contextPath}/onclass/deleteOstar.do">삭제</a>
+			<%-- <a onclick="location.href='ratingWrite.do?ostar_num=${ostar.ostar_num}'">답글</a> --%>
+
+			<button type="button" class="btn btn-dark" onclick="location.href='deleteOstar.do?ostar_num=${ostar.ostar_num}'">삭제</button>
 			</div>
-			</li>
 			
+			<c:if test="${session_user_auth == 3}">
+			<form action="" id="" method="post" id=""> 
+				<input type="text"/>
+			   	<input type="submit" value="답글">
+			</form>
+			</c:if>
 			
-			<li>
-				<div style="padding-left:90px; padding-top:30px ">
-				<div class="bubble">선생님 댓글 : ${reply.ostar_num}</div>
-				</div>
 			</li>
-									
-								
-						
 		</ul>	
 	</div>
 </div>
@@ -360,36 +322,14 @@ function iamport(){
 		      <!-- 바디 -->
 		      <!-- 푸터 -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 오스타넘:${ostar.ostar_num}</button>
-		        <button type="button" class="btn btn-primary">Understood</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary">목록가기</button>
 		      </div>
-		      <!-- 푸터 -->
-		      
+		      <!-- 푸터 -->		      
 		    </div>
 		  </div>
 		</div>
 <!-- 모달 끝 -->
 </c:forEach>
+
 <div class="align-center">${pagingHtml}</div>
-
-
-
-
-<script>
-//별점 스타일 시작
-var count;
-function starmark(item){
-	count=item.id[0];
-	sessionStorage.starRating = count;
-	var subid= item.id.substring(1);
-		for(var i=0;i<5;i++){
-			if(i<count){
-				document.getElementById((i+1)+subid).style.color="orange";
-				}
-			else{
-				document.getElementById((i+1)+subid).style.color="black";
-				}
-			}
-		}
-//별점 스타일 끝
-</script>

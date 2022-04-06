@@ -1,5 +1,6 @@
 package kr.spring.onclass.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import kr.spring.onclass.vo.OnclassVO;
 import kr.spring.onclass.vo.OnlikeVO;
 import kr.spring.onclass.vo.OstarReplyVO;
 import kr.spring.onclass.vo.OstarVO;
+import kr.spring.onclass.vo.UploadFileVO;
 import kr.spring.user.vo.UserVO;
 
 
@@ -27,7 +29,10 @@ public class OnclassServiceImpl implements OnclassService{
 	@Override
 	public void insertOnclass(OnclassVO onclassVO) {
 		// TODO Auto-generated method stub
-		onclassMapper.insertOnclass(onclassVO);
+
+		 //onclassVO.setOn_num(onclassMapper.selectOn_num());
+		 onclassMapper.insertOnclass(onclassVO);
+
 	}
 
 	@Override
@@ -45,12 +50,15 @@ public class OnclassServiceImpl implements OnclassService{
 	@Override
 	public void updateOnclass(OnclassVO onclassVO) {
 		// TODO Auto-generated method stub
+		/* onclassMapper.deleteFile(onclassVO.getOn_num()); */
 		onclassMapper.updateOnclass(onclassVO);
 	}
 
 	@Override
 	public void deleteOnclass(Integer on_num) {
 		// TODO Auto-generated method stub
+		//게시물 지우기 전에 이미지 삭제
+		onclassMapper.deleteFile(on_num);
 		onclassMapper.deleteOnclass(on_num);
 	}
 
@@ -157,7 +165,8 @@ public class OnclassServiceImpl implements OnclassService{
 	public void deleteOstar(int ostar_num) {
 		// TODO Auto-generated method stub
 		//댓글 먼저 삭제
-		onclassMapper.deleteReplyByOstarNum(ostar_num);
+
+		onclassMapper.deleteReplyByQnaNum(ostar_num);
 		onclassMapper.deleteOstar(ostar_num);
 	}
 	@Override
@@ -208,9 +217,44 @@ public class OnclassServiceImpl implements OnclassService{
 		return onclassMapper.selectOstarReply(ostar_num);
 	}
 
-
-
+	@Override
+	public int selectOn_num() {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectOn_num();
+	}
 
 	
+	//다중 파일 업로드
+	@Override
+	public void fileUpload(String originalfileName, String saveFileName, long fileSize,int on_num) {
+	    HashMap<String, Object> hm = new HashMap<String, Object>();
+	    hm.put("originalfileName", originalfileName);
+	    hm.put("saveFileName", saveFileName);
+	    hm.put("fileSize", fileSize);
+	    hm.put("on_num", on_num);
+	    
+	    
+	    onclassMapper.uploadFile(hm);
+	}
+
+	@Override
+	public int currSelect() {
+		// TODO Auto-generated method stub
+		return onclassMapper.currSelect();
+	}
+
+	@Override
+	public List<UploadFileVO> selectFile(int on_num) {
+		// TODO Auto-generated method stub
+		return onclassMapper.selectFile(on_num);
+	}
+
+	@Override
+	public void deleteFile(int on_num) {
+		// TODO Auto-generated method stub
+		onclassMapper.deleteFile(on_num);
+		
+	}
+
 
 }

@@ -18,7 +18,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/onclass/onclassInsert.jsp"/>
     </definition>
     <definition name="onclassModify" extends="main">
-    	<put-attribute name="title" value="수업 목록"/>
+    	<put-attribute name="title" value="수업 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/onclass/onclassModify.jsp"/>
     </definition>
     <definition name="onclassDelete" extends="main">
