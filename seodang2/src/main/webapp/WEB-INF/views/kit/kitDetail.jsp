@@ -150,8 +150,23 @@ $(function(){
 	  <img id="output_fav" src="../resources/image/heart1.png">
 	  <span id="output_fcount" class="margin_right_10"></span>
 	  </div> 
-		<input type="button" value="장바구니"id="cart2" onclick="location.href='kitOder.do'"></div>
 		<input type="button" value="관련클래스 구경하기" id="button2" onclick="location.href='class.do'">
+	
+			<div>
+			<form action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post" style="width:100px;">
+				<input type="hidden" name="kit_quantity" value="${kit.kit_quantity}"> <!-- 현재 kit 남은 수량 -->
+				<input type="hidden" name="order_quantity" value="1"> <!-- 주문시 기본 1 -->
+				<input type="hidden" name="class_kind" value="kit">
+				<input type="hidden" name="class_num" value="${kit.kit_num}">
+				
+				<c:if test="${kit.kit_quantity != 0}">
+					<input type="submit" value="장바구니">
+				</c:if>
+				<c:if test="${kit.kit_quantity == 0}">
+					<span style="color:red">품절</span>
+				</c:if>
+			</form>
+		</div>
 	
 	</div>
 

@@ -388,12 +388,37 @@ input[type="submit"],input[id="listbtn"]{
 	border-radius:10%;
 }
 
+/*
+.cartList_div{
+	width:100%;
+	margin : 0 auto;
+	align-items:center;
+	border:none;
+}
 
+.cartList_table{
+	width:100%;
+	margin : 0 auto;
+	align-items:center;
+	border:none;
+}
+*/
 
+.quantity-width{
+	width:30px;
+}
 
-
-
-
-
-
-
+form.order{
+	width: 1000px;
+    margin: 0 auto;
+    padding: 0 0;
+    border:none;
+}
+input[type="submit"].cart-btn{
+	width:100px; 
+	background-color:#3469c9; 
+	color:white; 
+	border:none;
+	font-size:13pt;
+	font-weight: bold;
+}

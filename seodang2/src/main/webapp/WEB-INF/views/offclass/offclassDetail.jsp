@@ -135,9 +135,27 @@
 					<div id="timetable"></div>
 				</div>
 				<hr size="1" noshade>
-				<input class="btn btn-outline-secondary" type="button"
-					value="장바구니 담기"><br> <input
-					class="btn btn-outline-secondary" type="button" value="바로 구매">
+				
+				<input class="btn btn-outline-secondary" type="button" value="바로 구매">
+				
+		<div>
+			<form action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post" style="width:100px;">
+				<input type="hidden" name="off_quantity" value="${offclass.off_limit}"> <!-- 현재  오프클래스 정원 남은 수량 -->
+				<input type="hidden" name="order_quantity" value="1"> <!-- 주문시 기본 1 -->
+				<input type="hidden" name="class_kind" value="off">
+				<input type="hidden" name="class_num" value="${offclass.off_num}">
+				<input type="submit" value="장바구니">
+				<!--  
+				<c:if test="${offTimetableVO.off_limit != offTimetableVO.off_personcount}">
+					<input type="submit" value="장바구니">
+				</c:if>
+				<c:if test="${offTimetableVO.off_limit == offTimetableVO.off_personcount}">
+					<span style="color:red">품절</span>
+				</c:if>
+				-->
+			</form>
+		</div>				
+				
 				<c:choose>
 					<c:when test="${likecheck eq '0' or empty likecheck}">
 						<button class="btn" id="like_btn">

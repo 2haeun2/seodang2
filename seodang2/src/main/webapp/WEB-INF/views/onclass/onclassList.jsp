@@ -138,7 +138,18 @@ $(function(){
 					<img id="output_fav${vs.index}" src="../resources/image/heart1.png">
 					<span id="output_fcount${vs.index}" class="margin_right_10"></span>
 					<!-- 찜 누르기 -->
+			
+		<div>
+			<form action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post" style="width:100px;">
+				<input type="hidden" name="order_quantity" value="1"> <!-- 주문시 기본 1 -->
+				<input type="hidden" name="class_kind" value="on">
+				<input type="hidden" name="class_num" value="${onclass.on_num}">
+				<input type="submit" value="장바구니">
+			</form>
+		</div>					
 			</div>
+			
+			
 		</c:forEach>
 	</div>
 

@@ -40,15 +40,16 @@
     	<put-attribute name="title" value="회원정보 수정form(관리자 전용)"/>
     	<put-attribute name="body" value="/WEB-INF/views/admin/adminModifyUser.jsp"/>
     </definition>
-    
-    
-    
-    
+  
     <definition name="onqnaWrite" extends="main">
     	<put-attribute name="title" value="온라인 클래스 1:1문의글 작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/onqna/onqnaWrite.jsp"/>
     </definition>
     
+     <definition name="newsList" extends="main">
+    	<put-attribute name="title" value="취업 뉴스"/>
+    	<put-attribute name="body" value="/WEB-INF/views/oqna/newsList.jsp"/>
+    </definition>
     
 </tiles-definitions>
 

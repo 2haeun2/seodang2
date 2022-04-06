@@ -98,3 +98,4 @@ create table oqna_reply(
 	constraint oqna_reply_fk2 foreign key (user_num) references ouser (user_num)
 ); 
 create sequence oqna_reply_seq;
+
