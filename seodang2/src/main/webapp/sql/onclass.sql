@@ -8,6 +8,7 @@ create table onclass(
 	uploadfile blob,
 	filename varchar2(100) not null,
 	on_content clob not null,
+	onoff number(1) default 1 not null,
 	reg_date date default sysdate not null,
 	modify_date date,
 	constraint onclass_pk primary key (on_num),
@@ -70,3 +71,27 @@ create table ostar_reply(
     constraint ostar_reply_fk2 foreign key(ostar_num) references ostar(ostar_num)
 );
 create sequence ostar_reply_seq;
+
+--다중이미지 업로드
+create table uploadfile(
+	file_num number not null,
+	on_num number not null,
+	o_name varchar2(300) not null,
+	file_name varchar2(300) not null,
+	file_size number not null,
+	constraint uploadfile_pk primary key(file_num),
+	constraint uploadfile_fk1 foreign key(on_num) references onclass(on_num)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
