@@ -23,7 +23,7 @@
 
 
 <div class="page-main">
-	<h2>TEst - QnA 목록 - Test</h2>
+	<h2>QnA 목록</h2>
 
 	<div>
 		<img src="${pageContext.request.contextPath }/resources/image/oqnaImage.png" style="width:953px; hieght:338px">

@@ -72,7 +72,6 @@
 
 	<!--  =================댓글=============== -->
 	<div id="reply_div">
-		
 		<form id="re_form">
 			<input type="hidden" name="qna_num" value="${oqna.qna_num }" id="qna_num">
 			
@@ -89,7 +88,6 @@
 				</div>
 			</c:if>
 		</form>
-		
 	</div>
 	
 	<!-- 댓글 목록 출력 -->

@@ -17,12 +17,6 @@
 					class="menu-item"><b>오프라인</b></a> <a
 					href="${pageContext.request.contextPath}/kit/kitList.do"
 					class="menu-item"><b>키트</b></a>
-			<a href="#" class="menu-item">게시판</a> <a
-				href="${pageContext.request.contextPath}/oqna/oqnaList.do"
-				class="menu-item">Q&amp;A</a>
-			<c:if test="${!empty session_user_num && session_user_auth == 4}">
-				<a href="${pageContext.request.contextPath}/admin/adminMemberList.do">회원관리</a>
-			</c:if>
 			</div>
 			<div class="login align-right">
 				<c:if test="${!empty session_user_num && !empty session_user_photo}">
@@ -57,7 +51,15 @@
 		</div>
 
 		<div class="header2">
-			
+			<a href="${pageContext.request.contextPath}/news/list.do" class="menu-item"><b>취업 뉴스</b></a>
+			<a href="${pageContext.request.contextPath}/oqna/oqnaList.do" class="menu-item">Q&amp;A</a>
+			<c:if test="${!empty session_user_num && session_user_auth == 4}">
+				<a href="${pageContext.request.contextPath}/admin/adminMemberList.do">회원관리</a>
+			</c:if>	
+			<c:if test="${!empty session_user_num}">
+				<a href="${pageContext.request.contextPath}/cart/cartList.do" class="menu-item"><b>장바구니</b></a>
+				<a href="${pageContext.request.contextPath}/cart/orderList.do" class="menu-item"><b>주문내역</b></a>
+			</c:if>			
 			
 		</div>
 	</div>
