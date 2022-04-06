@@ -53,7 +53,6 @@
 			<div class="reviewList">
 				<c:forEach var="offstarVO" items="${list2 }">
 					<div class="review width-50">
-						<a href="offclassReviewList.do?off_num=${offclass.off_num}">
 							<div>
 								<div class="review_start">
 									<div class="user_image">
@@ -104,7 +103,6 @@
 									<span> 0 </span>
 								</c:if>
 							</div>
-						</a>
 					</div>
 				</c:forEach>
 			</div>

@@ -96,7 +96,7 @@
 	</c:if>
 	<c:if test="${count>0 }">
 		<c:forEach var="item" items="${list }">
-		<div class="review-set"  data-num="${item.offstar_num}" >
+		<div class="review-set"  data-num="${item.offstar_num}">
 			<div class="review" >
 				<div class="review_start">
 					<div class="user_image">
@@ -150,7 +150,7 @@
 				</c:if>
 			</div>
 			</c:if>
-			<div id=${item.offstar_num }>
+			<div id=${item.offstar_num } data-offre_num=${item.offre_num }>
 			<c:if test="${!empty item.writer_num}">
 			<div class="reply-complete display-flex">
 				<div class="user_image">
@@ -185,9 +185,6 @@
 			</div>
 			</c:if>
 			</div>
-			<c:if test="${writer_num!=session_user_num or !empty item.writer_num}">
-			<div class="reply-no"></div>
-			</c:if>
 			<hr size="1" class="hr">
 		</div>
 		</c:forEach>

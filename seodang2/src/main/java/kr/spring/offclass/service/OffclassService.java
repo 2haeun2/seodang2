@@ -37,4 +37,6 @@ public interface OffclassService {
 
 	public void inserOffReviewReply(OffstarReplyVO offstarReplyVO);
 	public OffstarReplyVO selectOffReviewReply(int offstar_num);
+	public void updateOffReviewReply(OffstarReplyVO offstarReplyVO);
+	public void deleteOffReviewReply(int offre_num);
 }

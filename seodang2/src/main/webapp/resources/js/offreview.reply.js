@@ -169,7 +169,7 @@ $(function(){
 			$.ajax({
 			type:'post',
 			data:{num:num},
-			url:'deleteReply.do',
+			url:'deleteOffReview.do',
 			cache:false,
 			timeout:30000,
 			success:function(param){
@@ -189,14 +189,15 @@ $(function(){
 		});
 		}
 	});
-	$('#modify-btn').click(function(){
+	
+	//댓글 수정 버튼 클릭
+	$(document).on('click','#modify-btn',function(){
 		initForm();
-		let user_num = $(this).attr('data-user');
-		let writer_name =$(this).attr('data-name');
-		
-		let offstar_num = $(this).attr('data-num');
-
-		let photo_name = $(this).attr('data-photo');
+		let user_num = $(this).parents('#reviewList').attr('data-user');
+		let writer_name =$(this).parents('#reviewList').attr('data-name');
+		let offstar_num = $(this).parents('.review-set').attr('data-num');
+		let photo_name = $(this).parents('#reviewList').attr('data-photo');
+		let offre_num = $(this).parents('#'+offstar_num).attr('data-offre_num');
 		
 		
 		let output  = '<div class="output-div display-flex">'
@@ -208,8 +209,9 @@ $(function(){
 				output += '		<img src="'+contextPath +'/resources/images/face.png'+'" >';
 			}
 			output += '</div>'
-			output += '<form id="offre_form" class="balloon" >';
+			output += '<form id="moffre_form" class="balloon" >';
 			output += '		<input type="hidden" name="offstar_num" id="offstar_num" value="'+offstar_num+'">';
+			output += '		<input type="hidden" name="offre_num" id="offre_num" value="'+offre_num+'">';
 			output += '		<div>'+writer_name+" 강사님 답변"+'</div>';
 			output += '		<textarea rows="3" cols="50" name="offre_content" id="offre_content"></textarea>';
 			output += '		<div id="re_first">';
@@ -217,13 +219,84 @@ $(function(){
 			output += '		</div>';
 			output += '		<div id="re_second">';
 			output += '			<input type="submit" class="btn" value="전송">';
-			output += '			<input type="button" class="btn" value="취소" id="reset-btn">';
+			output += '			<input type="button" class="btn" value="취소" id="mreset-btn">';
 			output += '		</div>';
 			output += '</form>';
 			output += '</div>';
 			
-			$(this).parent('.reply').hide();
-			$(this).parents('.reply-output').find('#output').append(output);
+			$('#'+offstar_num).hide();
+			$(this).parents('.review-set').find('.reply-output').append(output);
 			
+	});
+	//수정폼에서 취소 버튼 클릭시 수정폼 초기화 
+	$(document).on('click','#mreset-btn',function(){
+		let offstar_num = $(this).parents('.review-set').attr('data-num');
+		$('#'+offstar_num).show();
+		initForm();
+	});
+	
+	//댓글 수정 
+	$(document).on('submit','#moffre_form',function(event){
+		if($('#offre_content').val().trim()==''){
+			alert('내용을 입력하세요.');
+			$('#offre_content').val('').focus();
+			return false;
+		}
+		let offstar_num = $('#offstar_num').val();
+		
+		let data = $(this).serialize();
+		
+		
+		$.ajax({
+			type:'post',
+			data:data,
+			url:'updateOffReply.do',
+			cache:false,
+			timeout:30000,
+			success:function(param){
+				if(param.result=='logout'){
+					alert('로그인해야 작성할 수 있습니다.');
+				}else if(param.result=='success'){
+					initForm();
+					$('#'+offstar_num).load(location.href+' #'+offstar_num+'>*',"");
+					$('#'+offstar_num).css('display',"block");
+				}else{
+					alert('등록 시 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		//기본 이벤트 제거
+		event.preventDefault();
+	});
+	
+	//댓글 삭제
+	$(document).on('click','#delete-btn',function(event){
+		let offstar_num = $(this).parents('.review-set').attr('data-num');
+		let offre_num = $(this).parents('#'+offstar_num).attr('data-offre_num');
+		let choice = confirm('정말 삭제하시겠습니까?');
+		if(choice){
+			$.ajax({
+			type:'post',
+			data:{offre_num:offre_num},
+			url:'deleteOffReply.do',
+			cache:false,
+			timeout:30000,
+			success:function(param){
+				if(param.result=='logout'){
+					alert('로그인해야 삭제할 수 있습니다.');
+				}else if(param.result=='success'){
+					location.reload();
+				}else{
+					alert('등록 시 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		}
 	});
 });

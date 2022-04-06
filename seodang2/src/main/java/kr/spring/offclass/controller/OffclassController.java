@@ -97,12 +97,12 @@ public class OffclassController {
 		List<OffclassVO> list =null;
 		if(count>0) {
 			list = offclassService.selectListOffClass(map);
-		}
-		for(int i=0;i<list.size();i++) {
-			OffclassVO offclassVO = list.get(i);
-			int like_count = offclassService.selectLikeCount(offclassVO.getOff_num());
-			offclassVO.setLike_count(like_count);
-			System.out.println("like_count"+like_count);
+			for(int i=0;i<list.size();i++) {
+				OffclassVO offclassVO = list.get(i);
+				int like_count = offclassService.selectLikeCount(offclassVO.getOff_num());
+				offclassVO.setLike_count(like_count);
+				System.out.println("like_count"+like_count);
+			}
 		}
 		
 		ModelAndView mav = new ModelAndView();

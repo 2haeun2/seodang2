@@ -122,7 +122,7 @@
 		ON s.user_num = d.user_num
         LEFT OUTER JOIN 
         (
-        SELECT offstar_num,d.user_num AS writer_num,name AS writer_name,offre_content,offre_date,photo_name as writer_photo
+        SELECT offre_num,offstar_num,d.user_num AS writer_num,name AS writer_name,offre_content,offre_date,photo_name as writer_photo
         FROM offstar_reply r
         JOIN ouser_detail d
         ON r.user_num = d.user_num

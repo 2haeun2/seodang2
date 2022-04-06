@@ -147,4 +147,14 @@ public class OffclassServiceImpl implements OffclassService{
 		return offclassMapper.selectOffReviewReply(offstar_num);
 	}
 
+	@Override
+	public void updateOffReviewReply(OffstarReplyVO offstarReplyVO) {
+		offclassMapper.updateOffReviewReply(offstarReplyVO);
+	}
+
+	@Override
+	public void deleteOffReviewReply(int offre_num) {
+		offclassMapper.deleteOffReviewReply(offre_num);
+	}
+
 }

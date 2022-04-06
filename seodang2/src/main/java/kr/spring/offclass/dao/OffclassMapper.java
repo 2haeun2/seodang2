@@ -70,4 +70,8 @@ public interface OffclassMapper {
 	public OffstarReplyVO selectOffReviewReply(int offstar_num);
 	@Delete("DELETE FROM offstar_reply WHERE offstar_num=#{offstar_num}")
 	public void deleteOffReviewReplyByOffstar(int offstar_num);
+	@Update("UPDATE offstar_reply SET offre_content=#{offre_content} WHERE offre_num=#{offre_num}")
+	public void updateOffReviewReply(OffstarReplyVO offstarReplyVO);
+	@Delete("DELETE FROM offstar_reply WHERE offre_num=#{offre_num}")
+	public void deleteOffReviewReply(int offre_num);
 }

@@ -409,6 +409,7 @@ button.btn.reply {
 }
 .reply-complete {
     padding-top: 6px;
+   	padding-bottom: 20px;
 }
 .reply-text {
     color: #aaa9a9;

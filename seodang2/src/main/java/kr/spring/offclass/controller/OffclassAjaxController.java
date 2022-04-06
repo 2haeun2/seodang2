@@ -213,9 +213,10 @@ public class OffclassAjaxController {
 		return map;
 	}
 	
-	@RequestMapping("/offclass/deleteReply.do")
+	//후기 삭제 - 후기 답변 삭제X
+	@RequestMapping("/offclass/deleteOffReview.do")
 	@ResponseBody
-	public Map<String, Object> deleteReply(int num,HttpSession session){
+	public Map<String, Object> deleteReview(int num,HttpSession session){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
@@ -224,6 +225,37 @@ public class OffclassAjaxController {
 		}else {
 			map.put("result","success");
 			offclassService.deleteOffReview(num);
+		}
+		
+		return map;
+	}
+	@RequestMapping("/offclass/updateOffReply.do")
+	@ResponseBody
+	public Map<String, Object> updateReply(OffstarReplyVO offstarReplyVO,HttpSession session){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		if(user_num==null) {
+			map.put("result", "logout");
+		}else {
+			map.put("result","success");
+			offclassService.updateOffReviewReply(offstarReplyVO);
+		}
+		
+		return map;
+	}
+	//후기 삭제 - 후기 답변 삭제X
+	@RequestMapping("/offclass/deleteOffReply.do")
+	@ResponseBody
+	public Map<String, Object> deleteReply(int offre_num,HttpSession session){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Integer user_num = (Integer)session.getAttribute("session_user_num");
+		if(user_num==null) {
+			map.put("result", "logout");
+		}else {
+			map.put("result","success");
+			offclassService.deleteOffReviewReply(offre_num);
 		}
 		
 		return map;
