@@ -41,7 +41,7 @@ public class OnqnaServiceImpl implements OnqnaService{
 	@Override
 	public OnqnaVO selectOnqna(Integer Onqna_num) {
 		// TODO Auto-generated method stub
-		return null;
+		return onqnaMapper.selectOnqna(Onqna_num);
 	}
 	/*=============조회수==============*/
 	@Override

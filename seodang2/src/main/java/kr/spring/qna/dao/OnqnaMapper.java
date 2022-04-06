@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.qna.vo.OnqnaVO;
 
@@ -23,6 +24,8 @@ public interface OnqnaMapper {
 	public void insertOnqna(OnqnaVO Onqna);
 	
 	/*=============글상세==============*/
+	@Select("SELECT*FROM onqna q JOIN ouser u ON q.user_num=u.user_num JOIN ouser_detail d ON u.user_num=d.user_num "
+			+ "WHERE q.onqna_num=#{onqna_num}")
 	public OnqnaVO selectOnqna(Integer Onqna_num);
 	
 	/*=============조회수==============*/

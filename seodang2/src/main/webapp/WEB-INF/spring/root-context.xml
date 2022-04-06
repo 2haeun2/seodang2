@@ -75,7 +75,9 @@
 		                                           kr.spring.offclass.vo,
 		                                           kr.spring.ostar.vo,
 		                                           kr.spring.qna.vo,
-		                                           kr.spring.myclass.vo"/>
+		                                           kr.spring.myclass.vo,
+		                                           kr.spring.onqna.vo,
+		                                           kr.spring.offqna.vo"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.**.dao"/>
