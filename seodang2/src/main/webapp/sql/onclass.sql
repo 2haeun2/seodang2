@@ -79,8 +79,7 @@ create table uploadfile(
 	o_name varchar2(300) not null,
 	file_name varchar2(300) not null,
 	file_size number not null,
-	constraint uploadfile_pk primary key(file_num),
-	constraint uploadfile_fk1 foreign key(on_num) references onclass(on_num)
+	constraint uploadfile_pk primary key(file_num)
 );
 create sequence uploadfile_seq;
 
