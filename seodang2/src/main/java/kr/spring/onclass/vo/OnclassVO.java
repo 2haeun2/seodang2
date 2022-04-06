@@ -19,11 +19,9 @@ public class OnclassVO {
 	private int on_price;
 	private int hit;
 	@Range(min=1,max=5)
-	private int category_num;
+	private int category_num; 
 	@NotEmpty
 	private String on_content;
-	private MultipartFile upload;
-	private byte[] uploadfile;
 	private String filename;
 	private Date reg_date;
 	private Date modify_date;
@@ -77,13 +75,6 @@ public class OnclassVO {
 		this.hit = hit;
 	}
 
-	public void setUpload(MultipartFile upload)throws IOException{
-		this.upload = upload;
-		setUploadfile(upload.getBytes());
-		setFilename(upload.getOriginalFilename());
-	}
-
-
 	public int getOn_num() {
 		return on_num;
 	}
@@ -124,14 +115,6 @@ public class OnclassVO {
 		this.on_content = on_content;
 	}
 
-	public byte[] getUploadfile() {
-		return uploadfile;
-	}
-
-	public void setUploadfile(byte[] uploadfile) {
-		this.uploadfile = uploadfile;
-	}
-
 	public String getFilename() {
 		return filename;
 	}
@@ -156,15 +139,12 @@ public class OnclassVO {
 		this.modify_date = modify_date;
 	}
 
-	public MultipartFile getUpload() {
-		return upload;
-	}
 
 	@Override
 	public String toString() {
 		return "OnclassVO [on_num=" + on_num + ", user_num=" + user_num + ", on_name=" + on_name + ", on_price="
 				+ on_price + ", hit=" + hit + ", category_num=" + category_num + ", on_content=" + on_content
-				+ ", upload=" + upload + ", filename=" + filename + ", reg_date=" + reg_date + ", modify_date="
+				+ ", upload=" + ", filename=" + filename + ", reg_date=" + reg_date + ", modify_date="
 				+ modify_date + ", avgqna=" + avgqna + ", deletePasswd=" + deletePasswd + "]";
 	}
 

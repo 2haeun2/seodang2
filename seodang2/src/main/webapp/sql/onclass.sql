@@ -2,7 +2,7 @@ create table onclass(
 	on_num number not null,
 	user_num number not null,
 	on_name varchar2(12) not null,
-	on_price number(8) not null,
+	on_price number(8) not null, 
 	hit number default 0 not null,
 	category_num number not null,
 	mimage varchar2(300) not null,

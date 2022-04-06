@@ -5,7 +5,7 @@ public class UploadFileVO {
 	private int on_num;
 	private String o_name;
 	private String file_name;
-	private int file_size;
+	private int file_size; 
 	public int getFile_num() {
 		return file_num;
 	}
