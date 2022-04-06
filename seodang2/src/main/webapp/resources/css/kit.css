@@ -5,6 +5,11 @@
  font-family: 'Jeju Gothic', sans-serif;
 }
 /*키트 목록 display: flex;*/
+listpage{
+  padding:200px 0px 0px 0px;
+  width: 98%;
+  margin: 0 auto;
+}
 ul{
 	list-style:none;
 }

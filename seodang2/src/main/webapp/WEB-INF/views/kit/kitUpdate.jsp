@@ -4,58 +4,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 중앙 컨텐츠 시작 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css.bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit_2.css">
+<script type="text/javascript">
+$(function(){
+	$('#photo_btn').click(function(){
+		$('#photo_choice').show();
+		$(this).hide();
+	});
+	
+	//처음 화면에 보여지는 이미지 읽기
+	let photo_path = $('.kitVO.filename').attr('src');
+	let my_photo;
+	$('#upload').change(function(){
+		kitVO.filename = this.files[0];
+		if(!kitVO.filename){
+			$('.kitVO.filename').attr('src',photo_path);
+			return;
+		}
+		
+		
+		//이미지 미리보기
+		var reader = new FileReader();
+		reader.readAsDataURL(kitVO.filename);
+		
+		reader.onload=function(){
+			$('.kitVO.filename').attr('src',reader.result);
+		};
+	});//end of change
 
+</script>
 <div class="page-main">
 	<h2>글수정</h2>
 	<form:form modelAttribute="kitVO" action="kitUpdate.do" id="upate_form"
 	               enctype="multipart/form-data">
 		<form:hidden path="kit_num"/>
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
-			<li>
-				<form:label path="kit_name">키트이름</form:label>
-				<form:input path="kit_name"/>
-				<form:errors path="kit_name" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="kit_price">가격</form:label>
-				<form:input type="number" path="kit_price" min="0"/>
-				<form:errors path="kit_price" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="kit_quantity">판매수량</form:label>
-				<form:input type="number" path="kit_quantity" min="1"/>
-				<form:errors path="kit_quantity" cssClass="error-color"/>
-			</li>
-			<li><b>내용</b></li>
-			<li>
-				<form:textarea path="kit_content"/>
-				<form:errors path="kit_content" cssClass="error-color"/>
-				<script>
-				 function MyCustomUploadAdapterPlugin(editor) {
-					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-					        return new UploadAdapter(loader);
-					    }
-					}
-				 
-				 ClassicEditor
-		            .create( document.querySelector( '#kit_content' ),{
-		            	extraPlugins: [MyCustomUploadAdapterPlugin]
-		            })
-		            .then( editor => {
-						window.editor = editor;
-					} )
-		            .catch( error => {
-		                console.error( error );
-		            } );
-			    </script>       
-			</li>
-			<li>
+		<div class="align-right">
+			<form:button>수정</form:button>
+			<input type="button" value="목록" 
+			                         onclick="location.href='kitList.do'">
+		</div>
+		<ul id="box4">
+		<li>
+		<c:if test="${empty kitVO.filename}">
+			<img src="${pageContext.request.contextPath}/resources/images/face.png"
+			                     width="200" height="200" class="my-photo">
+			
+			</c:if>
+			<c:if test="${!empty kitVO.filename}">
+			<img src="imageView.do?kit_num=${kitVO.filename}"  
+			style="width:200px; height:200px; border-radius:5px;">
+			</c:if>
+		   </li>
+		   <li id="file">
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 				<c:if test="${!empty kitVO.filename}">
@@ -95,12 +100,49 @@
 </script>				
 				</c:if>
 			</li>
+			<li id="name">
+				<form:label path="kit_name">키트이름</form:label>
+				<form:input path="kit_name"/>
+				<form:errors path="kit_name" cssClass="error-color"/>
+			</li>
+			<li id="price">
+				<form:label path="kit_price">가격</form:label>
+				<form:input type="number" path="kit_price" min="0"/>
+				<form:errors path="kit_price" cssClass="error-color"/>
+			</li>
+			<li id="quantity">
+				<form:label path="kit_quantity">판매수량</form:label>
+				<form:input type="number" path="kit_quantity" min="1"/>
+				<form:errors path="kit_quantity" cssClass="error-color"/>
+			</li>
+			<li id="content2">
+				<form:label path="kit_content2">설명</form:label>
+				<form:input path="kit_content2" style=""/>
+				<form:errors path="kit_content2" cssClass="error-color"/>
+			</li>
+			<li id="content">
+				<form:textarea path="kit_content"/>
+				<form:errors path="kit_content" cssClass="error-color"/>
+				<script>
+				 function MyCustomUploadAdapterPlugin(editor) {
+					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+					        return new UploadAdapter(loader);
+					    }
+					}
+				 
+				 ClassicEditor
+		            .create( document.querySelector( '#kit_content' ),{
+		            	extraPlugins: [MyCustomUploadAdapterPlugin]
+		            })
+		            .then( editor => {
+						window.editor = editor;
+					} )
+		            .catch( error => {
+		                console.error( error );
+		            } );
+			    </script>       
+			</li>
 		</ul>
-		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="등록" 
-			                         onclick="location.href='kitList.do'">
-		</div>
 	</form:form>
 </div>
 <!-- 중앙 컨텐츠 끝 -->

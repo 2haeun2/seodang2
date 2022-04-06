@@ -30,7 +30,7 @@ div.ck_content{
 	position: sticky;
 	padding:20px;
 	font-family: 'Jeju Gothic', sans-serif;
-	border: 2px solid #D9F6FC;
+	border: 2px solid #c0c0c0;
     border-radius:5px;
     
 }
@@ -48,6 +48,7 @@ div.kitdetail{
     left:600px;
     bottom:400px;
     font-family: 'Jeju Gothic', sans-serif;
+    border: 2px solid #81BEF7;
     width: 300px;
  
 }
@@ -72,7 +73,7 @@ table#detail{
 	border-right:2px solid;
     border-left:2px solid;
     border-top:2px solid;
-     border-collapse : collapse;
+    border-collapse : collapse;
     border-bottom:2px solid;
     text-align: center;
     padding: 5px;

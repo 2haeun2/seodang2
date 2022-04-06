@@ -8,7 +8,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.reply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/videoAdapter.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ratestar.css">
 <script type="text/javascript">
 	$(function(){
 		$('#search_form').submit(function(){
@@ -94,7 +93,7 @@ $(function(){
 	    
 });
 </script>
-<div class="page-main">
+<div class="listpage">
 	<h2>키트 목록</h2>
 	<div class="align-right">
 	<c:if test="${!empty session_user_num && session_user_auth>=3}">
@@ -142,7 +141,7 @@ $(function(){
 	  </div>
 	    <div id="kit_name"><a href="kitDetail.do?kit_num=${kit.kit_num}">${kit.kit_name}</a></div>    
 		<div class="box3">
-		<div id="kit_content2">${kit.kit_content2}</div>
+		<!--<div id="kit_content2">${kit.kit_content2}</div> -->
 		<div class="price">가격</div>
 		<div id="kit_price">${kit.kit_price}원</div></div>
 		

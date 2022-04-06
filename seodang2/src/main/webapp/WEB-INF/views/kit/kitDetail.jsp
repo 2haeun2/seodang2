@@ -6,7 +6,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/board.reply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/videoAdapter.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit_2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/kit_3.css">
 
 <script type="text/javascript">
 	$(function(){
@@ -94,52 +94,13 @@ $(function(){
 });
 </script>
 
-<div class="page-main">
-	<div class="kitdetail_p">
-	<!--<c:if test="${!empty kit.filename}">
-		<li>첨부파일 : <a href="file.do?board_num=${kit.kit_num}">${kit.filename}</a></li>
-		</c:if>-->
-	<c:if test="${fn:endsWith(kit.filename,'.jpg') ||
-	              fn:endsWith(kit.filename,'.JPG') ||
-	              fn:endsWith(kit.filename,'.gif') ||
-	              fn:endsWith(kit.filename,'.GIF') ||
-	              fn:endsWith(kit.filename,'.png') ||
-	              fn:endsWith(kit.filename,'.PNG')}">
-	           
-	
-		<img src="imageView.do?kit_num=${kit.kit_num}"  style="width:300px; height:300px;" >
-	
-	</c:if>
-	</div>
-	<div class="kitdetail">
-	<h2>${kit.kit_name}</h2>
-	<ul>
-		<li>키트번호 : ${kit.kit_num}</li>
-		<li>키트명 : ${kit.kit_name}</li>
-		<li>조회수 : ${kit.hit}</li>
-		<c:if test="${!empty kit.modify_date}">
-		<li>최근 수정일 : ${kit.modify_date}</li>
-		</c:if>
-		<li>작성일 : ${kit.reg_date}</li>
-	</ul>
-	
-	<input type="button" value="장바구니"id="cart" onclick="location.href='kitOder.do'">
-		<input type="button" value="관련클래스 구경하기" id="button2" onclick="location.href='class.do'">
-		<input type="button" value="목록" onclick="location.href='kitList.do'">
-	</div>
-	<h2>상세내용</h2>
-	<div id="kit_content">
-	<p>
-		${kit.kit_content}
-		<img id="output_fav" src="../resources/image/heart1.png">
-	  	<span id="output_fcount" class="margin_right_10"></span>
-	</p>
-	</div>
-	<div class="align-right">
-		<c:if test="${!empty session_user_num && session_user_num == kit.user_num}">
-		<input type="button" value="수정" onclick="location.href='kitUpdate.do?kit_num=${kit.kit_num}'">	
-		<input type="button" value="삭제" id="delete_btn">
-		<script type="text/javascript">
+<div>
+		<h3>키트상세</h3>
+		<div class="align-right">
+			<c:if test="${kit.user_num == session_user_num }">
+				<input class="btn btn-outline-secondary"  type="button" value="수정" onclick="location.href='kitUpdate.do?kit_num=${kit.kit_num}'">
+				<input type="button" value="삭제" id="delete_btn">
+			<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
 				let choice = confirm('삭제하시겠습니까?');
@@ -148,8 +109,52 @@ $(function(){
 				}
 			};
 		</script>
+			</c:if>
+			<input type="button" value="목록" onclick="location.href='kitList.do'">
+		</div>
+	</div>
+	<!--<c:if test="${!empty kit.filename}">
+		<li>첨부파일 : <a href="file.do?board_num=${kit.kit_num}">${kit.filename}</a></li>
+		</c:if>-->
+	<div class="detail_content">
+		<div class="ck_content">
+		${kit.kit_content}
+		<c:if test="${!empty kit.modify_date}">
+		               최근 수정일 : ${kit.modify_date}
 		</c:if>
-		
+		                      작성일 : ${kit.reg_date}
+		</div>
+		<!-- <div class="kitdetail"> -->
+	<div class="sidebar">
+			<div class="sidbar_content">
+			<h6>키트번호 :${kit.kit_num}</h6>
+			<h3>${kit.kit_name}</h3>
+			<img src="imageView.do?kit_num=${kit.kit_num}"  style="width:300px; height:280px;" >
+	<c:if test="${fn:endsWith(kit.filename,'.jpg') ||
+	              fn:endsWith(kit.filename,'.JPG') ||
+	              fn:endsWith(kit.filename,'.gif') ||
+	              fn:endsWith(kit.filename,'.GIF') ||
+	              fn:endsWith(kit.filename,'.png') ||
+	              fn:endsWith(kit.filename,'.JPEG') ||
+	              fn:endsWith(kit.filename,'.jpeg') ||
+	              fn:endsWith(kit.filename,'.PNG')}">	
+	
+	</c:if>
+	<div id="kit_quantity">남은 수량 : ${kit.kit_quantity}</div>
+	<div class="box">
+		<div class="box3">
+		<div id="kit_content2">${kit.kit_content2}</div>
+		<div class="price">가격</div>
+		<div id="kit_price">${kit.kit_price}원</div></div>
+       <div id="heart">
+	  <img id="output_fav" src="../resources/image/heart1.png">
+	  <span id="output_fcount" class="margin_right_10"></span>
+	  </div> 
+		<input type="button" value="장바구니"id="cart2" onclick="location.href='kitOder.do'"></div>
+		<input type="button" value="관련클래스 구경하기" id="button2" onclick="location.href='class.do'">
+	
+	</div>
+
 	</div>
 	</div>
 <!-- 중앙 컨텐츠 끝 -->
