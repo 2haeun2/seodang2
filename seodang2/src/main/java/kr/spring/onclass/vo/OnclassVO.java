@@ -28,6 +28,16 @@ public class OnclassVO {
 	private Date reg_date;
 	private Date modify_date;
 	
+	//대표이미지 저장
+	private String mimage;
+	public String getMimage() {
+		return mimage;
+	}
+	public void setMimage(String mimage) {
+		this.mimage = mimage;
+	}
+	//대표이미지 저장
+
 	//평균 평점(후기게시판)
 	private int avgqna;
 	public int getAvgqna() {
@@ -154,9 +164,11 @@ public class OnclassVO {
 	public String toString() {
 		return "OnclassVO [on_num=" + on_num + ", user_num=" + user_num + ", on_name=" + on_name + ", on_price="
 				+ on_price + ", hit=" + hit + ", category_num=" + category_num + ", on_content=" + on_content
-				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", avgqna=" + avgqna + ", deletePasswd="
-				+ deletePasswd + "]";
+				+ ", upload=" + upload + ", filename=" + filename + ", reg_date=" + reg_date + ", modify_date="
+				+ modify_date + ", avgqna=" + avgqna + ", deletePasswd=" + deletePasswd + "]";
 	}
+
+
 	
 	
 }
