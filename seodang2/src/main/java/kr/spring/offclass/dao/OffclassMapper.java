@@ -12,6 +12,8 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OffclassVO;
 import kr.spring.offclass.vo.OfflikeVO;
+import kr.spring.offclass.vo.OffstarReplyVO;
+import kr.spring.offclass.vo.OffstarVO;
 
 public interface OffclassMapper {
 	//부모글
@@ -45,4 +47,27 @@ public interface OffclassMapper {
 	@Select("SELECT COUNT(*) FROM offlike WHERE off_num=#{off_num}")
 	public int selectLikeCount(Integer off_num);
 	
+	//후기 작성하기
+	@Insert("INSERT INTO offstar (offstar_num,user_num,off_num,rating,text) VALUES (offstar_seq.nextval,#{user_num},#{off_num},#{rating},#{text})")
+	public void insertOffReview(OffstarVO offstarVO);
+	//후기 목록
+	public List<OffstarVO> selectListOffReview(Map<String, Object> map);
+	public int selectRowReviewCount(Map<String, Object> map);
+	@Select("SELECT ROUND(avg(rating),1) FROM offstar WHERE off_num=#{off_num} ORDER BY offstar_num DESC")
+	public float selectReviewRating(int off_num);
+	@Select("SELECT * FROM offstar WHERE off_num=#{off_num} AND user_num=#{user_num}")
+	public OffstarVO selectOffReview(Map<String, Object> map);
+	@Update("UPDATE offstar SET rating=#{rating},text=#{text} WHERE offstar_num=#{offstar_num}")
+	public void updateOffReview(OffstarVO offstarVO);
+	@Delete("DELETE FROM offstar WHERE offstar_num=#{offstar_num}")
+	public void deleteOffReview(int offstar_num);
+	
+	//후기 작성 댓글
+	@Insert("INSERT INTO offstar_reply (offre_num,offstar_num,user_num,offre_content) VALUES (offstar_reply_seq.nextval,#{offstar_num},#{user_num},#{offre_content})")
+	public void inserOffReviewReply(OffstarReplyVO offstarReplyVO);
+	//후기 작성 답변 select
+	@Select("SELECT * FROM offstar_reply r JOIN ouser_detail d ON r.user_num = d.user_num WHERE offstar_num=#{offstar_num}")
+	public OffstarReplyVO selectOffReviewReply(int offstar_num);
+	@Delete("DELETE FROM offstar_reply WHERE offstar_num=#{offstar_num}")
+	public void deleteOffReviewReplyByOffstar(int offstar_num);
 }

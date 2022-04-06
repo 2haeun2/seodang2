@@ -34,7 +34,10 @@
 						off_content,
 						off_filename,
 						off_uploadfile,
-						user_num
+						user_num,
+						offzipcode,
+						offaddress1,
+						offaddress2
 						) 
 						VALUES 
 						(
@@ -46,7 +49,10 @@
 						#{off_content},
 						#{off_filename},
 						#{off_uploadfile},
-						#{user_num}
+						#{user_num},
+						#{offzipcode},
+						#{offaddress1},
+						#{offaddress2}
 						)
 	</insert>
 	<select id="selectListOffClass" parameterType="map" resultType="offclassVO">
@@ -100,12 +106,56 @@
 		category_num=#{category_num},
 		off_name=#{off_name},
 		off_price=#{off_price},
-		off_content=#{off_content}
+		off_content=#{off_content},
+		offzipcode=#{offzipcode},
+		offaddress1=#{offaddress1},
+		offaddress2=#{offaddress2}
 		<if test="off_filename!=''">
 		,off_filename=#{off_filename},off_uploadfile=#{off_uploadfile}
 		</if>
 		 WHERE off_num=#{off_num}
 	</update>
+	<select id="selectListOffReview" parameterType="map" resultType="offstarVO">
+	SELECT *
+		FROM offstar s
+		JOIN ouser_detail d
+		ON s.user_num = d.user_num
+        LEFT OUTER JOIN 
+        (
+        SELECT offstar_num,d.user_num AS writer_num,name AS writer_name,offre_content,offre_date,photo_name as writer_photo
+        FROM offstar_reply r
+        JOIN ouser_detail d
+        ON r.user_num = d.user_num
+        ) r
+        ON s.offstar_num = r.offstar_num
+		WHERE off_num=#{off_num}
+		<if test="rownum!=null">
+		<![CDATA[
+		AND ROWNUM<=#{rownum}
+		]]>
+		</if>
+		ORDER BY s.offstar_num DESC
+	</select>
+	<select id="selectRowReviewCount" parameterType="map" resultType="integer">
+	SELECT COUNT(*)
+			FROM offstar
+			WHERE off_num=#{off_num}
+			<if test="rating==1">
+			AND rating =#{rating}
+			</if>
+			<if test="rating==2">
+			AND rating =#{rating}
+			</if>
+			<if test="rating==3">
+			AND rating =#{rating}
+			</if>
+			<if test="rating==4">
+			AND rating =#{rating}
+			</if>
+			<if test="rating==5">
+			AND rating =#{rating}
+			</if>
+	</select>
 </mapper>
 
 

@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,8 +29,16 @@ public class OffclassVO {
 	private int user_num;
 	private Date reg_date;
 	private Date modify_date;
+	@Size(min=5,max=5)
+	private String offzipcode;
+	@NotEmpty
+	private String offaddress1;
+	@NotEmpty
+	private String offaddress2;
+	
 	private String name;
 	private int like_count;
+	private String photo_name;//선생님 프로필 사진
 	
 	//업로드 파일 처리
 	public void setOff_upload(MultipartFile off_upload) throws IOException{
@@ -111,6 +120,30 @@ public class OffclassVO {
 	public void setModify_date(Date modify_date) {
 		this.modify_date = modify_date;
 	}
+	public String getOffzipcode() {
+		return offzipcode;
+	}
+
+	public void setOffzipcode(String offzipcode) {
+		this.offzipcode = offzipcode;
+	}
+
+	public String getOffaddress1() {
+		return offaddress1;
+	}
+
+	public void setOffaddress1(String offaddress1) {
+		this.offaddress1 = offaddress1;
+	}
+
+	public String getOffaddress2() {
+		return offaddress2;
+	}
+
+	public void setOffaddress2(String offaddress2) {
+		this.offaddress2 = offaddress2;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -124,14 +157,22 @@ public class OffclassVO {
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
 	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+	}
 
 	@Override
 	public String toString() {
 		return "OffclassVO [off_num=" + off_num + ", category_num=" + category_num + ", off_name=" + off_name
 				+ ", off_limit=" + off_limit + ", off_price=" + off_price + ", off_content=" + off_content
 				+ ", off_upload=" + off_upload + ", off_filename=" + off_filename + ", user_num=" + user_num
-				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", user_name=" + name
-				+  "]";
+				+ ", reg_date=" + reg_date + ", modify_date=" + modify_date + ", offzipcode=" + offzipcode
+				+ ", offaddress1=" + offaddress1 + ", offaddress2=" + offaddress2 + ", name=" + name + ", like_count="
+				+ like_count + ", photo_name=" + photo_name + "]";
 	}
 	
 }

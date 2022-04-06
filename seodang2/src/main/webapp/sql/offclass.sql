@@ -10,6 +10,10 @@ create table offclass(
 	reg_date date default sysdate not null,
 	modify_date date,
 	user_num number not null,
+	offzipcode varchar2(5) not null,
+	offaddress1 varchar2(90) not null,
+	offaddress2 varchar2(90) not null,
+	onoff number(1) default 2 not null,
 	constraint offclass_pk primary key(off_num),
 	constraint offclass_fk foreign key(user_num) references ouser(user_num)
 	/*constraint offclass_fk2 foreign key(category_num) references category(category_num)*/

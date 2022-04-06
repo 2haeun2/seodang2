@@ -12,6 +12,8 @@ import kr.spring.offclass.dao.OffclassMapper;
 import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OffclassVO;
 import kr.spring.offclass.vo.OfflikeVO;
+import kr.spring.offclass.vo.OffstarReplyVO;
+import kr.spring.offclass.vo.OffstarVO;
 
 @Service
 @Transactional
@@ -98,6 +100,51 @@ public class OffclassServiceImpl implements OffclassService{
 	@Override
 	public int selectLikeCount(Integer off_num) {
 		return offclassMapper.selectLikeCount(off_num);
+	}
+
+	@Override
+	public void insertOffReview(OffstarVO offstarVO) {
+		offclassMapper.insertOffReview(offstarVO);
+	}
+
+	@Override
+	public List<OffstarVO> selectListOffReview(Map<String, Object> map) {
+		return offclassMapper.selectListOffReview(map);
+	}
+
+	@Override
+	public int selectRowReviewCount(Map<String, Object> map) {
+		return offclassMapper.selectRowReviewCount(map);
+	}
+	
+	@Override
+	public OffstarVO selectOffReview(Map<String, Object> map) {
+		return offclassMapper.selectOffReview(map);
+	}
+
+	@Override
+	public void updateOffReview(OffstarVO offstarVO) {
+		offclassMapper.updateOffReview(offstarVO);
+	}
+
+	@Override
+	public void deleteOffReview(int offstar_num) {
+		offclassMapper.deleteOffReviewReplyByOffstar(offstar_num);
+		offclassMapper.deleteOffReview(offstar_num);
+	}	
+	@Override
+	public float selectReviewRating(int off_num) {
+		return offclassMapper.selectReviewRating(off_num);
+	}
+
+	@Override
+	public void inserOffReviewReply(OffstarReplyVO offstarReplyVO) {
+		offclassMapper.inserOffReviewReply(offstarReplyVO);
+	}
+
+	@Override
+	public OffstarReplyVO selectOffReviewReply(int offstar_num) {
+		return offclassMapper.selectOffReviewReply(offstar_num);
 	}
 
 }
