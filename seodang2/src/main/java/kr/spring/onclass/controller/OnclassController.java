@@ -135,7 +135,9 @@ public class OnclassController {
 					
 				if(i == 0) {mimage = saveFileName;}
              
-                onclassService.fileUpload(originalfileName, saveFileName, fileSize, on_num);
+				
+				onclassService.fileUpload(originalfileName, saveFileName, fileSize, on_num);
+				 
 
             }
         }
@@ -260,7 +262,7 @@ public class OnclassController {
 			model.addAttribute("message", "게시물 삭제 완료");
 			model.addAttribute("url", request.getContextPath() + "/onclass/onclassList.do");
 		}else {
-			model.addAttribute("message", "게시물 삭제 실패");
+			model.addAttribute("message", "비밀번호 불일치");
 			model.addAttribute("url", request.getContextPath() + "/onclass/onclassList.do");
 		}
 		return "common/resultView";
@@ -368,15 +370,16 @@ public class OnclassController {
 	
 	
 	
-	@RequestMapping("/onclass/imageView.do")
-	public ModelAndView viewImage(@RequestParam int on_num) {
-		OnclassVO onclass = onclassService.selectOnclass(on_num);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("imageView");
-		mav.addObject("imageFile",onclass.getUploadfile());
-		mav.addObject("filename", onclass.getFilename());
-		return mav;
-	}
+	
+	/*
+	 * @RequestMapping("/onclass/imageView.do") public ModelAndView
+	 * viewImage(@RequestParam int on_num) { OnclassVO onclass =
+	 * onclassService.selectOnclass(on_num); ModelAndView mav = new ModelAndView();
+	 * mav.setViewName("imageView");
+	 * mav.addObject("imageFile",onclass.getUploadfile()); mav.addObject("filename",
+	 * onclass.getFilename()); return mav; }
+	 */
+	 
 
 }
 

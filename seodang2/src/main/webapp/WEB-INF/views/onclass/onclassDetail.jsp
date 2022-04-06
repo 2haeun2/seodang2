@@ -109,37 +109,46 @@ function iamport(){
 	const phone = "${ouser.phone}";
 	const address1 = "${ouser.address1}";
 	const address2 = "${ouser.address2}";
-	const on_name = "${onclass.on_name}"
-	//가맹점 식별코드
-	IMP.init('imp62760166');
-	IMP.request_pay({
-	    pg : 'kcp',
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : on_name , //결제창에서 보여질 이름
-	    amount : on_price, //실제 결제되는 가격, 최소금액 500원 이상 , 500이하시 결제 오류
-	    buyer_email : email,
-	    buyer_name : id,
-	    buyer_tel : phone,
-	    buyer_addr : address1+address2
-	    /* buyer_postcode : '123-456' */
-	}, function(rsp) {
-		console.log(rsp);
-	    if ( rsp.success ) {
-	    	var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	        document.getElementById('paymentData_btn').submit();
-	    } else {
-	    	 var msg = '결제에 실패하였습니다.';
-	         msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	});
+	const on_name = "${onclass.on_name}";
+	
+	const user_num = "${session_user_num}";
+	
+	console.log(user_num);
+	
+	if(user_num == ""){
+		alert('로그인 후 구매 가능합니다.')
+	}else if(user_num != null){
+		//가맹점 식별코드
+		IMP.init('imp62760166');
+		IMP.request_pay({
+		    pg : 'kcp',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : on_name , //결제창에서 보여질 이름
+		    amount : on_price, //실제 결제되는 가격, 최소금액 500원 이상 , 500이하시 결제 오류
+		    buyer_email : email,
+		    buyer_name : id,
+		    buyer_tel : phone,
+		    buyer_addr : address1+address2
+		    /* buyer_postcode : '123-456' */
+		}, function(rsp) {
+			console.log(rsp);
+		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        document.getElementById('paymentData_btn').submit();
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+	
 }
-
+}
 /////////////////////////////////////////////////////////////////////
 
 </script>
@@ -167,57 +176,14 @@ function iamport(){
 
 <div>
 ${onclass.on_name}
-수업 등록일 : ${onclass.reg_date} ,,하나만 ${upone.file_name},,하나만 ${uptwo.file_name}
+수업 등록일 : ${onclass.reg_date} 세션 : ${session_user_num}
 글내용 : ${onclass.on_content}
 ${onclass.on_price}
 ${onclass.reg_date}
 <a href="${pageContext.request.contextPath}/onclass/onclassModify.do?on_num=${onclass.on_num}">수정</a>
 <a href="${pageContext.request.contextPath}/onclass/onclassDelete.do?on_num=${onclass.on_num}">삭제</a>
 </div>
-
-      <!-- 별 아이콘 반복 -->
-       <c:if test="${onclass.avgqna == 0}">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-       </c:if>
-       <c:if test="${onclass.avgqna == 1}">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-       </c:if>
-       <c:if test="${onclass.avgqna == 2}">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-       </c:if>
-       <c:if test="${onclass.avgqna == 3}">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-       </c:if>
-       <c:if test="${onclass.avgqna == 4}">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star2.png" width="15px" height="15px">        			                                        	
-       </c:if>
-       <c:if test="${onclass.avgqna == 5}">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">
-       		<img src="../resources/image/star1.png" width="15px" height="15px">        			                                        	
-       </c:if>	                                        
+                  
 
             
 		<!-- 찜 누르기 -->
@@ -238,98 +204,5 @@ ${onclass.reg_date}
 			<!-- 안보이게 하기 -->
 		</div>
 
-<form action="ratingInsert.do" id="rateInsert" name="rateInsert" method="post"> 
-		<input type="hidden" name="on_num" value="${onclass.on_num}"/>
-		<textarea class="rate-textarea" name="text" id="rate_text" cols="30" rows="5"
-		<c:if test="${empty session_user_num}">readonly placeholder="로그인 하세요"</c:if>
-		></textarea><br>
-		<input class="btn btn-outline-warning ratingStar_btn" type="submit" value="별점 전송">	
-<!-- 별점 -->		
-<div class="star-rating space-x-4">
-		<input type="radio" id="5-stars" name="rating" value="5"/>
-		<label for="5-stars" class="star pr-4">★</label>
-		<input type="radio" id="4-stars" name="rating" value="4"/>
-		<label for="4-stars" class="star">★</label>
-		<input type="radio" id="3-stars" name="rating" value="3"/>
-		<label for="3-stars" class="star">★</label>
-		<input type="radio" id="2-stars" name="rating" value="2"/>
-		<label for="2-stars" class="star">★</label>
-		<input type="radio" id="1-star" name="rating" value="1" />
-		<label for="1-star" class="star">★</label>			
-</div>
-<!-- 별점 -->   	
-</form>
-
-<hr size="1" noshade>
-<c:forEach var="ostar" items="${list}" varStatus="vs">
-<div class="outer"> <!-- 답글 쓰러 가기 -->
-	<div class="inner">
-		<ul>
-			<li>평가 점수 : ${ostar.rating}</li>
-			<li>아이디 : ${ostar.id}</li>
-			<li>평가 내용 : ${ostar.text}</li>
-			<li>작성 일 : ${ostar.reg_date}</li>
-			<li>오스타넘 : ${ostar.ostar_num}</li>
-			<li>
-			<div style="text-align:right; margin-right:15px;">
-			<!-- 수정 모달 시작 -->
-			<a data-bs-toggle="modal" data-bs-target="#staticBackdrop${vs.index}">수정</a>
-			<!-- 수정 모달 끝 -->
-			<a href="${pageContext.request.contextPath}/onclass/deleteOstar.do">삭제</a>
-			<%-- <a onclick="location.href='ratingWrite.do?ostar_num=${ostar.ostar_num}'">답글</a> --%>
-
-			<button type="button" class="btn btn-dark" onclick="location.href='deleteOstar.do?ostar_num=${ostar.ostar_num}'">삭제</button>
-			</div>
-			
-			<c:if test="${session_user_auth == 3}">
-			<form action="" id="" method="post" id=""> 
-				<input type="text"/>
-			   	<input type="submit" value="답글">
-			</form>
-			</c:if>
-			
-			</li>
-		</ul>	
-	</div>
-</div>
-<!-- 모달 시작 -->
-      	<div class="modal fade" id="staticBackdrop${vs.index}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <!-- 바디 -->
-		      <div class="modal-body">
-		       	<!-- 업데이트폼 시작  -->
-		       	<form action="updateOstar.do" id="updateOstar" name="updateOstar" method="post"> 
-						<input type="hidden" name="ostar_num" value="${ostar.ostar_num}"/>
-						<input type="hidden" name="on_num" value="${onclass.on_num}"/>
-						<textarea class="rate-textarea-modal" name="text" id="rate_text" cols="30" rows="5"></textarea><br>
-						<input class="btn btn-outline-warning ratingStar_btn-modal" type="submit" value="별점 전송">	
-					<div class="star-rating2 space-x-4">
-						<input type="radio" id="5-stars${vs.index}" name="rating" value="5"/>
-						<label for="5-stars${vs.index}" class="star pr-4">★</label>
-						<input type="radio" id="4-stars${vs.index}" name="rating" value="4"/>
-						<label for="4-stars${vs.index}" class="star">★</label>
-						<input type="radio" id="3-stars${vs.index}" name="rating" value="3"/>
-						<label for="3-stars${vs.index}" class="star">★</label>
-						<input type="radio" id="2-stars${vs.index}" name="rating" value="2"/>
-						<label for="2-stars${vs.index}" class="star">★</label>
-						<input type="radio" id="1-star${vs.index}" name="rating" value="1" />
-						<label for="1-star${vs.index}" class="star">★</label>			
-					</div>   	
-				</form>
-		       	<!-- 업데이트폼 끝 -->
-		      </div>
-		      <!-- 바디 -->
-		      <!-- 푸터 -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-primary">목록가기</button>
-		      </div>
-		      <!-- 푸터 -->		      
-		    </div>
-		  </div>
-		</div>
-<!-- 모달 끝 -->
-</c:forEach>
 
 <div class="align-center">${pagingHtml}</div>

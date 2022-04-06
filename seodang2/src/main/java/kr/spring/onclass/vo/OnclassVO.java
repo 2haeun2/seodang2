@@ -25,7 +25,7 @@ public class OnclassVO {
 	private String filename;
 	private Date reg_date;
 	private Date modify_date;
-	
+
 	//대표이미지 저장
 	private String mimage;
 	public String getMimage() {
