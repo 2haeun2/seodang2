@@ -7,7 +7,7 @@ body {
         margin: 0;
       }
 .container-right {
-	width: 1024px;
+	width: 1600px;
 	margin-right: auto;
 	margin-left: auto;
 	font-size: 1.13em;
@@ -111,8 +111,8 @@ li#content {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 229px;
-    height: 185px;
+   	width: 100%;
+    max-height: 67%;
     border-radius: 7px;
 }
 a:hover img {
@@ -305,6 +305,10 @@ textarea#review_text {
    	resize: vertical;
 }
 /*오프라인 클래스 후기 목록*/
+.average-review.display-flex {
+    justify-content: center;
+    align-items: center;
+}
 .review_list {
     margin: 0 23px;
 }

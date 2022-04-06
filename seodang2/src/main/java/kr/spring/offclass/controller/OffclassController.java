@@ -342,7 +342,9 @@ public class OffclassController {
 		mav.addObject("writer_num",writer_num);
 		mav.addObject("photo_name",photo_name);
 		mav.addObject("writer_name",writer_name);
-		mav.addObject("session_user_num",session_user_num);
+		if(session_user_num!=null) {
+			mav.addObject("session_user_num",session_user_num);
+		}
 		mav.addObject("off_num",off_num);
 		
 		return mav;

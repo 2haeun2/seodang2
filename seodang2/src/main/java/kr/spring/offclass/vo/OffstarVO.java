@@ -29,6 +29,7 @@ public class OffstarVO {
 	private String writer_name;
 	private String offre_content;
 	private String offre_date;
+	private int offre_num;
 	
 	public int getOffstar_num() {
 		return offstar_num;
@@ -122,13 +123,20 @@ public class OffstarVO {
 	public void setOffre_date(String offre_date) {
 		this.offre_date = DurationFromNow.getTimeDiffLabel(offre_date);
 	}
+	
+	public int getOffre_num() {
+		return offre_num;
+	}
+	public void setOffre_num(int offre_num) {
+		this.offre_num = offre_num;
+	}
 	@Override
 	public String toString() {
 		return "OffstarVO [offstar_num=" + offstar_num + ", user_num=" + user_num + ", off_num=" + off_num + ", rating="
 				+ rating + ", text=" + text + ", reg_date=" + reg_date + ", name=" + name + ", off_name=" + off_name
 				+ ", photo_name=" + photo_name + ", rating_percent=" + rating_percent + ", writer_photo=" + writer_photo
 				+ ", writer_num=" + writer_num + ", writer_name=" + writer_name + ", offre_content=" + offre_content
-				+ ", offre_date=" + offre_date + "]";
+				+ ", offre_date=" + offre_date + ", offre_num=" + offre_num + "]";
 	}
 	
 }

@@ -33,7 +33,7 @@ public class CommonController {
 		
 		Integer user_num = (Integer)session.getAttribute("user_num");
 		
-		String filepath = realFolder + "\\" + user_num + "\\" + str_filename;
+		String filepath = realFolder + "/" + user_num + "/" + str_filename;
 		
 		File f = new File(filepath);
 		if(!f.exists()) {
