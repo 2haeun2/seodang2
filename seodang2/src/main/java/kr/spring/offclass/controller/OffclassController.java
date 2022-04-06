@@ -288,6 +288,7 @@ public class OffclassController {
 		OffclassVO offclassVO=offclassService.selectOffClass(off_num);
 		int writer_num = offclassVO.getUser_num();
 		String photo_name= offclassVO.getPhoto_name();
+		String writer_name= offclassVO.getName();//작성자 이름
 		Integer session_user_num = (Integer)session.getAttribute("session_user_num");
 		
 		List<OffstarVO> list = null;
@@ -337,8 +338,10 @@ public class OffclassController {
 		mav.addObject("star_4", star_4);
 		mav.addObject("star_5", star_5);
 		mav.addObject("rating", rating);
+		//글 작성자 -강사
 		mav.addObject("writer_num",writer_num);
 		mav.addObject("photo_name",photo_name);
+		mav.addObject("writer_name",writer_name);
 		mav.addObject("session_user_num",session_user_num);
 		mav.addObject("off_num",off_num);
 		

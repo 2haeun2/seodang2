@@ -52,7 +52,16 @@
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<label for="time_date"><b>05</b></label>
+				<form:label path="off_price"><b>05</b></form:label>
+				<form:label path="off_price">수업 장소</form:label><br>
+				<form:input path="offzipcode" onclick="sample2_execDaumPostcode()" class="off-form-input" id="offzipcode"/>
+				<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
+				<form:input path="offaddress1" class="off-form-input" placeholder="주소" id="offaddress1"/>
+				<form:input path="offaddress2" class="off-form-input" placeholder="상세 주소" id="offaddress2"/>
+				<hr size="1" noshade>
+			</li>
+			<li>
+				<label for="time_date"><b>06</b></label>
 				<label for="time_date">수업 일정</label><br>
 				<input type="date" id="time_date" class="off-form-input"> <input type="time" id="time_start" class="off-form-input-date">~<input type="time" id="time_end" class="off-form-input-date">
 				<input type="button" id="time_register" value="등록">
@@ -73,7 +82,7 @@
 			</c:forEach>
 			<li>
 			<li><hr size="1" noshade></li>
-			<li><label for="off_content"><b>06</b></label></li>
+			<li><label for="off_content"><b>07</b></label></li>
 			<li><label for="off_content">수업 상세</label><br></li>
 			<li id="content">
 				<form:errors path="off_content" cssClass="error-color"/>

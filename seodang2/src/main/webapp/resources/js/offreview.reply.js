@@ -34,12 +34,10 @@ $(function(){
 	
 	$('.reply-btn').click(function(){
 		initForm();
-		let user_num = $(this).attr('data-user');
-		let writer_name =$(this).attr('data-name');
-		
-		let offstar_num = $(this).attr('data-num');
-
-		let photo_name = $(this).attr('data-photo');
+		let user_num = $(this).parents('#reviewList').attr('data-user');
+		let writer_name =$(this).parents('#reviewList').attr('data-name');
+		let offstar_num = $(this).parents('.review-set').attr('data-num');
+		let photo_name = $(this).parents('#reviewList').attr('data-photo');
 		
 		
 		let output  = '<div class="output-div display-flex">'
@@ -59,8 +57,8 @@ $(function(){
 			output += '			<span class="letter-count">300/300</span>';
 			output += '		</div>';
 			output += '		<div id="re_second">';
-			output += '			<input type="submit" value="전송">';
-			output += '			<input type="button" value="취소" id="reset-btn">';
+			output += '			<input type="submit" class="btn" value="전송">';
+			output += '			<input type="button" class="btn" value="취소" id="reset-btn">';
 			output += '		</div>';
 			output += '</form>';
 			output += '</div>';
@@ -105,7 +103,7 @@ $(function(){
 					alert('로그인해야 작성할 수 있습니다.');
 				}else if(param.result=='success'){
 					initForm();
-					replydiv(offstar_num);
+					$('#'+offstar_num).load(location.href+' #'+offstar_num+'>*',"");
 					$('.'+offstar_num).remove();
 				}else{
 					alert('등록 시 오류 발생');
@@ -138,49 +136,6 @@ $(function(){
 			}
 		}
 	});
-	//등록후 div 추가
-	function replydiv(offstar_num){
-		alert(typeof offstar_num);
-		let output ; 
-		$.ajax({
-			type:'post',
-			data:{offstar_num:offstar_num},
-			url:'selectOffReply.do',
-			cache:false,
-			timeout:30000,
-			success:function(param){
-					output = '<div class="reply-complete display-flex">'
-					output += '<div class="user_image">'
-				if(param.photo_name!=null){
-					output += '		<img src="imageViewUser.do?user_num='+param.user_num+'" >';
-				}
-				if(param.photo_name==null){
-					output += '		<img src="'+contextPath +'/resources/images/face.png'+'" >';
-				}
-					output += '</div>'
-					output += '<div class="balloon">';
-					output += '		<div class="display-flex">';
-					output += '		<div class="writer_name"><b>'+param.writer_name+" 강사님</b>&nbsp;"+'</div>';
-					output += '		<div class="re-date">'+param.offre_date+'</div>';
-					output += '		<div class="re-btn">';
-					output += '			<div class="display-flex">';
-					output += '				<input type="button" class="btn" value="수정">';
-					output += '				<input type="button" class="btn" value="삭제">';
-					output += '			</div>';
-					output += '		</div>';
-					output += '</div>';
-					output += '<div class="re-content">'+param.offre_content+'</div>'
-					output += '</div>';
-					output += '</div>';
-					output += '<div class="reply-no">';
-					output += '</div>';
-					$('#'+offstar_num).append(output);
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
-	}
 	//팝업창  
 	let num;
 	$("#popup01").css("display","none"); 
@@ -233,5 +188,42 @@ $(function(){
 			}
 		});
 		}
+	});
+	$('#modify-btn').click(function(){
+		initForm();
+		let user_num = $(this).attr('data-user');
+		let writer_name =$(this).attr('data-name');
+		
+		let offstar_num = $(this).attr('data-num');
+
+		let photo_name = $(this).attr('data-photo');
+		
+		
+		let output  = '<div class="output-div display-flex">'
+			output += '<div class="user_image">'
+			if(photo_name!=null){
+				output += '		<img src="imageViewUser.do?user_num='+user_num+'" >';
+			}
+			if(photo_name==null){
+				output += '		<img src="'+contextPath +'/resources/images/face.png'+'" >';
+			}
+			output += '</div>'
+			output += '<form id="offre_form" class="balloon" >';
+			output += '		<input type="hidden" name="offstar_num" id="offstar_num" value="'+offstar_num+'">';
+			output += '		<div>'+writer_name+" 강사님 답변"+'</div>';
+			output += '		<textarea rows="3" cols="50" name="offre_content" id="offre_content"></textarea>';
+			output += '		<div id="re_first">';
+			output += '			<span class="letter-count">300/300</span>';
+			output += '		</div>';
+			output += '		<div id="re_second">';
+			output += '			<input type="submit" class="btn" value="전송">';
+			output += '			<input type="button" class="btn" value="취소" id="reset-btn">';
+			output += '		</div>';
+			output += '</form>';
+			output += '</div>';
+			
+			$(this).parent('.reply').hide();
+			$(this).parents('.reply-output').find('#output').append(output);
+			
 	});
 });

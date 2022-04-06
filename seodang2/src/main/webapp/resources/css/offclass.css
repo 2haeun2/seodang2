@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+body, th, td, input, select, textarea, button { font-size: 14px; line-height: 1.5; font-family: HelveticaNeue-Light,AppleSDGothicNeo-Light,'Malgun Gothic','맑은 고딕',sans-serif; color: #212121; }
 a:hover {
 	text-decoration:none;
 }
@@ -526,4 +527,15 @@ button.btn.reply {
 }
 .writer-reply {
     margin-top: auto;
+}
+/*지도 주소 안보이게*/
+span#offaddress1, span#offaddress2,span#offzipcode {
+    display: none;
+}
+.map-title{
+	width: 150px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 13px;
+    font-weight: bold;
 }

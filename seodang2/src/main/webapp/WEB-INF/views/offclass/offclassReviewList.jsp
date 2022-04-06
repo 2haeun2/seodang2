@@ -90,13 +90,13 @@
 	<div class="sorting-item align-right">
 		<span><button class="btn sorting">최신순</button></span><span><button class="btn sorting">별점높은순</button></span><span><button class="btn">별점낮은순</button></span>
 	</div>
-	<div id="reviewList">
+	<div id="reviewList" data-name="${writer_name }" data-user="${writer_num }" data-photo="${photo_name }">
 	<c:if test="${count==0 }">
 		등록한 후기가 없습니다.
 	</c:if>
 	<c:if test="${count>0 }">
 		<c:forEach var="item" items="${list }">
-		<div class="review-set">
+		<div class="review-set"  data-num="${item.offstar_num}" >
 			<div class="review" >
 				<div class="review_start">
 					<div class="user_image">
@@ -133,10 +133,10 @@
 			<div class="review-text">${item.text }</div>
 			</div>
 			<c:if test="${writer_num==session_user_num }">
-			<div class="reply-output">
+			<div class="reply-output" >
 				<c:if test="${empty item.writer_num}">
 				<div class="reply ${item.offstar_num }">
-				<button class="btn display-flex reply-btn" data-num="${item.offstar_num}" data-name="${item.name }" data-user="${writer_num }" data-photo="${photo_name }">
+				<button class="btn display-flex reply-btn">
 					<div>
 						<img src="${pageContext.request.contextPath}/resources/images/speech_bubble.png">
 					</div>
@@ -172,8 +172,8 @@
 						<c:if test="${writer_num==session_user_num }">
 						<div class="re-btn">
 							<div class="display-flex">
-								<input type="button" class="btn" value="수정">
-								<input type="button" class="btn" value="삭제">
+								<input type="button" id="modify-btn" class="btn" value="수정">
+								<input type="button" id="delete-btn" class="btn" value="삭제">
 							</div>
 						</div>
 						</c:if>
