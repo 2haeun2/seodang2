@@ -15,6 +15,7 @@
 </style>
 <!-- 중앙 컨텐츠 시작 -->
 <div class="page-main">
+	<div style="height:130px;"></div>
 	<h2>QNA 리스트</h2>
 	<ul class="profile-photo">
 		<li>
@@ -23,7 +24,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"
-			                     width="160" height="160" class="my-photo">온라인 강의 qna
+			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/onqna/onqnaList.do'">온라인 강의 qna
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/"

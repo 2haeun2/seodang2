@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class OffqnaVO {		//오프라인 클래스 1:1게시판
 
-	private int offqua_num;
+	private int offqna_num;
 	private int off_num;
 	private int user_num;
 	@NotEmpty
@@ -22,6 +22,9 @@ public class OffqnaVO {		//오프라인 클래스 1:1게시판
 	private MultipartFile upload;	//파일업로드시 parameter로 넘어오는 부분 
 	private byte[] uploadfile;		//파일(byte배열로 처리하기 위한)
 	private String filename;		//파일명
+	private String id;
+	private String name;
+	private int auth;	/*0탈퇴,1.정지,2일반,3관리자 // default=2*/
 	
 	
 	//* 업로드 파일 처리하는 setter (파일upload By.blob타입)
@@ -37,19 +40,20 @@ public class OffqnaVO {		//오프라인 클래스 1:1게시판
 	//* toString()재정의
 	@Override
 	public String toString() {
-		return "OffqnaVO [offqua_num=" + offqua_num + ", off_num=" + off_num + ", user_num=" + user_num + ", title="
+		return "OffqnaVO [offqna_num=" + offqna_num + ", off_num=" + off_num + ", user_num=" + user_num + ", title="
 				+ title + ", content=" + content + ", reg_date=" + reg_date + ", modify_date=" + modify_date
-				+ ", upload=" + upload + ", filename=" + filename + "]";
+				+ ", upload=" + upload + ", filename=" + filename + ", id=" + id + ", name=" + name + ", auth=" + auth
+				+ "]";
 	}
 
 
 
 
 	public int getOffqua_num() {
-		return offqua_num;
+		return offqna_num;
 	}
 	public void setOffqua_num(int offqua_num) {
-		this.offqua_num = offqua_num;
+		this.offqna_num = offqua_num;
 	}
 	public int getOff_num() {
 		return off_num;
