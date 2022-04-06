@@ -14,6 +14,7 @@ create table onclass(
 	constraint onclass_fk foreign key (user_num) 
                          references ouser (user_num)
 );
+create sequence onclass_seq;
 create table ostar(
 	ostar_num number not null,
 	user_num number not null,

@@ -5,9 +5,9 @@
 <!-- 중앙 컨텐츠 시작 -->
 <!-- 부트스트랩 라이브러리 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/onclass.css">
 <style>
 #att_zone {
@@ -95,21 +95,42 @@
 			</li>
 		</ul>	 
 		<div class="align-center">
-			<form:button id="imageGO">전송</form:button>
+			<form:button id="imageGO" onclick='fileNullCheck()'>전송</form:button>
 		</div>                                          
 	</form:form>
 </div>
 
 <script>
+
+function fileNullCheck(){
+	var fileCK = document.getElementById("btnAtt").value;
+	if(!fileCK){
+	 alert("파일을 첨부하세요");
+	 event.preventDefault();
+	    return;
+	}
+}
+
+
 $(document).ready(function() {
   $('#btnAtt').change(function() {
     if (this.files.length > 4){
-      alert('최대 사진 4개 까지 가능합니다');
-      //새로고침
+      alert('최대 사진 4개 까지 가능합니다');   
+
       location.reload();
     }
-  });
+  });  
 });
+
+$(document).ready(function() {
+	  $('#btnAtt').change(function() {
+	    if (this.files.length < 4){
+	      alert('최소 사진 4개 까지 가능합니다');   
+
+	      location.reload();
+	    }
+	  });  
+	});
 
 //파일선택 (css)
 function handleButtonOnclick() {
