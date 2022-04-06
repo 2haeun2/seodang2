@@ -81,7 +81,7 @@ create table uploadfile(
 	constraint uploadfile_pk primary key(file_num),
 	constraint uploadfile_fk1 foreign key(on_num) references onclass(on_num)
 );
-
+create sequence uploadfile_seq;
 
 
 
