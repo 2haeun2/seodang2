@@ -10,8 +10,7 @@ public class MyclassVO {
 	private String off_limit;
 	private String off_price;
 	private int onoff;
-	
-	
+
 	public int getOnoff() {
 		return onoff;
 	}

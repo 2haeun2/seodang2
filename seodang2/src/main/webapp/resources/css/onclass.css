@@ -1,11 +1,50 @@
 @CHARSET "UTF-8";
-/* @font-face {
-    font-family: 'neon';
-    src: url('../resources/fonts/NeonPlanetDisplay.ttf') format('truetype');
+body, th, td, input, select, textarea, button { font-size: 14px; line-height: 1.5; font-family: HelveticaNeue-Light,AppleSDGothicNeo-Light,'Malgun Gothic','맑은 고딕',sans-serif; color: #212121; }
+a:hover {
+	text-decoration:none;
 }
 body {
-	font-family: 'neon';
-} */
+        margin: 0;
+      }
+.container-right {
+	width: 1600px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1.13em;
+}
+.container-head{
+	display:flex;
+	background-color: #fff;
+    position: sticky;
+    top: 50px;
+}
+.detail_content{
+	display:flex;
+	padding-top:20px;
+	
+}
+div.ck_content{
+	padding:0 10px;
+	width: 66.6667%;
+}
+
+.sidebar {
+	padding:0 10px;
+    width: 33.3333%;
+    display: block;
+}
+.sidbar_content{
+	top: 110px;
+	position: sticky;
+	padding:20px;
+	border: 1px solid;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -109,4 +148,30 @@ div#time_end{
 }
 
 
-
+/* //////////////////////////////// */
+/* 다중이미지 스타일 */
+.img-one{
+	width:50%;
+	height:600px; 
+	float:left; 
+}
+.img-two{  
+	width:50%; 
+	height:300px;
+	float:left;
+}
+.img-three{ 
+	width:400px; 
+	height:300px;
+	float:left;
+}
+.img-four{
+	width:400px; 
+	height:300px;
+	float:left;
+}
+[class^='img-'] img{
+	width:100%;
+	height:100%;
+	border: 2px solid #fff;
+}

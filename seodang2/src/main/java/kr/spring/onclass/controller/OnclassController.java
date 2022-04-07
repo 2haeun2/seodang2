@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnclassVO;
-import kr.spring.onclass.vo.OstarVO;
 import kr.spring.onclass.vo.UploadFileVO;
 import kr.spring.user.controller.UserController;
 import kr.spring.user.service.UserService;
@@ -67,7 +66,7 @@ public class OnclassController {
 		int count = onclassService.selectRowCount(map);
 		
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-                currentPage,count,6,10,"onclassList.do");
+                currentPage,count,8,10,"onclassList.do");
 
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
@@ -269,24 +268,7 @@ public class OnclassController {
 	}
 	
 	@GetMapping("/onclass/onclassDetail.do")
-	public ModelAndView detailForm(@RequestParam(value="pageNum",defaultValue="1")
-									int currentPage,HttpSession session, 
-									@ModelAttribute("ostarVO") OstarVO ostarVO) {
-		
-		int on_num = ostarVO.getOn_num();	
-		Map<String,Object> map = new HashMap<String,Object>();
-		int count = onclassService.selectRowCountRating(on_num);
-		PagingUtil page = new PagingUtil(currentPage,count,6,10,"onclassDetail.do","&on_num="+on_num);
-
-		map.put("start",page.getStartCount());
-		map.put("end", page.getEndCount());
-		map.put("on_num", on_num);
-		
-		List<OstarVO> list = null;
-		if(count > 0) {
-			list = onclassService.listALL(map);
-		}
-	
+	public ModelAndView detailForm(HttpSession session,int on_num) {
 		onclassService.updateHit(on_num); //조회수
 		
 		//다중업로드 파일 가져오기 시작
@@ -294,16 +276,12 @@ public class OnclassController {
 		//다중업로드 파일 가져오기 끝
 		
 		OnclassVO oVO = onclassService.selectOnclass(on_num);
-		/* oVO.setAvgqna(onclassService.avgQna(on_num)); */
 	
 		ModelAndView mav = new ModelAndView();
 
 		//프로필 뿌림
 		mav.setViewName("onclassDetail");
-		
 		mav.addObject("onclass",oVO);		
-		mav.addObject("count", count);
-		mav.addObject("list",list);
 		//다중 업로드
 		mav.addObject("uplist",uplist);
 		//실험 첫번째 이미지 추출
@@ -318,68 +296,9 @@ public class OnclassController {
 		for(int i=0; i<4;i++) {
 			mav.addObject("upfile"+i,uplist.get(i));
 		}
-		
-		mav.addObject("pagingHtml", page.getPagingHtml());
 
 		return mav;
 	}
-	@PostMapping("/onclass/ratingInsert.do")
-	public String qna(@ModelAttribute("ostarVO") OstarVO ostarVO,int on_num,HttpSession session,Model model) {
-		
-		logger.info("!!온넘확인!! : " + ostarVO);
-		
-		Integer user_num = (Integer)session.getAttribute("session_user_num");
-		ostarVO.setUser_num(user_num);
-		onclassService.insertqna(ostarVO);
-
-		return "redirect:/onclass/onclassDetail.do?on_num="+on_num;
-	}
-	@PostMapping("/onclass/updateOstar.do")
-	public String updateOstar(OstarVO ostarVO,int ostar_num) {
-		
-		logger.info("!!온넘확인!! : " + ostarVO);
-		
-		String rate = ostarVO.getRating();
-		String text = ostarVO.getText();
-		int on_num = ostarVO.getOn_num();
-		
-		ostarVO.setRating(rate);
-		ostarVO.setText(text);
-		onclassService.updateOstar(ostarVO);
-		
-		return "redirect:/onclass/onclassDetail.do?on_num="+on_num;
-	}
-	@GetMapping("/onclass/deleteOstar.do")
-	public String deleteOstar(Integer ostar_num) {
-
-		onclassService.deleteOstar(ostar_num);
-
-		
-		return "redirect:/onclass/onclassList.do"; 
-	}
-	
-	@GetMapping("/onclass/ratingWrite.do")
-	public String rateWrite(OstarVO ostarVO,Model model) {
-		int ostar_num = ostarVO.getOstar_num();
-		ostarVO = onclassService.selectOstar(ostar_num);
-		
-		model.addAttribute("ostar", ostarVO);
-		
-		return "ratingWrite";
-	}
-	
-	
-	
-	
-	/*
-	 * @RequestMapping("/onclass/imageView.do") public ModelAndView
-	 * viewImage(@RequestParam int on_num) { OnclassVO onclass =
-	 * onclassService.selectOnclass(on_num); ModelAndView mav = new ModelAndView();
-	 * mav.setViewName("imageView");
-	 * mav.addObject("imageFile",onclass.getUploadfile()); mav.addObject("filename",
-	 * onclass.getFilename()); return mav; }
-	 */
-	 
 
 }
 

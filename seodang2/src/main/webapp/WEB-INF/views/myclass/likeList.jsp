@@ -27,6 +27,9 @@
 							<c:when test="${like.onoff == 1}">
 								<img src="${pageContext.request.contextPath}/onclass/imageView.do?on_num=${like.on_num}" 
 	                          		style="max-width:200px;max-height:200px;margin-left:15px; margin-top:10px; border-radius: 10%;">
+	                          	<!-- 오프라인 완성하면 교체 -->
+	                          	<%-- <img src="${pageContext.request.contextPath}/resources/image_upload/${like.mimage}"> --%>
+	                          	<!-- 오프라인 완성하면 교체 -->
 	                        </c:when>
 	                        <c:when test="${like.onoff == 2}">
 	                        	<img src="${pageContext.request.contextPath}/offclass/imageView.do?off_num=${like.on_num}" 
@@ -54,6 +57,11 @@
 	
 <script>
 function likeDelete() {
-	document.getElementById('likeDelete_btn').click();
+	 if (confirm("찜 목록에서 지우시겠습니까?") == true){    //확인
+		 document.getElementById('likeDelete_btn').click();
+	 }else{   //취소
+	     return false;
+	 }
+	/* document.getElementById('likeDelete_btn').click(); */
 }
 </script>    

@@ -95,6 +95,45 @@ public class MyclassServiceImpl implements MyclassService{
 		myclassMapper.offDeleteLike(on_num);
 	}
 
+	@Override
+	public List<PaymentVO> buyerSelectList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.buyerSelectList(map);
+	}
+
+	@Override
+	public int buySelectRowCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return myclassMapper.buySelectRowCount(map);
+	}
+
+	@Override
+	public int peopleCount(int on_num) {
+		// TODO Auto-generated method stub
+		return myclassMapper.peopleCount(on_num);
+	}
+
+	@Override
+	public void myclassDelete(int onreg_num, int user_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.myclassDelete(onreg_num, user_num);
+		myclassMapper.myclassDelete2(onreg_num);
+	}
+
+	@Override
+	public void myclassUpdate(int onreg_num, int user_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.myclassUpdate(onreg_num, user_num);
+		myclassMapper.myclassUpdate2(onreg_num);
+	}
+
+	@Override
+	public void myclassUserDelete(int onreg_num) {
+		// TODO Auto-generated method stub
+		myclassMapper.myclassUserDelete(onreg_num);
+		myclassMapper.myclassUserDelete2(onreg_num);
+	}
+
 
 
 }
