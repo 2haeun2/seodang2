@@ -32,7 +32,7 @@
 		<c:forEach var="oqna" items="${list}">
 			<tr>
 				<td style="width: 50%;"><a
-					href="oqnaDetail.do?qna_num=${oqna.qna_num }">${oqna.title }</a></td>
+					href="${pageContext.request.contextPath}/oqna/oqnaDetail.do?qna_num=${oqna.qna_num }">${oqna.title }</a></td>
 				<td style="width: 10%;"><c:if test="${oqna.auth==0 }">탈퇴회원</c:if>
 					<c:if test="${oqna.auth==1 }">정지회원</c:if> <c:if
 						test="${oqna.auth==2 }">일반회원</c:if> <c:if test="${oqna.auth==3 }">선생님</c:if>
