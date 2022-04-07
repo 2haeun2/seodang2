@@ -43,7 +43,7 @@ public class OffclassAjaxController {
 	@RequestMapping("/offclass/offTimetableAjax.do")
 	@ResponseBody
 	public Map<String, String> openClass(OffTimetableVO offTimtableVO,
-										 HttpSession session,HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException{
+									 	 HttpSession session,HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException{
 		
 		//RequestBody:json 기반 메세지의 경우 사용
 		Map<String, String> map = new HashMap<String, String>();
