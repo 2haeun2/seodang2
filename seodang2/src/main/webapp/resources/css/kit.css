@@ -30,43 +30,40 @@ div#page_num{
 
 /*검색창*/
 input[type="search"]{
-	width: 250px;
-	height:30px;
+	width:250px;
+	height:40px;
+	border: 2px solid #c0c0c0;
+	border-radius:5px;
 }
 input[type="submit"]{
-	width: 50px;
-	height:30px;
+	width: 100px;
+	height:40px;
 	position: relative;
     left: 10px;
 }
-input[type="button"]{
-	width: 70px;
-	height:30px;
-	text-align: center;
+input[type="button"],[type="submit"]{
 	font-family: 'Jeju Gothic', sans-serif;
-}
-input[id="button2"]{
-	width: 200px;
-	height:30px;
-	position: relative;
-	bottom:20px;
-	font-family: 'Jeju Gothic', sans-serif;
-	font-size: 110%;
+	width: 100px;
+	height:40px;
+	border: 2px solid #c0c0c0;
+	border-radius:5px;
+	font-size: 100%;
 }
 select#keyfield{
-	width: 100px;
-	height:30px;
+	font-size:90%;
+	width:130px;
+	height:40px;
 	text-align: center;
 	position: relative;
     right: 10px;
-}
-input#button1{
-	position: relative;
-    left: 200px;
+    border: 2px solid #c0c0c0;
+    font-family: 'Jeju Gothic', sans-serif;
+	border-radius:5px;
 }
 
 form#search_form{
 	height:30px;
+	
 }
 .kit_listpage{
 	font-family: 'Jeju Gothic', sans-serif;

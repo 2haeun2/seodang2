@@ -140,18 +140,18 @@ $(function(){
 	              fn:endsWith(kit.filename,'.PNG')}">	
 	
 	</c:if>
-	<div id="kit_quantity">남은 수량 : ${kit.kit_quantity}</div>
+	
 	<div class="box">
 		<div class="box3">
 		<div id="kit_content2">${kit.kit_content2}</div>
-		<div class="price">가격</div>
+		<div class="price">판매가</div>
 		<div id="kit_price">${kit.kit_price}원</div></div>
        <div id="heart">
 	  <img id="output_fav" src="../resources/image/heart1.png">
 	  <span id="output_fcount" class="margin_right_10"></span>
 	  </div> 
-		<input type="button" value="관련클래스 구경하기" id="button2" onclick="location.href='class.do'">
-	
+	  <div id="kit_quantity">남은 수량 : ${kit.kit_quantity}</div>
+	  <!-- <input type="button" value="관련클래스 구경하기" id="button2" onclick="location.href='class.do'">-->
 			<div>
 			<form action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post" style="width:100px;">
 				<input type="hidden" name="kit_quantity" value="${kit.kit_quantity}"> <!-- 현재 kit 남은 수량 -->

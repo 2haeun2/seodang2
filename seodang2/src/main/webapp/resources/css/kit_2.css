@@ -5,10 +5,14 @@
  font-family: 'Jeju Gothic', sans-serif;
 }
 /*write
-li{
-	float:left;
-}
+
 */
+li{
+	margin-bottom:50px;
+}
+li#name,#price,#quantity,#content2,#content{
+	text-align: center;
+}
 h2{
 	font-family: 'Jeju Gothic', sans-serif;
 }
@@ -20,74 +24,45 @@ ul#box5{
 }
 ul#box4{
 	font-family: 'Jeju Gothic', sans-serif;
-	font-size: 130%;
-    border: 2px solid #D9F6FC;
-    border-radius:5px;
+	font-size: 120%;
+	
 }
 input#kit_name{
-	width: 300px;
-	height:30px;
+	width: 400px;
+	height:40px;
 }
 input[type=number]{
-	width: 300px;
-	height:30px;
+	width: 400px;
+	height:40px;
 }
 input[type=text]{
-	width: 300px;
-	height:30px;	
+	width: 400px;
+	height:40px;	
 }
-li#file{
-	position: relative;
-    top:20px;   
-}
-li#price{
-	position: relative;
-    top:80px;
-}
-li#name{
-	position: relative;
-    top:60px;
-}
-li#quantity{
-	position: relative;
-    top:100px;
-}
-li#content{
-	position: relative;
-	top:150px;
-}
-li#content2{
-	position: relative;
-	top:130px;
-}
-input[type="button"],[type="submit"],#file-upload-button]{
-	width: 70px;
-	height:30px;
-	text-align: center;
+input[type="button"],[type="submit"]{
 	font-family: 'Jeju Gothic', sans-serif;
+	width: 100px;
+	height:40px;
+	border: 2px solid #c0c0c0;
 	border-radius:5px;
-	border: 2px solid #D9F6FC;
-    background:#EBF9FC;
+	font-size: 100%;
 }
 input#file-upload-button{
-	width: 70px;
-	height:30px;
-	text-align: center;
 	font-family: 'Jeju Gothic', sans-serif;
+	width: 100px;
+	height:40px;
+	border: 2px solid #c0c0c0;
+	border-radius:5px;
+	font-size: 100%;
 }
-id#upload{
-	width: 70px;
-	height:30px;
-	text-align: center;
+input#upload{
 	font-family: 'Jeju Gothic', sans-serif;
 }
 .kitwrite{
-	position: relative;
-	top:50px;
-	left:400px;
+	
 }
-input#kit_name,#kit_price,#kit_quantity{
-	border: 2px solid #BDEDF7;
+input#kit_name,#kit_price,#kit_quantity,#kit_content2{
+	border: 2px solid #c0c0c0;
 	border-radius:5px; 
 }
 

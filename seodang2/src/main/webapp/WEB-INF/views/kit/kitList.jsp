@@ -99,7 +99,7 @@ $(function(){
 	<c:if test="${!empty session_user_num && session_user_auth>=3}">
 		<input type="button" value="키트 등록" onclick="location.href='kitWrite.do'">
 	</c:if>
-		<input type="button" value="목록" id="button1" onclick="location.href='kitList.do'">
+		<input type="button" value="목록" onclick="location.href='kitList.do'">
 	</div>
 	<form action="kitList.do" id="search_form" method="get">
 		<ul class="search">
