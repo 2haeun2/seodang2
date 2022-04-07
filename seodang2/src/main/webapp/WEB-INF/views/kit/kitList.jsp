@@ -143,7 +143,18 @@ $(function(){
 		<div class="box3">
 		<!--<div id="kit_content2">${kit.kit_content2}</div> -->
 		<div class="price">가격</div>
-		<div id="kit_price">${kit.kit_price}원</div></div>
+		<div id="kit_price">${kit.kit_price}원</div>
+		
+		<br>
+		<div>재고 수량</div>
+		<c:if test = "${kit.kit_quantity != 0}">
+			<span>${kit.kit_quantity}</span>
+		</c:if>
+		<c:if test = "${kit.kit_quantity == 0}">
+			<span style="color:red;">품절</span>
+		</c:if>			
+		
+		</div>
 		
 		<!-- <input type="button" value="❤ " id="kitLike">
 		<input type="button" value="장바구니" id="button2">
