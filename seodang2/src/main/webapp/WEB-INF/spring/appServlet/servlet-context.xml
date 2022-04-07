@@ -81,6 +81,7 @@
 			<mapping path="/onclass/onclassInsert.do"/>
 			<mapping path="/onclass/onclassModify.do"/>
 			<mapping path="/onclass/onclassDelete.do"/>
+			<mapping path="/onclass/payment.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
