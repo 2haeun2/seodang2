@@ -30,6 +30,7 @@
 		<beans:property name="definitions">
 			<beans:list>
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/cart.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/user.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/offclass.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/onclass.xml</beans:value>
