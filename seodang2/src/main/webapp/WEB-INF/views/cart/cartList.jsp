@@ -134,7 +134,8 @@ $(function(){
          <tr>
             <c:if test="${cart.class_kind eq 'kit'}">
             	<td>키트</td>
-	            <td>${cart.kitVO.kit_name}</td>
+	            <td><a href="${pageContext.request.contextPath}/kit/kitDetail.do?kit_num=${cart.kitVO.kit_num}">
+	            	${cart.kitVO.kit_name}</a></td>
 				<td><fmt:formatNumber value="${cart.kitVO.kit_price }" pattern="#,###" />
 	            <td class="quantity-msg">
 	            	<c:if test = "${cart.kitVO.kit_quantity < cart.order_quantity}"> [ 재고 부족 ]
@@ -152,7 +153,8 @@ $(function(){
             
             <c:if test="${cart.class_kind eq 'off'}">
             	<td>오프라인 클래스</td>
-	            <td>${cart.offclassVO.off_name}</td>
+	            <td><a href="${pageContext.request.contextPath}/offclass/offclassDetail.do?off_num=${cart.offclassVO.off_num}">
+	            	${cart.offclassVO.off_name}</a></td>
 	            <td><fmt:formatNumber value="${cart.offclassVO.off_price}" pattern="#,###" />
 	            <td class="quantity-msg">
 	            	<c:if test="${cart.offclassVO.off_limit < cart.order_quantity}"> [ 정원 마감 ]</c:if>
@@ -164,7 +166,8 @@ $(function(){
             
             <c:if test="${cart.class_kind eq 'on'}">
             	<td>온라인 클래스</td>
- 	            <td>${cart.onclassVO.on_name}</td>
+ 	            <td><a href="${pageContext.request.contextPath}/onclass/onclassDetail.do?on_num=${cart.onclassVO.on_num}">
+ 	            	${cart.onclassVO.on_name}</a></td>
 	            <td><fmt:formatNumber value="${cart.onclassVO.on_price}" pattern="#,###" />
 	            <td>${cart.order_quantity} </td>
 	            <td><fmt:formatNumber value="${cart.sub_total}" pattern="#,###" />            
