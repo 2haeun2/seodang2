@@ -154,7 +154,7 @@ $(function(){
             <c:if test="${cart.class_kind eq 'off'}">
             	<td>오프라인 클래스</td>
 	            <td><a href="${pageContext.request.contextPath}/offclass/offclassDetail.do?off_num=${cart.offclassVO.off_num}">
-	            	${cart.offclassVO.off_name}</a></td>
+	            	${cart.offclassVO.off_name} [ ${time} ]</a></td>
 	            <td><fmt:formatNumber value="${cart.offclassVO.off_price}" pattern="#,###" />
 	            <td class="quantity-msg">
 	            	<c:if test="${cart.offclassVO.off_limit < cart.order_quantity}"> [ 정원 마감 ]</c:if>

@@ -1,5 +1,6 @@
 package kr.spring.cart.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.CartVO;
 import kr.spring.kit.vo.KitVO;
+import kr.spring.offclass.service.OffclassService;
+import kr.spring.offclass.vo.OffTimetableVO;
 import kr.spring.offclass.vo.OffclassVO;
 
 @Controller
@@ -32,6 +35,8 @@ public class CartController {
 	//(1) 의존관계 주입
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private OffclassService offService;
 	
 	
 	//(2) 장바구니 등록 
@@ -118,6 +123,7 @@ public class CartController {
 		List<CartVO> list = null;
 		list = cartService.getCartList(user_num);	//user_num에 해당하는 전체 장바구니 데이터를 뽑아옴
 		
+		List<OffTimetableVO> timeList = null;
 		
 		// Q. VO를 직접넣어주지않으면 자동으로 VO가 들어가지 않음.. 왜  ? INSERT시킬 떄는 VO그대로 다 넣었는데..
 		
@@ -130,6 +136,9 @@ public class CartController {
 			else if(list.get(i).getClass_kind().equals("off")) {	//list에 OffclassVO담기   &  (list에 sub_total담기)
 				list.get(i).setOffclassVO(cartService.getOffclass(list.get(i).getClass_num()));
 				list.get(i).setSub_total(list.get(i).getOffclassVO().getOff_price()*list.get(i).getOrder_quantity());
+				timeList = offService.selectListOffTimeDate(list.get(i).getOffclassVO().getOff_num());
+				Date time = timeList.get(0).getTime_date();
+				mav.addObject("time", time);
 			}
 			else if(list.get(i).getClass_kind().equals("kit")) {	//list에 kitVO담기   &  list에 sub_total담기
 				list.get(i).setKitVO(cartService.getKit(list.get(i).getClass_num()));
