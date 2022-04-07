@@ -2,7 +2,7 @@
 
 /*====레이아웃====*/
 .container{
-    width: 1024px;
+    width: 1600px;
     margin-right: auto;
     margin-left: auto;
     font-size: 1.13em;
@@ -46,7 +46,6 @@ div#main_body{
 div#main_footer{
 	clear:both;
 	width:100%;
-	background-color:yellow;
 }
 
 /*===메뉴===*/
