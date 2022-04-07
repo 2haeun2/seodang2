@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 import kr.spring.myclass.vo.MyclassVO;
 import kr.spring.myclass.vo.PaymentVO;
@@ -25,6 +26,18 @@ public interface MyclassService {
 	public void deletePayment(int onreg_num, int user_num);
 	//내 구매 목록 정보 출력
 	public PaymentVO selectPayment(PaymentVO paymentVO);
+	
+	//구매한 강의 학생 목록
+	public List<PaymentVO> buyerSelectList(Map<String,Object> map);
+	public int buySelectRowCount(Map<String,Object> map);
+	//수강중인 학생 카운트
+	public int peopleCount(int on_num);
+	//수강중인 학생 수강취소
+	public void myclassDelete(int onreg_num, int user_num);
+	//수강중인 학생 수강재시작
+	public void myclassUpdate(int onreg_num, int user_num);
+	//수강목록에 있는 학생 지우기
+	public void myclassUserDelete(int onreg_num);
 	
 	//찜 한 목록
 	public List<OnlikeVO> selectLikeList(Map<String,Object> map);

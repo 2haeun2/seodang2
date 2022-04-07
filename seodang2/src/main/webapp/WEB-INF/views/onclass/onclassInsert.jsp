@@ -89,8 +89,8 @@
 			<li>
 				<div id='image_preview'>
 				<img src="../resources/image/choice.png" onclick='handleButtonOnclick()'>
-			    <input type='file' id='btnAtt' name="uploadFile" multiple='multiple' style="display:none;" />
-			    <div id='att_zone' data-placeholder='드래그앤드롭 하세요'></div>
+			    <input type='file' id='btnAtt' name="uploadFile" multiple='multiple' style="display:none;"/>
+			    <div id='att_zone'></div>
 			  	</div>		
 			</li>
 		</ul>	 
@@ -122,14 +122,14 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	  $('#btnAtt').change(function() {
-	    if (this.files.length < 4){
-	      alert('최소 사진 4개 까지 가능합니다');   
+  $('#btnAtt').change(function() {
+    if (this.files.length < 4){
+      alert('4개 이미지 일괄 업로드');   
 
-	      location.reload();
-	    }
-	  });  
-	});
+      location.reload();
+    }
+  });  
+});
 
 //파일선택 (css)
 function handleButtonOnclick() {
@@ -160,34 +160,7 @@ function handleButtonOnclick() {
       for(f of fileArr){
         imageLoader(f);
       }
-    }  
-    
-  
-    // 탐색기에서 드래그앤 드롭 사용
-    attZone.addEventListener('dragenter', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-    }, false)
-    
-    attZone.addEventListener('dragover', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      
-    }, false)
-  
-    attZone.addEventListener('drop', function(e){
-      var files = {};
-      e.preventDefault();
-      e.stopPropagation();
-      var dt = e.dataTransfer;
-      files = dt.files;
-      for(f of files){
-        imageLoader(f);
-      }
-      
-    }, false)
-    
-
+    }   
     
     /*첨부된 이미리즐을 배열에 넣고 미리보기 */
     imageLoader = function(file){

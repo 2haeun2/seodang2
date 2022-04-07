@@ -18,7 +18,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/myclass.png"
-			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/myclassMain.do'"> my클래스     
+			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/myclassList.do'"> my클래스     
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/qna.png"
@@ -26,7 +26,7 @@
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/myreserve.png"
-			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/onqna/onqnaList.do'">찜목록
+			                     width="160" height="160" class="my-photo" onclick="location.href='${pageContext.request.contextPath}/myclass/likeList.do'">찜목록
 		</li>
 		<li>
 			<img id="cen_img" src="${pageContext.request.contextPath}/resources/images/shoppingbasket.png"

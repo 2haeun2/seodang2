@@ -11,6 +11,28 @@ public class PaymentVO {
 	public Date on_regdate;
 	public Date on_moregdate;
 	
+	/////ouser에서 가져온 조인 값/////
+	public String id;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	/////ouser에서 가져온 조인 값/////	
+	
+	//수강중인 인원 체크
+	private int peopleCount;
+		
+	public int getPeopleCount() {
+		return peopleCount;
+	}
+	public void setPeopleCount(int peopleCount) {
+		this.peopleCount = peopleCount;
+	}
+	//수강중인 인원 체크
+	
 	public int getOnreg_num() {
 		return onreg_num;
 	}

@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.myclass.service.MyclassService;
 import kr.spring.myclass.vo.MyclassVO;
+import kr.spring.myclass.vo.PaymentVO;
 import kr.spring.onclass.service.OnclassService;
 import kr.spring.onclass.vo.OnlikeVO;
+import kr.spring.qna.vo.OqnaVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -37,42 +39,98 @@ public class MyclassController {
 	@RequestMapping("/myclass/myclassList.do")
 	public ModelAndView classList(
 			@RequestParam(value="pageNum",defaultValue="1")
-			int currentPage,
-			@RequestParam(value="keyfield",defaultValue="")
-			String keyfield,
-			@RequestParam(value="keyword",defaultValue="")
-			String keyword, HttpSession session
-			) {
+			int currentPage,HttpSession session) {
 		
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+		map.put("user_num", user_num);
 		
 		int count = myclassService.selectRowCount(map);
 		
-		PagingUtil page = new PagingUtil(keyfield,keyword,
-                currentPage,count,4,10,"myclassList.do");
+		PagingUtil page = new PagingUtil(currentPage,count,4,10,"myclassList.do");
 		map.put("user_num", user_num);
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
 		
-		
 		List<MyclassVO> list = null;
 			if(count > 0) {
 				list = myclassService.selectList(map);
-			}
-
+			}  
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myclassList");
 		mav.addObject("user_num",user_num);
 		mav.addObject("count", count);
 		mav.addObject("list",list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
-
+		
 		return mav;
 	}
+	
+	//내가올린 과목의 수강생 목록
+	@GetMapping("/myclass/myclassData.do")
+	public ModelAndView dataForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+							@RequestParam(value="keyfield", defaultValue="") String keyfield,
+							@RequestParam(value="keyword", defaultValue="") String keyword,
+							HttpSession session,int on_num) {
+		
+		Integer session_user_num = (Integer)session.getAttribute("session_user_num");
+	
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("on_num", on_num);
+		
+		int count = myclassService.buySelectRowCount(map);
+		
+		//로그
+		System.out.println("수강생 목록 온 넘: "+on_num);
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage,count,8,10,"myclassData.do");
+		map.put("start", page.getStartCount());	
+		map.put("end", page.getEndCount());
+		
+		List<PaymentVO> list = null;
+		if(count >0) {
+			list = myclassService.buyerSelectList(map);
+		}
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myclassData");
+		mav.addObject("user_num",session_user_num);
+		mav.addObject("count",count);
+		mav.addObject("list",list);
+		mav.addObject("people",myclassService.peopleCount(on_num));
+		mav.addObject("pagingHtml",page.getPagingHtml());
+		
+		return mav;
+	}
+	
+	//수강중인 학생 수강취소 
+	@RequestMapping("/myclass/myclassDelete.do")
+	public String myclassDelete(int onreg_num,int on_num,int user_num) {
+		
+		myclassService.myclassDelete(onreg_num, user_num);
+		
+		return "redirect:/myclass/myclassData.do?on_num="+on_num;
+	}
+	//수강중인 학생 수강 재시작
+	@RequestMapping("/myclass/myclassUpdate.do")
+	public String myclassUpdate(int onreg_num,int on_num,int user_num) {
+		myclassService.myclassUpdate(onreg_num, user_num);
+		
+		return "redirect:/myclass/myclassData.do?on_num="+on_num;
+	}
+	//수강목록에 있는 학생 지우기
+	@RequestMapping("/myclass/myclassUserDelete.do")
+	public String myclassUserDelete(int onreg_num,int on_num) {
+		myclassService.myclassUserDelete(onreg_num);
+		
+		return "redirect:/myclass/myclassData.do?on_num="+on_num;
+	}
+	
 	
 	@RequestMapping("/myclass/likeList.do")
 	public ModelAndView likeForm(@RequestParam(value="pageNum",defaultValue="1")
@@ -80,11 +138,11 @@ public class MyclassController {
 		
 		Integer user_num = (Integer)session.getAttribute("session_user_num");
 		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("user_num", user_num);
 		
 		int count = myclassService.selectRowCount3(map);
 		
 		PagingUtil page = new PagingUtil(currentPage,count,4,10,"likeList.do");
-		map.put("user_num", user_num);
 		map.put("start",page.getStartCount());
 		map.put("end", page.getEndCount());
 		
@@ -123,4 +181,6 @@ public class MyclassController {
 	  
 	  return "common/resultView"; 
 	  }	
+	  
+	  //
 }

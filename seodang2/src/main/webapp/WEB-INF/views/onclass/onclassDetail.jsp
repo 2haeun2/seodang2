@@ -11,21 +11,9 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
-
-
-<!-- 모달 부트스트랩 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
-<!-- 리플 -->
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/onclass.reply.js"></script> --%>
-
 <!-- 아임포트 임포트 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ratestar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/onclass.css">
 
 
 <script type="text/javascript">
@@ -90,14 +78,6 @@ $(function(){
 	   }
 	
 	   selectData(${onclass.on_num}); //초기값 세팅
-	   
-		$('#rateInsert').submit(function(){
-			if($('#rate_text').val().trim()==''){
-				alert('평가 내용을 입력하세요');
-				$('#rate_text').val('').focus();
-				return false;
-			}
-		});  
 });
 
 //결제 코드
@@ -152,57 +132,296 @@ function iamport(){
 /////////////////////////////////////////////////////////////////////
 
 </script>
-<div class="img-one"">
-<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile0.file_name}">
-</div>
-<div class="img-two">
-<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile1.file_name}">
-</div>
-<div class="img-three">
-<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile2.file_name}">
-</div>
-<div class="img-four">
-<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile3.file_name}">
-</div>
-
-
-
-<!-- 다중이미지 불러오기 -->
-<%-- <c:forEach var="uplist" items="${uplist}" varStatus="vs">
-	<div style="float:left; width:25%;">
-		<img src="${pageContext.request.contextPath}/resources/image_upload/${uplist.file_name}" height="200px">
+<div style="width:1600px; height:600px;">
+	<div class="img-one"">
+	<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile0.file_name}">
 	</div>
-</c:forEach>    --%>
+	<div class="img-two">
+	<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile1.file_name}">
+	</div>
+	<div class="img-three">
+	<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile2.file_name}">
+	</div>
+	<div class="img-four">
+	<img src="${pageContext.request.contextPath}/resources/image_upload/${upfile3.file_name}">
+	</div>
+</div>
+<%-- 	<div class="container-right">
+		<div class="container-head">
+			<h3>오프라인 클래스 상세</h3>
+			<div>
+				<input class="btn btn-outline-secondary" type="button" value="수정"
+					onclick="location.href='onclassModify.do?on_num=${onclass.on_num}'">
+				<input class="btn btn-outline-secondary" type="button" value="삭제"
+					onclick="location.href='onclassDelete.do?on_num=${onclass.on_num}'">
+			</div>
+		</div>
+		
+		<!--  -->
+		<div class="detail_content">
+		<div></div>
+		<div class="ck_content">
+			<div>${offclass.off_content }</div>
+			<hr class="off_detail" size="1">
+			<div class="off_review align-right">
+				<input type="button" class="btn" value="후기 작성하기"
+					onclick="location.href='offclassReview.do?off_num=${offclass.off_num}'">
+			</div>
+			<div class="align-center">
+				<div class="average-review display-flex">
+					<div class="avg_rating">${rating }</div>
+					<div>총 ${review_count }개</div>
+				</div>
+			</div>
+			<div class="reviewList">
+				<c:forEach var="offstarVO" items="${list2 }">
+					<div class="review width-50">
+							<div>
+								<div class="review_start">
+									<div class="user_image">
+										<c:if test="${!empty offstarVO.photo_name }">
+											<img src="imageViewUser.do?user_num=${offstarVO.user_num}">
+										</c:if>
+										<c:if test="${empty offstarVO.photo_name }">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/face.png">
+										</c:if>
+									</div>
+									<div class="name-rating">
+										<div>
+											<div>
+												${offstarVO.name } <span class="re-date">${offstarVO.reg_date }</span>
+											</div>
+											<div class="star-ratings">
+												<div class="star-ratings-fill space-x-2 text-lg"
+													style="width:${offstarVO.rating_percent}%">
+													<div>
+														<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+													</div>
+												</div>
+												<div class="star-ratings-base space-x-2 text-lg">
+													<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<c:set var="offstarVO_text" value="${offstarVO.text }" />
+								<c:choose>
+									<c:when test="${fn:length(offstarVO_text)<=100}">
+						        ${offstarVO.text }
+						    </c:when>
+									<c:otherwise>
+						    	${fn:substring(offstarVO_text, 0,100)} ......<small>(더보기)</small>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="writer-reply">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/speech_bubble.png">
+								<c:if test="${!empty offstarVO.writer_num}">
+									<span> 1 </span>
+								</c:if>
+								<c:if test="${empty offstarVO.writer_num}">
+									<span> 0 </span>
+								</c:if>
+							</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div>
+				<input type="button" value="후기 목록 더보기"
+					onclick="location.href='offclassReviewList.do?off_num=${offclass.off_num}'">
+			</div>
+		</div>
+		<!--  -->
+		<div class="detail_content">
+			<div class="sidebar">
+			<div class="sidbar_content">
+				<input type="hidden" value="" id="off_num">
+				<div>zz</div>
+				<h3>zz</h3>
+				<h4>zz원</h4>
+				<hr size="1">
+				<hr size="1" noshade>
+				<input class="btn btn-outline-secondary" type="button"
+					value="장바구니 담기"><br> <input
+					class="btn btn-outline-secondary" onclick="iamport()" type="button" value="바로 구매">
+					<!-- 찜 누르기 -->
+					<img id="output_fav" src="../resources/image/heart1.png">
+					<span id="output_fcount" class="margin_right_10"></span>
+					<!-- 찜 누르기 -->
+				<div>
+					<!-- 안보이게 하기 -->
+					<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
+						<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+						<input type="hidden" name="on_payment" value="2"/>
+						<input type="hidden" name="on_status" value="1"/>  
+					   	<input type="submit" value="임시 구매 버튼">
+					</form>
+					<!-- 안보이게 하기 -->
+				</div>
+			</div>
+		</div>
+	</div>	
+</div> --%>
 
-<div>
+<div class="container-right">
+	<div class="container-head">
+		<h3>오프라인 클래스 상세</h3>
+		<div>
+			<c:if test="${onclass.user_num == session_user_num }">
+				<input class="btn btn-outline-secondary" type="button" value="수정"
+					onclick="location.href='onclassModify.do?on_num=${onclass.on_num}'">
+			</c:if>
+			<c:if
+				test="${onclass.user_num == session_user_num || session_user_auth==4 }">
+				<input class="btn btn-outline-secondary" type="button" value="삭제"
+					onclick="location.href='onclassDelete.do?on_num=${onclass.on_num}'">
+			</c:if>
+		</div>
+	</div>
+	<div class="detail_content">
+		<div></div>
+		<div class="ck_content">
+			<div>${onclass.on_content }</div>
+			<div>
+				<div>
+					ssssssssssssssssssssss
+				</div>
+			</div>
+			<hr class="off_detail" size="1">
+			<div class="off_review align-right">
+				<input type="button" class="btn" value="후기 작성하기"
+					onclick="location.href='offclassReview.do?off_num=${offclass.off_num}'">
+			</div>
+			<div class="align-center">
+				<div class="average-review display-flex">
+					<div class="avg_rating">${rating }</div>
+					<div>총 ${review_count }개</div>
+				</div>
+			</div>
+			<div class="reviewList">
+				<c:forEach var="offstarVO" items="${list2 }">
+					<div class="review width-50">
+							<div>
+								<div class="review_start">
+									<div class="user_image">
+										<c:if test="${!empty offstarVO.photo_name }">
+											<img src="imageViewUser.do?user_num=${offstarVO.user_num}">
+										</c:if>
+										<c:if test="${empty offstarVO.photo_name }">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/face.png">
+										</c:if>
+									</div>
+									<div class="name-rating">
+										<div>
+											<div>
+												${offstarVO.name } <span class="re-date">${offstarVO.reg_date }</span>
+											</div>
+											<div class="star-ratings">
+												<div class="star-ratings-fill space-x-2 text-lg"
+													style="width:${offstarVO.rating_percent}%">
+													<div>
+														<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+													</div>
+												</div>
+												<div class="star-ratings-base space-x-2 text-lg">
+													<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<c:set var="offstarVO_text" value="${offstarVO.text }" />
+								<c:choose>
+									<c:when test="${fn:length(offstarVO_text)<=100}">
+						        ${offstarVO.text }
+						    </c:when>
+									<c:otherwise>
+						    	${fn:substring(offstarVO_text, 0,100)} ......<small>(더보기)</small>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="writer-reply">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/speech_bubble.png">
+								<c:if test="${!empty offstarVO.writer_num}">
+									<span> 1 </span>
+								</c:if>
+								<c:if test="${empty offstarVO.writer_num}">
+									<span> 0 </span>
+								</c:if>
+							</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div>
+				<input type="button" value="후기 목록 더보기"
+					onclick="location.href='offclassReviewList.do?off_num=${offclass.off_num}'">
+			</div>
+		</div>
+		<div class="sidebar">
+			<div class="sidbar_content">
+				<input type="hidden" value="${onclass.on_num }" id="on_num">
+				<div>${onclass.category_num }</div>
+				<h3>${onclass.on_name }</h3>
+				<h4>${onclass.on_price }원</h4>
+				<hr size="1">
+
+				<hr size="1" noshade>
+				<input class="btn btn-outline-secondary" type="button"
+					value="장바구니 담기"><br> 
+					<input class="btn btn-outline-secondary" onclick="iamport()" type="button" value="바로 구매">
+				<!-- 찜 누르기 -->
+				<img id="output_fav" src="../resources/image/heart1.png">
+				<span id="output_fcount" class="margin_right_10"></span>
+				<!-- 찜 누르기 -->
+				<!-- 안보이게 하기 -->
+					<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
+						<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+						<input type="hidden" name="on_payment" value="2"/>
+						<input type="hidden" name="on_status" value="1"/>  
+					   	<input type="submit" value="임시 구매 버튼">
+					</form>
+					<!-- 안보이게 하기 -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<%-- <div>
 ${onclass.on_name}
 수업 등록일 : ${onclass.reg_date} 세션 : ${session_user_num}
 글내용 : ${onclass.on_content}
 ${onclass.on_price}
 ${onclass.reg_date}
-<a href="${pageContext.request.contextPath}/onclass/onclassModify.do?on_num=${onclass.on_num}">수정</a>
-<a href="${pageContext.request.contextPath}/onclass/onclassDelete.do?on_num=${onclass.on_num}">삭제</a>
-</div>
-                  
-
-            
-		<!-- 찜 누르기 -->
-		<img id="output_fav" src="../resources/image/heart1.png">
-		<span id="output_fcount" class="margin_right_10"></span>
-		<!-- 찜 누르기 -->
-		<!-- 구매버튼 -->
-		<button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
-		<!-- 구매버튼 -->
-		<div>
-			<!-- 안보이게 하기 -->
-			<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
-				<input type="hidden" name="on_num" value="${onclass.on_num}"/>
-				<input type="hidden" name="on_payment" value="2"/>
-				<input type="hidden" name="on_status" value="1"/>  
-			   	<input type="submit" value="임시 구매 버튼">
-			</form>
-			<!-- 안보이게 하기 -->
-		</div>
+</div>     
+	<!-- 찜 누르기 -->
+	<img id="output_fav" src="../resources/image/heart1.png">
+	<span id="output_fcount" class="margin_right_10"></span>
+	<!-- 찜 누르기 -->
+	<!-- 구매버튼 -->
+	<button type="button" onclick="iamport()" class="btn btn-dark" style="width:230px">구매</button>
+	<!-- 구매버튼 -->
+	<div>
+		<!-- 안보이게 하기 -->
+		<form action="payment.do" id="paymentData_btn" method="post" id="paymentData"> 
+			<input type="hidden" name="on_num" value="${onclass.on_num}"/>
+			<input type="hidden" name="on_payment" value="2"/>
+			<input type="hidden" name="on_status" value="1"/>  
+		   	<input type="submit" value="임시 구매 버튼">
+		</form>
+		<!-- 안보이게 하기 -->
+	</div>
 
 
-<div class="align-center">${pagingHtml}</div>
+<div class="align-center">${pagingHtml}</div> --%>

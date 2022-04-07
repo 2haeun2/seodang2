@@ -82,53 +82,6 @@
 		  modify_date=SYSDATE
 	   WHERE on_num=#{on_num}
 	</update>
-	
-	<!-- 평점 리스트 -->
-	<select id="listAll" parameterType="map" resultType="ostarVO">
-		SELECT
-		  *
-		FROM (SELECT 
-		       a.*,
-		       rownum rnum
-		      FROM (SELECT 	
-		               b.ostar_num,
-		               b.on_num,
-		               <![CDATA[
-		               REPLACE(REPLACE(b.rating,'<','&lt;'),'>','&gt;') rating,
-		               ]]>
-		               b.text,
-		               m.id ,
-		               m.user_num,
-		               b.reg_date
-		            FROM ostar b
-		            JOIN ouser m 
-		            ON b.user_num = m.user_num
-		            ORDER BY b.ostar_num DESC)a)
-	   <![CDATA[
-	   WHERE rnum >= #{start} AND rnum <= #{end} and on_num = #{on_num}
-	   ]]>	            
-	</select>
-	<!-- 해당 게시물 평점 불러오기 카운트 -->
-	<select id="selectRowCountRating" parameterType="integer" resultType="integer">
-		SELECT COUNT(*)
-		FROM ostar where on_num = #{on_num}
-	</select>
-	<select id="selectListReply" parameterType="map" resultType="ostarReplyVO">
-       SELECT * FROM (SELECT a.*,rownum rnum FROM (SELECT
-				ore_num,
-               <![CDATA[
-               REPLACE(REPLACE(ore_content,'<','&lt;'),'>','&gt;') ore_content,
-               ]]>
-                ore_date,
-                ostar_num,
-                user_num,
-                id
-                FROM ostar_reply JOIN ouser USING(user_num) WHERE ostar_num = #{ostar_num}
-				ORDER BY ore_num DESC)a)
-       <![CDATA[
-       WHERE rnum >= #{start} AND rnum <= #{end}
-       ]]>                                 
-    </select>
     
     <!-- 파일 다중 업로드 -->
     <insert id="uploadFile" parameterType="HashMap">

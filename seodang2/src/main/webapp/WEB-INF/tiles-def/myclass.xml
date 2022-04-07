@@ -10,8 +10,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/myclass/myclassMain.jsp"/>
     </definition>   
     <definition name="myclassList" extends="main">
-    	<put-attribute name="title" value="구매 목록"/>
+    	<put-attribute name="title" value="올린 강의 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/myclass/myclassList.jsp"/>
+    </definition>
+    <definition name="myclassData" extends="main">
+    	<put-attribute name="title" value="신청한 수강생 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/myclass/myclassData.jsp"/>
     </definition>  
     <definition name="myRegisterList" extends="main">
     	<put-attribute name="title" value="게시판 목록"/>
