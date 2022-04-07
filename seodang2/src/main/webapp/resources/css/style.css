@@ -20,6 +20,7 @@
     display: flex;
     height: 78px;
     align-items: center;
+    background-color: white;
 }
 
 .logo {
@@ -53,6 +54,7 @@ div#main_header {
     top: 0px;
 	margin-bottom: 10px;
 	padding: 0 10px 0 0;
+	z-index: 30;
 }
 #myPagePopup{
     text-align: left;
@@ -126,9 +128,7 @@ div#main_footer {
     padding-top: 40px;
     clear: both;
     width: 100%;
-}
-div#main_footer  {
-    padding: 0px 12px;
+    background-color: white;
 }
 .fotter-width-1 {
     flex-basis: 56%;
@@ -288,7 +288,7 @@ textarea.rep-content {
 
 div#re_first, div#mre_first {
 	float: left;
-	width: 70%;
+	width: 75%;
 	padding-left: 15px;
 	margin-bottom: 10px;
 }
@@ -339,8 +339,8 @@ ul {
 }
 
 label {
-	width: 100px;
-	float: left;
+    width: 104px;
+    float: left;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {

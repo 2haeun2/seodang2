@@ -57,7 +57,7 @@
 				<form:input path="offzipcode" onclick="sample2_execDaumPostcode()" class="off-form-input" id="offzipcode"/>
 				<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 				<form:input path="offaddress1" class="off-form-input" placeholder="주소" id="offaddress1"/>
-				<form:input path="offaddress2" class="off-form-input" placeholder="상세 주소" id="offaddress2"/>
+				<form:input path="offaddress2" class="off-form-input-place" placeholder="상세 주소" id="offaddress2"/>
 				<hr size="1" noshade>
 			</li>
 			<li>

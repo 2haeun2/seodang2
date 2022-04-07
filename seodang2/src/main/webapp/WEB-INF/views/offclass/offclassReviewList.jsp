@@ -92,7 +92,9 @@
 	</div>
 	<div id="reviewList" data-name="${writer_name }" data-user="${writer_num }" data-photo="${photo_name }">
 	<c:if test="${count==0 }">
+	<div class="no-result">
 		등록한 후기가 없습니다.
+	</div>
 	</c:if>
 	<c:if test="${count>0 }">
 		<c:forEach var="item" items="${list }">
@@ -178,7 +180,7 @@
 						</div>
 						</c:if>
 					</div>
-					<div class="re-content">
+					<div class="re-content" data-re_content="${item.offre_content }">
 						${item.offre_content }
 					</div>
 				</div>

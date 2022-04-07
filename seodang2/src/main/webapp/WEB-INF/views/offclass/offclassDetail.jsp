@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/offclass.css">
 <!-- 중앙 컨텐츠 시작 -->
@@ -13,7 +14,7 @@
 <div class="container-right">
 	<div class="container-head">
 		<h3>오프라인 클래스 상세</h3>
-		<div>
+		<div class="modify-delete-btn">
 			<c:if test="${offclass.user_num == session_user_num }">
 				<input class="btn btn-outline-secondary" type="button" value="수정"
 					onclick="location.href='offclassUpdate.do?off_num=${offclass.off_num}'">
@@ -41,8 +42,7 @@
 			</div>
 			<hr class="off_detail" size="1">
 			<div class="off_review align-right">
-				<input type="button" class="btn" value="후기 작성하기"
-					onclick="location.href='offclassReview.do?off_num=${offclass.off_num}'">
+				<button  class="btn detail-replybtn" onclick="location.href='offclassReview.do?off_num=${offclass.off_num}'"><img src="${pageContext.request.contextPath}/resources/images/white-pencil.png" width="20px">&nbsp;후기작성하기</button>
 			</div>
 			<div class="align-center">
 				<div class="average-review display-flex">
@@ -106,17 +106,40 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div>
-				<input type="button" value="후기 목록 더보기"
-					onclick="location.href='offclassReviewList.do?off_num=${offclass.off_num}'">
+			<div class="align-center">
+				<input type="button" class="btn replylist-btn" value="후기 목록 더보기" onclick="location.href='offclassReviewList.do?off_num=${offclass.off_num}'">
 			</div>
 		</div>
 		<div class="sidebar">
 			<div class="sidbar_content">
 				<input type="hidden" value="${offclass.off_num }" id="off_num">
-				<div>${offclass.category_num }</div>
+				<div class="display-flex">
+				<div class="item-category">
+				<c:if test="${offclass.category_num ==1}">드로잉</c:if>
+				<c:if test="${offclass.category_num ==2}">플라워</c:if>
+				<c:if test="${offclass.category_num ==3}">공예</c:if>
+				<c:if test="${offclass.category_num ==4}">요리</c:if>
+				<c:if test="${offclass.category_num ==5}">베이킹</c:if>
+				</div>
+				<div class="like">
+					<c:choose>
+						<c:when test="${likecheck eq '0' or empty likecheck}">
+							<button class="btn" id="like_btn">
+								<img src="${pageContext.request.contextPath }/resources/images/heart_nofill.png">
+								<span id="like_count"></span>
+							</button>
+						</c:when>
+						<c:otherwise>
+							<button class="btn" id="like_btn">
+								<img src="${pageContext.request.contextPath }/resources/images/heart_fill.png">
+								<span id="like_count"></span>
+							</button>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				</div>
 				<h3>${offclass.off_name }</h3>
-				<h4>${offclass.off_price }원</h4>
+				<h4><fmt:formatNumber type="number" maxFractionDigits="3" value="${offclass.off_price }" />원</h4>
 				<hr size="1">
 				<div class="schedule_calendar">
 					<h4>클래스 일정</h4>
@@ -136,15 +159,16 @@
 				</div>
 				<hr size="1" noshade>
 				
-				<input class="btn btn-outline-secondary" type="button" value="바로 구매">
+				
+				<!-- <input class="btn btn-outline-secondary shopping" type="button" value="바로 구매"> -->
 				
 		<div>
-			<form action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post" style="width:100px;">
+			<form id="detail-shopping" action="${pageContext.request.contextPath}/cart/cartInsert.do" method="post">
 				<input type="hidden" name="off_quantity" value="${offclass.off_limit}"> <!-- 현재  오프클래스 정원 남은 수량 -->
 				<input type="hidden" name="order_quantity" value="1"> <!-- 주문시 기본 1 -->
 				<input type="hidden" name="class_kind" value="off">
 				<input type="hidden" name="class_num" value="${offclass.off_num}">
-				<input type="submit" value="장바구니">
+				<input class="btn btn-outline-secondary shopping" type="submit" value="장바구니">
 				<!--  
 				<c:if test="${offTimetableVO.off_limit != offTimetableVO.off_personcount}">
 					<input type="submit" value="장바구니">
@@ -156,22 +180,7 @@
 			</form>
 		</div>				
 				
-				<c:choose>
-					<c:when test="${likecheck eq '0' or empty likecheck}">
-						<button class="btn" id="like_btn">
-							<img
-								src="${pageContext.request.contextPath }/resources/images/heart_nofill.png">
-							<span id="like_count"></span>
-						</button>
-					</c:when>
-					<c:otherwise>
-						<button class="btn" id="like_btn">
-							<img
-								src="${pageContext.request.contextPath }/resources/images/heart_fill.png">
-							<span id="like_count"></span>
-						</button>
-					</c:otherwise>
-				</c:choose>
+				
 			</div>
 		</div>
 	</div>

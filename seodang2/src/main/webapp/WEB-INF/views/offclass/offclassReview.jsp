@@ -85,7 +85,7 @@
 			<form:errors path="text" cssClass="error-color"/>
 		</li>
 		<li>
-			<form:button>후기 작성완료</form:button>
+			<form:button class="btn detail-replybtn">후기 작성완료</form:button>
 		</li>
 	</ul>
 	</form:form>

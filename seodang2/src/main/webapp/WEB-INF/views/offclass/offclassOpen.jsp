@@ -17,7 +17,7 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul class="items">
 			<li>
-				<form:label path="category_num"><b>01</b></form:label>
+				<form:label path="category_num"><b>0<span class="open-title">1</span></b></form:label>
 				<form:label path="category_num">CLASS 분류</form:label><br>
 				<form:select path="category_num" class="off-form-input" id="category_num">
 					<form:option value="1">드로잉</form:option>
@@ -30,37 +30,37 @@
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<form:label path="off_name"><b>02</b></form:label>
+				<form:label path="off_name"><b>0<span class="open-title">2</span></b></form:label>
 				<form:label path="off_name" maxlength='5'>수업명</form:label><br>
-				<form:input path="off_name" placeholder="수업명을 입력해주세요." class="off-form-input" id="off_name"/>
+				<form:input path="off_name" placeholder="수업명을 입력해주세요." class="off-form-input" id="off_name" maxlength="33"/>
 				<form:errors path="off_name" cssClass="error-color"/>
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<form:label path="off_limit"><b>03</b></form:label>
+				<form:label path="off_limit"><b>0<span class="open-title">3</span></b></form:label>
 				<form:label path="off_limit">수업 인원</form:label><br>
 				<form:input type="number" path="off_limit" min="1" class="off-form-input" id="off_limit"/>
 				<form:errors path="off_limit"  cssClass="error-color"/>
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<form:label path="off_price"><b>04</b></form:label>
+				<form:label path="off_price"><b>0<span class="open-title">4</span></b></form:label>
 				<form:label path="off_price">가격</form:label><br>
 				<form:input type="number" path="off_price" min="0" class="off-form-input" id="off_price"/>
 				<form:errors path="off_price"  cssClass="error-color"/>
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<form:label path="off_price"><b>05</b></form:label>
+				<form:label path="off_price"><b>0<span class="open-title">5</span></b></form:label>
 				<form:label path="off_price">수업 장소</form:label><br>
 				<form:input path="offzipcode" onclick="sample2_execDaumPostcode()" class="off-form-input" id="offzipcode"/>
 				<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 				<form:input path="offaddress1" class="off-form-input" placeholder="주소" id="offaddress1"/>
-				<form:input path="offaddress2" class="off-form-input" placeholder="상세 주소" id="offaddress2"/>
+				<form:input path="offaddress2" class="off-form-input-place" placeholder="상세 주소" id="offaddress2"/>
 				<hr size="1" noshade>
 			</li>
 			<li>
-				<label for="time_date"><b>06</b></label>
+				<label for="time_date"><b>0<span class="open-title">6</span></b></label>
 				<label for="time_date">수업 일정</label><br>
 				<input type="date" id="time_date" class="off-form-input"> <input type="time" id="time_start" class="off-form-input-date">~<input type="time" id="time_end" class="off-form-input-date">
 				<input type="button" id="time_register" value="등록">
@@ -68,7 +68,7 @@
 			</li>
 			<li id="time-item"><li>
 			<li><hr size="1" noshade></li>
-			<li><label for="off_content"><b>07</b></label></li>
+			<li><label for="off_content"><b>0<span class="open-title">7</span></b></label></li>
 			<li><label for="off_content">수업 상세</label><br></li>
 			<li id="content">
 				<form:errors path="off_content" cssClass="error-color"/>

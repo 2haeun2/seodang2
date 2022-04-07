@@ -127,13 +127,10 @@ $(function(){
 		}else{//300자 이하인 경우
 			let remain = 300 - inputLength;
 			remain += '/300';
-			if($(this).attr('id')=='offre_content'){
-				//등록폼 글자수
-				$('#offre_form .letter-count').text(remain);
-			}else{
-				//수정폼 글자수
-				$('#offre_content .letter-count').text(remain);
-			}
+			$('#offre_form .letter-count').text(remain);
+			//수정폼 글자수
+			$('#moffre_form .letter-count').text(remain);
+
 		}
 	});
 	//팝업창  
@@ -198,6 +195,7 @@ $(function(){
 		let offstar_num = $(this).parents('.review-set').attr('data-num');
 		let photo_name = $(this).parents('#reviewList').attr('data-photo');
 		let offre_num = $(this).parents('#'+offstar_num).attr('data-offre_num');
+		let offre_content = $(this).parents('.balloon').find('.re-content').attr('data-re_content');
 		
 		
 		let output  = '<div class="output-div display-flex">'
@@ -213,7 +211,7 @@ $(function(){
 			output += '		<input type="hidden" name="offstar_num" id="offstar_num" value="'+offstar_num+'">';
 			output += '		<input type="hidden" name="offre_num" id="offre_num" value="'+offre_num+'">';
 			output += '		<div>'+writer_name+" 강사님 답변"+'</div>';
-			output += '		<textarea rows="3" cols="50" name="offre_content" id="offre_content"></textarea>';
+			output += '		<textarea rows="3" cols="50" name="offre_content" id="offre_content">'+offre_content+'</textarea>';
 			output += '		<div id="re_first">';
 			output += '			<span class="letter-count">300/300</span>';
 			output += '		</div>';

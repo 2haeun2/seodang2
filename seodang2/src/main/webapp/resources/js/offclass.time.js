@@ -30,7 +30,7 @@ $(function(){
 		let time_end = $('#time_end').val();
 		
 		let data = {time_date:time_date, time_start:time_start, time_end:time_end};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		
 		let timeUI;
 		$.ajax({

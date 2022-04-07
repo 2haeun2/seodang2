@@ -8,7 +8,7 @@
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
-<body>
+<body style="background-color: #ffe7d133;">
 <div id="main-noheader">
 	<div id="main-bodyfooter">
 	<div id="main_body review">
