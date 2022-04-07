@@ -100,6 +100,8 @@
 	});
 </script>
 <div class="page-main">
+   <div style="border:2px solid #c0c0c0;height:500px;padding:20px;margin:10px;">
+   <div style="float:left;width:50%;">
 	<h2>프로필 사진</h2>
 	<ul>
 		<li>
@@ -124,6 +126,8 @@
 			</div>
 		</li>
 	</ul>
+	</div>
+	<div style="float:left;width:50%;">
 	<h2>회원 상세 정보</h2>
 	<ul>
 		<li>이름 : ${user.name}</li>
@@ -139,7 +143,7 @@
 		</c:if>
 	</ul>
 	<hr size="1" width="100%">
-	<p class="align-right">
+	<p>
 		<input type="button" value="회원정보수정" 
 		                   onclick="location.href='update.do'">
 		<input type="button" value="비밀번호변경" 
@@ -149,5 +153,8 @@
 		<input type="button" value="회원메인메뉴" 
 		                   onclick="location.href='myMenu.do'">                                          
 	</p>
+	</div>
+	</div>
+	<div style="clear:both;"></div>
 </div>
 <!-- 중앙 컨텐츠 끝 -->

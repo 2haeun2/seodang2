@@ -1,10 +1,8 @@
 @charset "UTF-8";
 
-
-
 ul#modify_passwd{
 	font-size: 130%;
-    border: 2px solid #000000;
+    border: 2px solid #c0c0c0;
     height:200px;
     position: relative;
     left:100px;
@@ -114,10 +112,22 @@ input[id="zipcode"] {
 #modify_password,#delete_form,#modify_form,#login_form{
 	width:700px;
 	margin:0 auto;
+	border: 2px solid #c0c0c0;
+}
+#menu_form{
+	width:850px;
+	margin:0 auto;
+	border: 2px solid #c0c0c0;
+}
+#my_form{
+	width:850px;
+	margin:0 auto;
+	border: 2px solid #c0c0c0;
 }
 #modify_password input,#delete_form,#modify_form input,#login_form input{
 	margin-bottom:10px;
 }
+
 #modify_password ul li label{
 	width:150px;
 }
@@ -130,3 +140,28 @@ input[id="zipcode"] {
 	width:150px;
 }
 
+.my-photo {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+}
+
+ul.profile-photo {
+	list-style: none;
+}
+
+ul.profile-photo li {
+	display: inline;
+	padding-left: 5px;
+}
+
+div#cen_img {
+	display: block;
+	margin: auto;
+}
+
+.menu_input{
+	position: relative;
+	top:10px;
+	text-align: center;
+}
