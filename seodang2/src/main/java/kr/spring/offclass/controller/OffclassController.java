@@ -77,7 +77,7 @@ public class OffclassController {
 		ArrayList<OffTimetableVO> list  =(ArrayList<OffTimetableVO>)session.getAttribute("list");
 		offclassService.insertOffClass(offclassVO,list);
 		session.removeAttribute("list");
-		
+		 
 		return "redirect:/offclass/offclassList.do";
 	}
 	
