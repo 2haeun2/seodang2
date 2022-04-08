@@ -23,8 +23,33 @@
 				<c:if test="${list.class_kind eq 'kit'}">키트</c:if>
 				<c:if test="${list.class_kind eq 'on'}">온라인 클래스</c:if>
 				<c:if test="${list.class_kind eq 'off'}">오프라인 클래스</c:if>
-			</td>       	
-			<td>${list.item_name}</td>
+			</td>       	       	
+			<td>
+				<c:if test="${list.class_kind eq 'kit'}">
+				<a href="${pageContext.request.contextPath}/kit/kitDetail.do?kit_num=${list.class_num}">
+	            	${list.item_name}</a>
+				</c:if>	
+					
+			
+				<c:if test="${list.class_kind eq 'off'}">
+				<a href="${pageContext.request.contextPath}/offclass/offclassDetail.do?off_num=${list.class_num}">
+	            	${list.item_name} 
+	            	
+	            	<c:set var="class_num" value ="${list.class_num }"/>
+	            	<c:forEach var="time" items="${time }">
+	            		<c:if test ="${time.off_num == class_num}">
+	            			[ ${time.time_date} "${time.time_start}~${time.time_end}" }
+	            		</c:if>
+	            	</c:forEach>
+	            	
+	            	</a>
+				</c:if>
+				
+				<c:if test="${list.class_kind eq 'on'}">
+				<a href="${pageContext.request.contextPath}/onclass/onclassDetail.do?on_num=${list.class_num}">
+	            	${list.item_name}</a>
+				</c:if>
+			</td> 	
 			<td><fmt:formatNumber value="${list.item_price}" pattern="#,###" /></td>   
 			<td>${list.order_quantity}</td>
 			<td><fmt:formatNumber value="${list.item_total}" pattern="#,###" /></td> 
